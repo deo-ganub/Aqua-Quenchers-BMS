@@ -28,10 +28,14 @@ def environment():
         commit = subprocess.check_output(['git', 'rev-parse', 'HEAD'], stderr=subprocess.DEVNULL).decode().strip()
     except (subprocess.CalledProcessError, FileNotFoundError):
         commit = 'UNCOMMITTED'
+    try:
+        source_dirty = bool(subprocess.check_output(['git','status','--porcelain','--','classifier','classifier-java','app','supabase'],stderr=subprocess.DEVNULL).strip())
+    except (subprocess.CalledProcessError,FileNotFoundError):
+        source_dirty = True
     return {'python': sys.version, 'numpy': np.__version__, 'scipy': scipy.__version__,
             'scikit_learn': sklearn.__version__, 'platform': platform.platform(),
             'machine': platform.machine(), 'processor': platform.processor(),
-            'logical_cpus': os.cpu_count(), 'source_commit': commit}
+            'logical_cpus': os.cpu_count(), 'source_commit': commit, 'source_dirty':source_dirty}
 
 
 def prepare_command(dataset, output, synthetic=False):
@@ -80,7 +84,7 @@ def train_command(dataset, output, model_version, synthetic=False, max_epochs=50
     # Provisional policy is retained unchanged, explicitly frozen before looking at held-out labels.
     thresholds = {'top_score': 0.70, 'top_gap': 0.15}
     env = environment()
-    if not manifest['synthetic'] and env['source_commit'] == 'UNCOMMITTED':
+    if not manifest['synthetic'] and (env['source_commit'] == 'UNCOMMITTED' or env['source_dirty']):
         raise ValueError('Commit reviewed source before exporting a nonsynthetic release candidate.')
     model = {'schema_version': 1, 'model_version': model_version,
              'preprocessing_version': PREPROCESSING_VERSION, 'labels': list(LABELS),
@@ -112,7 +116,7 @@ def train_command(dataset, output, model_version, synthetic=False, max_epochs=50
     freeze = {'model_sha256': digest, 'split_sha256': digest_bytes(canonical(manifest)),
               'comparison_sha256': digest_bytes((output / 'comparison.json').read_bytes()),
               'training_sha256': digest_bytes((output / 'training.json').read_bytes()),
-              'gates': GATES, 'thresholds': thresholds, 'test_evaluated': False}
+              'gates': GATES, 'thresholds': thresholds, 'evaluation_state': 'NOT RUN at freeze; consult evaluation-started.json and test-results.json'}
     write_new(output / 'freeze.json', freeze)
     return experiment
 

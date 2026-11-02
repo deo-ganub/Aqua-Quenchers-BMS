@@ -11,7 +11,7 @@ umask 077
 : "${AQ_RECOVERY_TOOL:?Absolute path to reviewed admin/recovery/backup.py required}"
 bundle=$(mktemp -d)
 trap 'rm -rf -- "$bundle"' EXIT
-pg_dump --format=custom --schema=public --schema=aq_private --schema=auth --schema=storage --file="$bundle/database.dump"
+pg_dump --format=custom --schema=public --schema=aq_private --schema=auth --schema=storage --exclude-table-data=aq_private.privacy_decisions --file="$bundle/database.dump"
 pg_dumpall --roles-only --no-role-passwords --file="$bundle/roles.sql"
 for file in project-config.json auth-config.json storage-inventory.json; do
   cp -- "$AQ_RECOVERY_CONFIG_DIR/$file" "$bundle/$file"

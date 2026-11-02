@@ -1,0 +1,12 @@
+usage: privacy_ledger.py [-h] --ledger LEDGER [--execute]
+                         [--confirm-database CONFIRM_DATABASE]
+                         {export,replay}
+
+positional arguments:
+  {export,replay}
+
+options:
+  -h, --help            show this help message and exit
+  --ledger LEDGER
+  --execute
+  --confirm-database CONFIRM_DATABASE

@@ -33,6 +33,8 @@ public final class OperationsUi {
     private static final String[] TYPES = {"Choose customer type", "Household", "Dealer", "Walk-in"};
     public OperationsUi(MainActivity host) { this.host = host; }
 
+    public boolean restore(String route){switch(route){case "Customers":customers();return true;case "Orders":orders();return true;case "Pending gallons / Carry-over Details":pending();return true;case "Walk-in Sale / POS":pos();return true;case "Payments":payments();return true;case "Create Order":newOrder(null);return true;case "Add Customer":customerForm(null,null);return true;}return false;}
+    private LinearLayout page(String title,String id){generation++;return host.page(title,id);}
     private LinearLayout page(String title) { generation++; return host.page(title); }
     private void query(String resource, JSONObject data, Consumer<JSONObject> action) {
         long requestedGeneration = generation;
@@ -124,7 +126,7 @@ public final class OperationsUi {
     }
 
     private void customerForm(JSONObject existing, Runnable afterSave) {
-        LinearLayout p = page(existing == null ? "Add Customer" : "Edit Customer");
+        LinearLayout p = page(existing == null ? "Add Customer" : "Edit Customer",existing==null?"":id(existing));
         EditText name = host.input(p, "Full name", existing == null ? "" : existing.optString("name"), TEXT);
         Spinner type = host.select(p, "Customer type", TYPES);
         if (existing != null) {
@@ -206,7 +208,7 @@ public final class OperationsUi {
             int index = customer.getSelectedItemPosition() - 1;
             if (index < 0 || index >= list.size()) return;
             JSONObject c = list.get(index); long unit = c.optString("customer_type").equals("dealer") ? 3000 : 3500;
-            details.setText(c.optString("name") + " · " + title(c.optString("customer_type")) + "\nDelivery address: " + c.optString("address") + "\nMost recent order quantity: " + (c.has("last_order_quantity") ? c.optInt("last_order_quantity") + " gallons" : "Not yet available"));
+            details.setText(c.optString("name") + " · " + title(c.optString("customer_type")) + "\nDelivery address: " + c.optString("address") + "\nMost recent order quantity: " + (c.has("previous_order_quantity") ? c.optInt("previous_order_quantity") + " gallons" : "Not yet available"));
             try { total.setText("Unit price: " + host.money(unit) + "\nTotal: " + host.money(Math.multiplyExact((long) quantity(quantity), unit))); }
             catch (Exception e) { total.setText("Unit price: " + host.money(unit) + "\nEnter a positive whole-number quantity."); }
         };
@@ -222,7 +224,7 @@ public final class OperationsUi {
                 JSONObject c = all.optJSONObject(i); if (c == null) continue; list.add(c); labels.add(c.optString("name") + " · " + title(c.optString("customer_type")));
                 if (id(c).equals(selectedCustomerId)) selection = list.size();
             }
-            customer.setAdapter(new ArrayAdapter<>(host, android.R.layout.simple_spinner_dropdown_item, labels)); customer.setSelection(selection);
+            customer.setAdapter(new ArrayAdapter<>(host, android.R.layout.simple_spinner_dropdown_item, labels));if(selectedCustomerId==null)host.restoreSelection(customer);else customer.setSelection(selection);
         });
         host.button(p, "Add New Customer", () -> customerForm(null, () -> newOrder(null)));
         host.button(p, "Save Order", () -> valid(() -> {
@@ -268,7 +270,7 @@ public final class OperationsUi {
     }
 
     private void pickup(JSONObject o) {
-        LinearLayout p = page("Record Pickup"); int expected = o.optInt("expected_quantity", o.optInt("quantity")); long unit = o.optLong("unit_price_centavos");
+        LinearLayout p = page("Record Pickup",id(o)); int expected = o.optInt("expected_quantity", o.optInt("quantity")); long unit = o.optLong("unit_price_centavos");
         line(p, o.optString("reference") + " · " + o.optString("customer_name") + "\n" + o.optString("contact_number") + "\n" + o.optString("address") + "\nPickup date: " + host.today() + "\nOriginal expected gallons: " + expected + "\nFixed unit price: " + host.money(unit));
         EditText collected = host.input(p, "Actual collected gallons", "", QTY);
         TextView adjusted = liveLine(p, "Enter actual collected gallons to review the shortfall and adjusted total.");
@@ -285,7 +287,7 @@ public final class OperationsUi {
         host.button(p, "Reschedule Pickup", () -> reschedule(o)); cancel(p, () -> order(id(o)));
     }
     private void reschedule(JSONObject o) {
-        LinearLayout p = page("Reschedule Pickup"); line(p, o.optString("reference") + " · " + o.optString("customer_name"));
+        LinearLayout p = page("Reschedule Pickup",id(o)); line(p, o.optString("reference") + " · " + o.optString("customer_name"));
         EditText next = date(p, "New pickup date", host.today());
         EditText notes = host.input(p, "Notes (optional)", "", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         host.button(p, "Save Pickup Result", () -> valid(() -> {
@@ -296,7 +298,7 @@ public final class OperationsUi {
         })); cancel(p, () -> order(id(o)));
     }
     private void delivery(JSONObject o) {
-        LinearLayout p = page("Record Delivery"); int remaining = pending(o); int delivered = o.optInt("delivered_quantity");
+        LinearLayout p = page("Record Delivery",id(o)); int remaining = pending(o); int delivered = o.optInt("delivered_quantity");
         line(p, o.optString("reference") + " · " + o.optString("customer_name") + "\nPreviously delivered: " + delivered + "\nRemaining gallons: " + remaining + "\nOrder reservation: " + o.optInt("reserved_quantity") + "\nRecorded at actual server time on save.");
         EditText trip = host.input(p, "Gallons delivered this trip", "", QTY);
         TextView preview = liveLine(p, "Enter delivered gallons to review cumulative delivered and pending quantities.");
@@ -323,7 +325,7 @@ public final class OperationsUi {
         query("customers", json(), response -> {
             List<String> names = new ArrayList<>(); names.add("No saved profile"); JSONArray all = items(response);
             for (int i = 0; i < all.length(); i++) { JSONObject c = all.optJSONObject(i); if (c != null) { customers.add(c); names.add(c.optString("name")); } }
-            profile.setAdapter(new ArrayAdapter<>(host, android.R.layout.simple_spinner_dropdown_item, names));
+            profile.setAdapter(new ArrayAdapter<>(host, android.R.layout.simple_spinner_dropdown_item, names));host.restoreSelection(profile);
         });
         profile.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override public void onItemSelected(AdapterView<?> parent, View view, int position, long ignored) { if (position > 0 && position <= customers.size()) name.setText(customers.get(position - 1).optString("name")); }
@@ -387,7 +389,7 @@ public final class OperationsUi {
         if (count == 0) line(p, "No outstanding " + (kind.equals("order") ? "orders" : "Walk-in credits") + " found.");
     }
     private void payment(JSONObject target, String kind) {
-        LinearLayout p = page("Record Payment"); long due = balance(target);
+        LinearLayout p = page("Record Payment",target.optString("reference")); long due = balance(target);
         line(p, target.optString("reference") + " · " + target.optString("customer_name") + "\nOriginal total: " + host.money(target.optLong("total_centavos")) + "\nAmount already paid: " + host.money(paid(target)) + "\nOutstanding balance: " + host.money(due) + "\nMethod: Cash\nReceipt date/time and reference are assigned by the server.");
         EditText amount = host.input(p, "Payment amount (₱)", "", CASH);
         TextView preview = liveLine(p, "Enter payment amount to review remaining balance.");

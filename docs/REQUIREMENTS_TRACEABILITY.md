@@ -1,44 +1,36 @@
 # Requirements traceability
 
-Baseline: `handoff/CODEX_PROMPT.md`, five originals under `handoff/sources/`; extracted criteria under `handoff/source_readable/`. Status vocabulary: Planned, In Progress, Implemented but Unverified, Verified, Blocked. Verification requires applicable executed passing checks. Detailed mapping is in progress; no requirement is yet Verified.
+Baseline: `handoff/CODEX_PROMPT.md`, original5 sources and both story tabs. Statuses: Planned, In Progress, Implemented but Unverified, Verified, Blocked. A whole requirement is Verified only when all applicable checks pass. Every full A/B requirement below remains In Progress or Blocked; passing subsets are identified without treating compilation as runtime proof.
 
-| Requirement | Status | Implementation | Verification / gap |
+`source-requirements.json` individually indexes/maps160 scenario/acceptance records (IDs, original source/row/text, implementation, subset checks, remaining gaps). `tools/trace_sources.py` regenerates inventory while preserving evidence metadata. It does not inherit archived workbook test claims. See SOURCE_REVIEW and WORK_STATE.
+
+| IDs | Behavior | Implementation | Passing subset evidence | Remaining gap |
+|---|---|---|---|---|
+| A-01/A-12 | Sign-in/active role/session | MainActivity, Backend; username-login, aq_me/require_actor | admin_security.sql, smoke.sql;4 Node Auth tests | Managed Auth/password/expiry and native sign-in device checks need development access/device |
+| A-02 | Owner dashboard | MainActivity.showHome, OwnerUi.summary; financial_summary/dashboard | lifecycle.sql; Android build/lint | Individual dashboard shortcuts, report-period states and Figma/device checks pending |
+| A-03/A-14 | Customer create/search/edit/context | OperationsUi customers/customer/customerForm; create_customer/update_customer | smoke.sql/lifecycle.sql; API grants denial | Full Given-When-Then UI states/duplicates/search histories pending |
+| A-04/A-15 | Orders/date/prices/lifecycle | OperationsUi orders/newOrder/order; create_order/transition_order | lifecycle.sql, edge_cases.sql | Full native order/source scenario and hosted integration pending |
+| A-05/A-16 | Actual pickup/shortfall/reschedule | OperationsUi pickup/reschedule; record_pickup/reschedule_pickup | lifecycle.sql, edge_cases.sql | Device confirmation/error/date/state checks pending |
+| A-06/A-17 | Partial/final delivery/reservations | OperationsUi delivery/pending; record_delivery | lifecycle.sql; concurrency.py stock subset | Reservation-theft/concurrent delivery variants and full UI checks pending |
+| A-07/A-18 | POS/name/credit/change | OperationsUi.pos; create_sale | edge_cases.sql, lifecycle.sql, concurrency.py | Native confirmation/failed-save/optional-profile states pending |
+| A-08/A-19 | Selected-reference payments/history | OperationsUi payments/payment; record_payment | edge_cases.sql, lifecycle.sql | Hosted/native payment receipt and failure/retry states pending |
+| A-09 | Owner expense/suggestion/review | OwnerUi.expenses/expense; ExpenseSuggestionController/ClassifierAssets; create_expense | UTF8 unicode/lifecycle SQL,154 Java assertions,11 Python tests | Reviewed release/data/real quality blocked; full native manual/apply/override/stale/PDF-adjacent states not run |
+| A-10 | Financial summary/PDF | OwnerUi.reports/renderPdf; financial_summary | lifecycle.sql, edge_cases.sql; Android compilation/lint | Native preview/export viewer reconciliation/device states pending |
+| A-11 | Owner settings/inventory/MFA accounts | OwnerUi.settings/staffForm/verifyMfa; staff-admin; bootstrap.sql | admin_security.sql, bootstrap_check.py; Node Auth tests | Hosted managed MFA/Auth reconciliation and Owner native workflows pending |
+| A-13 | Staff operational Home | MainActivity.showHome; aq_query home/inventory | Backend lifecycle data; Android compilation/lint | Native queue links/counters/empty/error/Figma states pending |
+| A-20 | Staff own settings/password/payment links | OwnerUi.settings/profile/password; update_profile | admin_security.sql; Android compilation/lint | Hosted password change/reauth and native permission/state checks pending |
+
+| ID | Status | Implementation and executed subset | Missing applicable evidence |
 |---|---|---|---|
-| A-01 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-02 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-03 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-04 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-05 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-06 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-07 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-08 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-09 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-10 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-11 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-12 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-13 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-14 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-15 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-16 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-17 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-18 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-19 | In Progress | See component code / source inventory | Full criterion checks pending |
-| A-20 | In Progress | See component code / source inventory | Full criterion checks pending |
-| B-01 | In Progress | See component code / source inventory | Full criterion checks pending |
-| B-02 | In Progress | See component code / source inventory | Full criterion checks pending |
-| B-03 | In Progress | See component code / source inventory | Full criterion checks pending |
-| B-04 | In Progress | See component code / source inventory | Full criterion checks pending |
-| B-05 | In Progress | See component code / source inventory | Full criterion checks pending |
-| B-06 | In Progress | See component code / source inventory | Full criterion checks pending |
+| B-01 | Blocked for real measurements | InferenceBenchmark, ClassifierDeviceBenchmark, Python benchmark harness; numerical/parity tests pass | Actual Owner tablet p95/Java heap plus process memory,3second screens under declared normal network; real-data training timings |
+| B-02 | In Progress | Checked online RPCs/idempotency; age encryption/tamper, populated isolated restore, retention dry-run/age monitor, private disabled schedule | Hosted backup custody/destination/drill/monitoring and RPO/RTO; device failed-save states |
+| B-03 | In Progress | Private RLS/grants/current roles/session/MFA checks, protected alias mapping/audit; synthetic restore grant/RLS and privacy-cutoff replay tests | Hosted Auth signatures/factors, admin credential custody, full attack/error variants and controller approvals |
+| B-04 | In Progress | Exact7 Owner/5 Staff navigation, native forms/date controls, required fonts/peso formatting; build/lint pass | Figma tokens/screens/dialogs, full native keyboard/Back/rotation/usability tests |
+| B-05 | Blocked for device checks | API29min/35target Java Android project builds app/test APK | Android10+ Owner tablet/Staff phone runtime, resizing and PDF viewer |
+| B-06 | In Progress | Fixed prices/integer quantities/centavos, short pickup, reservations/retained receipts/as-of reports; SQL and two-connection race pass | All full source scenarios and hosted/UI reconciliation; real classifier quality evidence |
 
-## Targeted verification (current instance)
+Actual evidence: `evidence/android-final-build.log` (app+test APKs,4 unit tests, lint,154 Java assertions), `evidence/classifier-python.log` (11 tests), `evidence/postgres-utf8.log` and `postgres-edge-cases.log`, `postgres-concurrency.log`, `bootstrap-test.log`, `auth-node.log` (4 direct Node cases), `recovery-test.log`, `recovery-retention.log` (2 policy tests) and `recovery-database.log`. SQL JWT stubs do not verify hosted Auth; synthetic data/model fixtures do not establish station accuracy. Device/instrumentation tests compile but are Not Run. Model score examples and archived IAS test counts are not evidence for this repository.
 
-B-03/B-06 subset: `backend/tests/smoke.sql`, evidence `evidence/postgres-migrations.log`: passed on PostgreSQL17.11 with explicit Auth stubs. Covers identical retry, payload conflict, exact phone format, Staff expense/admin denial and inactive existing session. These passing subsets do not verify the full requirements. Core migration and `supabase/functions/contract.sql` execute successfully; hosted Auth/MFA not run.
+Recovery/erasure verification preserves financial/name history, blocks unsettled removals, removes eligible historical contact from audit/retry/record snapshots, and retains request hashes so retries neither duplicate effects nor resurrect removed data. Actual controller eligibility/retention decisions and independent ledger custody remain external; no legal/physical erasure guarantee is claimed.
 
-Classifier Java compile passed; self-test failed missing Python golden fixture (`evidence/classifier-java.log`). Android incomplete: missing OwnerUi and wrapper; no APK/build evidence. All A/B overall statuses remain Planned/In Progress until detailed coverage exists.
-
-Classifier verification update: `classifier/tests/generate_golden.py` generated 8 clearly synthetic cases; `ClassifierSelfTest` passed 154 assertions including Python/Java tokens/features/scores/policy parity. `classifier/tests/test_gradients.py` passed 2 tests covering all central finite-difference weight/bias gradients and extreme-logit softmax stability. Logs: `evidence/classifier-{java,python,fixtures}.log`. Supersedes the missing-fixture failure above; real-data/model/device gates remain Blocked and full A-09/B-01/B-06 remain unverified.
-
-A-04/A-05/A-06/A-07/A-08/A-09/A-10 and Staff shared counterparts: `backend/tests/lifecycle.sql` verified targeted backend lifecycle/date/financial/reservation paths (see final PostgreSQL log). Full requirements remain In Progress: hosted integration/UI/story variants not all checked. `OwnerUi.java` adds expenses/report/PDF/settings/MFA flows, host API35 compilation passed; device/UI verification not run.
-
-Latest evidence: UTF8 backend migration/smoke/lifecycle/admin/security/Unicode tests pass (`evidence/postgres-utf8.log`); real concurrent stock test passes. Wrapper final build/unit/lint/Java selfTest passed (`evidence/android-final-build.log`),4 Android unit tests,154 Java assertions; Python8 checks passed. age file/tamper checks pass (`evidence/recovery-test.log`), hosted/database restore not run. `docs/source-requirements.json` contains160 individually indexed acceptance/scenario records; detailed code/test/gap mapping remains in progress. No full A/B requirement is declared Verified based solely on these subsets.
+Additional source-specific subset evidence: backend/tests/expense_fixture.sql passed7-record6250→8-record7000 idempotently with newest-first/date/category filtering; evidence/expense-fixture.log. Synthetic training timing harness actually completed5 fresh processes after warmup (evidence/classifier-synthetic-timing.json); this is infrastructure timing on fixtures, not station training/device gates.

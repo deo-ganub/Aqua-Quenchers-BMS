@@ -1,0 +1,2 @@
+PASS: synthetic populated DB age package/decrypt + pg_restore into new UTF8 database; charge/receipt/expense/stock/reservation/Auth-mapping/audit reconciliation and protected grants/RLS match; dry-run/approved-contact ledger replay removes restored contact snapshots while retaining financial history.
+NOT RUN: hosted managed Auth/config/Storage restore, actual controller approval/external ledger custody and operating-hours RPO/RTO measurement.

@@ -84,7 +84,7 @@ create table aq_private.expenses (
        (selection_source<>'suggestion' and accepted_model_version is null))
 );
 create table aq_private.requests (
- actor_id uuid not null references aq_private.profiles, request_id uuid not null, payload jsonb not null,
+ actor_id uuid not null references aq_private.profiles, request_id uuid not null, payload jsonb not null, payload_hash bytea not null,
  result jsonb, created_at timestamptz not null default clock_timestamp(), primary key(actor_id,request_id)
 );
 create table aq_private.audit_events (
@@ -206,9 +206,9 @@ begin
  if p_request is null or jsonb_typeof(p_request)<>'object' then raise exception 'Invalid request.'; end if;
  begin rid:=(p_request->>'request_id')::uuid; exception when others then raise exception 'A valid request_id is required.'; end;
  if rid is null then raise exception 'A valid request_id is required.'; end if;
- insert into aq_private.requests(actor_id,request_id,payload) values(a,rid,p_request) on conflict do nothing;
+ insert into aq_private.requests(actor_id,request_id,payload,payload_hash) values(a,rid,p_request,sha256(convert_to(p_request::text,'UTF8'))) on conflict do nothing;
  select * into previous from aq_private.requests where actor_id=a and request_id=rid for update;
- if previous.payload<>p_request then raise exception 'Request key was already used with different data.'; end if;
+ if previous.payload_hash<>sha256(convert_to(p_request::text,'UTF8')) then raise exception 'Request key was already used with different data.'; end if;
  if previous.result is not null then return previous.result; end if;
  -- A small station benefits from a deterministic global write lock; explicit rows below
  -- also protect invariants. This serializes application mutations, never external reads.
@@ -233,6 +233,7 @@ begin
   q:=aq_private.positive_quantity(p_request->'quantity');
   select * into c from aq_private.customers where customers.id=(p_request->>'customer_id')::uuid;
   if not found then raise exception 'Choose a customer.'; end if;
+  if c.contact_number is null or c.address is null then raise exception 'Complete the required fields.';end if;
   d:=coalesce(nullif(p_request->>'business_date','')::date,aq_private.today());
   insert into aq_private.orders(reference,customer_id,customer_type,customer_name,address,contact_number,business_date,expected_quantity,quantity,unit_price_centavos,recorded_by)
   values(aq_private.new_reference('ORD'),c.id,c.customer_type,c.name,c.address,c.contact_number,d,q,q,case when c.customer_type='dealer' then 3000 else 3500 end,a) returning orders.id into id;

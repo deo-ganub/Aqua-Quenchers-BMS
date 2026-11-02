@@ -1,2 +1,3 @@
-# Android component checkpoint
-In Progress: native Java/XML project, real aq_query/aq_command transport, username-login + managed MFA, operational forms (ui_forms agent), Owner expenses/report/settings. No Figma access, release model, cloud credentials or device present. No app build yet; root installing SDK/JDK. Gradle files pin AGP8.9.2/compile35/API29+, classifier-java shared module. No fake saves or local financial queues. NEXT_ACTION: complete core Activity/transport then integrate forms and build.
+# Component checkpoint
+
+Native Java app and instrumentation APK compile;4 host domain tests/lint pass. Real device/Figma/hosted flows not run. Owner/Staff operational/financial/settings flows implemented; per-entity draft scopes/route/selector/idempotency restoration added. Latest evidence is root docs/WORK_STATE.md and evidence/android-final-build.log; follow its single NEXT_ACTION.

@@ -1,9 +1,12 @@
-✔ admin/tests/auth.test.mjs (66.68032ms)
-ℹ tests 1
+✔ strict login schema and normalized alias (0.772324ms)
+✔ Staff creation fixes role and validates long passwords/phone (0.434479ms)
+✔ unconfigured login never claims a successful save/authentication (17.314686ms)
+✔ staff operation without bearer rejected before upstream writes (0.703881ms)
+ℹ tests 4
 ℹ suites 0
-ℹ pass 1
+ℹ pass 4
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 72.740463
+ℹ duration_ms 23.115872

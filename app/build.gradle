@@ -16,7 +16,7 @@ android {
         buildConfigField 'String', 'CLASSIFIER_SHA256', quoted(publicValue('AQ_CLASSIFIER_SHA256'))
         buildConfigField 'String', 'SUPABASE_URL', quoted(publicValue('AQ_SUPABASE_URL'))
         buildConfigField 'String', 'SUPABASE_ANON_KEY', quoted(publicValue('AQ_SUPABASE_ANON_KEY'))
-        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildFeatures { buildConfig true }
     buildTypes { release { minifyEnabled false; proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' } }
@@ -24,4 +24,4 @@ android {
     lint { abortOnError true; checkReleaseBuilds true }
     testOptions { unitTests.returnDefaultValues = true }
 }
-dependencies { implementation project(':classifier-java'); testImplementation 'junit:junit:4.13.2' }
+dependencies { implementation project(':classifier-java'); testImplementation 'junit:junit:4.13.2'; androidTestImplementation 'androidx.test:runner:1.6.2'; androidTestImplementation 'androidx.test.ext:junit:1.2.1' }

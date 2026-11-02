@@ -45,3 +45,5 @@ erDiagram
 ```
 
 Edge username-login accepts username/password only; uses service-only alias mapping then real Auth. Staff-admin accepts strict operation/request_id/profile fields; Owner AAL2 required by checked SQL. Create uses stable internal email derived from request ID for unknown-outcome reconciliation; never retry an uncertain creation with another key. No public signup/recovery menu. Hosted Auth signature/MFA/config and APK behavior require development integration tests; SQL JWT stubs are only local enforcement tests.
+
+Privacy migration2 allows approved contact/address removal on customers and historical order snapshots; operational RPCs still require valid contact details. Private privacy_decisions records approved administrative cutoffs/results; no ordinary app/service-role execution grant exists for erase_eligible_contact. Export/replay ledger is separate from ordinary dump data; see privacy runbook. Names/financial history retained per controller assessment.
