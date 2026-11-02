@@ -1,0 +1,2 @@
+# Android component checkpoint
+In Progress: native Java/XML project, real aq_query/aq_command transport, username-login + managed MFA, operational forms (ui_forms agent), Owner expenses/report/settings. No Figma access, release model, cloud credentials or device present. No app build yet; root installing SDK/JDK. Gradle files pin AGP8.9.2/compile35/API29+, classifier-java shared module. No fake saves or local financial queues. NEXT_ACTION: complete core Activity/transport then integrate forms and build.

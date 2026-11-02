@@ -1,0 +1,18 @@
+name: Private recovery export
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 22,10 * * *'
+permissions:
+  contents: read
+jobs:
+  export:
+    if: github.event.repository.private && vars.AQ_BACKUP_ENABLED == 'true'
+    runs-on: [self-hosted, aqua-private-recovery]
+    steps:
+      - name: Export using custodian-managed private runner
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -x /opt/aqua-recovery/export-and-package
+          /opt/aqua-recovery/export-and-package

@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+# Install on the reviewed private runner; configuration/credentials remain outside Git.
+set -euo pipefail
+umask 077
+: "${PGSERVICE:?Select the approved development libpq service}"
+: "${AQ_RECOVERY_CONFIG_DIR:?Reviewed project/Auth/Storage inventory directory required}"
+: "${AQ_BACKUP_RECIPIENTS:?Public age recipients file required}"
+: "${AQ_BACKUP_PRIMARY:?Restricted primary destination required}"
+: "${AQ_BACKUP_RECOVERY:?Independent restricted cloud mount required}"
+: "${AQ_BACKUP_CATALOG:?Separately protected digest catalog required}"
+: "${AQ_RECOVERY_TOOL:?Absolute path to reviewed admin/recovery/backup.py required}"
+bundle=$(mktemp -d)
+trap 'rm -rf -- "$bundle"' EXIT
+pg_dump --format=custom --schema=public --schema=aq_private --schema=auth --schema=storage --file="$bundle/database.dump"
+pg_dumpall --roles-only --no-role-passwords --file="$bundle/roles.sql"
+for file in project-config.json auth-config.json storage-inventory.json; do
+  cp -- "$AQ_RECOVERY_CONFIG_DIR/$file" "$bundle/$file"
+done
+if test -d "$AQ_RECOVERY_CONFIG_DIR/storage-objects"; then cp -a -- "$AQ_RECOVERY_CONFIG_DIR/storage-objects" "$bundle/"; fi
+python3 "$AQ_RECOVERY_TOOL" package --bundle "$bundle" --recipients "$AQ_BACKUP_RECIPIENTS" --primary "$AQ_BACKUP_PRIMARY" --recovery "$AQ_BACKUP_RECOVERY" --catalog "$AQ_BACKUP_CATALOG"

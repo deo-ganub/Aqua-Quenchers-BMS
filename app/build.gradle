@@ -1,0 +1,27 @@
+plugins { id 'com.android.application' }
+
+def local = new Properties()
+if (rootProject.file('local.properties').exists()) rootProject.file('local.properties').withInputStream { local.load(it) }
+def publicValue = { String name -> providers.gradleProperty(name).orElse(providers.environmentVariable(name)).getOrElse(local.getProperty(name, '')) }
+def quoted = { String value -> '"' + value.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '') + '"' }
+android {
+    namespace 'com.aquaquenchers.bms'
+    compileSdk 35
+    defaultConfig {
+        applicationId 'com.aquaquenchers.bms'
+        minSdk 29
+        targetSdk 35
+        versionCode 1
+        versionName '0.1.0'
+        buildConfigField 'String', 'CLASSIFIER_SHA256', quoted(publicValue('AQ_CLASSIFIER_SHA256'))
+        buildConfigField 'String', 'SUPABASE_URL', quoted(publicValue('AQ_SUPABASE_URL'))
+        buildConfigField 'String', 'SUPABASE_ANON_KEY', quoted(publicValue('AQ_SUPABASE_ANON_KEY'))
+        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+    }
+    buildFeatures { buildConfig true }
+    buildTypes { release { minifyEnabled false; proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' } }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    lint { abortOnError true; checkReleaseBuilds true }
+    testOptions { unitTests.returnDefaultValues = true }
+}
+dependencies { implementation project(':classifier-java'); testImplementation 'junit:junit:4.13.2' }

@@ -1,0 +1,173 @@
+CREATE DATABASE
+CREATE SCHEMA
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+BEGIN
+CREATE SCHEMA
+REVOKE
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 1
+CREATE SEQUENCE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+DO
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+REVOKE
+GRANT
+COMMIT
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+BEGIN
+INSERT 0 2
+INSERT 0 2
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000002
+(1 row)
+
+                                           set_config                                            
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal1", "iat": 1793652582.236510, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+psql:backend/tests/smoke.sql:27: NOTICE:  PASS: retry equality, payload conflict, exact phone validation, Staff expense and administration denial
+DO
+RESET
+UPDATE 1
+SET
+psql:backend/tests/smoke.sql:34: NOTICE:  PASS: existing inactive session rejected
+DO
+ROLLBACK
+BEGIN
+INSERT 0 1
+INSERT 0 1
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                           set_config                                            
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal2", "iat": 1793652582.240667, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+psql:backend/tests/lifecycle.sql:38: NOTICE:  PASS: adjusted charge, conversion/reservation retry, reserved POS protection, partial/final delivery, Owner expenses, report date/receipt/as-of definitions
+DO
+ROLLBACK
+BEGIN
+INSERT 0 2
+INSERT 0 2
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                           set_config                                            
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal1", "iat": 1793652582.252657, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+psql:backend/tests/admin_security.sql:12: NOTICE:  PASS: Owner AAL1 denied account mutation
+DO
+RESET
+                                           set_config                                            
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal2", "iat": 1793652582.252994, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+psql:backend/tests/admin_security.sql:20: NOTICE:  PASS: AAL2 account rename preserves stable Auth identity and Staff role
+DO
+RESET
+SET
+psql:backend/tests/admin_security.sql:27: NOTICE:  PASS: anonymous protected read denied by grant
+DO
+RESET
+UPDATE 1
+SET
+psql:backend/tests/admin_security.sql:34: NOTICE:  PASS: expired session protected read denied
+DO
+ROLLBACK
+BEGIN
+INSERT 0 1
+INSERT 0 1
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config                                    
+----------------------------------------------------------------------------------
+ {"iat": 1793652582.254832, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+psql:backend/tests/unicode.sql:16: NOTICE:  PASS: UTF8 expense 500/501 code point boundary
+DO
+ROLLBACK

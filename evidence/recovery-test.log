@@ -1,0 +1,1 @@
+PASS: age round trip, independent copy digests, restored file hashes, authenticated tamper rejection, destination separation. Database/hosted restore NOT RUN.

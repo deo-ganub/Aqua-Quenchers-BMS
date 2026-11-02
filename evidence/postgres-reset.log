@@ -1,0 +1,34 @@
+NOTICE:  drop cascades to 31 other objects
+DETAIL:  drop cascades to table aq_private.profiles
+drop cascades to table aq_private.sessions
+drop cascades to table aq_private.customers
+drop cascades to table aq_private.inventory
+drop cascades to sequence aq_private.reference_seq
+drop cascades to table aq_private.orders
+drop cascades to table aq_private.reservations
+drop cascades to table aq_private.sales
+drop cascades to table aq_private.payments
+drop cascades to table aq_private.deliveries
+drop cascades to table aq_private.expenses
+drop cascades to table aq_private.requests
+drop cascades to table aq_private.audit_events
+drop cascades to function aq_private.today()
+drop cascades to function aq_private.new_reference(text)
+drop cascades to function aq_private.require_actor(boolean)
+drop cascades to function aq_private.require_keys(jsonb,text[])
+drop cascades to function aq_private.positive_quantity(jsonb)
+drop cascades to function aq_private.money(jsonb,boolean)
+drop cascades to function aq_private.paid(uuid,uuid)
+drop cascades to function aq_private.payment_status(bigint,bigint)
+drop cascades to function aq_private.order_json(uuid)
+drop cascades to function aq_private.sale_json(uuid)
+drop cascades to function aq_private.customer_json(uuid)
+drop cascades to function aq_private.stock_json()
+drop cascades to function aq_private.financial_summary(date,date)
+drop cascades to table aq_private.login_windows
+drop cascades to table aq_private.account_operations
+drop cascades to table aq_private.account_audit
+drop cascades to function aq_private.admin_actor()
+drop cascades to function aq_private.validate_staff_payload(jsonb)
+DROP SCHEMA
+DROP FUNCTION
