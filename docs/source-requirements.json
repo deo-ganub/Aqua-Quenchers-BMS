@@ -4451,6 +4451,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional settings, account create/edit/status/MFA/validation, inventory/pending routes, stock operations/password/logout criteria covered cumulatively by matching actual native/official Auth/backend evidence. Design/declared-device gates separate; production opening seed tracked under AC4/SCC."
@@ -4565,6 +4571,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional settings, account create/edit/status/MFA/validation, inventory/pending routes, stock operations/password/logout criteria covered cumulatively by matching actual native/official Auth/backend evidence. Design/declared-device gates separate; production opening seed tracked under AC4/SCC."
@@ -4679,6 +4691,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
@@ -4793,6 +4811,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional settings, account create/edit/status/MFA/validation, inventory/pending routes, stock operations/password/logout criteria covered cumulatively by matching actual native/official Auth/backend evidence. Design/declared-device gates separate; production opening seed tracked under AC4/SCC."
@@ -4804,7 +4828,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 93,
     "text": "4. Upon opening Inventory, the system shall display the heading, last-update time, Filled available, Reserved filled and Empty counts, and pending deliveries with Customer, Pending gallons, Original date and Carry-over Details. Available filled equals physical filled less active reservations. Initial counts require an Owner-approved controlled seed with an audit record; no manual adjustment screen is provided.",
-    "status": "In Progress",
+    "status": "Blocked",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -4907,9 +4931,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
-    "gap": "Runtime inventory/MFA subsets pass. Production initial counts and documented Owner approval/custody remain external; disposable controlled seed/audit fixture passes but is not production approval. Design/device gates separate."
+    "gap": "Runtime inventory/pending/MFA/controlled-seed audit fixture checks pass. Real opening counts and documented Owner approval/designated-administrator custody are external production inputs;47/80 are illustrative only. Production remains deferred; no manual adjustment screen."
   },
   {
     "id": "A-11-SCB",
@@ -4918,7 +4948,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 93,
     "text": "B. Reject invalid accounts, insufficient empty stock or invalid password changes\nGiven the Owner is creating or updating a Staff account\nWhen required details are missing, contact is not 11 digits or the username is already assigned\nThen the system shall display the relevant error and not save a duplicate or invalid account\nGiven a Refilling order needs more empty gallons than are available\nWhen Ready for Delivery is selected\nThen the system shall display \"Not enough empty gallons.\" and preserve status and stock\nGiven the Owner is changing their password\nWhen the current password is incorrect\nThen the system shall display \"Current password is incorrect.\"\nWhen the new-password confirmation differs\nThen the system shall display \"New passwords do not match.\"\nThen the system shall retain the previous password until valid details are saved.\n\nSample Data:\nDuplicate username ana.mendoza → \"Username already exists.\"\nMissing staff detail → \"Complete the required fields.\"\nInvalid contact → \"Please enter a valid contact number. Use 11 digits.\"\nReadiness needs 10 gallons but empty stock is 6.\nWrong current password: WrongPass123; mismatched new-password entries.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -5021,9 +5051,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
-    "gap": "Account/password negatives and full SQL shortage rollback/retry pass. Remaining explicit native Ready for Delivery insufficient-empty error display requires a recorded administrator-only synthetic shortage fixture and safe restoration; not a product manual-adjustment control. Design/device gates separate."
+    "gap": "Actual account/password negatives and native Ready-for-Delivery shortage display/status+stock preservation/recovery now pass, plus full disposable rollback/retry fixtures. Administrator-only synthetic shortage explicit; no production/declared-device/Figma claim."
   },
   {
     "id": "A-11-AC5",
@@ -5135,6 +5171,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
@@ -5146,7 +5188,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 94,
     "text": "C. Owner MFA and controlled opening stock\nGiven the Owner is saving a Staff account and is enrolled in managed MFA\nWhen a valid verification code is supplied\nThen save the account change once; an invalid or expired code shall display \"Enter a valid verification code.\" and preserve the existing account.\nGiven initial stock is not yet configured\nWhen the Owner approves a controlled seed executed by the designated administrator\nThen retain the opening counts and audit record without adding an inventory adjustment screen.\n\nSample Data:\nVerification code: valid six-digit authenticator code from the test account; wrong/expired code: reject. Opening stock values must be confirmed by the Owner; 47 filled and 80 empty are test fixtures only.",
-    "status": "In Progress",
+    "status": "Blocked",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -5249,9 +5291,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
-    "gap": "Runtime inventory/MFA subsets pass. Production initial counts and documented Owner approval/custody remain external; disposable controlled seed/audit fixture passes but is not production approval. Design/device gates separate."
+    "gap": "Runtime inventory/pending/MFA/controlled-seed audit fixture checks pass. Real opening counts and documented Owner approval/designated-administrator custody are external production inputs;47/80 are illustrative only. Production remains deferred; no manual adjustment screen."
   },
   {
     "id": "A-11-AC6",
@@ -5363,6 +5411,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
@@ -5477,6 +5531,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
@@ -5591,6 +5651,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
@@ -5705,6 +5771,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-staff-form-negative.log",
         "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
+      },
+      {
+        "path": "admin/tests/empty_stock_native.py --resume-reviewed",
+        "status": "Verified subset",
+        "evidence": "evidence/android-empty-stock.log",
+        "limit": "Actual Owner Ready confirmation->exact shortage error/no protected-record change. Recorded administrator-only owned synthetic shortage restored with guards; rotation/retry/readiness/final2delivery, stock baseline and charge6000-only; exact signed HTTP readiness replay after delivery no effect. Same original order/setup reused; no production counts or manual-adjustment endpoint."
       }
     ],
     "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
