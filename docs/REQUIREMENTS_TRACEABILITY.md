@@ -88,3 +88,12 @@ Actual backend-outage subset Verified: BackendOutageDeviceTest/backend_outage.py
 Source A13-SCB defect repaired: generic403 previously signed out active Staff. MainActivity now revalidates current same-ID active role through aq_me, preserves workspace with Access denied, never retries denied operation; inactive/expired recheck still signs out. Actual Staff report/expense/account-list403 + account mutation403, home counters/shortcuts and exact financial/profile immutability PASS (android-staff-home.log). Dedicated checked-MFA inactive/negative31minute expiry cases PASS (android-denied-session.log); account restored. Build/unit/lint PASS. Before-fix native behavior retained separately. A13-AC2/SCB functional criteria now Verified; full A13 design/populated-card variants remain separate.
 
 PDF negative output subset Verified: actual IOException/SecurityException from controlled callback URIs maps to error/no false save and retained retry bytes; cancellation clears bytes and financial/inventory snapshots unchanged (android-pdf-output-failure.log). FinancialHistoryDeviceTest additionally asserts previous valid report remains after reversed-date rejection, then corrected report succeeds. A10-AC2/SCB functional criteria Verified; not a full product/design/device acceptance claim.
+
+Latest verified functional additions (local official Auth/REST, API29):
+
+- A-13: personalized Home/card/routes and populated historical carry-over delivery, with exact ledger/stock reconciliation (`android-staff-home.log`, `android-carryover-queue.log`). AC1/AC3/SCA now Verified alongside existing AC2/SCB.
+- A-02: staged named period dialog, cancellation/rejection/correction, financial/stock figures and six quick actions (`android-owner-dashboard.log`).
+- A-11/A-20: real own-password validation/update and old/new same-ID login; enrolled Owner requires real MFA, cancellation/invalid codes do not update; Staff ordinary flow passes (`android-own-password.log`). A-20-AC4 Verified.
+- A-08/A-19: forward migration005 + native Payments search handoff fix; customer-name and invoice reference histories, customer/date scoping and empty results pass15SQL fixtures/real API/native test with exact unchanged records (`payment-history-search-*.log`, `android-payment-history.log`).
+
+Other criteria retain their existing status; these subsets do not assert Figma fidelity, trained-model quality or production acceptance.

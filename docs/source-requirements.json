@@ -616,6 +616,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -649,6 +655,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -682,6 +694,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -715,6 +733,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -748,6 +772,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -781,6 +811,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2710,6 +2746,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2755,6 +2803,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2800,6 +2860,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2845,6 +2917,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2890,6 +2974,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2935,6 +3031,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2980,6 +3088,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3025,6 +3145,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4079,6 +4211,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4151,6 +4289,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4223,6 +4367,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4295,6 +4445,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4367,6 +4523,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4439,6 +4601,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4511,6 +4679,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4583,6 +4757,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4655,6 +4835,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4727,6 +4913,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4799,6 +4991,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4871,6 +5069,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-managed-account.log",
         "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5470,7 +5674,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 12,
     "text": "1. Upon opening Home after successful Staff login, the system shall display the Staff Home screen with the Staff account label, personalized greeting and work summary; Orders, For pickup, Ready to deliver and Pending gallons; New order and Walk-in sale actions; a current order card showing the customer, Order ID, order status, gallons, balance and View order; and navigation for Home, Orders, POS, Customers and Settings.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / aq_query home",
@@ -5504,9 +5708,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/carryover_queue.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "No remaining functional gap for this criterion under tested local API29 environment. Design, declared-device and hosted operational gates remain separate."
   },
   {
     "id": "A-13-AC2",
@@ -5549,6 +5765,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/carryover_queue.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "No remaining functional gap for this criterion under tested local API29 environment. Figma fidelity/declared-device and hosted operational gates are tracked separately; this does not mark full A13 or product acceptance complete."
@@ -5560,7 +5788,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 14,
     "text": "3. The system shall open the related operational list or order from a summary, View order, New order or Walk-in sale action without exposing Owner financial functions.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / aq_query home",
@@ -5594,9 +5822,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/carryover_queue.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "No remaining functional gap for this criterion under tested local API29 environment. Design, declared-device and hosted operational gates remain separate."
   },
   {
     "id": "A-13-SCA",
@@ -5605,7 +5845,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 14,
     "text": "A. View the shift queue and open its work items\nGiven Ana Mendoza has signed in with an Active Staff account\nWhen Home opens\nThen the system shall display the personalized greeting, work counts, current order card and Staff navigation\nWhen New order or Walk-in sale is selected\nThen the system shall open the related entry form\nWhen View order or a work summary is selected\nThen the system shall open the corresponding order or operational list\nWhen Pending gallons is opened\nThen the system shall display the customer, original date, waiting days and remaining quantity with a delivery action.\n\nSample Data:\nGood morning, Ana; Orders 8; For pickup 2; Ready to deliver 3; Pending gallons 3.\nMaria Santos / ORD-2026-0001 / Undelivered / 10 gallons / ₱150.00 balance.\nOriginal date 14 Oct 2026; business date 15 Oct; 1 day waiting.\nNavigation: Home, Orders, POS, Customers, Settings.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / aq_query home",
@@ -5639,9 +5879,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/carryover_queue.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "No remaining functional gap for this criterion under tested local API29 environment. Design, declared-device and hosted operational gates remain separate."
   },
   {
     "id": "A-13-SCB",
@@ -5684,6 +5936,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/carryover_queue.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "No remaining functional gap for this criterion under tested local API29 environment. Figma fidelity/declared-device and hosted operational gates are tracked separately; this does not mark full A13 or product acceptance complete."
@@ -7613,6 +7877,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7658,6 +7934,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7703,6 +7991,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7748,6 +8048,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7793,6 +8105,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7838,6 +8162,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7883,6 +8219,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7928,6 +8276,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "backend/tests/payment_history_search.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/payment-history-search-sql.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7986,6 +8346,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8044,6 +8410,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8102,6 +8474,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8160,6 +8538,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8171,7 +8555,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 77,
     "text": "4. The system shall validate Current password, New password and Confirm password through Save password; reject incorrect current passwords and mismatches, otherwise show \"Password updated.\".\n\nRequire at least 15 characters for the new password and show \"Use at least 15 characters.\" when shorter. Verified administrator recovery remains outside the app.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,profile,password / update_profile",
@@ -8218,9 +8602,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "No remaining functional gap for this criterion under tested local API29 environment. Design, declared-device and hosted operational gates remain separate."
   },
   {
     "id": "A-20-SCB",
@@ -8276,6 +8666,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8334,6 +8730,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8392,6 +8794,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
