@@ -4319,6 +4319,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4397,6 +4403,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4475,6 +4487,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4553,6 +4571,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4637,6 +4661,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-dashboard.log; evidence/android-owner-inventory-empty.log",
         "limit": "Actual Owner Inventory4counts/time/empty+populated pending customer/date/gallons/Carry-over Details; normal checked1gal delivery clears reservation and restores stock, historical charge3000 only. Production initial-seed approval and declared-device/design gates separate."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4715,6 +4745,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4793,6 +4829,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4871,6 +4913,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4949,6 +4997,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5027,6 +5081,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5105,6 +5165,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5183,6 +5249,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8562,6 +8634,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8626,6 +8704,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8637,7 +8721,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 76,
     "text": "3. The system shall display the current Staff account and save valid own-profile edits through Save profile; validate Full name, unique Username and 11-digit Contact number and prevent edits to other accounts.\n\nUsername changes shall update only the alias and retain the stable Auth user ID and linked transaction history.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,profile,password / update_profile",
@@ -8690,9 +8774,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional current-account/valid alias save/stable-ID/history and invalid/duplicate/cancel/rotation checks pass across existing connected UI/SQL and current real Auth/REST native negatives. Design/device/hosted gates separate."
   },
   {
     "id": "A-20-SCA",
@@ -8754,6 +8844,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8818,6 +8914,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "No remaining functional gap for this criterion under tested local API29 environment. Design, declared-device and hosted operational gates remain separate."
@@ -8882,6 +8984,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8946,6 +9054,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -9010,6 +9124,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/own_profile_negative.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
+        "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
