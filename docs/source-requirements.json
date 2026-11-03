@@ -3857,6 +3857,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3923,6 +3929,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3989,6 +4001,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4055,6 +4073,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4121,6 +4145,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4187,6 +4217,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4253,6 +4289,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4319,6 +4361,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4385,6 +4433,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4451,6 +4505,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4517,6 +4577,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4583,6 +4649,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManagedAccountDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Actual native cancel/MFA-cancel/rotation, real TOTP/AAL2 rename+deactivate, old-session403/old-new alias401 while inactive, actual reactivation/fresh same-ID login. Account count and all financial/stock records unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."

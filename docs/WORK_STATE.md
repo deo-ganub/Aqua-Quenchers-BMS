@@ -6,7 +6,7 @@ Only Owner/Staff; fixed35/30 pesos, whole gallons/integer centavos, Manila busin
 
 ## Git / current task
 Branch `work`; latest committed implementation `32aaf1b` (earlier eb5b12b,81bf0c1). Current changes: financial_history.py/FinancialHistoryDeviceTest, named_credit.py/NamedCreditDeviceTest, related evidence, LOCAL_REAL_SERVICES/REQUIREMENTS_TRACEABILITY/source-requirements and this checkpoint. No unrelated user changes found; inspect git status. No push/deploy.
-CURRENT_TASK: Staff customer edit verification complete run256df692 (native OK1test + host PASS), no pending profile mutation. Next independent native account edit/deactivation/reactivation requires a dedicated already-created synthetic Staff account and actual managed MFA; preserve all business records.
+CURRENT_TASK: user requested progress/GitHub synchronization explanation. Checking remote main/work read-only; changes so far are LOCAL cloud-workspace commits on branch work, no push has been performed. Managed-account verification completed; checkpoint/commit being finalized. No pending account mutation.
 
 ## Verified (reuse evidence)
 - Official source-built GoTruev2.197.0 + SHA-verified PostgREST16.5, real production Edge handlers over trusted HTTPS, all4 migrations on actual Auth schema. Password/JWT/forgery, real TOTP/AAL2, account reconciliation/deactivation/logout/refresh, permissions, exact operational/financial/stock workflow PASS: real-auth-rest-http.log, real-services-provenance.json.
@@ -37,4 +37,8 @@ Figma SECOND-page screens/components/prototype access; reviewed seven-category d
 
 Customer edit run256df692 VERIFIED: cancel/missing/type/invalid/duplicate no effects; same stableID/contact after rotation and name/address/Household update; old30-peso order/name/payment retained; prospective35-peso order preview cancelled. Exact full orders/sales/payments/expenses/inventory/reservation snapshots unchanged and customer count unchanged. evidence/android-customer-edit.log; device fixture removed; host state completed. Build + Python syntax PASS.
 
-NEXT_ACTION: commit verified customer edit checks/docs, then implement gated native Owner Staff-account edit/deactivation/reactivation using the account created by connected run7f863325, actual MFA, old-session denial while inactive and fresh same-ID login afterward; no financial mutation.
+Managed-account run781053dc executing runner17112: native reached waiting_inactive_checks after actual managed-TOTP rename/deactivate. Host verified old session403 plus old/new alias signins401 while inactive and delivered private ready acknowledgement. Reactivation/fresh same-ID login and exact business-state reconciliation pending; no financial writes. Do not rerun/create another identity. Check stable target_id in private managed-account-state.json if interrupted.
+
+Managed-account run781053dc VERIFIED: native OK1test + host PASS. Cancel/MFA-cancel/rotation, actual TOTP/AAL2 rename/deactivate, old session403 and old/new alias401 while inactive, actual TOTP reactivation/fresh same-ID Staff login. Account count and exact full financial/stock snapshots unchanged. Device fixture removed; private managed-account-state completed. evidence/android-managed-account.log. No hosted operations/deployment.
+
+NEXT_ACTION: finalize managed-account checkpoint commit and report local-versus-remote Git status to user. Continue remaining independent native variants (saved-profile POS linkage/cancel/rotation, network/PDF cancel/error) while retaining external design/model/device/hosted-recovery gates.
