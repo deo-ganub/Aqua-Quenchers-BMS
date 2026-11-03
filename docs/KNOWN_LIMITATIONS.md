@@ -13,3 +13,5 @@ Local real-Auth integration is Verified using official source-built GoTrue and P
 Protected correction previews now run as read-only administrator snapshots with tested reconciliation and private output. Actual compensating execution requires a concrete Owner-approved case specification (references, reason, amounts, dates, stock/reservations) and reviewed migration; the generic app has no correction controls.
 
 Update: registry remains blocked but no longer blocks LOCAL Auth/REST verification. Official source-built GoTrue/PostgREST and connected native API29 workflow pass, including actual TOTP and SAF/PDF. Hosted operational equivalence and declared hardware/design/data/custody gates remain separate. Earlier registry-only blocker statements are superseded for local functional integration.
+
+Published-environment access recheck: observed unrestricted/enforced HTTP policy, but the supplied Figma design URL still fails at proxy CONNECT403. A missing allowlist entry is therefore not an established cause. No settings were reapplied or environment published by the agent. Actual Figma visuals remain unavailable; no fidelity claim.

@@ -1,0 +1,38 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.PdfCancellationDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.PdfCancellationDeviceTest:
+INSTRUMENTATION_STATUS: test=realDocumentPickerCancelNeverAcknowledgesExport
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.PdfCancellationDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Missing dialog/system control: actual document picker
+	at com.aquaquenchers.bms.PdfCancellationDeviceTest.awaitNode(PdfCancellationDeviceTest.java:57)
+	at com.aquaquenchers.bms.PdfCancellationDeviceTest.realDocumentPickerCancelNeverAcknowledgesExport(PdfCancellationDeviceTest.java:63)
+
+INSTRUMENTATION_STATUS: stream=
+Error in realDocumentPickerCancelNeverAcknowledgesExport(com.aquaquenchers.bms.PdfCancellationDeviceTest):
+java.lang.AssertionError: Missing dialog/system control: actual document picker
+	at com.aquaquenchers.bms.PdfCancellationDeviceTest.awaitNode(PdfCancellationDeviceTest.java:57)
+	at com.aquaquenchers.bms.PdfCancellationDeviceTest.realDocumentPickerCancelNeverAcknowledgesExport(PdfCancellationDeviceTest.java:63)
+
+INSTRUMENTATION_STATUS: test=realDocumentPickerCancelNeverAcknowledgesExport
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 34.045
+There was 1 failure:
+1) realDocumentPickerCancelNeverAcknowledgesExport(com.aquaquenchers.bms.PdfCancellationDeviceTest)
+java.lang.AssertionError: Missing dialog/system control: actual document picker
+	at com.aquaquenchers.bms.PdfCancellationDeviceTest.awaitNode(PdfCancellationDeviceTest.java:57)
+	at com.aquaquenchers.bms.PdfCancellationDeviceTest.realDocumentPickerCancelNeverAcknowledgesExport(PdfCancellationDeviceTest.java:63)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1
