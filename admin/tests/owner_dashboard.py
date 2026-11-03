@@ -25,7 +25,7 @@ def main():
     # SQL supplies independent expected data; native UI authenticates through actual Auth/REST.
     figures = {date: json.loads(sql("select aq_private.financial_summary(:'day'::date,:'day'::date)||jsonb_build_object('inventory',aq_private.stock_json());", day=date)) for date in [today, past]}
     reference = sql('select reference from aq_private.orders order by created_at desc limit 1;')
-    fixture = {'kind': 'SYNTHETIC_LOCAL_OWNER_DASHBOARD_UI', 'username': c['owner_username'], 'password': c['owner_password'], 'today': today, 'past': past, 'figures': figures, 'reference': reference}
+    fixture = {'kind': 'SYNTHETIC_LOCAL_OWNER_DASHBOARD_UI', 'username': c['owner_username'], 'password': c['owner_password'], 'today': today, 'past': past, 'figures': figures, 'reference': reference, 'pending_orders': json.loads(sql("select coalesce(jsonb_agg(aq_private.order_json(o.id) order by business_date),'[]') from aq_private.orders o where status in ('ready_for_delivery','undelivered');"))}
     private_json(LOCAL / 'owner-dashboard-fixture.json', fixture)
     for path in ['app/build/outputs/apk/debug/app-debug.apk', 'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk']: adb('install', '-r', '-t', str(REPO / path))
     adb('reverse', 'tcp:55436', 'tcp:55436')
@@ -36,7 +36,7 @@ def main():
     assert 'OK (1 test)' in text, 'Inspect dashboard evidence before retry'
     assert json.loads(sql(snapshot_sql)) == before, 'Read-only dashboard workflow changed business/profile state'
     adb('shell', 'run-as', PACKAGE, 'rm', 'files/owner-dashboard-credentials.json')
-    with evidence.open('a') as log: log.write('\nPASS: actual Owner dashboard figures/current inventory/time, named period dialog/cancel/reversed-date preservation/correction/rotation, recent order and6content quick actions; exact business/profile snapshots unchanged. No Figma fidelity claim.\n')
+    with evidence.open('a') as log: log.write('\nPASS: actual Owner dashboard figures/current inventory/time, named period dialog/cancel/reversed-date preservation/correction/rotation, recent order and6content quick actions; Inventory all4counts/update-time/pending details/carry-over route/no manual adjustment screen; exact business/profile snapshots unchanged. No Figma fidelity claim.\n')
     print('PASS: actual Owner dashboard period selector/figures/quick actions with unchanged business records')
 
 

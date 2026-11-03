@@ -1,4 +1,5 @@
 """Read-only actual customer-name payment-history UI and immutable business snapshot."""
+import argparse
 import json
 import os
 import re
@@ -10,6 +11,9 @@ from connected_android import LOCAL, REPO, PACKAGE, adb, private_json
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--owner', action='store_true')
+    options = parser.parse_args()
     c = json.loads((LOCAL / 'private-config.json').read_text())
     assert c['kind'] == 'SYNTHETIC_LOCAL_INTEGRATION_ONLY' and c['url'] == 'https://127.0.0.1:55436'
     assert re.fullmatch(r'aq_http_[0-9a-f]{8}', c['database'])
@@ -24,20 +28,22 @@ def main():
     def call(path, body, token=None):
         req = urllib.request.Request(c['url'] + path, data=json.dumps(body).encode(), headers={'apikey': c['SUPABASE_ANON_KEY'], 'Authorization': 'Bearer ' + (token or c['SUPABASE_ANON_KEY']), 'content-type': 'application/json'})
         with urllib.request.urlopen(req, context=context, timeout=20) as response: return json.load(response)
-    token = call('/functions/v1/username-login', {'username': staff['username'], 'password': c['staff_password']})['access_token']
+    username = c['owner_username'] if options.owner else staff['username']
+    password = c['owner_password'] if options.owner else c['staff_password']
+    token = call('/functions/v1/username-login', {'username': username, 'password': password})['access_token']
     customer = call('/rest/v1/rpc/aq_query', {'p_request': {'resource': 'customer', 'id': ids['customer_id']}}, token)
     assert len(customer['payments']) == 2 and len(customer['orders']) == 1
-    fixture = {'kind': 'SYNTHETIC_LOCAL_PAYMENT_HISTORY_UI', 'username': staff['username'], 'password': c['staff_password'], 'customer_name': customer['name'], 'order_reference': customer['orders'][0]['reference'], 'receipts': customer['payments']}
+    fixture = {'kind': 'SYNTHETIC_LOCAL_PAYMENT_HISTORY_UI', 'username': username, 'password': password, 'owner': options.owner, 'customer_name': customer['name'], 'order_reference': customer['orders'][0]['reference'], 'receipts': customer['payments']}
     private_json(LOCAL / 'payment-history-fixture.json', fixture); before = json.loads(sql(snapshot_sql))
     for path in ['app/build/outputs/apk/debug/app-debug.apk', 'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk']: adb('install', '-r', '-t', str(REPO / path))
     adb('reverse', 'tcp:55436', 'tcp:55436')
     adb('shell', 'run-as', PACKAGE, 'sh', '-c', shlex.quote('umask 077; cat > files/payment-history-credentials.json'), input=json.dumps(fixture).encode())
     run = adb('shell', 'am', 'instrument', '-w', '-r', '-e', 'class', PACKAGE + '.PaymentHistoryDeviceTest', PACKAGE + '.test/androidx.test.runner.AndroidJUnitRunner', timeout=300)
-    text = run.stdout.decode().replace(fixture['password'], '[private fixture withheld]'); evidence = REPO / 'evidence/android-payment-history.log'; evidence.write_text(text)
+    text = run.stdout.decode().replace(fixture['password'], '[private fixture withheld]'); evidence = REPO / ('evidence/android-payment-history-owner.log' if options.owner else 'evidence/android-payment-history.log'); evidence.write_text(text)
     assert 'OK (1 test)' in text, 'Inspect native history evidence before retry'
     assert json.loads(sql(snapshot_sql)) == before
     adb('shell', 'run-as', PACKAGE, 'rm', 'files/payment-history-credentials.json')
-    with evidence.open('a') as log: log.write('\nPASS: actual Staff name-filtered2receipt history/ref/amount/recorder, Back retains name search, invoice-ref search still2, unknown name true empty. All business/profile records unchanged.\n')
+    with evidence.open('a') as log: log.write('\nPASS: actual ' + ('Owner' if options.owner else 'Staff') + ' name-filtered2receipt history/ref/amount/recorder, Back retains name search, invoice-ref search still2, unknown name true empty. All business/profile records unchanged.\n')
     print('PASS: native customer-name/ref/empty payment history and exact business immutability')
 
 

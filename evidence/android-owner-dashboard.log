@@ -15,11 +15,13 @@ INSTRUMENTATION_STATUS: test=realPeriodsCancelValidationInventoryAndQuickActions
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 45.181
+Time: 46.945
 
 OK (1 test)
 
 
 INSTRUMENTATION_CODE: -1
 
-PASS: actual Owner dashboard figures/current inventory/time, named period dialog/cancel/reversed-date preservation/correction/rotation, recent order and6content quick actions; exact business/profile snapshots unchanged. No Figma fidelity claim.
+PASS: actual Owner dashboard figures/current inventory/time, named period dialog/cancel/reversed-date preservation/correction/rotation, recent order and6content quick actions; Inventory all4counts/update-time/pending details/carry-over route/no manual adjustment screen; exact business/profile snapshots unchanged. No Figma fidelity claim.
+
+PASS: populated Inventory pending fixture1 (customer/reference/original date/pending gallon), authoritative stock/time and Carry-over Details navigation. Native UI changed no records. Checked final delivery cleared reservation, stock returned to baseline; historical charge3000 retained, receipts/expenses/net unchanged.

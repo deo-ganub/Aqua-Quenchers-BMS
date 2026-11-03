@@ -97,3 +97,7 @@ Latest verified functional additions (local official Auth/REST, API29):
 - A-08/A-19: forward migration005 + native Payments search handoff fix; customer-name and invoice reference histories, customer/date scoping and empty results pass15SQL fixtures/real API/native test with exact unchanged records (`payment-history-search-*.log`, `android-payment-history.log`).
 
 Other criteria retain their existing status; these subsets do not assert Figma fidelity, trained-model quality or production acceptance.
+
+Owner native payment-history role path also Verified (`android-payment-history-owner.log`), with same name/reference/empty/Back checks and exact business/profile immutability as Staff. No additional payment was created.
+
+A-11-AC4 Inventory native empty and populated states Verified subset: exact4counts/time, pending customer/reference/original date/gallons and Carry-over Details route; no manual adjustment controls. `inventory_pending.py` saved command intents, verified no UI mutations, completed normal final delivery; stock restored, historical charge3000 only, receipts/expenses/net unchanged (`android-owner-dashboard.log`, `android-owner-inventory-empty.log`). Production controlled-seed review remains separate.

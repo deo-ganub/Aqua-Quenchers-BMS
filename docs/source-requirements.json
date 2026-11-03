@@ -2756,8 +2756,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2813,8 +2813,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2870,8 +2870,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2927,8 +2927,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2984,8 +2984,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3041,8 +3041,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3098,8 +3098,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3155,8 +3155,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4529,6 +4529,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-password.log",
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log; evidence/android-owner-inventory-empty.log",
+        "limit": "Actual Owner Inventory4counts/time/empty+populated pending customer/date/gallons/Carry-over Details; normal checked1gal delivery clears reservation and restores stock, historical charge3000 only. Production initial-seed approval and declared-device/design gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7887,8 +7893,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7944,8 +7950,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8001,8 +8007,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8058,8 +8064,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8115,8 +8121,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8172,8 +8178,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8229,8 +8235,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -8286,8 +8292,8 @@
       {
         "path": "admin/tests/payment_history.py",
         "status": "Verified subset",
-        "evidence": "evidence/android-payment-history.log",
-        "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
