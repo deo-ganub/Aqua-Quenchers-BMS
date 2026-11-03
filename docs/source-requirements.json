@@ -880,6 +880,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-customer-create.log",
         "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -943,6 +949,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-customer-create.log",
         "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -1006,6 +1018,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-customer-create.log",
         "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "No functional gap for eleven-digit contact validation/display-space normalization under actual local API29 checks and existing RulesTest. Design/declared-device/hosted gates separate."
@@ -1069,6 +1087,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-customer-create.log",
         "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1080,7 +1104,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 22,
     "text": "4. The system shall reject a contact number belonging to another customer with \"Customer already exists.\"; allow the current customer to keep their own number when editing.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / aq_command create_customer,update_customer",
@@ -1132,9 +1156,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-customer-create.log",
         "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional duplicate/own-number/corrected same-ID edit checks pass for both roles with immutable linked history. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-03-SCB",
@@ -1143,7 +1173,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 22,
     "text": "B. Missing details, invalid contact and duplicate customer\nGiven the Owner is adding or editing a customer\nWhen required details are missing\nThen the system shall display \"Complete the required fields.\" and not save the profile\nWhen Customer type has not been selected\nThen the system shall display \"Choose Household, Dealer, or Walk-in.\"\nWhen the contact number does not contain 11 digits after display spaces are removed\nThen the system shall display \"Please enter a valid contact number. Use 11 digits.\"\nGiven the submitted number belongs to a different existing customer\nWhen the Owner selects Save Customer\nThen the system shall display \"Customer already exists.\" and create no duplicate\nWhen the invalid details are corrected and resubmitted\nThen the system shall validate them again and retain all existing customer transactions.\n\nSample Data:\nMissing contact or unselected customer type.\nInvalid contact: 0917 555 or 0917 55.\nDuplicate contact: 09175550125 already belongs to Maria Santos.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / aq_command create_customer,update_customer",
@@ -1195,9 +1225,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-customer-create.log",
         "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional duplicate/own-number/corrected same-ID edit checks pass for both roles with immutable linked history. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-03-AC5",
@@ -1258,6 +1294,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-customer-create.log",
         "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1321,6 +1363,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-owner-customer-create.log",
         "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4300,7 +4348,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 90,
     "text": "1. The system shall display Owner Settings with Inventory, Staff accounts, Change password, Log out, Back to dashboard and the existing Owner navigation. Login History and Activity Log shall remain excluded from the active scope.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -4373,9 +4421,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional settings, account create/edit/status/MFA/validation, inventory/pending routes, stock operations/password/logout criteria covered cumulatively by matching actual native/official Auth/backend evidence. Design/declared-device gates separate; production opening seed tracked under AC4/SCC."
   },
   {
     "id": "A-11-AC2",
@@ -4384,7 +4462,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 91,
     "text": "2. The system shall accept Full name, unique Username, 11-digit Contact number, Role Staff, Account status and Temporary password through Save Staff Account; reject required-field omissions, invalid contact or duplicate username.\n\nTemporary passwords shall contain at least 15 characters. Before saving a new or changed Staff account/status, require managed MFA verification through Verification code, Verify and save and Cancel; reject invalid or expired codes with \"Enter a valid verification code.\" and save no account change.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -4457,9 +4535,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional settings, account create/edit/status/MFA/validation, inventory/pending routes, stock operations/password/logout criteria covered cumulatively by matching actual native/official Auth/backend evidence. Design/declared-device gates separate; production opening seed tracked under AC4/SCC."
   },
   {
     "id": "A-11-AC3",
@@ -4468,7 +4576,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 92,
     "text": "3. The system shall allow editing a staff account and setting Active or Inactive, and deny subsequent sign-in for Inactive accounts.\n\nThe backend shall deny protected requests from existing sessions immediately after deactivation, including an old access token.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -4541,9 +4649,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
   },
   {
     "id": "A-11-SCA",
@@ -4552,7 +4690,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 92,
     "text": "A. Manage staff access, review inventory and secure the Owner session\nGiven the Owner is signed in\nWhen Settings opens\nThen the system shall display Inventory, Staff accounts, Change password, Log out and Back to dashboard\nWhen Staff accounts and Add Staff are selected\nThen the system shall display the staff account form\nWhen valid account details and an unused username are submitted\nThen the system shall save the Staff account and show its confirmation\nWhen an existing staff account is edited and set Inactive or Active\nThen the system shall save the status and apply it to subsequent sign-in attempts\nWhen Inventory opens\nThen the system shall display filled and empty counts, last update and pending-delivery information\nWhen Carry-over Details is selected\nThen the system shall open the pending-delivery list\nGiven independent valid pickup, delivery, Walk-in-sale or readiness transactions\nWhen each is saved\nThen the system shall apply its corresponding stock update once\nWhen Change password is opened and the correct current password and matching new passwords are submitted\nThen the system shall save the change and display \"Password updated.\"\nWhen Log out is selected\nThen the system shall end the session and return to Sign in; protected pages shall require authentication again.\n\nSample Data:\nOwner: Elena Mendoza / owner.elena.\nStaff: Ana Mendoza / ana.mendoza / 0917 555 0188 / Staff / Active; temporary password masked.\nInventory: 47 filled, 80 empty; updated 15 Oct 2026, 9:00 AM; Maria Santos pending 3 from 14 Oct.\nIndependent pickup: collect 8, empty 80 → 88.\nIndependent sale: sell 10, filled 47 → 37.\nIndependent readiness: convert 10 once, empty 80 → 70 and filled 47 → 57.\nPassword values remain masked in Figma.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -4625,9 +4763,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional settings, account create/edit/status/MFA/validation, inventory/pending routes, stock operations/password/logout criteria covered cumulatively by matching actual native/official Auth/backend evidence. Design/declared-device gates separate; production opening seed tracked under AC4/SCC."
   },
   {
     "id": "A-11-AC4",
@@ -4715,9 +4883,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Runtime inventory/MFA subsets pass. Production initial counts and documented Owner approval/custody remain external; disposable controlled seed/audit fixture passes but is not production approval. Design/device gates separate."
   },
   {
     "id": "A-11-SCB",
@@ -4799,9 +4991,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Account/password negatives and full SQL shortage rollback/retry pass. Remaining explicit native Ready for Delivery insufficient-empty error display requires a recorded administrator-only synthetic shortage fixture and safe restoration; not a product manual-adjustment control. Design/device gates separate."
   },
   {
     "id": "A-11-AC5",
@@ -4810,7 +5032,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 94,
     "text": "5. The system shall add actual pickup gallons to Empty once. Delivery shall consume its order’s reservation and physical filled stock once; a Walk-in sale shall consume only unreserved available filled stock once.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -4883,9 +5105,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
   },
   {
     "id": "A-11-SCC",
@@ -4967,9 +5219,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Runtime inventory/MFA subsets pass. Production initial counts and documented Owner approval/custody remain external; disposable controlled seed/audit fixture passes but is not production approval. Design/device gates separate."
   },
   {
     "id": "A-11-AC6",
@@ -4978,7 +5260,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 95,
     "text": "6. Ready for Delivery shall atomically convert the adjusted order quantity from Empty into physical filled stock and reserve it for that order once. Reject insufficient empties with \"Not enough empty gallons.\" Partial deliveries retain remaining reservations; retries shall create no duplicate conversion or reservation.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -5051,9 +5333,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
   },
   {
     "id": "A-11-AC7",
@@ -5062,7 +5374,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 96,
     "text": "7. The system shall display the pending-delivery table with Customer, Pending gallons and Original date. Carry-over Details shall open the pending delivery list, which shall show original date, days waiting and the action to record the remaining delivery.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -5135,9 +5447,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
   },
   {
     "id": "A-11-AC8",
@@ -5146,7 +5488,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 97,
     "text": "8. The system shall validate Current password, New password and Confirm new password through Save password; reject incorrect current passwords or mismatched confirmation and save only a valid change.\n\nNew and temporary passwords shall contain at least 15 characters; otherwise show \"Use at least 15 characters.\" Designated administrator recovery remains outside the app.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -5219,9 +5561,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
   },
   {
     "id": "A-11-AC9",
@@ -5230,7 +5602,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 98,
     "text": "9. The system shall end the authenticated session through Log out and return to Sign in; protected screens shall require signing in again.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
@@ -5303,9 +5675,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "backend/tests/empty_stock_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/empty-stock-boundary.log",
+        "limit": "New disposable DB5migrations/16fixtures: Owner+Staff exact insufficient-empty error/full rollback/restored same-key successful retry/exactly-once conversion+reservation+audit. Explicit administrator-controlled shortage boundary; JWT stubs, no native physical-shortage claim."
+      },
+      {
+        "path": "admin/tests/managed_account.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-managed-account.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/inventory_pending.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse passing actual local official Auth/REST/native evidence only for matching functional assertions; design/device/hosted acceptance separate."
+      },
+      {
+        "path": "admin/tests/staff_form_negative.py --owner",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-form-negative.log",
+        "limit": "Actual required Staff fields/contact/temporary<15 rejection; ordinary draft/status rotation with temporary password cleared; real TOTP/AAL2 duplicate alias rejection and MFA/form Cancel. No account provisioned; customers/financial/stock/profiles/Auth identity/factor mappings unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion verified cumulatively by matching real Auth/native workflow and backend boundary/replay/concurrency/validation evidence. Insufficient-empty negative is an explicit disposable administrator fixture with JWT stubs; no physical-device/hosted/Figma acceptance claimed."
   },
   {
     "id": "A-12-AC1",
@@ -6233,6 +6635,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -6290,6 +6698,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -6347,6 +6761,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "No functional gap for eleven-digit contact validation/display-space normalization under actual local API29 checks and existing RulesTest. Design/declared-device/hosted gates separate."
@@ -6404,6 +6824,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6461,6 +6887,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -6472,7 +6904,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 22,
     "text": "B. Missing details, invalid contact and duplicate customer\nGiven the Staff member is adding or editing a customer\nWhen required details are missing\nThen the system shall display \"Complete the required fields.\" and not save the profile\nWhen Customer type has not been selected\nThen the system shall display \"Choose Household, Dealer, or Walk-in.\"\nWhen the contact number does not contain 11 digits after display spaces are removed\nThen the system shall display \"Please enter a valid contact number. Use 11 digits.\"\nGiven the submitted number belongs to a different existing customer\nWhen the Staff member selects Save Customer\nThen the system shall display \"Customer already exists.\" and create no duplicate\nWhen the invalid details are corrected and resubmitted\nThen the system shall validate them again and retain all existing customer transactions.\n\nSample Data:\nMissing contact or unselected customer type.\nInvalid contact: 0917 555 or 0917 55.\nDuplicate contact: 09175550125 already belongs to Maria Santos.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / create_customer,update_customer",
@@ -6518,9 +6950,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional duplicate/own-number/corrected same-ID edit checks pass for both roles with immutable linked history. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-14-AC5",
@@ -6575,6 +7013,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6632,6 +7076,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/customer_edit.py --reviewed-owner-run",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-edit-owner.log",
+        "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."

@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.StaffFormNegativeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.StaffFormNegativeDeviceTest:
+INSTRUMENTATION_STATUS: test=invalidStaffCreationAndMfaDuplicateNeverProvisionAccount
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.StaffFormNegativeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=invalidStaffCreationAndMfaDuplicateNeverProvisionAccount
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 25.091
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: actual Owner Staff required fields/contact/temporary15 minimum, rotation clears temporary secret, managed-MFA cancel and real verified duplicate alias rejection, Cancel no save. Customers/financial/stock/profiles/Auth identity and verified-factor mappings unchanged.
