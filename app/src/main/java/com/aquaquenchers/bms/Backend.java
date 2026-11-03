@@ -40,7 +40,7 @@ public final class Backend {
             int status=connection.getResponseCode();InputStream stream=status>=200&&status<300?connection.getInputStream():connection.getErrorStream();
             String text="";if(stream!=null){try(InputStream in=stream;ByteArrayOutputStream bytes=new ByteArrayOutputStream()){byte[] b=new byte[4096];int n;while((n=in.read(b))!=-1){if(bytes.size()+n>4*1024*1024)throw new Failure(status,"Response is too large.");bytes.write(b,0,n);}text=bytes.toString(StandardCharsets.UTF_8.name());}}
             JSONObject result;try{result=text.trim().isEmpty()?new JSONObject():new JSONObject(text);}catch(Exception e){throw new Failure(status,"The backend returned an invalid response. Nothing is confirmed saved.");}
-            if(status<200||status>=300){String message=result.optString("message",result.optString("error","Request failed.")); if(message.length()>300)message="Request rejected. Check your entries and permissions.";throw new Failure(status,message);}
+            if(status<200||status>=300){String message=result.optString("message",result.optString("error",result.optString("msg","Request failed."))); if(message.length()>300)message="Request rejected. Check your entries and permissions.";throw new Failure(status,message);}
             return result;
         }catch(Failure e){throw e;}catch(Exception e){throw new Failure(0,"Connection failed. Inputs are preserved. The save outcome may be unknown; retry the same request safely when connected.");}
         finally{if(connection!=null)connection.disconnect();}

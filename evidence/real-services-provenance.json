@@ -1,0 +1,8 @@
+{
+  "auth_tag": "v2.197.0",
+  "auth_commit": "4eee58f296d9698a1c2c0ae14d7a0b379c7622d3",
+  "auth_binary_sha256": "c995abc063dae799e61b8362502399f98900676911263bcbcdc7d3e6e33e6fbc",
+  "go_toolchain": "go1.27.3; official checksum verified",
+  "postgrest": "16.5; official release SHA256 verified",
+  "kind": "LOCAL SYNTHETIC INTEGRATION; not hosted deployment"
+}
