@@ -1,6 +1,6 @@
 # Requirements traceability
 
-Baseline: `handoff/CODEX_PROMPT.md`, original5 sources and both story tabs. Statuses: Planned, In Progress, Implemented but Unverified, Verified, Blocked. A whole requirement is Verified only when all applicable checks pass. Every full A/B requirement below remains In Progress or Blocked; passing subsets are identified without treating compilation as runtime proof.
+Baseline: `handoff/CODEX_PROMPT.md`, original5 sources and both story tabs. Statuses: Planned, In Progress, Implemented but Unverified, Verified, Blocked. A whole requirement is Verified only when all applicable checks pass. Full acceptance is Blocked on the concrete external prerequisites below; all160 source entries retain passing component subsets without treating compilation as runtime proof.
 
 `source-requirements.json` individually indexes/maps160 scenario/acceptance records (IDs, original source/row/text, implementation, subset checks, remaining gaps). `tools/trace_sources.py` regenerates inventory while preserving evidence metadata. It does not inherit archived workbook test claims. See SOURCE_REVIEW and WORK_STATE.
 
@@ -23,11 +23,11 @@ Baseline: `handoff/CODEX_PROMPT.md`, original5 sources and both story tabs. Stat
 | ID | Status | Implementation and executed subset | Missing applicable evidence |
 |---|---|---|---|
 | B-01 | Blocked for real measurements | InferenceBenchmark, ClassifierDeviceBenchmark, Python benchmark harness; numerical/parity tests pass | Actual Owner tablet p95/Java heap plus process memory,3second screens under declared normal network; real-data training timings |
-| B-02 | In Progress | Checked online RPCs/idempotency; age encryption/tamper, populated isolated restore, retention dry-run/age monitor, private disabled schedule | Hosted backup custody/destination/drill/monitoring and RPO/RTO; device failed-save states |
-| B-03 | In Progress | Private RLS/grants/current roles/session/MFA checks, protected alias mapping/audit; synthetic restore grant/RLS and privacy-cutoff replay tests | Hosted Auth signatures/factors, admin credential custody, full attack/error variants and controller approvals |
-| B-04 | In Progress | Exact7 Owner/5 Staff navigation, native forms/date controls, required fonts/peso formatting; build/lint pass | Figma tokens/screens/dialogs, full native keyboard/Back/rotation/usability tests |
+| B-02 | Blocked | Checked online RPCs/idempotency; age encryption/tamper, populated isolated restore, retention dry-run/age monitor, private disabled schedule | Hosted backup custody/destination/drill/monitoring and RPO/RTO; device failed-save states |
+| B-03 | Blocked | Private RLS/grants/current roles/session/MFA checks, protected alias mapping/audit; synthetic restore grant/RLS and privacy-cutoff replay tests | Hosted Auth signatures/factors, admin credential custody, full attack/error variants and controller approvals |
+| B-04 | Blocked | Exact7 Owner/5 Staff navigation, native forms/date controls, required fonts/peso formatting; build/lint pass | Figma tokens/screens/dialogs, full native keyboard/Back/rotation/usability tests |
 | B-05 | Blocked for device checks | API29min/35target Java Android project builds app/test APK | Android10+ Owner tablet/Staff phone runtime, resizing and PDF viewer |
-| B-06 | In Progress | Fixed prices/integer quantities/centavos, short pickup, reservations/retained receipts/as-of reports; SQL and two-connection race pass | All full source scenarios and hosted/UI reconciliation; real classifier quality evidence |
+| B-06 | Blocked | Fixed prices/integer quantities/centavos, short pickup, reservations/retained receipts/as-of reports; SQL and two-connection race pass | All full source scenarios and hosted/UI reconciliation; real classifier quality evidence |
 
 Actual evidence: `evidence/android-final-build.log` (app+test APKs,6 unit tests, lint,155 Java assertions), `evidence/classifier-python.log` (16 tests), `evidence/postgres-utf8.log` and `postgres-edge-cases.log`, `postgres-concurrency.log`, `bootstrap-test.log`, `auth-node.log` (7 direct Node cases), `recovery-test.log`, `recovery-retention.log` (2 policy tests) and `recovery-database.log`. SQL JWT stubs do not verify hosted Auth; synthetic data/model fixtures do not establish station accuracy. Three explicit instrumentation tests now ran on local API29 software emulation; connected flows and declared-tablet benchmark remain Not Run. Model score examples and archived IAS test counts are not evidence for this repository.
 
