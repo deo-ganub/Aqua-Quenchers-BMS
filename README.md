@@ -22,6 +22,8 @@ Create the initial Auth identity using the managed administrator procedure; bind
 
 SQL tests use explicit synthetic Auth stubs, never real JWT signature verification. The prepared local PostgreSQL17 cluster listens on `/workspace/tooling/pgtest`, port55432. UTF8 database `aq_bms_dev` has migrated empty fixture tables. Put `/workspace/tooling/sysroot/usr/lib/postgresql/17/bin` first in PATH, set LD_LIBRARY_PATH to `/workspace/tooling/sysroot/usr/lib/x86_64-linux-gnu`. Run `python3 backend/tests/run_suite.py` with those binaries in PATH. It applies all current migrations and every rollback SQL fixture in a NEW disposable UTF8 database, then removes it. The retained aq_bms_dev may have older migrations; do not reset it to run tests. `backend/tests/concurrency.py` creates/removes only its own isolated local test database. Never run fixtures against a hosted/live database.
 
+Local official Auth/REST and actual connected Android workflows are now verified. Read [LOCAL_REAL_SERVICES.md](docs/LOCAL_REAL_SERVICES.md) to restart retained services without resetting synthetic records. Additional native expiry/retry and real Auth-schema restore evidence is under `evidence/real-auth-*.log`. These results do not establish full scenario/design/declared-device/model/hosted-recovery acceptance.
+
 ## Classifier
 
 ```

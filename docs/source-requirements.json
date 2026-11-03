@@ -61,6 +61,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -127,6 +133,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -193,6 +205,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -259,6 +277,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -325,6 +349,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -391,6 +421,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -457,6 +493,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1303,6 +1345,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1342,6 +1390,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1381,6 +1435,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1420,6 +1480,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1459,6 +1525,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1498,6 +1570,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1537,6 +1615,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1576,6 +1660,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1615,6 +1705,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2670,7 +2766,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 75,
     "text": "2. The system shall offer exactly Fuel, Electricity, Water, Maintenance, Supplies, Salary and Others. Suggestions shall use only those labels. A successful result shall display Suggested category, Apply suggestion and Choose manually; Apply shall change only the local Category selection until the Owner saves.",
-    "status": "In Progress",
+    "status": "Blocked",
     "implementation": [
       {
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
@@ -2721,7 +2817,7 @@
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Reviewed release model/dataset required for actual released suggestion/apply acceptance. Synthetic math/state tests pass; do not ship a synthetic release model."
   },
   {
     "id": "A-09-AC3",
@@ -2790,7 +2886,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 76,
     "text": "A. Request, review and apply an expense category\nGiven the Owner has valid expense details and a released model is available\nWhen the Owner enters Remarks and selects Suggest category\nThen the system shall display the proposed category with Apply suggestion and Choose manually without saving an expense\nWhen the Owner selects Apply suggestion\nThen the system shall fill Category, preserve the other inputs and display \"Suggestion applied. Review before saving.\"\nWhen the Owner confirms the category and selects Save Expense\nThen the system shall save the expense once with the final category and recorder and display \"Expense saved.\"\n\nSample Data:\nPrototype fixture only: date 15 Oct 2026; amount ₱750.00; Remarks \"gasolina para sa motor\"; proposed Fuel; internal model score 0.86; planned model version EXP-LR-v1. These are illustrative UI values, not a measured prediction. Expense total example: ₱6,250.00 + ₱750.00 = ₱7,000.00.",
-    "status": "In Progress",
+    "status": "Blocked",
     "implementation": [
       {
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
@@ -2841,7 +2937,7 @@
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Reviewed release model/dataset required for actual released suggestion/apply acceptance. Synthetic math/state tests pass; do not ship a synthetic release model."
   },
   {
     "id": "A-09-AC4",
@@ -4217,6 +4313,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4283,6 +4385,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4349,6 +4457,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4415,6 +4529,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4481,6 +4601,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4547,6 +4673,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4613,6 +4745,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/LoginRateLimitDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-login-rate-fixed.log",
+        "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5426,6 +5564,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5465,6 +5609,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5504,6 +5654,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5543,6 +5699,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5582,6 +5744,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5621,6 +5789,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5660,6 +5834,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5699,6 +5879,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5738,6 +5924,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/OperationalEdgeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-edges.log",
+        "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."

@@ -47,3 +47,5 @@ Missing retained private configuration is a setup prerequisite: restore the
 authorized synthetic fixture securely; never replace it with invented production
 credentials. Real Figma assets, reviewed classifier data/model, declared devices
 and independent recovery custody/hosted drill remain separate acceptance gates.
+
+Additional native operational runner: `python3 admin/tests/operational_edges.py` creates synthetic paid dealer orders for Owner/Staff invalid collection and reschedule/cancel/rotation checks. It persists baselines and exact request bodies/results before each external call; use `--resume` only after inspecting its incomplete stage. Completed roles are skipped. Preserve duplicate-contact rejections and actual rate-limit intervals; never reset limits to run tests. `LoginRateLimitDeviceTest` is a separate gated negative check for an already-exhausted local fixture and must not be treated as a general startup test.
