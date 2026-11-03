@@ -33,5 +33,7 @@ android {
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
     lint { abortOnError true; checkReleaseBuilds true }
     testOptions { unitTests.returnDefaultValues = true }
+    // Explicit synthetic parity fixtures belong only to the instrumentation APK.
+    sourceSets { androidTest.assets.srcDir rootProject.file('classifier/fixtures') }
 }
 dependencies { implementation project(':classifier-java'); testImplementation 'junit:junit:4.13.2'; androidTestImplementation 'androidx.test:runner:1.6.2'; androidTestImplementation 'androidx.test.ext:junit:1.2.1' }

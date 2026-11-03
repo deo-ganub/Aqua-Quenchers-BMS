@@ -53,3 +53,5 @@ Identity/account administration is versioned in migration3. Definite Auth400/422
 Customer history: aq_query orders optionally filters start_date/end_date inclusively by entered business_date; payments uses actual received_at converted to Asia/Manila. Blank bounds are unbounded; an end before start is rejected. Customer profile balance remains the full outstanding balance, not a date-filtered balance. Contact display spaces normalize to the same eleven-digit customer identity before uniqueness checks.
 
 Owner order detail includes a minimized timeline (event_id, action, status, occurred_at, recorded_by_name) restricted to that order’s operational events. Staff retains operational details/payments/deliveries without timeline. No raw audit snapshots or general activity-log endpoint is exposed.
+
+Reschedule Pickup accepts optional notes (string/null, at most500 Unicode code points), stores trimmed reschedule_notes with the server-audited order change and returns it in order detail. Notes are permitted only for reschedule_pickup; client actor fields remain forbidden. This implements story A05/A16 AC5; the earlier claim that Notes were invented was incorrect.

@@ -22,11 +22,14 @@ do $$declare p jsonb;c jsonb;r jsonb;o jsonb;denied boolean;invalid jsonb;expect
  end loop;
  o:=public.aq_command(jsonb_build_object('operation','create_order','request_id',gen_random_uuid(),'customer_id',c->>'id','quantity',2));
  perform public.aq_command(jsonb_build_object('operation','transition_order','request_id',gen_random_uuid(),'order_id',o->>'id','status','for_pickup'));
- p:=jsonb_build_object('operation','reschedule_pickup','request_id',gen_random_uuid(),'order_id',o->>'id','scheduled_date',(clock_timestamp() at time zone 'Asia/Manila')::date+1);
+ p:=jsonb_build_object('operation','reschedule_pickup','request_id',gen_random_uuid(),'order_id',o->>'id','scheduled_date',(clock_timestamp() at time zone 'Asia/Manila')::date+1,'notes','Synthetic access unavailable');
  r:=public.aq_command(p);
- if r->>'status'<>'rescheduled' then raise exception 'Native reschedule contract failed';end if;
- denied:=false;begin perform public.aq_command(p||jsonb_build_object('request_id',gen_random_uuid(),'notes','unsupported'));exception when others then denied:=true;end;
- if not denied then raise exception 'Unsupported invented notes accepted';end if;
+ if r->>'status'<>'rescheduled' or r->>'reschedule_notes'<>'Synthetic access unavailable' then raise exception 'Native reschedule/date/optional notes contract failed';end if;
+ if public.aq_command(p) is distinct from r then raise exception 'Notes retry changed saved result';end if;
+ denied:=false;begin perform public.aq_command(p||jsonb_build_object('request_id',gen_random_uuid(),'notes',repeat('😀',501)));exception when others then if sqlerrm='Use 500 characters or fewer.' then denied:=true;else raise;end if;end;
+ if not denied then raise exception 'Unbounded notes accepted';end if;
+ denied:=false;begin perform public.aq_command(p||jsonb_build_object('request_id',gen_random_uuid(),'client_actor_id','unsupported'));exception when others then denied:=true;end;
+ if not denied then raise exception 'Unsupported caller actor accepted';end if;
  r:=public.aq_query('{"resource":"home"}');
  if (r->>'orders_count')::int<>1 or (r->>'ready_for_delivery_count')::int<>0 then raise exception 'Native Home count contract failed';end if;
  raise notice 'PASS: stable customer edit id, duplicate contact denial, strict reschedule/date payload and active Home order counts.';

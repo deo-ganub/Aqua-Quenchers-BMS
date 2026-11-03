@@ -1,0 +1,48 @@
+LOCAL API29 X86_64 SOFTWARE EMULATOR ONLY; not declared physical-device performance, real-data accuracy or managed Auth evidence.
+ro.build.version.sdk=29
+ro.product.cpu.abi=x86_64
+sys.boot_completed=1
+app/build/outputs/apk/debug/app-debug.apk: synthetic test fixture assets=0
+Performing Streamed Install
+Success
+app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk: synthetic test fixture assets=2
+Performing Streamed Install
+Success
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.SignInDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.SignInDeviceTest:
+INSTRUMENTATION_STATUS: test=missingUsernameNeverOpensProtectedNavigation
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.SignInDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=missingUsernameNeverOpensProtectedNavigation
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.classifier.ClassifierParityDeviceTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.classifier.ClassifierParityDeviceTest:
+INSTRUMENTATION_STATUS: test=pythonGoldenVectorsMatchOnAndroid
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.classifier.ClassifierParityDeviceTest
+INSTRUMENTATION_STATUS: current=2
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=2
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=pythonGoldenVectorsMatchOnAndroid
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 7.048
+
+OK (2 tests)
+
+
+INSTRUMENTATION_CODE: -1

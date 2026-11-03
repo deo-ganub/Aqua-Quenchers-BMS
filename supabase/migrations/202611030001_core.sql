@@ -43,7 +43,7 @@ create table aq_private.orders (
  delivered_quantity integer not null default 0 check(delivered_quantity>=0 and delivered_quantity<=quantity),
  unit_price_centavos bigint not null check((customer_type='dealer' and unit_price_centavos=3000) or (customer_type<>'dealer' and unit_price_centavos=3500)),
  status text not null default 'ordered' check(status in ('ordered','for_pickup','picked_up','refilling','ready_for_delivery','undelivered','delivered','rescheduled')),
- rescheduled_date date, created_at timestamptz not null default clock_timestamp(),
+ rescheduled_date date, reschedule_notes text not null default '' check(char_length(reschedule_notes)<=500), created_at timestamptz not null default clock_timestamp(),
  updated_at timestamptz not null default clock_timestamp(), recorded_by uuid not null references aq_private.profiles,
  check((status in ('ordered','for_pickup','rescheduled') and collected_quantity=0 and delivered_quantity=0) or
        (status in ('picked_up','refilling','ready_for_delivery','undelivered','delivered') and collected_quantity=quantity)),
@@ -240,7 +240,7 @@ begin
   values(aq_private.new_reference('ORD'),c.id,c.customer_type,c.name,c.address,c.contact_number,d,q,q,case when c.customer_type='dealer' then 3000 else 3500 end,a) returning orders.id into id;
   result:=aq_private.order_json(id);
  elsif op in ('transition_order','record_pickup','reschedule_pickup','record_delivery') then
-  perform aq_private.require_keys(p_request,array['operation','request_id','order_id','status','quantity','scheduled_date']);
+  perform aq_private.require_keys(p_request,array['operation','request_id','order_id','status','quantity','scheduled_date']||case when op='reschedule_pickup' then array['notes'] else array[]::text[] end);
   select * into inv from aq_private.inventory where singleton for update;
   select * into o from aq_private.orders where orders.id=(p_request->>'order_id')::uuid for update;
   if not found then raise exception 'Order not found.'; end if;
@@ -269,7 +269,9 @@ begin
    if o.status not in ('for_pickup','rescheduled') then raise exception 'Follow the next eligible order stage.'; end if;
    d:=nullif(p_request->>'scheduled_date','')::date;
    if d is null or d<aq_private.today() then raise exception 'Select today or a future date.'; end if;
-   update aq_private.orders set status='rescheduled',rescheduled_date=d,updated_at=clock_timestamp() where orders.id=id;
+   if p_request ? 'notes' and jsonb_typeof(p_request->'notes') not in ('string','null') then raise exception 'Enter valid pickup notes.';end if;
+   if char_length(coalesce(p_request->>'notes',''))>500 then raise exception 'Use 500 characters or fewer.';end if;
+   update aq_private.orders set status='rescheduled',rescheduled_date=d,reschedule_notes=btrim(coalesce(p_request->>'notes','')),updated_at=clock_timestamp() where orders.id=id;
   else
    if o.status not in ('ready_for_delivery','undelivered') then raise exception 'Follow the next eligible order stage.'; end if;
    q:=aq_private.positive_quantity(p_request->'quantity');

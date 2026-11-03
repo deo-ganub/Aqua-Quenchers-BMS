@@ -43,6 +43,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -91,6 +97,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -139,6 +151,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -187,6 +205,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -235,6 +259,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -283,6 +313,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -331,6 +367,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1027,6 +1069,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1054,6 +1102,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1081,6 +1135,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1108,6 +1168,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1135,6 +1201,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1162,6 +1234,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1189,6 +1267,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1216,6 +1300,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1243,6 +1333,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2029,6 +2125,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-python.log",
         "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/classifier/ClassifierParityDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed on local software API29: synthetic numerical parity only."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2071,6 +2173,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-python.log",
         "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/classifier/ClassifierParityDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed on local software API29: synthetic numerical parity only."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2113,6 +2221,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-python.log",
         "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/classifier/ClassifierParityDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed on local software API29: synthetic numerical parity only."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2155,6 +2269,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-python.log",
         "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/classifier/ClassifierParityDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed on local software API29: synthetic numerical parity only."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2197,6 +2317,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-python.log",
         "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/classifier/ClassifierParityDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed on local software API29: synthetic numerical parity only."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2239,6 +2365,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-python.log",
         "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/classifier/ClassifierParityDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed on local software API29: synthetic numerical parity only."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2281,6 +2413,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-python.log",
         "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/classifier/ClassifierParityDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed on local software API29: synthetic numerical parity only."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2323,6 +2461,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-python.log",
         "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/classifier/ClassifierParityDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed on local software API29: synthetic numerical parity only."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3208,6 +3352,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3256,6 +3406,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3304,6 +3460,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3352,6 +3514,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3400,6 +3568,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3448,6 +3622,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3496,6 +3676,12 @@
         "status": "Verified subset",
         "evidence": "evidence/auth-node.log",
         "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/SignInDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log",
+        "limit": "Actually executed required-field/protected-navigation denial only; real Auth not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4165,6 +4351,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4192,6 +4384,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4219,6 +4417,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4246,6 +4450,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4273,6 +4483,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4300,6 +4516,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4327,6 +4549,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4354,6 +4582,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4381,6 +4615,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/client_contract.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Required optional Notes, Unicode bound and stable retry; native connected flow not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."

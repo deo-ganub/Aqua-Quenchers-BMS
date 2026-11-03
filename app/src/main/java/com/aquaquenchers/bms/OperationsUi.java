@@ -281,6 +281,7 @@ public final class OperationsUi {
             if (status.equals("ordered")) transition(p, o, "for_pickup", "For Pickup");
             if (status.equals("rescheduled")) {
                 line(p, "Rescheduled pickup: " + o.optString("rescheduled_date"));
+                if(!o.optString("reschedule_notes").isEmpty())line(p,"Pickup notes: "+o.optString("reschedule_notes"));
                 transition(p, o, "for_pickup", "Resume For Pickup");
             }
             if (status.equals("for_pickup")) {
@@ -324,16 +325,19 @@ public final class OperationsUi {
     private void reschedule(JSONObject o) {
         LinearLayout p = page("Reschedule Pickup",id(o)); line(p, o.optString("reference") + " · " + o.optString("customer_name"));
         EditText next = date(p, "New pickup date", host.today());
-        host.button(p, "Save Pickup Result", () -> valid(() -> {
+        EditText notes=host.input(p,"Notes (optional)",o.optString("reschedule_notes"),InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_MULTI_LINE);
+        host.button(p, host.isOwner()?"Save Pickup Result":"Save result", () -> valid(() -> {
             LocalDate d;
             try { d = LocalDate.parse(value(next)); } catch (Exception e) { throw new IllegalArgumentException("Select today or a future date."); }
             if (d.isBefore(LocalDate.parse(host.today()))) throw new IllegalArgumentException("Select today or a future date.");
-            host.command("reschedule_pickup", json("order_id", id(o), "scheduled_date", d.toString()), saved -> { order(id(o));host.info("Order rescheduled."); });
+            Rules.remarks(value(notes));
+            host.command("reschedule_pickup", json("order_id", id(o), "scheduled_date", d.toString(),"notes",value(notes)), saved -> { order(id(o));host.info("Order rescheduled."); });
         })); cancel(p, () -> order(id(o)));
     }
     private void delivery(JSONObject o) {
         LinearLayout p = page("Record Delivery",id(o)); int remaining = pending(o); int delivered = o.optInt("delivered_quantity");
         line(p, o.optString("reference") + " · " + o.optString("customer_name") + "\nPreviously delivered: " + delivered + "\nRemaining gallons: " + remaining + "\nOrder reservation: " + o.optInt("reserved_quantity") + "\nRecorded at actual server time on save.");
+        if(host.isOwner())line(p,"Recording account: "+host.recorder()+"\nToday: "+host.today()+" (Asia/Manila); actual delivery time is assigned on save.");
         EditText trip = host.input(p, "Gallons delivered this trip", "", QTY);
         TextView preview = liveLine(p, "Enter delivered gallons to review cumulative delivered and pending quantities.");
         watch(trip, () -> {

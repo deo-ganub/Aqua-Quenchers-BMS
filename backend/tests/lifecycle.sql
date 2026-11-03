@@ -12,6 +12,9 @@ begin
  o:=public.aq_command(jsonb_build_object('operation','create_order','request_id',gen_random_uuid(),'customer_id',c->>'id','quantity',10,'business_date','2026-10-15'));
  if (o->>'total_centavos')::bigint<>35000 then raise exception 'Incorrect initial price';end if;
  perform public.aq_command(jsonb_build_object('operation','transition_order','request_id',gen_random_uuid(),'order_id',o->>'id','status','for_pickup'));
+ r:=public.aq_command(jsonb_build_object('operation','reschedule_pickup','request_id',gen_random_uuid(),'order_id',o->>'id','scheduled_date',(clock_timestamp() at time zone 'Asia/Manila')::date+1,'notes','SYNTHETIC OPERATIONAL NOTE'));
+ if r->>'status'<>'rescheduled' or r->>'reschedule_notes'<>'SYNTHETIC OPERATIONAL NOTE' then raise exception 'Reschedule notes not retained';end if;
+ perform public.aq_command(jsonb_build_object('operation','transition_order','request_id',gen_random_uuid(),'order_id',o->>'id','status','for_pickup'));
  r:=public.aq_command(jsonb_build_object('operation','record_pickup','request_id',gen_random_uuid(),'order_id',o->>'id','quantity',8));
  if (r->>'total_centavos')::bigint<>28000 or (r->>'shortfall')::int<>2 then raise exception 'Short pickup adjustment failed';end if;
  perform public.aq_command(jsonb_build_object('operation','transition_order','request_id',gen_random_uuid(),'order_id',o->>'id','status','refilling'));
@@ -36,7 +39,7 @@ begin
  if (r->>'payments_received_centavos')::bigint<>10000 or (r->>'outstanding_centavos')::bigint<>18000 then raise exception 'Receipt/current as-of calculation failed';end if;
  r:=public.aq_query(jsonb_build_object('resource','order','id',o->>'id'));
  select array_agg(value->>'status') into stages from jsonb_array_elements(r->'timeline');
- if stages is distinct from array['ordered','for_pickup','picked_up','refilling','ready_for_delivery','undelivered','delivered'] then raise exception 'Timeline missing/reordered/duplicated stages: %',stages;end if;
+ if stages is distinct from array['ordered','for_pickup','rescheduled','for_pickup','picked_up','refilling','ready_for_delivery','undelivered','delivered'] then raise exception 'Timeline missing/reordered/duplicated stages: %',stages;end if;
  for event in select value from jsonb_array_elements(r->'timeline') loop
   if (select count(*) from jsonb_object_keys(event))<>5 or event->>'occurred_at' is null or event->>'recorded_by_name'<>'Synthetic Owner' then raise exception 'Timeline fields not minimized/server-derived';end if;
  end loop;
