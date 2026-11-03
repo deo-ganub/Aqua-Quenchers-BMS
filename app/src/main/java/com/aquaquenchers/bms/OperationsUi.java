@@ -176,10 +176,12 @@ public final class OperationsUi {
         cancel(p, ()->{if(afterSave==null)customers();else afterSave.accept(null);});
     }
 
-    public void orders() {
+    public void orders() { ordersFiltered(null); }
+    public void ordersFiltered(String initialStatus) {
         LinearLayout p = page("Orders");
         EditText search = host.input(p, "Search Order ID or customer", "", InputType.TYPE_CLASS_TEXT);
         Spinner status = host.select(p, "Status", new String[]{"All", "Ordered", "For Pickup", "Picked Up", "Refilling", "Ready for Delivery", "Undelivered", "Delivered", "Rescheduled"});
+        if(initialStatus!=null)for(int i=0;i<status.getCount();i++)if(initialStatus.equals(status.getItemAtPosition(i).toString())){status.setSelection(i);break;}
         host.button(p, "Create Order", () -> newOrder(null));
         host.button(p, "Walk-in Sale", this::pos);
         host.button(p, "Pending gallons", this::pending);
