@@ -1,0 +1,41 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OrderFormDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OrderFormDeviceTest:
+INSTRUMENTATION_STATUS: test=datesQuantityPreviewRotationAndCancelNeverSave
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OrderFormDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Missing dialog/system control: calendar day 2026-11-03
+	at com.aquaquenchers.bms.OrderFormDeviceTest.awaitNode(OrderFormDeviceTest.java:51)
+	at com.aquaquenchers.bms.OrderFormDeviceTest.chooseDate(OrderFormDeviceTest.java:60)
+	at com.aquaquenchers.bms.OrderFormDeviceTest.datesQuantityPreviewRotationAndCancelNeverSave(OrderFormDeviceTest.java:69)
+
+INSTRUMENTATION_STATUS: stream=
+Error in datesQuantityPreviewRotationAndCancelNeverSave(com.aquaquenchers.bms.OrderFormDeviceTest):
+java.lang.AssertionError: Missing dialog/system control: calendar day 2026-11-03
+	at com.aquaquenchers.bms.OrderFormDeviceTest.awaitNode(OrderFormDeviceTest.java:51)
+	at com.aquaquenchers.bms.OrderFormDeviceTest.chooseDate(OrderFormDeviceTest.java:60)
+	at com.aquaquenchers.bms.OrderFormDeviceTest.datesQuantityPreviewRotationAndCancelNeverSave(OrderFormDeviceTest.java:69)
+
+INSTRUMENTATION_STATUS: test=datesQuantityPreviewRotationAndCancelNeverSave
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 42.842
+There was 1 failure:
+1) datesQuantityPreviewRotationAndCancelNeverSave(com.aquaquenchers.bms.OrderFormDeviceTest)
+java.lang.AssertionError: Missing dialog/system control: calendar day 2026-11-03
+	at com.aquaquenchers.bms.OrderFormDeviceTest.awaitNode(OrderFormDeviceTest.java:51)
+	at com.aquaquenchers.bms.OrderFormDeviceTest.chooseDate(OrderFormDeviceTest.java:60)
+	at com.aquaquenchers.bms.OrderFormDeviceTest.datesQuantityPreviewRotationAndCancelNeverSave(OrderFormDeviceTest.java:69)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

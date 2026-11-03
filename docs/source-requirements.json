@@ -1264,6 +1264,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1303,6 +1309,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1342,6 +1354,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1381,6 +1399,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1420,6 +1444,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1459,6 +1489,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1498,6 +1534,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1537,6 +1579,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1576,6 +1624,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6401,6 +6455,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6440,6 +6500,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6479,6 +6545,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6518,6 +6590,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6557,6 +6635,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6596,6 +6680,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6635,6 +6725,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6674,6 +6770,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6713,6 +6815,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/order_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
+        "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
