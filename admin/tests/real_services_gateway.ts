@@ -47,14 +47,67 @@ Deno.serve({
   if (url.pathname === '/functions/v1/staff-admin') return staff(new Request(request, { headers }));
   let target: string;
   if (url.pathname.startsWith('/auth/v1/')) target = config.auth_url + url.pathname.slice('/auth/v1'.length);
+  else if (url.pathname.startsWith('/short-auth/v1/')) target = 'http://127.0.0.1:55437' + url.pathname.slice('/short-auth/v1'.length);
   else if (url.pathname.startsWith('/rest/v1/')) target = config.rest_url + url.pathname.slice('/rest/v1'.length);
   else return reply(404, 'Unknown local integration route.');
+  // Optional, one-shot transport fault for a separately controlled local test.
+  // The real upstream commits; the client receives an error, never a fake save.
+  let suppressed = '';
+  let requestId = '';
+  const faultDirectory = '/workspace/tooling/aq-auth-rest-local/faults';
+  let shortNonce = '';
+  if (url.pathname === '/auth/v1/token' && url.searchParams.get('grant_type') === 'password') {
+    try {
+      const spec = JSON.parse(Deno.readTextFileSync(faultDirectory + '/short-pending.json'));
+      const body = await request.clone().json();
+      if (spec.kind === 'LOCAL_SHORT_AUTH' && /^[a-f0-9]{8}$/.test(spec.nonce) &&
+          spec.expires_at > Date.now() / 1000 && body.email === config.owner_email) {
+        Deno.renameSync(faultDirectory + '/short-pending.json', faultDirectory + '/short-consumed-' + spec.nonce + '.json');
+        target = 'http://127.0.0.1:55437/token';shortNonce = spec.nonce;
+      }
+    } catch { /* Ordinary official Auth issuer remains the default. */ }
+  }
+  if (url.pathname === '/rest/v1/rpc/aq_command' && request.method === 'POST') {
+    try {
+      const directory = faultDirectory;
+      const spec = JSON.parse(Deno.readTextFileSync(directory + '/pending.json'));
+      const body = (await request.clone().json()).p_request;
+      const now = Date.now() / 1000;
+      if (spec.kind === 'LOCAL_POST_COMMIT_FAULT' && /^[a-f0-9]{8}$/.test(spec.nonce) &&
+          spec.expires_at > now && spec.expires_at < now + 600 &&
+          body?.operation === 'create_expense' && body?.remarks === 'LOCAL RETRY ' + spec.nonce) {
+        Deno.renameSync(directory + '/pending.json', directory + '/consumed-' + spec.nonce + '.json');
+        suppressed = directory + '/result-' + spec.nonce + '.json';
+        requestId = body.request_id;
+      }
+    } catch { /* Absent/invalid control file means ordinary forwarding. */ }
+  }
   try {
-    return await fetch(target + url.search, {
+    const response = await fetch(target + url.search, {
       method: request.method, headers,
       body: ['GET', 'HEAD'].includes(request.method) ? undefined : request.body,
       redirect: 'manual', signal: AbortSignal.timeout(15000),
     });
+    if (response.ok && shortNonce) {
+      const data = await response.clone().json();
+      Deno.writeTextFileSync(faultDirectory + '/short-active.json', JSON.stringify({ nonce: shortNonce, user_id: data.user.id, expires_in: data.expires_in, refresh_count: 0, until: Date.now() / 1000 + 600 }), { mode: 0o600 });
+    }
+    if (response.ok && url.pathname === '/auth/v1/token' && url.searchParams.get('grant_type') === 'refresh_token') {
+      try {
+        const active = JSON.parse(Deno.readTextFileSync(faultDirectory + '/short-active.json'));
+        const data = await response.clone().json();
+        if (active.until > Date.now() / 1000 && active.user_id === data.user.id) {
+          active.refresh_count++;active.refreshed_expires_in = data.expires_in;
+          Deno.writeTextFileSync(faultDirectory + '/short-active.json', JSON.stringify(active), { mode: 0o600 });
+        }
+      } catch { /* No active short-session probe. */ }
+    }
+    if (suppressed && response.ok) {
+      await response.arrayBuffer();
+      await Deno.writeTextFile(suppressed, JSON.stringify({ request_id: requestId, upstream_status: response.status, response_drained: true }), { mode: 0o600 });
+      return reply(503, 'Service unavailable. Retry with the same details.');
+    }
+    return response;
   } catch {
     return reply(503, 'Local integration upstream unavailable.');
   }
