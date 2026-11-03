@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.CarryoverQueueDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.CarryoverQueueDeviceTest:
+INSTRUMENTATION_STATUS: test=populatedCarryoverCardRetainsDateAndCompletesDelivery
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.CarryoverQueueDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=populatedCarryoverCardRetainsDateAndCompletesDelivery
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 26.775
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: populated actual Staff card/carry-over original date/1day/pending2, invalid deliveries unchanged, rotated final delivery2 clears reservation/queue and updates work counts. Stock returns to baseline; charge9000 retained on original prior business date, actual delivery timestamps today, receipts/expenses/net unchanged.

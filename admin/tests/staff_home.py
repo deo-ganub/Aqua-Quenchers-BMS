@@ -35,6 +35,8 @@ def main():
         return data
     token = call('/functions/v1/username-login', {'username': staff['username'], 'password': c['staff_password']})['access_token']
     fixture = {'kind': 'SYNTHETIC_LOCAL_STAFF_HOME_UI', 'username': staff['username'], 'password': c['staff_password'], 'today': str(datetime.datetime.now(ZoneInfo('Asia/Manila')).date()), 'home': call('/rest/v1/rpc/aq_query', {'p_request': {'resource': 'home'}}, token)}
+    fixture['full_name'] = call('/rest/v1/rpc/aq_me', {}, token)['full_name']
+    fixture['current_order'] = call('/rest/v1/rpc/aq_query', {'p_request': {'resource': 'orders'}}, token)['items'][0]
     private_json(LOCAL / 'staff-home-fixture.json', fixture)
     before = json.loads(sql(snapshot_sql))
     target = json.loads((LOCAL / 'managed-account-state.json').read_text())['target_id']

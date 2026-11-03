@@ -31,6 +31,8 @@ def main():
     adb('reverse', 'tcp:55436', 'tcp:55436')
     fixture = json.loads((LOCAL / 'financial-fixture.json').read_text())
     assert fixture['kind'] == 'SYNTHETIC_LOCAL_FINANCIAL_READ_UI'
+    # Prior read-only fixture dates are reusable; credential values may have rotated.
+    fixture.update(username=c['owner_username'], password=c['owner_password'])
     adb('shell', 'run-as', PACKAGE, 'sh', '-c', shlex.quote('umask 077; cat > files/financial-test-credentials.json'), input=json.dumps(fixture).encode())
     result = adb('shell', 'am', 'instrument', '-w', '-r', '-e', 'class', PACKAGE + '.PdfCancellationDeviceTest#' + ('controlledOutputFailureNeverAcknowledgesSave' if output_failure else 'realDocumentPickerCancelNeverAcknowledgesExport'), PACKAGE + '.test/androidx.test.runner.AndroidJUnitRunner', timeout=240)
     text = result.stdout.decode().replace(fixture['password'], '[private fixture withheld]')

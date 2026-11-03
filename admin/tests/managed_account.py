@@ -1,4 +1,5 @@
 """Real native managed-MFA account edit/deactivation/reactivation, synthetic only."""
+import argparse
 import json
 import os
 import re
@@ -13,13 +14,25 @@ from connected_android import ADB, LOCAL, REPO, PACKAGE, adb, private_json
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--new-reviewed-run', action='store_true', help='Archive a completed synthetic run and reuse its stable target')
+    options = parser.parse_args()
+    previous = None
     c = json.loads((LOCAL / 'private-config.json').read_text())
     assert c['kind'] == 'SYNTHETIC_LOCAL_INTEGRATION_ONLY' and c['url'] == 'https://127.0.0.1:55436'
     assert re.fullmatch(r'aq_http_[0-9a-f]{8}', c['database'])
     assert adb('emu', 'avd', 'name').stdout.decode().splitlines()[0] == 'aq_api29_software'
     state_path = LOCAL / 'managed-account-state.json'
     if state_path.exists():
-        raise RuntimeError('Prior account state exists; inspect stable identity/active state before any retry')
+        previous = json.loads(state_path.read_text())
+        assert options.new_reviewed_run and previous.get('completed') and previous.get('kind') == 'SYNTHETIC_LOCAL_MANAGED_ACCOUNT_UI', 'Prior account run must be reviewed and completed'
+        assert json.loads((LOCAL / 'own-password-state.json').read_text())['completed']
+        for name in ['managed-account-state.json', 'managed-account-fixture.json', 'managed-account-instrumentation.log']:
+            original = LOCAL / name
+            if original.exists():
+                archive = LOCAL / (name + '.verified-' + previous['run_id'])
+                assert not archive.exists(), 'Prior archive already exists; inspect before retry'
+                archive.write_bytes(original.read_bytes()); archive.chmod(0o600)
     env = dict(os.environ, LD_LIBRARY_PATH='/workspace/tooling/sysroot/usr/lib/x86_64-linux-gnu')
     def sql(statement):
         return subprocess.run(['/workspace/tooling/sysroot/usr/lib/postgresql/17/bin/psql', '-X', '-At', '-h', '/workspace/tooling/pgtest', '-p', '55432', '-d', c['database'], '-v', 'ON_ERROR_STOP=1'], input=statement, text=True, capture_output=True, env=env, check=True).stdout.strip()
@@ -27,7 +40,7 @@ def main():
     source = json.loads((LOCAL / 'native-fixture.json').read_text())
     assert source['kind'] == 'SYNTHETIC_LOCAL_CONNECTED_UI'
     profiles = json.loads(sql('select jsonb_agg(to_jsonb(p)) from aq_private.profiles p;'))
-    target = next(p for p in profiles if p['username'] == source['new_staff_username'])
+    target = next(p for p in profiles if (p['user_id'] == previous['target_id'] if previous else p['username'] == source['new_staff_username']))
     assert target['role'] == 'staff' and target['active']
     context = ssl.create_default_context(cafile=c['ca_cert'])
     def http(path, body, token=None, expected=200):

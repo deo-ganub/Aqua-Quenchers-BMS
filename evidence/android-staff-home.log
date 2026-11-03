@@ -15,7 +15,7 @@ INSTRUMENTATION_STATUS: test=actualCountersQueueLinksAndOwnerDenial
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 25.685
+Time: 25.96
 
 OK (1 test)
 
