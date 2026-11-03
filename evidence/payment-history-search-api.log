@@ -1,0 +1,2 @@
+PASS: forward migration005 applied only to owned synthetic real-service DB; full business/profile records and query ownership/ACL/definer/search_path exact unchanged.
+PASS: real signed Staff customer-name payment history returns both original receipts; invoice-reference search retained; wrong-customer and future-date filters return0; no ledger/stock mutation. Fresh disposable suite5migrations/15fixtures also PASS.

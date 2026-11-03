@@ -1,0 +1,41 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.PaymentHistoryDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.PaymentHistoryDeviceTest:
+INSTRUMENTATION_STATUS: test=customerNameHistoryRetainsAllReceiptsAndSearchContext
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.PaymentHistoryDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Timed out: actual name-filtered receipts; UI message: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.aquaquenchers.bms.PaymentHistoryDeviceTest.await(PaymentHistoryDeviceTest.java:47)
+	at com.aquaquenchers.bms.PaymentHistoryDeviceTest.customerNameHistoryRetainsAllReceiptsAndSearchContext(PaymentHistoryDeviceTest.java:64)
+
+INSTRUMENTATION_STATUS: stream=
+Error in customerNameHistoryRetainsAllReceiptsAndSearchContext(com.aquaquenchers.bms.PaymentHistoryDeviceTest):
+java.lang.AssertionError: Timed out: actual name-filtered receipts; UI message: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.aquaquenchers.bms.PaymentHistoryDeviceTest.await(PaymentHistoryDeviceTest.java:47)
+	at com.aquaquenchers.bms.PaymentHistoryDeviceTest.customerNameHistoryRetainsAllReceiptsAndSearchContext(PaymentHistoryDeviceTest.java:64)
+
+INSTRUMENTATION_STATUS: test=customerNameHistoryRetainsAllReceiptsAndSearchContext
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 43.742
+There was 1 failure:
+1) customerNameHistoryRetainsAllReceiptsAndSearchContext(com.aquaquenchers.bms.PaymentHistoryDeviceTest)
+java.lang.AssertionError: Timed out: actual name-filtered receipts; UI message: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.aquaquenchers.bms.PaymentHistoryDeviceTest.await(PaymentHistoryDeviceTest.java:47)
+	at com.aquaquenchers.bms.PaymentHistoryDeviceTest.customerNameHistoryRetainsAllReceiptsAndSearchContext(PaymentHistoryDeviceTest.java:64)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

@@ -414,8 +414,10 @@ public final class OperationsUi {
         };
         host.button(p, "Search balances", load); load.run();
         host.button(p, "Payment history", () -> {
+            String selectedSearch = value(search);
             LinearLayout history = page("Payment history");
-            JSONObject filter = customerId == null ? json() : json("customer_id", customerId);
+            JSONObject filter = json("search", selectedSearch);
+            if (customerId != null) try { filter.put("customer_id", customerId); } catch (Exception ignored) {}
             query("payments", filter, response -> renderReceipts(history, items(response)));
             host.button(history, "Back to Payments", () -> payments(customerId));
         });
