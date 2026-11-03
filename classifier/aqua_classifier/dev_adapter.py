@@ -7,7 +7,8 @@ from .text import normalize
 def validate_request(body):
  if not isinstance(body,dict) or set(body)!={'request_id','remarks'}:raise ValueError('Invalid request.')
  if not isinstance(body['request_id'],str):raise ValueError('Invalid request.')
- try:uuid.UUID(body['request_id'])
+ try:
+  if str(uuid.UUID(body['request_id']))!=body['request_id'].lower():raise ValueError('Invalid request.')
  except (ValueError,AttributeError):raise ValueError('Invalid request.') from None
  if not isinstance(body['remarks'],str) or not normalize(body['remarks']).strip():raise ValueError('Enter remarks to request a suggestion.')
  return body

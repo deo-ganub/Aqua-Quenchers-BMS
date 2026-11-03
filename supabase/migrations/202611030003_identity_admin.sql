@@ -7,9 +7,11 @@ create table if not exists aq_private.account_operations (
  request_id uuid primary key, actor_id uuid not null references auth.users(id),
  operation text not null check(operation in ('create','update','set_active')),
  payload_hash text not null check(payload_hash ~ '^[0-9a-f]{64}$'),
- payload jsonb not null, state text not null default 'pending' check(state in ('pending','completed')),
+ payload jsonb not null, state text not null default 'pending' check(state in ('pending','completed','failed')),
  result jsonb, created_at timestamptz not null default clock_timestamp(),completed_at timestamptz
 );
+alter table aq_private.account_operations drop constraint if exists account_operations_state_check;
+alter table aq_private.account_operations add constraint account_operations_state_check check(state in ('pending','completed','failed'));
 create table if not exists aq_private.account_audit (
  id bigint generated always as identity primary key, actor_id uuid not null,
  target_id uuid not null, request_id uuid not null unique, action text not null,
@@ -64,7 +66,7 @@ begin
  if (p_request->>'payload_hash') !~ '^[0-9a-f]{64}$' or p_request->>'request_id' is null then raise exception 'Invalid request.';end if;
  if p_request->>'operation' not in ('create','update','set_active') then raise exception 'Invalid request.';end if;
  if p_request->>'operation'<>'set_active' then
-  if coalesce(length(btrim(p_request->>'full_name')),0)=0 or length(p_request->>'full_name')>120 or coalesce(p_request->>'username','') !~ '^[a-z0-9][a-z0-9_.-]{2,39}$' or coalesce(p_request->>'contact_number','') !~ '^[0-9]{11}$' then raise exception 'Invalid staff details.';end if;
+  if coalesce(length(btrim(p_request->>'full_name')),0)=0 or length(p_request->>'full_name')>160 or coalesce(p_request->>'username','') !~ '^[a-z0-9][a-z0-9_.-]{2,39}$' or coalesce(p_request->>'contact_number','') !~ '^[0-9]{11}$' then raise exception 'Invalid staff details.';end if;
  end if;
  if p_request ? 'active' and jsonb_typeof(p_request->'active')<>'boolean' then raise exception 'Invalid request.';end if;
  if p_request->>'operation'='set_active' and not(p_request?'active') then raise exception 'Invalid request.';end if;
@@ -150,3 +152,23 @@ grant execute on function public.aq_admin_update_staff(jsonb) to authenticated;
 alter table aq_private.login_windows enable row level security;
 alter table aq_private.account_operations enable row level security;
 alter table aq_private.account_audit enable row level security;
+
+-- Only the privileged handler may close a definitively rejected Auth preparation.
+-- An existing Auth identity always requires reconciliation, never a false failed marker.
+create or replace function public.aq_admin_fail_staff(p_request_id uuid,p_payload_hash text) returns jsonb
+language plpgsql security definer set search_path='' as $$
+<<aq_admin_fail_staff>>
+declare job aq_private.account_operations; result jsonb;
+begin
+ perform pg_advisory_xact_lock(3841952);
+ select * into job from aq_private.account_operations where request_id=p_request_id for update;
+ if not found or job.payload_hash is distinct from p_payload_hash or job.operation<>'create' then raise exception 'Invalid request.';end if;
+ if job.state='completed' or exists(select 1 from auth.users where email=p_request_id::text||'@identity.aquaquenchers.invalid') then raise exception 'Account creation requires reconciliation.';end if;
+ if job.state='failed' then return job.result;end if;
+ result:=jsonb_build_object('state','failed','reason','AUTH_REJECTED');
+ update aq_private.account_operations set state='failed',result=aq_admin_fail_staff.result,completed_at=clock_timestamp() where request_id=p_request_id;
+ insert into aq_private.audit_events(actor_id,action,request_id,after_state,reason) values(job.actor_id,'staff_creation_rejected',p_request_id,result,'Managed Auth definitively rejected account details; no identity exists.');
+ return result;
+end $$;
+revoke all on function public.aq_admin_fail_staff(uuid,text) from public,anon,authenticated;
+grant execute on function public.aq_admin_fail_staff(uuid,text) to service_role;

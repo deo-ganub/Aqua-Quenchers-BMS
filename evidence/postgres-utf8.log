@@ -1,37 +1,10 @@
-NOTICE:  drop cascades to 31 other objects
-DETAIL:  drop cascades to table aq_private.profiles
-drop cascades to table aq_private.sessions
-drop cascades to table aq_private.customers
-drop cascades to table aq_private.inventory
-drop cascades to sequence aq_private.reference_seq
-drop cascades to table aq_private.orders
-drop cascades to table aq_private.reservations
-drop cascades to table aq_private.sales
-drop cascades to table aq_private.payments
-drop cascades to table aq_private.deliveries
-drop cascades to table aq_private.expenses
-drop cascades to table aq_private.requests
-drop cascades to table aq_private.audit_events
-drop cascades to function aq_private.today()
-drop cascades to function aq_private.new_reference(text)
-drop cascades to function aq_private.require_actor(boolean)
-drop cascades to function aq_private.require_keys(jsonb,text[])
-drop cascades to function aq_private.positive_quantity(jsonb)
-drop cascades to function aq_private.money(jsonb,boolean)
-drop cascades to function aq_private.paid(uuid,uuid)
-drop cascades to function aq_private.payment_status(bigint,bigint)
-drop cascades to function aq_private.order_json(uuid)
-drop cascades to function aq_private.sale_json(uuid)
-drop cascades to function aq_private.customer_json(uuid)
-drop cascades to function aq_private.stock_json()
-drop cascades to function aq_private.financial_summary(date,date)
-drop cascades to table aq_private.login_windows
-drop cascades to table aq_private.account_operations
-drop cascades to table aq_private.account_audit
-drop cascades to function aq_private.admin_actor()
-drop cascades to function aq_private.validate_staff_payload(jsonb)
-DROP SCHEMA
-DROP FUNCTION
+CREATE DATABASE
+CREATE SCHEMA
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+
+MIGRATION 202611030001_core.sql
 BEGIN
 CREATE SCHEMA
 REVOKE
@@ -80,37 +53,10 @@ REVOKE
 REVOKE
 GRANT
 COMMIT
-CREATE TABLE
-CREATE TABLE
-CREATE TABLE
-REVOKE
-CREATE FUNCTION
-REVOKE
-GRANT
-CREATE FUNCTION
-REVOKE
-GRANT
-CREATE FUNCTION
-REVOKE
-CREATE FUNCTION
-REVOKE
-CREATE FUNCTION
-REVOKE
-GRANT
-CREATE FUNCTION
-REVOKE
-GRANT
-CREATE FUNCTION
-REVOKE
-GRANT
-CREATE FUNCTION
-REVOKE
-GRANT
-ALTER TABLE
-ALTER TABLE
-ALTER TABLE
+
+MIGRATION 202611030002_privacy.sql
 BEGIN
-psql:supabase/migrations/202611030002_privacy.sql:3: NOTICE:  column "payload_hash" of relation "requests" already exists, skipping
+NOTICE:  column "payload_hash" of relation "requests" already exists, skipping
 ALTER TABLE
 UPDATE 0
 ALTER TABLE
@@ -124,71 +70,367 @@ REVOKE
 CREATE FUNCTION
 REVOKE
 COMMIT
+
+MIGRATION 202611030003_identity_admin.sql
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE TABLE
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE FUNCTION
+REVOKE
+GRANT
+
+MIGRATION 202611030004_session_logout.sql
+BEGIN
+ALTER TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+REVOKE
+COMMIT
+
+FIXTURE smoke
 BEGIN
 INSERT 0 2
 INSERT 0 2
-10000000-0000-4000-8000-000000000002
-{"aal": "aal1", "iat": 1793653709.384411, "session_id": "20000000-0000-4000-8000-000000000001"}
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000002
+(1 row)
+
+                                           set_config
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal1", "iat": 1793676477.226518, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
 SET
-psql:backend/tests/smoke.sql:27: NOTICE:  PASS: retry equality, payload conflict, exact phone validation, Staff expense and administration denial
+NOTICE:  PASS: retry equality, payload conflict, exact phone validation, Staff expense and administration denial
 DO
 RESET
 UPDATE 1
 SET
-psql:backend/tests/smoke.sql:34: NOTICE:  PASS: existing inactive session rejected
+NOTICE:  PASS: existing inactive session rejected
 DO
 ROLLBACK
+
+FIXTURE lifecycle
 BEGIN
 INSERT 0 1
 INSERT 0 1
-10000000-0000-4000-8000-000000000001
-{"aal": "aal2", "iat": 1793653709.389752, "session_id": "20000000-0000-4000-8000-000000000001"}
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                           set_config
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal2", "iat": 1793676477.236551, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
 SET
-psql:backend/tests/lifecycle.sql:38: NOTICE:  PASS: adjusted charge, conversion/reservation retry, reserved POS protection, partial/final delivery, Owner expenses, report date/receipt/as-of definitions
+NOTICE:  PASS: adjusted charge, conversion/reservation retry, reserved POS protection, partial/final delivery, Owner expenses, report date/receipt/as-of definitions
 DO
 ROLLBACK
+
+FIXTURE admin_security
 BEGIN
 INSERT 0 2
 INSERT 0 2
-10000000-0000-4000-8000-000000000001
-{"aal": "aal1", "iat": 1793653709.402081, "session_id": "20000000-0000-4000-8000-000000000001"}
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                           set_config
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal1", "iat": 1793676477.257299, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
 SET
-psql:backend/tests/admin_security.sql:12: NOTICE:  PASS: Owner AAL1 denied account mutation
+NOTICE:  PASS: Owner AAL1 denied account mutation
 DO
 RESET
-{"aal": "aal2", "iat": 1793653709.402543, "session_id": "20000000-0000-4000-8000-000000000001"}
+                                           set_config
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal2", "iat": 1793676477.258558, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
 SET
-psql:backend/tests/admin_security.sql:20: NOTICE:  PASS: AAL2 account rename preserves stable Auth identity and Staff role
+NOTICE:  PASS: AAL2 account rename preserves stable Auth identity and Staff role
 DO
 RESET
 SET
-psql:backend/tests/admin_security.sql:27: NOTICE:  PASS: anonymous protected read denied by grant
+NOTICE:  PASS: anonymous protected read denied by grant
 DO
 RESET
 UPDATE 1
 SET
-psql:backend/tests/admin_security.sql:34: NOTICE:  PASS: expired session protected read denied
+NOTICE:  PASS: expired session protected read denied
 DO
 ROLLBACK
+
+FIXTURE unicode
 BEGIN
 INSERT 0 1
 INSERT 0 1
-10000000-0000-4000-8000-000000000001
-{"iat": 1793653709.404420, "session_id": "20000000-0000-4000-8000-000000000001"}
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config
+----------------------------------------------------------------------------------
+ {"iat": 1793676477.265038, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
 SET
-psql:backend/tests/unicode.sql:16: NOTICE:  PASS: UTF8 expense 500/501 code point boundary
+NOTICE:  PASS: UTF8 expense 500/501 code point boundary
 DO
 ROLLBACK
+
+FIXTURE edge_cases
 BEGIN
 INSERT 0 1
 INSERT 0 1
 UPDATE 1
-10000000-0000-4000-8000-000000000001
-{"aal": "aal2", "iat": 1793653709.405566, "session_id": "20000000-0000-4000-8000-000000000001"}
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                           set_config
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal2", "iat": 1793676477.273161, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
 SET
-psql:backend/tests/edge_cases.sql:40: NOTICE:  PASS: profileless credit/selected-reference settlement, invalid payments, cash/change receipts, skipped lifecycle, reschedule boundaries, overcollection and paid-total protection, pickup retries
+NOTICE:  PASS: profileless credit/selected-reference settlement, invalid payments, cash/change receipts, skipped lifecycle, reschedule boundaries, overcollection and paid-total protection, pickup retries
 DO
 RESET
-psql:backend/tests/edge_cases.sql:46: NOTICE:  PASS: exact total retained receipts and no duplicate POS records
+NOTICE:  PASS: exact total retained receipts and no duplicate POS records
 DO
 ROLLBACK
+
+FIXTURE expense_fixture
+BEGIN
+INSERT 0 1
+INSERT 0 1
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config
+----------------------------------------------------------------------------------
+ {"iat": 1793676477.292931, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+NOTICE:  PASS: manual no-remarks fixture7/6250 becomes8/7000 once; newest-first and filtered total reconcile. No model result asserted.
+DO
+ROLLBACK
+
+FIXTURE reservation_guards
+BEGIN
+INSERT 0 1
+INSERT 0 1
+UPDATE 1
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config
+----------------------------------------------------------------------------------
+ {"iat": 1793676477.304750, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+NOTICE:  PASS: missing order reservation rejects despite ample physical/unreserved/other-order stock; failed save preserves stock and other reservation; overdelivery denied.
+DO
+ROLLBACK
+
+FIXTURE client_contract
+BEGIN
+INSERT 0 1
+INSERT 0 1
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config
+----------------------------------------------------------------------------------
+ {"iat": 1793676477.321938, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+NOTICE:  PASS: stable customer edit id, duplicate contact denial, strict reschedule/date payload and active Home order counts.
+DO
+ROLLBACK
+
+FIXTURE account_recovery
+BEGIN
+INSERT 0 1
+INSERT 0 1
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                           set_config
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal2", "iat": 1793676477.335640, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+                                        aq_admin_prepare_staff
+------------------------------------------------------------------------------------------------------
+ {"email": "40000000-0000-4000-8000-000000000001@identity.aquaquenchers.invalid", "state": "pending"}
+(1 row)
+
+NOTICE:  PASS: ordinary Owner cannot mark a preparation failed
+DO
+RESET
+SET
+              aq_admin_fail_staff
+------------------------------------------------
+ {"state": "failed", "reason": "AUTH_REJECTED"}
+(1 row)
+
+              aq_admin_fail_staff
+------------------------------------------------
+ {"state": "failed", "reason": "AUTH_REJECTED"}
+(1 row)
+
+RESET
+DO
+SET
+                                        aq_admin_prepare_staff
+------------------------------------------------------------------------------------------------------
+ {"email": "40000000-0000-4000-8000-000000000002@identity.aquaquenchers.invalid", "state": "pending"}
+(1 row)
+
+RESET
+INSERT 0 1
+SET
+NOTICE:  PASS: existing Auth identity cannot be falsely marked failed
+DO
+RESET
+SET
+                                                                                                                                  aq_admin_finish_staff
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"role": "staff", "active": true, "user_id": "10000000-0000-4000-8000-000000000002", "username": "synthetic.staff", "full_name": "Synthetic Staff", "created_at": "2026-11-03T03:27:57.339344+00:00", "updated_at": "2026-11-03T03:27:57.339344+00:00", "contact_number": "09000000002"}
+(1 row)
+
+RESET
+NOTICE:  PASS: corrected request can reuse released alias and managed identity completes once
+DO
+ROLLBACK
+
+FIXTURE own_profile
+BEGIN
+INSERT 0 2
+INSERT 0 2
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000002
+(1 row)
+
+                                           set_config
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal1", "iat": 1793676477.344025, "session_id": "20000000-0000-4000-8000-000000000002"}
+(1 row)
+
+SET
+NOTICE:  PASS: Staff own-profile username edit preserves Auth ID/transaction recorder; target/role/activation changes denied.
+DO
+RESET
+DO
+ROLLBACK
+
+FIXTURE logout
+BEGIN
+INSERT 0 1
+INSERT 0 1
+              set_config
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config
+----------------------------------------------------------------------------------
+ {"iat": 1793676477.354563, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+                                                                                      aq_me
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"role": "owner", "active": true, "user_id": "10000000-0000-4000-8000-000000000001", "username": "owner.test", "full_name": "Synthetic Owner", "contact_number": "09000000001"}
+(1 row)
+
+      aq_logout
+----------------------
+ {"logged_out": true}
+(1 row)
+
+      aq_logout
+----------------------
+ {"logged_out": true}
+(1 row)
+
+NOTICE:  PASS: revoked app session denied even with otherwise valid JWT claims
+DO
+RESET
+DO
+                                    set_config
+----------------------------------------------------------------------------------
+ {"iat": 1793676477.356664, "session_id": "20000000-0000-4000-8000-000000000002"}
+(1 row)
+
+SET
+                                                                                      aq_me
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"role": "owner", "active": true, "user_id": "10000000-0000-4000-8000-000000000001", "username": "owner.test", "full_name": "Synthetic Owner", "contact_number": "09000000001"}
+(1 row)
+
+RESET
+UPDATE 1
+SET
+      aq_logout
+----------------------
+ {"logged_out": true}
+(1 row)
+
+RESET
+NOTICE:  PASS: fresh sign-in session works, inactive caller can logout, and revocation/audit remain exactly once
+DO
+ROLLBACK
+DROP DATABASE

@@ -53,6 +53,8 @@ public final class ExpenseSuggestionController {
             message = "Category suggestion unavailable. Choose a category manually.";
         }
     }
+    public synchronized void cancelPending(){if(!pending)return;generation++;pending=false;suggestion=null;message="Category suggestion unavailable. Choose a category manually.";}
+    public synchronized boolean canApplySuggestion(){return suggestion!=null&&suggestion.status==ExpenseCategoryClassifier.Status.SUGGESTED;}
     public synchronized boolean applySuggestion() {
         if (suggestion == null || suggestion.status != ExpenseCategoryClassifier.Status.SUGGESTED) return false;
         category = suggestion.suggestedCategory;

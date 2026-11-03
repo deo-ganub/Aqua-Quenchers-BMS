@@ -82,6 +82,7 @@ public final class ClassifierSelfTest {
         request = controller.beginRequest();
         controller.chooseManually("Others");
         check(!controller.complete(request, fuel) && "Others".equals(controller.category()), "inflight response after manual choice");
+        request=controller.beginRequest();controller.cancelPending();check(!controller.complete(request,fuel)&&!controller.applySuggestion(),"recreated view cancels inaccessible pending response");
         Path golden = args.length > 0 ? Paths.get(args[0]) : Paths.get("classifier/fixtures/golden.json");
         if (Files.isRegularFile(golden)) golden(golden);
         else throw new IllegalStateException("Golden parity fixture missing: " + golden);

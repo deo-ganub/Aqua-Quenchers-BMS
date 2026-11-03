@@ -1,1 +1,3 @@
 PASS: concurrent Owner/Staff sale of last gallon: one sale/receipt, one stock rejection, stock zero.
+PASS: identical concurrent request returns same sale and creates one additional stock/receipt effect.
+PASS: same-key/different-payload concurrent conflict has one sale/receipt effect.

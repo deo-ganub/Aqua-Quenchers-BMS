@@ -11,7 +11,7 @@ do $$declare sale jsonb;r jsonb;c jsonb;o jsonb;p jsonb;bad jsonb;denied boolean
  sale:=public.aq_command(p);perform public.aq_command(p);
  if sale->>'payment_status'<>'partially_paid' or (sale->>'balance_centavos')::bigint<>6000 or (sale->>'change_centavos')::bigint<>0 then raise exception 'Profileless credit mismatch %',sale;end if;
  foreach bad in array array['0'::jsonb,'-1'::jsonb,'6001'::jsonb,'"nonnumeric"'::jsonb] loop
-  denied:=false;begin perform public.aq_command(jsonb_build_object('operation','record_payment','request_id',gen_random_uuid(),'reference',sale->>'reference','amount_centavos',bad));exception when others then denied:=true;end;
+  denied:=false;begin perform public.aq_command(jsonb_build_object('operation','record_payment','request_id',gen_random_uuid(),'reference',sale->>'reference','amount_centavos',bad));exception when others then if sqlerrm='Enter an amount greater than zero and not above the balance.' then denied:=true;else raise;end if;end;
   if not denied then raise exception 'Invalid payment accepted';end if;
  end loop;
  p:=jsonb_build_object('operation','record_payment','request_id',gen_random_uuid(),'reference',sale->>'reference','amount_centavos',6000);

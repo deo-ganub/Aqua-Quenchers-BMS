@@ -1,5 +1,5 @@
 """Real multi-connection last-gallon test on an explicitly isolated local database."""
-import concurrent.futures,os,pathlib,subprocess,uuid
+import concurrent.futures,os,pathlib,subprocess,uuid,json
 root=pathlib.Path(__file__).resolve().parents[2]
 psql='/workspace/tooling/sysroot/usr/lib/postgresql/17/bin/psql'
 base=[psql,'-h','/workspace/tooling/pgtest','-p','55432','-v','ON_ERROR_STOP=1']
@@ -30,5 +30,26 @@ select public.aq_command('{{"operation":"create_sale","request_id":"{uuid.uuid4(
  r=run("select physical_filled||','||(select count(*) from aq_private.sales)||','||(select count(*) from aq_private.payments) from aq_private.inventory")
  assert r.returncode==0 and r.stdout.strip()=='0,1,1',(r.stdout,r.stderr)
  print('PASS: concurrent Owner/Staff sale of last gallon: one sale/receipt, one stock rejection, stock zero.')
+ def shared_request(payload):
+  sql="begin;select set_config('request.jwt.claim.sub','10000000-0000-4000-8000-000000000001',true);select set_config('request.jwt.claims',jsonb_build_object('session_id','"+str(uuid.uuid4())+"','iat',extract(epoch from clock_timestamp()))::text,true);set local role authenticated;select public.aq_command('"+json.dumps(payload).replace("'","''")+"'::jsonb);commit;"
+  return run(sql)
+ r=run('update aq_private.inventory set physical_filled=1;');assert r.returncode==0,r.stderr
+ payload=dict(operation='create_sale',request_id=str(uuid.uuid4()),customer_name='Synthetic concurrent retry',quantity=1,cash_centavos=3500)
+ with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:retries=list(pool.map(shared_request,[payload,payload]))
+ assert all(r.returncode==0 for r in retries),[r.stderr for r in retries]
+ ids=[json.loads(next(line for line in r.stdout.splitlines() if line.startswith('{') and 'reference' in line))['id'] for r in retries]
+ assert ids[0]==ids[1],'Identical concurrent retry returned different sale'
+ r=run("select physical_filled||','||(select count(*) from aq_private.sales)||','||(select count(*) from aq_private.payments) from aq_private.inventory")
+ assert r.stdout.strip()=='0,2,2',(r.stdout,r.stderr)
+ print('PASS: identical concurrent request returns same sale and creates one additional stock/receipt effect.')
+ r=run('update aq_private.inventory set physical_filled=1;');assert r.returncode==0,r.stderr
+ payload['request_id']=str(uuid.uuid4());a={**payload,'confirm_credit':True};b={**a,'cash_centavos':1000}
+ with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:conflicts=list(pool.map(shared_request,[a,b]))
+ assert sum(r.returncode==0 for r in conflicts)==1,[r.stderr for r in conflicts]
+ assert any('Request key was already used with different data.' in r.stderr for r in conflicts)
+ r=run("select physical_filled||','||(select count(*) from aq_private.sales)||','||(select count(*) from aq_private.payments) from aq_private.inventory")
+ assert r.stdout.strip()=='0,3,3',(r.stdout,r.stderr)
+ print('PASS: same-key/different-payload concurrent conflict has one sale/receipt effect.')
+
 finally:
  r=run(f'drop database {database}',db='postgres');assert r.returncode==0,r.stderr

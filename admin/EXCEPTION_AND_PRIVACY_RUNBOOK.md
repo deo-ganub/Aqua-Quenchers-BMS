@@ -6,6 +6,8 @@ For any exceptional correction, obtain documented Owner approval naming the desi
 
 Dry-run queries (administrator only; use parameter binding for invoice IDs):
 
+Runnable equivalent: `python3 admin/exception_preview.py --service APPROVED_ADMIN_SERVICE --kind order --id UUID --output /restricted/case/order-preview.json` (use `--kind sale` for POS). Configure the separate libpq service securely; the output parent must be0700. The tool opens a repeatable-read, read-only transaction, exports originals, charge/receipt/balance, deliveries, reservations, inventory and linked audit evidence to an exclusive-created0600 file. It refuses ordinary application database roles and never executes compensating entries. Protect previews as personal/financial data and retain only under the reviewed case policy. The snapshot can become stale: lock and recalculate at separately approved execution. A case-specific correction specification and isolated reviewed migration remain required; this command does not invent correction amounts or dates.
+
 ```
 select aq_private.order_json(:'order_id'::uuid);
 select * from aq_private.payments where order_id=:'order_id'::uuid order by received_at;

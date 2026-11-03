@@ -90,7 +90,7 @@ public final class Model {
         boolean synthetic = (Boolean) syntheticValue;
         if (synthetic && !allowSynthetic) throw invalid();
         String commit = string(provenance.get("source_commit"));
-        if (commit.trim().isEmpty() || commit.length() > 128 || (!synthetic && !commit.matches("[0-9a-f]{40}"))) throw invalid();
+        if (!commit.matches("(?:[0-9a-f]{40}|UNCOMMITTED)") || (!synthetic && commit.equals("UNCOMMITTED"))) throw invalid();
         for (String key : Arrays.asList("dataset_sha256", "split_sha256"))
             if (!string(provenance.get(key)).matches("[0-9a-f]{64}")) throw invalid();
         return new Model(version, vocabulary, idf, weights, biases, topScore, topGap, synthetic);

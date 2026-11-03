@@ -55,6 +55,8 @@ def validate_model(model, allow_synthetic=False):
             raise ValueError('Invalid provenance digest.')
     if type(provenance['synthetic']) is not bool or (provenance['synthetic'] and not allow_synthetic):
         raise ValueError('Synthetic model not permitted in release.')
+    if not provenance['synthetic'] and provenance['source_commit']=='UNCOMMITTED':
+        raise ValueError('A nonsynthetic release requires a source commit.')
     return model
 
 

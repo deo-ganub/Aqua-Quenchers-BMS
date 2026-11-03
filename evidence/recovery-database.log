@@ -1,2 +1,4 @@
+PASS: order/sale correction previews reconcile charges/receipts/balances, preserve database state and refuse evidence overwrite (0600).
+PASS: ordinary authenticated database role cannot export privileged correction evidence.
 PASS: synthetic populated DB age package/decrypt + pg_restore into new UTF8 database; charge/receipt/expense/stock/reservation/Auth-mapping/audit reconciliation and protected grants/RLS match; dry-run/approved-contact ledger replay removes restored contact snapshots while retaining financial history.
 NOT RUN: hosted managed Auth/config/Storage restore, actual controller approval/external ledger custody and operating-hours RPO/RTO measurement.

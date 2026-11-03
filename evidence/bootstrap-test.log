@@ -1,1 +1,2 @@
+PASS: reference counter expands beyond six digits without truncation.
 PASS: controlled Owner/opening inventory setup once; repeated bootstrap rejected without duplicate profile/stock/audit effects.

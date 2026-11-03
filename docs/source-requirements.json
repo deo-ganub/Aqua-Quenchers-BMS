@@ -12,7 +12,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -28,6 +31,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -45,7 +60,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -61,6 +79,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -78,7 +108,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -94,6 +127,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -111,7 +156,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -127,6 +175,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -144,7 +204,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -160,6 +223,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -177,7 +252,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -193,6 +271,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -210,7 +300,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -226,6 +319,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1117,6 +1222,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1144,6 +1255,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1171,6 +1288,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1198,6 +1321,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1225,6 +1354,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1252,6 +1387,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1279,6 +1420,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1306,6 +1453,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1755,7 +1908,10 @@
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseSuggestionController.java",
+          "classifier/aqua_classifier/pipeline.py",
+          "classifier/aqua_classifier/metrics.py"
         ]
       }
     ],
@@ -1771,6 +1927,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-java.log",
         "limit": "Synthetic pure state/inference tests; full device form flow not run."
+      },
+      {
+        "path": "classifier/tests/test_pipeline.py",
+        "status": "Verified subset",
+        "evidence": "evidence/classifier-python.log",
+        "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1788,7 +1950,10 @@
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseSuggestionController.java",
+          "classifier/aqua_classifier/pipeline.py",
+          "classifier/aqua_classifier/metrics.py"
         ]
       }
     ],
@@ -1804,6 +1969,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-java.log",
         "limit": "Synthetic pure state/inference tests; full device form flow not run."
+      },
+      {
+        "path": "classifier/tests/test_pipeline.py",
+        "status": "Verified subset",
+        "evidence": "evidence/classifier-python.log",
+        "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1821,7 +1992,10 @@
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseSuggestionController.java",
+          "classifier/aqua_classifier/pipeline.py",
+          "classifier/aqua_classifier/metrics.py"
         ]
       }
     ],
@@ -1837,6 +2011,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-java.log",
         "limit": "Synthetic pure state/inference tests; full device form flow not run."
+      },
+      {
+        "path": "classifier/tests/test_pipeline.py",
+        "status": "Verified subset",
+        "evidence": "evidence/classifier-python.log",
+        "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1854,7 +2034,10 @@
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseSuggestionController.java",
+          "classifier/aqua_classifier/pipeline.py",
+          "classifier/aqua_classifier/metrics.py"
         ]
       }
     ],
@@ -1870,6 +2053,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-java.log",
         "limit": "Synthetic pure state/inference tests; full device form flow not run."
+      },
+      {
+        "path": "classifier/tests/test_pipeline.py",
+        "status": "Verified subset",
+        "evidence": "evidence/classifier-python.log",
+        "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1887,7 +2076,10 @@
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseSuggestionController.java",
+          "classifier/aqua_classifier/pipeline.py",
+          "classifier/aqua_classifier/metrics.py"
         ]
       }
     ],
@@ -1903,6 +2095,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-java.log",
         "limit": "Synthetic pure state/inference tests; full device form flow not run."
+      },
+      {
+        "path": "classifier/tests/test_pipeline.py",
+        "status": "Verified subset",
+        "evidence": "evidence/classifier-python.log",
+        "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1920,7 +2118,10 @@
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseSuggestionController.java",
+          "classifier/aqua_classifier/pipeline.py",
+          "classifier/aqua_classifier/metrics.py"
         ]
       }
     ],
@@ -1936,6 +2137,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-java.log",
         "limit": "Synthetic pure state/inference tests; full device form flow not run."
+      },
+      {
+        "path": "classifier/tests/test_pipeline.py",
+        "status": "Verified subset",
+        "evidence": "evidence/classifier-python.log",
+        "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1953,7 +2160,10 @@
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseSuggestionController.java",
+          "classifier/aqua_classifier/pipeline.py",
+          "classifier/aqua_classifier/metrics.py"
         ]
       }
     ],
@@ -1969,6 +2179,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-java.log",
         "limit": "Synthetic pure state/inference tests; full device form flow not run."
+      },
+      {
+        "path": "classifier/tests/test_pipeline.py",
+        "status": "Verified subset",
+        "evidence": "evidence/classifier-python.log",
+        "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1986,7 +2202,10 @@
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseSuggestionController.java",
+          "classifier/aqua_classifier/pipeline.py",
+          "classifier/aqua_classifier/metrics.py"
         ]
       }
     ],
@@ -2002,6 +2221,12 @@
         "status": "Verified subset",
         "evidence": "evidence/classifier-java.log",
         "limit": "Synthetic pure state/inference tests; full device form flow not run."
+      },
+      {
+        "path": "classifier/tests/test_pipeline.py",
+        "status": "Verified subset",
+        "evidence": "evidence/classifier-python.log",
+        "limit": "Synthetic pipeline/validation-policy checks only; reviewed real data absent."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2208,7 +2433,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2224,6 +2452,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2241,7 +2487,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2257,6 +2506,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2274,7 +2541,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2290,6 +2560,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2307,7 +2595,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2323,6 +2614,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2340,7 +2649,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2356,6 +2668,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2373,7 +2703,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2389,6 +2722,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2406,7 +2757,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2422,6 +2776,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2439,7 +2811,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2455,6 +2830,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2472,7 +2865,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2488,6 +2884,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2505,7 +2919,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2521,6 +2938,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2538,7 +2973,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2554,6 +2992,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2571,7 +3027,10 @@
         "symbol": "OwnerUi.settings,staffForm,verifyMfa / staff-admin",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2587,6 +3046,24 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
+      },
+      {
+        "path": "backend/tests/account_recovery.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2604,7 +3081,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2620,6 +3100,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2637,7 +3129,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2653,6 +3148,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2670,7 +3177,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2686,6 +3196,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2703,7 +3225,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2719,6 +3244,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2736,7 +3273,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2752,6 +3292,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2769,7 +3321,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2785,6 +3340,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2802,7 +3369,10 @@
         "symbol": "MainActivity.signIn / username-login",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/MainActivity.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030003_identity_admin.sql",
+          "supabase/functions/_shared/auth.mjs",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -2818,6 +3388,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "admin/tests/auth.test.mjs",
+        "status": "Verified subset",
+        "evidence": "evidence/auth-node.log",
+        "limit": "Seven mocked handler cases; actual managed Auth/TOTP not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3682,6 +4264,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3709,6 +4297,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3736,6 +4330,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3763,6 +4363,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3790,6 +4396,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3817,6 +4429,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3844,6 +4462,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3871,6 +4495,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/reservation_guards.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reservation theft rejected despite available other stock; full device scenarios not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4320,7 +4950,8 @@
         "symbol": "OwnerUi.settings,profile,password / update_profile",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -4336,6 +4967,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "backend/tests/own_profile.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Own-profile identity/link/permission subset; device/password integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4353,7 +4996,8 @@
         "symbol": "OwnerUi.settings,profile,password / update_profile",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -4369,6 +5013,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "backend/tests/own_profile.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Own-profile identity/link/permission subset; device/password integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4386,7 +5042,8 @@
         "symbol": "OwnerUi.settings,profile,password / update_profile",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -4402,6 +5059,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "backend/tests/own_profile.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Own-profile identity/link/permission subset; device/password integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4419,7 +5088,8 @@
         "symbol": "OwnerUi.settings,profile,password / update_profile",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -4435,6 +5105,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "backend/tests/own_profile.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Own-profile identity/link/permission subset; device/password integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4452,7 +5134,8 @@
         "symbol": "OwnerUi.settings,profile,password / update_profile",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -4468,6 +5151,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "backend/tests/own_profile.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Own-profile identity/link/permission subset; device/password integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4485,7 +5180,8 @@
         "symbol": "OwnerUi.settings,profile,password / update_profile",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -4501,6 +5197,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "backend/tests/own_profile.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Own-profile identity/link/permission subset; device/password integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4518,7 +5226,8 @@
         "symbol": "OwnerUi.settings,profile,password / update_profile",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -4534,6 +5243,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "backend/tests/own_profile.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Own-profile identity/link/permission subset; device/password integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4551,7 +5272,8 @@
         "symbol": "OwnerUi.settings,profile,password / update_profile",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "supabase/migrations/202611030004_session_logout.sql"
         ]
       }
     ],
@@ -4567,6 +5289,18 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/logout.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Backend revocation only; actual managed Auth/device lifecycle not run."
+      },
+      {
+        "path": "backend/tests/own_profile.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Own-profile identity/link/permission subset; device/password integration not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."

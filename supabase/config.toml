@@ -1,0 +1,28 @@
+project_id = "aqua-quenchers-bms-dev"
+
+[api]
+enabled = true
+schemas = ["public"]
+extra_search_path = ["public", "extensions"]
+
+[auth]
+enabled = true
+enable_signup = false
+minimum_password_length = 15
+
+[auth.mfa.totp]
+enroll_enabled = true
+verify_enabled = true
+
+# Username login is pre-authenticated. Staff administration explicitly verifies the
+# bearer with managed Auth /user, then checks active Owner/AAL2 in PostgreSQL.
+# Handler verification also supports modern signing keys/public publishable keys.
+[functions.username-login]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/username-login/index.ts"
+
+[functions.staff-admin]
+enabled = true
+verify_jwt = false
+entrypoint = "./functions/staff-admin/index.ts"

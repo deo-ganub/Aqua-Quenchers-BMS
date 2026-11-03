@@ -110,7 +110,8 @@ end $$;
 
 create function aq_private.today() returns date language sql stable set search_path='' as $$ select (statement_timestamp() at time zone 'Asia/Manila')::date $$;
 create function aq_private.new_reference(p_prefix text) returns text language sql volatile set search_path='' as $$
- select p_prefix||'-'||to_char(aq_private.today(),'YYYY')||'-'||lpad(nextval('aq_private.reference_seq')::text,6,'0')
+ with value as (select nextval('aq_private.reference_seq')::text n)
+ select p_prefix||'-'||to_char(aq_private.today(),'YYYY')||'-'||lpad(n,greatest(6,length(n)),'0') from value
 $$;
 create function aq_private.require_actor(p_owner boolean default false) returns uuid language plpgsql security definer set search_path='' as $$
 declare a uuid:=auth.uid(); p aq_private.profiles; sid uuid; seen timestamptz; claims jsonb:=auth.jwt();
@@ -215,7 +216,7 @@ begin
  perform pg_advisory_xact_lock(71420261103);
  if op in ('create_customer','update_customer') then
   perform aq_private.require_keys(p_request,array['operation','request_id','id','name','customer_type','contact_number','address']);
-  if coalesce(length(btrim(p_request->>'name')),0)=0 or coalesce(length(btrim(p_request->>'address')),0)=0 or coalesce(length(btrim(p_request->>'contact_number')),0)=0 then raise exception 'Complete the required fields.'; end if;
+  if coalesce(length(btrim(p_request->>'name')),0)=0 or coalesce(length(btrim(p_request->>'address')),0)=0 or coalesce(length(btrim(p_request->>'contact_number')),0)=0 or coalesce(length(btrim(p_request->>'customer_type')),0)=0 then raise exception 'Complete the required fields.'; end if;
   if coalesce(p_request->>'customer_type','') not in ('household','dealer','walk_in') then raise exception 'Choose Household, Dealer, or Walk-in.'; end if;
   if (p_request->>'contact_number') !~ '^[0-9]{11}$' then raise exception 'Please enter a valid contact number. Use 11 digits.'; end if;
   id:=case when op='update_customer' then (p_request->>'id')::uuid else gen_random_uuid() end;
@@ -230,7 +231,7 @@ begin
   result:=aq_private.customer_json(id);
  elsif op='create_order' then
   perform aq_private.require_keys(p_request,array['operation','request_id','customer_id','quantity','business_date']);
-  q:=aq_private.positive_quantity(p_request->'quantity');
+  begin q:=aq_private.positive_quantity(p_request->'quantity');exception when others then raise exception 'Enter a valid gallon quantity.';end;
   select * into c from aq_private.customers where customers.id=(p_request->>'customer_id')::uuid;
   if not found then raise exception 'Choose a customer.'; end if;
   if c.contact_number is null or c.address is null then raise exception 'Complete the required fields.';end if;
@@ -297,7 +298,7 @@ begin
   result:=aq_private.sale_json(id);
  elsif op='record_payment' then
   perform aq_private.require_keys(p_request,array['operation','request_id','reference','amount_centavos']);
-  cash:=aq_private.money(p_request->'amount_centavos'); reference:=p_request->>'reference';
+  begin cash:=aq_private.money(p_request->'amount_centavos');exception when others then raise exception 'Enter an amount greater than zero and not above the balance.';end; reference:=p_request->>'reference';
   select * into o from aq_private.orders where orders.reference=reference for update;
   if found then total:=o.quantity::bigint*o.unit_price_centavos; paid:=aq_private.paid(o.id,null);
   else
@@ -397,7 +398,7 @@ begin
   where (coalesce(o.reference,s.reference) ilike '%'||search||'%') and (nullif(p_request->>'customer_id','') is null or o.customer_id=(p_request->>'customer_id')::uuid or s.customer_id=(p_request->>'customer_id')::uuid);
  elsif resource in ('inventory','home') then
   result:=aq_private.stock_json();
-  return result||jsonb_build_object('for_pickup_count',(select count(*) from aq_private.orders where status='for_pickup'),
+  return result||jsonb_build_object('orders_count',(select count(*) from aq_private.orders where status<>'delivered'),'for_pickup_count',(select count(*) from aq_private.orders where status='for_pickup'),
    'ready_for_delivery_count',(select count(*) from aq_private.orders where status='ready_for_delivery'),
    'pending_orders',(select coalesce(jsonb_agg(aq_private.order_json(o.id)||jsonb_build_object('days_waiting',greatest(aq_private.today()-business_date,0)) order by business_date),'[]') from aq_private.orders o where status in ('ready_for_delivery','undelivered')));
  elsif resource='expenses' then

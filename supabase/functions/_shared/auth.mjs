@@ -9,9 +9,9 @@ export function validateStaff(body){exact(body,['operation','request_id','user_i
  const out={operation:body.operation,request_id:body.request_id};
  if(body.operation!=='create'){if(!uuid(body.user_id))throw new SafeError(400,'Invalid request.');out.user_id=body.user_id;}
  if(body.operation!=='set_active'){
-  out.username=normalizeUsername(body.username);if(typeof body.full_name!=='string'||!body.full_name.trim()||[...body.full_name].length>120||!/^\d{11}$/.test(body.contact_number))throw new SafeError(400,'Invalid staff details.');out.full_name=body.full_name.trim();out.contact_number=body.contact_number;
+  out.username=normalizeUsername(body.username);if(typeof body.full_name!=='string'||!body.full_name.trim()||[...body.full_name].length>160||!/^\d{11}$/.test(body.contact_number))throw new SafeError(400,'Invalid staff details.');out.full_name=body.full_name.trim();out.contact_number=body.contact_number;
  }
- if(body.operation==='create'){if(typeof body.temporary_password!=='string'||[...body.temporary_password].length<15||body.temporary_password.length>4096)throw new SafeError(400,'Use a password of at least 15 characters.');out.temporary_password=body.temporary_password;}
+ if(body.operation==='create'){if(typeof body.temporary_password!=='string'||[...body.temporary_password].length<15||body.temporary_password.length>4096)throw new SafeError(400,'Use at least 15 characters.');out.temporary_password=body.temporary_password;}
  else if('temporary_password'in body)throw new SafeError(400,'Invalid request.');
  if('active'in body){if(typeof body.active!=='boolean')throw new SafeError(400,'Invalid request.');out.active=body.active;}else if(body.operation==='set_active')throw new SafeError(400,'Invalid request.');
  return out;
@@ -24,7 +24,16 @@ export function client(cfg,fetcher=fetch){return async(path,{token=cfg.service,k
 };}
 const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
 export async function fingerprint(secret,input){const key=await crypto.subtle.importKey('raw',new TextEncoder().encode(secret),{name:'HMAC',hash:'SHA-256'},false,['sign']);const mac=await crypto.subtle.sign('HMAC',key,new TextEncoder().encode(JSON.stringify(canonical(input))));return [...new Uint8Array(mac)].map(x=>x.toString(16).padStart(2,'0')).join('');}
-async function readBody(request){if(request.method!=='POST')throw new SafeError(405,'Method not allowed.');if(Number(request.headers.get('content-length')||0)>16384)throw new SafeError(413,'Request too large.');const raw=await request.text();if(new TextEncoder().encode(raw).length>16384)throw new SafeError(413,'Request too large.');try{return JSON.parse(raw);}catch{throw new SafeError(400,'Invalid request.');}}
+async function readBody(request){
+ if(request.method!=='POST')throw new SafeError(405,'Method not allowed.');
+ const length=request.headers.get('content-length');if(length!==null&&(!/^\d+$/.test(length)||Number(length)>16384))throw new SafeError(413,'Request too large.');
+ let raw='',size=0;const reader=request.body?.getReader();const decoder=new TextDecoder('utf-8',{fatal:true});
+ try{
+  if(reader)while(true){const {value,done}=await reader.read();if(done)break;size+=value.byteLength;if(size>16384){await reader.cancel();throw new SafeError(413,'Request too large.');}raw+=decoder.decode(value,{stream:true});}
+  raw+=decoder.decode();return JSON.parse(raw);
+ }catch(error){if(error instanceof SafeError)throw error;throw new SafeError(400,'Invalid request.');}
+ finally{reader?.releaseLock();}
+}
 export function loginHandler(env,fetcher=fetch){return async request=>{try{
  const body=validateLogin(await readBody(request)),cfg=config(env),api=client(cfg,fetcher);
  // The gateway supplies source information. Username bucket still throttles if absent.
@@ -52,10 +61,11 @@ export function staffHandler(env,fetcher=fetch){return async request=>{try{
  }
  const operation=await api('/rest/v1/rpc/aq_admin_prepare_staff',{token,key:cfg.anon,body:{p_request:{...safe,payload_hash:hash}}});
  if(operation.state==='completed')return json(200,operation.result);
+ if(operation.state==='failed')throw new SafeError(400,'Account details were rejected. Correct them and start a new request.');
  // Stable internal email lets an uncertain Auth create be reconciled on retry.
  let identity=await api('/rest/v1/rpc/aq_admin_auth_identity',{body:{p_request_id:body.request_id}});
- if(!identity?.user_id){try{const created=await api('/auth/v1/admin/users',{body:{email:operation.email,password:temporary_password,email_confirm:true,app_metadata:{provisioned_by:'aqua_quenchers'}}});identity={user_id:created.id};}catch{
-  identity=await api('/rest/v1/rpc/aq_admin_auth_identity',{body:{p_request_id:body.request_id}});if(!identity?.user_id)throw new SafeError(503,'Account creation needs reconciliation. Retry with the same request ID.');
+ if(!identity?.user_id){try{const created=await api('/auth/v1/admin/users',{body:{email:operation.email,password:temporary_password,email_confirm:true,app_metadata:{provisioned_by:'aqua_quenchers'}}});identity={user_id:created.id};}catch(error){
+  identity=await api('/rest/v1/rpc/aq_admin_auth_identity',{body:{p_request_id:body.request_id}});if(!identity?.user_id){if(error instanceof SafeError&&[400,422].includes(error.upstreamStatus)){await api('/rest/v1/rpc/aq_admin_fail_staff',{body:{p_request_id:body.request_id,p_payload_hash:hash}});throw new SafeError(400,'Account details were rejected. Correct them and start a new request.');}throw new SafeError(503,'Account creation needs reconciliation. Retry with the same request ID.');}
  }}
  const result=await api('/rest/v1/rpc/aq_admin_finish_staff',{token,key:cfg.anon,body:{p_request_id:body.request_id,p_user_id:identity.user_id,p_payload_hash:hash}});return json(200,result);
  }catch(e){return json(e instanceof SafeError?e.status:503,{error:e instanceof SafeError?e.message:'Service unavailable.'});}};}

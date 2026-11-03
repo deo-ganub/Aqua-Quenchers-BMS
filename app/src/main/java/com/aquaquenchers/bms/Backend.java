@@ -20,14 +20,16 @@ public final class Backend {
     private final String base,key;
     public volatile String accessToken="",refreshToken="";
     public Backend(String base,String key){this.base=base.replaceAll("/+$","");this.key=key;}
+    public void close(){executor.shutdown();}
     public boolean configured(){return base.startsWith("https://")&&!key.trim().isEmpty();}
     public void call(String path,JSONObject body,Consumer<JSONObject> success,Consumer<Failure> failure){ call("POST",path,body,success,failure); }
     public void call(String method,String path,JSONObject body,Consumer<JSONObject> success,Consumer<Failure> failure){
-        executor.execute(()->{try{JSONObject result=request(method,path,body); main.post(()->success.accept(result));}
+        final JSONObject snapshot;try{snapshot=body==null?null:new JSONObject(body.toString());}catch(Exception e){main.post(()->failure.accept(new Failure(0,"Invalid request. Nothing was saved.")));return;}
+        executor.execute(()->{try{JSONObject result=request(method,path,snapshot); main.post(()->success.accept(result));}
             catch(Failure e){main.post(()->failure.accept(e));}});
     }
     private JSONObject request(String method,String path,JSONObject body)throws Failure{
-        if(!configured())throw new Failure(0,"Backend is not configured. Set AQ_SUPABASE_URL and AQ_SUPABASE_ANON_KEY, then rebuild. Nothing was saved.");
+        if(!configured())throw new Failure(0,"The service is not configured. Contact the administrator. Nothing was saved.");
         HttpURLConnection connection=null;
         try{
             URL url=new URL(base+path);

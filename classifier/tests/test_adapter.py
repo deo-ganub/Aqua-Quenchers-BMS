@@ -7,6 +7,9 @@ class Adapter(unittest.TestCase):
   self.assertEqual(solve(body,'staff',lambda _:False)[0],403)
   for field in ['actor_id','model_path','labels','weights','url']:
    self.assertEqual(solve({**body,field:'bad'},'owner',lambda _:True)[0],400)
+ def test_trace_ids_require_canonical_uuid(self):
+  for request_id in ['11111111111141118111111111111111','{11111111-1111-4111-8111-111111111111}']:
+   self.assertEqual(solve({'request_id':request_id,'remarks':'fuel'},'owner',lambda _:True)[0],400)
  def test_missing_model_is_safe_not_save_success(self):
   status,r=solve({'request_id':'11111111-1111-4111-8111-111111111111','remarks':'fuel'},'owner',lambda _:True)
   self.assertEqual(status,200);self.assertEqual(r['status'],'UNAVAILABLE');self.assertIsNone(r['suggested_category']);self.assertIsNone(r['model_version'])

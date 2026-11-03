@@ -23,4 +23,17 @@ class Reference(unittest.TestCase):
   rng=np.random.default_rng(42);w=rng.normal(size=(7,3));b=rng.normal(size=7);x=[{0:.6,2:.8},{1:1.}];y=[0,6];reg=.01
   actual=loss_gradient(w,b,x,y,reg)[0];p=softmax(logits_for(w,b,x));expected=log_loss(y,p,labels=list(range(7)))+reg*(w*w).sum()/2
   self.assertAlmostEqual(actual,expected,places=12)
+
+class ValidationPolicy(unittest.TestCase):
+ def test_policy_tuning_uses_known_validation_only_and_frozen_gates(self):
+  from aqua_classifier.metrics import tune_policy,evaluate,GATES
+  probabilities=np.array([[.8,.1,.02,.02,.02,.02,.02],[.75,.1,.03,.03,.03,.03,.03]])
+  chosen,candidates=tune_policy([0,1],probabilities,[True,False])
+  self.assertEqual(len(candidates),25);self.assertIn({'top_score':.7,'top_gap':.15},[r['thresholds'] for r in candidates])
+  report=evaluate([0,1],probabilities,chosen,[True,False]);self.assertEqual(report['offered_count'],1);self.assertEqual(report['error_among_offered'],0);self.assertEqual(GATES['macro_f1_min'],.80)
+ def test_no_known_vectors_retains_provisional_and_zero_coverage(self):
+  from aqua_classifier.metrics import tune_policy,evaluate
+  p=np.array([[.9,.02,.02,.02,.02,.01,.01]])
+  chosen,_=tune_policy([0],p,[False]);self.assertEqual(chosen,{'top_score':.7,'top_gap':.15});self.assertEqual(evaluate([0],p,chosen,[False])['offered_count'],0)
+
 if __name__=='__main__':unittest.main()

@@ -13,6 +13,8 @@ try:
  r=run(db,script,args);assert r.returncode!=0 and 'already initialized' in r.stderr
  r=run(db,"select empty_quantity||','||physical_filled||','||(select count(*) from aq_private.profiles)||','||(select count(*) from aq_private.audit_events) from aq_private.inventory;")
  assert r.returncode==0 and r.stdout.strip()=='11,3,1,1',(r.stdout,r.stderr)
+ r=run(db,"select setval('aq_private.reference_seq',999999,true);select aq_private.new_reference('TEST');");assert r.returncode==0 and r.stdout.strip().splitlines()[-1].endswith('-1000000'),(r.stdout,r.stderr)
+ print('PASS: reference counter expands beyond six digits without truncation.')
  print('PASS: controlled Owner/opening inventory setup once; repeated bootstrap rejected without duplicate profile/stock/audit effects.')
 finally:
  r=run('postgres',f'drop database {db};');assert r.returncode==0,r.stderr

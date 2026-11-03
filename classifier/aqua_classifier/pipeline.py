@@ -4,6 +4,7 @@ import os
 import platform
 import subprocess
 import sys
+import unicodedata
 from pathlib import Path
 import numpy as np
 import scipy
@@ -13,7 +14,7 @@ from .data import canonical, digest_bytes, load_dataset, prepare, validate_manif
 from .text import Tfidf
 from .math_models import LogisticRegression, MultinomialNaiveBayes, loss_gradient
 from .contract import load_model
-from .metrics import GATES, evaluate
+from .metrics import GATES, evaluate, tune_policy
 
 
 def write_new(path, value):
@@ -35,7 +36,7 @@ def environment():
     return {'python': sys.version, 'numpy': np.__version__, 'scipy': scipy.__version__,
             'scikit_learn': sklearn.__version__, 'platform': platform.platform(),
             'machine': platform.machine(), 'processor': platform.processor(),
-            'logical_cpus': os.cpu_count(), 'source_commit': commit, 'source_dirty':source_dirty}
+            'logical_cpus': os.cpu_count(), 'source_commit': commit, 'source_dirty':source_dirty,'unicode_version':unicodedata.unidata_version}
 
 
 def prepare_command(dataset, output, synthetic=False):
@@ -58,8 +59,8 @@ def train_command(dataset, output, model_version, synthetic=False, max_epochs=50
     feature = Tfidf().fit([row['remarks'] for row in train_rows])
     train_features = feature.transform([row['remarks'] for row in train_rows])
     val_features = feature.transform([row['remarks'] for row in val_rows])
-    if any(not value for value in train_features + val_features):
-        raise ValueError('Insufficient data: unknown feature vectors in training/validation.')
+    if not any(train_features):
+        raise ValueError('Insufficient training vocabulary signal.')
     train_y = [LABELS.index(row['category']) for row in train_rows]
     val_y = [LABELS.index(row['category']) for row in val_rows]
     candidates, best = [], None
@@ -81,8 +82,10 @@ def train_command(dataset, output, model_version, synthetic=False, max_epochs=50
         nb_candidates.append({'alpha': alpha, 'validation_loss': validation_loss})
         if best_nb is None or validation_loss < best_nb[0]:
             best_nb = (validation_loss, fitted, alpha)
-    # Provisional policy is retained unchanged, explicitly frozen before looking at held-out labels.
-    thresholds = {'top_score': 0.70, 'top_gap': 0.15}
+    # Tune primary policy only on validation. Reuse it for the comparison's offered-policy
+    # metrics; unthresholded model quality stays separate and shares the held-out set.
+    known_validation=[bool(vector) for vector in val_features]
+    thresholds,policy_candidates=tune_policy(val_y,best[1].probabilities(val_features),known_validation)
     env = environment()
     if not manifest['synthetic'] and (env['source_commit'] == 'UNCOMMITTED' or env['source_dirty']):
         raise ValueError('Commit reviewed source before exporting a nonsynthetic release candidate.')
@@ -102,9 +105,9 @@ def train_command(dataset, output, model_version, synthetic=False, max_epochs=50
                   'primary_candidates': candidates, 'selected_primary': best[2],
                   'comparison_candidates': nb_candidates, 'selected_nb_alpha': best_nb[2],
                   'vocabulary_size': len(feature.vocabulary), 'model_bytes': len(payload),
-                  'thresholds': thresholds, 'gates': GATES, 'policy_selection': 'provisional-fixed-before-test',
-                  'primary_validation': evaluate(val_y, best[1].probabilities(val_features), thresholds),
-                  'comparison_validation': evaluate(val_y, best_nb[1].probabilities(val_features), thresholds),
+                  'thresholds': thresholds, 'gates': GATES, 'policy_selection': 'validation-error-then-coverage-then-provisional-distance; comparison uses same frozen policy', 'policy_candidates':policy_candidates,
+                  'primary_validation': evaluate(val_y, best[1].probabilities(val_features), thresholds,known_validation),
+                  'comparison_validation': evaluate(val_y, best_nb[1].probabilities(val_features), thresholds,known_validation),
                   'device_benchmark': 'NOT RUN: requires declared Owner tablet',
                   'evidence_kind': 'SYNTHETIC ONLY' if manifest['synthetic'] else 'OWNER-REVIEWED EXPERIMENT',
                   'release_approved': False}

@@ -15,6 +15,14 @@ class Pipeline(unittest.TestCase):
    results=evaluate_command(dataset,output,True);self.assertEqual(results['evidence_kind'],'SYNTHETIC ONLY');self.assertFalse(results['release_approved']);self.assertEqual(results['device_benchmark'],'NOT RUN')
    with self.assertRaises(FileExistsError):evaluate_command(dataset,output,True)
    with self.assertRaises(ValueError):train_command(dataset,output,'TEST-SYNTHETIC',True,max_epochs=5)
+ def test_unseen_validation_remark_preserves_manual_fallback_policy(self):
+  rows=self.rows();original=prepare(rows);unknown_id=original['partitions']['validation'][0]
+  for row in rows:
+   if row['id']==unknown_id:row['remarks']='zxqvunknownmark'
+  with tempfile.TemporaryDirectory() as t:
+   path=Path(t)/'data.jsonl';path.write_text('\n'.join(json.dumps(r) for r in rows));out=Path(t)/'experiment'
+   manifest=prepare_command(path,out,True);self.assertIn(unknown_id,manifest['partitions']['validation'])
+   report=train_command(path,out,'TEST-SYNTHETIC',True,max_epochs=5);self.assertEqual(len(report['policy_candidates']),25)
  def test_ingestion_rejects_unreviewed_and_leakage(self):
   rows=self.rows();rows[0]['reviewed']=False
   with tempfile.TemporaryDirectory() as t:

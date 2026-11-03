@@ -1,0 +1,7 @@
+running 3 tests from ./admin/tests/edge_deno_test.ts
+native Edge runtime rejects staff administration without managed bearer before upstream ... ok (11ms)
+native Edge runtime rejects oversized chunked input before identity resolution ... ok (893µs)
+native Edge runtime never authenticates when configuration is unavailable ... ok (597µs)
+
+ok | 3 passed | 0 failed (16ms)
+

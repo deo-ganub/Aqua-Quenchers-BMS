@@ -3,6 +3,16 @@ plugins { id 'com.android.application' }
 def local = new Properties()
 if (rootProject.file('local.properties').exists()) rootProject.file('local.properties').withInputStream { local.load(it) }
 def publicValue = { String name -> providers.gradleProperty(name).orElse(providers.environmentVariable(name)).getOrElse(local.getProperty(name, '')) }
+// Public client configuration only. Never echo a rejected credential value.
+def clientKey = publicValue('AQ_SUPABASE_ANON_KEY')
+if (!clientKey.isEmpty() && !clientKey.startsWith('sb_publishable_')) {
+    def role = null
+    try {
+        def pieces = clientKey.split('\\.')
+        if (pieces.length == 3) role = new groovy.json.JsonSlurper().parseText(new String(Base64.urlDecoder.decode(pieces[1]), 'UTF-8')).role
+    } catch (Exception ignored) { }
+    if (role != 'anon') throw new GradleException('AQ_SUPABASE_ANON_KEY must be a public anon/publishable client key. Privileged or unsupported credentials cannot be packaged.')
+}
 def quoted = { String value -> '"' + value.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '') + '"' }
 android {
     namespace 'com.aquaquenchers.bms'
@@ -15,7 +25,7 @@ android {
         versionName '0.1.0'
         buildConfigField 'String', 'CLASSIFIER_SHA256', quoted(publicValue('AQ_CLASSIFIER_SHA256'))
         buildConfigField 'String', 'SUPABASE_URL', quoted(publicValue('AQ_SUPABASE_URL'))
-        buildConfigField 'String', 'SUPABASE_ANON_KEY', quoted(publicValue('AQ_SUPABASE_ANON_KEY'))
+        buildConfigField 'String', 'SUPABASE_ANON_KEY', quoted(clientKey)
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildFeatures { buildConfig true }
