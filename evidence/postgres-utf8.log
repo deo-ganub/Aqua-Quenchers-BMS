@@ -48,6 +48,7 @@ CREATE FUNCTION
 CREATE FUNCTION
 CREATE FUNCTION
 CREATE FUNCTION
+CREATE FUNCTION
 REVOKE
 REVOKE
 GRANT
@@ -103,6 +104,8 @@ ALTER TABLE
 CREATE FUNCTION
 REVOKE
 GRANT
+CREATE FUNCTION
+REVOKE
 RUN supabase/migrations/202611030004_session_logout.sql
 BEGIN
 ALTER TABLE
@@ -117,7 +120,7 @@ BEGIN
 INSERT 0 1
 INSERT 0 1
 10000000-0000-4000-8000-000000000001
-{"aal": "aal2", "iat": 1793678284.567087, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"aal": "aal2", "iat": 1793678810.527583, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 {"email": "40000000-0000-4000-8000-000000000001@identity.aquaquenchers.invalid", "state": "pending"}
 NOTICE:  PASS: ordinary Owner cannot mark a preparation failed
@@ -137,7 +140,7 @@ NOTICE:  PASS: existing Auth identity cannot be falsely marked failed
 DO
 RESET
 SET
-{"role": "staff", "active": true, "user_id": "10000000-0000-4000-8000-000000000002", "username": "synthetic.staff", "full_name": "Synthetic Staff", "created_at": "2026-11-03T03:58:04.57117+00:00", "updated_at": "2026-11-03T03:58:04.57117+00:00", "contact_number": "09000000002"}
+{"role": "staff", "active": true, "user_id": "10000000-0000-4000-8000-000000000002", "username": "synthetic.staff", "full_name": "Synthetic Staff", "created_at": "2026-11-03T04:06:50.532299+00:00", "updated_at": "2026-11-03T04:06:50.532299+00:00", "contact_number": "09000000002"}
 RESET
 NOTICE:  PASS: corrected request can reuse released alias and managed identity completes once
 DO
@@ -147,12 +150,12 @@ BEGIN
 INSERT 0 2
 INSERT 0 2
 10000000-0000-4000-8000-000000000001
-{"aal": "aal1", "iat": 1793678284.577668, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"aal": "aal1", "iat": 1793678810.539034, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 NOTICE:  PASS: Owner AAL1 denied account mutation
 DO
 RESET
-{"aal": "aal2", "iat": 1793678284.578935, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"aal": "aal2", "iat": 1793678810.540396, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 NOTICE:  PASS: AAL2 account rename preserves stable Auth identity and Staff role
 DO
@@ -171,7 +174,7 @@ BEGIN
 INSERT 0 1
 INSERT 0 1
 10000000-0000-4000-8000-000000000001
-{"iat": 1793678284.584826, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"iat": 1793678810.547871, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 NOTICE:  PASS: stable customer edit id, duplicate contact denial, strict reschedule/date payload and active Home order counts.
 DO
@@ -181,7 +184,7 @@ BEGIN
 INSERT 0 1
 INSERT 0 1
 10000000-0000-4000-8000-000000000001
-{"iat": 1793678284.599815, "session_id": "f4839a23-bd3e-4fc3-acc5-8b4f8aafbcd5"}
+{"iat": 1793678810.564343, "session_id": "5b6ddb76-3f17-4495-89e7-fbe802fb6177"}
 DO
 UPDATE 4
 SET
@@ -194,7 +197,7 @@ INSERT 0 1
 INSERT 0 1
 UPDATE 1
 10000000-0000-4000-8000-000000000001
-{"aal": "aal2", "iat": 1793678284.616480, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"aal": "aal2", "iat": 1793678810.583248, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 NOTICE:  PASS: profileless credit/selected-reference settlement, invalid payments, cash/change receipts, skipped lifecycle, reschedule boundaries, overcollection and paid-total protection, pickup retries
 DO
@@ -207,9 +210,25 @@ BEGIN
 INSERT 0 1
 INSERT 0 1
 10000000-0000-4000-8000-000000000001
-{"iat": 1793678284.637002, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"iat": 1793678810.607666, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 NOTICE:  PASS: manual no-remarks fixture7/6250 becomes8/7000 once; newest-first and filtered total reconcile. No model result asserted.
+DO
+ROLLBACK
+RUN backend/tests/identity_alias_guard.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"aal": "aal2", "iat": 1793678810.621005, "session_id": "609b7361-fcba-445d-95f7-6f16b68216a3"}
+SET
+DO
+RESET
+SET
+{"state": "failed", "reason": "AUTH_REJECTED"}
+RESET
+SET
+NOTICE:  PASS: checked self-profile cannot take pending Staff alias; only protected definitive failure releases it, stable Auth identity preserved.
 DO
 ROLLBACK
 RUN backend/tests/lifecycle.sql
@@ -217,7 +236,7 @@ BEGIN
 INSERT 0 1
 INSERT 0 1
 10000000-0000-4000-8000-000000000001
-{"aal": "aal2", "iat": 1793678284.648787, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"aal": "aal2", "iat": 1793678810.634338, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 NOTICE:  PASS: adjusted charge, conversion/reservation retry, reserved POS protection, partial/final delivery, Owner expenses, report date/receipt/as-of definitions and minimal exact-once ordered Owner timeline
 DO
@@ -225,7 +244,7 @@ RESET
 INSERT 0 1
 INSERT 0 1
 10000000-0000-4000-8000-000000000002
-{"iat": 1793678284.666060, "session_id": "fed6c572-47d9-4371-886e-d7e30fd44ee5"}
+{"iat": 1793678810.653733, "session_id": "009de26c-1f22-46e6-858c-42ac920a6bf7"}
 SET
 NOTICE:  PASS: Staff retains operational order details without Owner timeline evidence
 DO
@@ -235,7 +254,7 @@ BEGIN
 INSERT 0 1
 INSERT 0 1
 10000000-0000-4000-8000-000000000001
-{"iat": 1793678284.672109, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"iat": 1793678810.660697, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 {"role": "owner", "active": true, "user_id": "10000000-0000-4000-8000-000000000001", "username": "owner.test", "full_name": "Synthetic Owner", "contact_number": "09000000001"}
 {"logged_out": true}
@@ -244,7 +263,7 @@ NOTICE:  PASS: revoked app session denied even with otherwise valid JWT claims
 DO
 RESET
 DO
-{"iat": 1793678284.674354, "session_id": "20000000-0000-4000-8000-000000000002"}
+{"iat": 1793678810.663168, "session_id": "20000000-0000-4000-8000-000000000002"}
 SET
 {"role": "owner", "active": true, "user_id": "10000000-0000-4000-8000-000000000001", "username": "owner.test", "full_name": "Synthetic Owner", "contact_number": "09000000001"}
 RESET
@@ -260,7 +279,7 @@ BEGIN
 INSERT 0 2
 INSERT 0 2
 10000000-0000-4000-8000-000000000002
-{"aal": "aal1", "iat": 1793678284.679617, "session_id": "20000000-0000-4000-8000-000000000002"}
+{"aal": "aal1", "iat": 1793678810.669544, "session_id": "20000000-0000-4000-8000-000000000002"}
 SET
 NOTICE:  PASS: Staff own-profile username edit preserves Auth ID/transaction recorder; target/role/activation changes denied.
 DO
@@ -273,7 +292,7 @@ INSERT 0 1
 INSERT 0 1
 UPDATE 1
 10000000-0000-4000-8000-000000000001
-{"iat": 1793678284.689983, "session_id": "401f3fd6-46e0-4a5b-96e0-4c5d7b3376b7"}
+{"iat": 1793678810.682949, "session_id": "8bdc43be-a4b9-4660-a75b-18690fc92442"}
 SET
 NOTICE:  PASS: explicit zero-cash credit, own-customer/global named credit lookup, exact overpayment feedback, recorder and exact-once selected receipt.
 DO
@@ -286,7 +305,7 @@ INSERT 0 1
 INSERT 0 1
 UPDATE 1
 10000000-0000-4000-8000-000000000001
-{"iat": 1793678284.704305, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"iat": 1793678810.699914, "session_id": "20000000-0000-4000-8000-000000000001"}
 NOTICE:  PASS: missing order reservation rejects despite ample physical/unreserved/other-order stock; failed save preserves stock and other reservation; overdelivery denied.
 DO
 ROLLBACK
@@ -295,7 +314,7 @@ BEGIN
 INSERT 0 2
 INSERT 0 2
 10000000-0000-4000-8000-000000000002
-{"aal": "aal1", "iat": 1793678284.720560, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"aal": "aal1", "iat": 1793678810.719516, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 NOTICE:  PASS: retry equality, payload conflict, exact phone validation, Staff expense and administration denial
 DO
@@ -310,10 +329,10 @@ BEGIN
 INSERT 0 1
 INSERT 0 1
 10000000-0000-4000-8000-000000000001
-{"iat": 1793678284.729711, "session_id": "20000000-0000-4000-8000-000000000001"}
+{"iat": 1793678810.730045, "session_id": "20000000-0000-4000-8000-000000000001"}
 SET
 NOTICE:  PASS: UTF8 expense 500/501 code point boundary
 DO
 ROLLBACK
-PASS: 4 ordered migrations and 13 rollback fixtures.
+PASS: 4 ordered migrations and 14 rollback fixtures.
 DROP DATABASE

@@ -19,6 +19,8 @@ adb -s emulator-5554 install -r -t app/build/outputs/apk/androidTest/debug/app-d
 adb -s emulator-5554 shell am instrument -w -r -e class com.aquaquenchers.bms.SignInDeviceTest,com.aquaquenchers.classifier.ClassifierParityDeviceTest com.aquaquenchers.bms.test/androidx.test.runner.AndroidJUnitRunner
 ```
 
+Reusable runner: `python3 admin/tests/android_runtime.py` checks the expected AVD before replacing APKs, verifies asset isolation and refuses zero/failed test success.
+
 Actual result: `OK (2 tests)`, evidence/android-api29-instrumentation.log. Sign-in test verifies missing fields and absence of protected navigation. Parity test verifies8 synthetic Python golden cases: tokens/TFIDF/7-class scores within1e-6 and status/category/reason; synthetic package rejected for release loading. APK inspection confirms golden.json/synthetic-model.json only in instrumentation APK. No station data is bundled or quality/performance claimed.
 
 The separate `ClassifierDeviceBenchmark` deliberately requires an approved release model and explicit declared `owner_tablet_id`; it was NOT RUN here. Connected saves, managed Auth/MFA, full screen/rotation/network/PDF flows, Figma fidelity and physical-device gates still require their documented prerequisites.

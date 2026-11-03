@@ -1,5 +1,5 @@
 """Real multi-connection last-gallon test on an explicitly isolated local database."""
-import concurrent.futures,os,pathlib,subprocess,uuid,json
+import concurrent.futures,os,pathlib,subprocess,uuid,json,threading
 root=pathlib.Path(__file__).resolve().parents[2]
 psql='/workspace/tooling/sysroot/usr/lib/postgresql/17/bin/psql'
 base=[psql,'-h','/workspace/tooling/pgtest','-p','55432','-v','ON_ERROR_STOP=1']
@@ -30,8 +30,9 @@ select public.aq_command('{{"operation":"create_sale","request_id":"{uuid.uuid4(
  r=run("select physical_filled||','||(select count(*) from aq_private.sales)||','||(select count(*) from aq_private.payments) from aq_private.inventory")
  assert r.returncode==0 and r.stdout.strip()=='0,1,1',(r.stdout,r.stderr)
  print('PASS: concurrent Owner/Staff sale of last gallon: one sale/receipt, one stock rejection, stock zero.')
- def shared_request(payload,actor=1):
-  sql="begin;select set_config('request.jwt.claim.sub','10000000-0000-4000-8000-00000000000"+str(actor)+"',true);select set_config('request.jwt.claims',jsonb_build_object('session_id','"+str(uuid.uuid4())+"','iat',extract(epoch from clock_timestamp()))::text,true);set local role authenticated;select public.aq_command('"+json.dumps(payload).replace("'","''")+"'::jsonb);commit;"
+ def shared_request(payload,actor=1,method="aq_command",aal="aal1"):
+  assert method in ("aq_command","aq_admin_prepare_staff") and aal in ("aal1","aal2")
+  sql="begin;select set_config('request.jwt.claim.sub','10000000-0000-4000-8000-00000000000"+str(actor)+"',true);select set_config('request.jwt.claims',jsonb_build_object('session_id','"+str(uuid.uuid4())+"','iat',extract(epoch from clock_timestamp()),'aal','"+aal+"')::text,true);set local role authenticated;select public."+method+"('"+json.dumps(payload).replace("'","''")+"'::jsonb);commit;"
   return run(sql)
  r=run('update aq_private.inventory set physical_filled=1;');assert r.returncode==0,r.stderr
  payload=dict(operation='create_sale',request_id=str(uuid.uuid4()),customer_name='Synthetic concurrent retry',quantity=1,cash_centavos=3500)
@@ -95,6 +96,20 @@ select public.aq_command('{{"operation":"create_sale","request_id":"{uuid.uuid4(
  assert pos.returncode!=0 and 'Not enough filled gallons.' in pos.stderr,pos.stderr
  assert state()==dict(physical=0,reserved=0,delivered=8,deliveries=3,sales=3,payments=3),state()
  print('PASS: competing POS cannot consume reserved stock before/after final delivery; no extra sale/receipt, all reservations reconciled.')
+ # Pending account aliases and ordinary self-profile edits use the same lock.
+ before_alias=state();gate=threading.Barrier(2)
+ rename=dict(operation='update_profile',request_id=str(uuid.uuid4()),username='race.alias',full_name='Synthetic Staff',contact_number='09000000002')
+ prepare=dict(operation='create',request_id=str(uuid.uuid4()),payload_hash='d'*64,username='race.alias',full_name='Synthetic New Staff',contact_number='09000000003',active=True)
+ def compete_alias(args):gate.wait(timeout=10);return shared_request(*args)
+ with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
+  outcomes=list(pool.map(compete_alias,[(rename,2,'aq_command','aal1'),(prepare,1,'aq_admin_prepare_staff','aal2')]))
+ assert sum(r.returncode==0 for r in outcomes)==1,[r.stderr for r in outcomes]
+ assert any('Username already exists.' in r.stderr for r in outcomes),[r.stderr for r in outcomes]
+ result=run("select (select count(*) from aq_private.profiles where username='race.alias')+(select count(*) from aq_private.account_operations where state='pending' and payload->>'username'='race.alias');")
+ assert result.returncode==0 and result.stdout.strip()=='1',(result.stdout,result.stderr)
+ assert state()==before_alias,'Identity race changed financial state'
+ print('PASS: concurrent Staff self-profile rename versus Owner AAL2 account preparation has exactly one alias owner/reservation; loser rejected, financial state unchanged (JWT stubs).')
+
 
 finally:
  r=run(f'drop database {database}',db='postgres');assert r.returncode==0,r.stderr

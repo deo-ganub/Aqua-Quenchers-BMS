@@ -2806,6 +2806,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2860,6 +2866,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2914,6 +2926,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2968,6 +2986,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3022,6 +3046,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3076,6 +3106,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3130,6 +3166,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3184,6 +3226,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3238,6 +3286,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3292,6 +3346,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3346,6 +3406,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3400,6 +3466,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Definitive failure/pending/completed account preparation safeguards; managed integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5603,6 +5675,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Own-profile identity/link/permission subset; device/password integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5649,6 +5727,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Own-profile identity/link/permission subset; device/password integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5695,6 +5779,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Own-profile identity/link/permission subset; device/password integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5741,6 +5831,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Own-profile identity/link/permission subset; device/password integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5787,6 +5883,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Own-profile identity/link/permission subset; device/password integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5833,6 +5935,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Own-profile identity/link/permission subset; device/password integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5879,6 +5987,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Own-profile identity/link/permission subset; device/password integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5925,6 +6039,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Own-profile identity/link/permission subset; device/password integration not run."
+      },
+      {
+        "path": "backend/tests/identity_alias_guard.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Reserved alias/definitive-release/identity preservation pass; real managed Auth/MFA not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."

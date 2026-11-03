@@ -136,7 +136,7 @@ begin
  select to_jsonb(p) into old_value from aq_private.profiles p where user_id=target and role='staff' for update;
  if not found then raise exception using errcode='42501',message='Staff account unavailable.';end if;
  if p_request->>'operation'='update' then
-  if exists(select 1 from aq_private.account_operations where state='pending' and payload->>'username'=p_request->>'username') then raise exception using errcode='23505',message='Username already exists.';end if;
+  if exists(select 1 from aq_private.profiles where username=p_request->>'username' and user_id<>target) or exists(select 1 from aq_private.account_operations where state='pending' and payload->>'username'=p_request->>'username') then raise exception using errcode='23505',message='Username already exists.';end if;
   update aq_private.profiles set username=p_request->>'username',full_name=p_request->>'full_name',contact_number=p_request->>'contact_number',active=coalesce((p_request->>'active')::boolean,active),updated_at=clock_timestamp() where user_id=target returning to_jsonb(profiles) into v_result;
  else
   update aq_private.profiles set active=(p_request->>'active')::boolean,updated_at=clock_timestamp() where user_id=target returning to_jsonb(profiles) into v_result;
@@ -172,3 +172,15 @@ begin
 end $$;
 revoke all on function public.aq_admin_fail_staff(uuid,text) from public,anon,authenticated;
 grant execute on function public.aq_admin_fail_staff(uuid,text) to service_role;
+
+-- Share the account lock with checked self-profile edits; a pending creation owns
+-- its alias until it completes or is definitively failed by the protected path.
+create or replace function aq_private.require_available_username(p_username text,p_user_id uuid) returns void language plpgsql set search_path='' as $$
+begin
+ perform pg_advisory_xact_lock(3841952);
+ if exists(select 1 from aq_private.profiles where username=p_username and user_id<>p_user_id)
+ or exists(select 1 from aq_private.account_operations where state='pending' and payload->>'username'=p_username) then
+  raise exception 'Username already exists.';
+ end if;
+end $$;
+revoke all on function aq_private.require_available_username(text,uuid) from public,anon,authenticated,service_role;

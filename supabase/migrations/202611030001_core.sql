@@ -135,6 +135,12 @@ begin
  end if;
  return a;
 end $$;
+-- Identity administration extends this check with pending aliases in migration3.
+create function aq_private.require_available_username(p_username text,p_user_id uuid) returns void language plpgsql set search_path='' as $$
+begin
+ perform pg_advisory_xact_lock(3841952);
+ if exists(select 1 from aq_private.profiles where username=p_username and user_id<>p_user_id) then raise exception 'Username already exists.';end if;
+end $$;
 create function aq_private.require_keys(p jsonb,p_allowed text[]) returns void language plpgsql set search_path='' as $$
 declare k text; begin
  if p is null or jsonb_typeof(p)<>'object' then raise exception 'Invalid request.'; end if;
@@ -329,7 +335,7 @@ begin
   if coalesce(length(btrim(p_request->>'full_name')),0)=0 then raise exception 'Complete the required fields.'; end if;
   if coalesce(p_request->>'contact_number','') !~ '^[0-9]{11}$' then raise exception 'Please enter a valid contact number. Use 11 digits.'; end if;
   if lower(btrim(coalesce(p_request->>'username',''))) !~ '^[a-z0-9][a-z0-9_.-]{2,39}$' then raise exception 'Enter a valid username.'; end if;
-  if exists(select 1 from aq_private.profiles where username=lower(btrim(p_request->>'username')) and user_id<>a) then raise exception 'Username already exists.'; end if;
+  perform aq_private.require_available_username(lower(btrim(p_request->>'username')),a);
   id:=a; select to_jsonb(p)-'created_at'-'updated_at' into before_state from aq_private.profiles p where user_id=a;
   update aq_private.profiles set full_name=btrim(p_request->>'full_name'),contact_number=replace(p_request->>'contact_number',' ',''),username=lower(btrim(p_request->>'username')),updated_at=clock_timestamp() where user_id=a;
   result:=public.aq_me();

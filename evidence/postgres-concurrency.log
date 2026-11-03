@@ -4,3 +4,4 @@ PASS: same-key/different-payload concurrent conflict has one sale/receipt effect
 PASS: concurrent Owner/Staff partial deliveries cannot overdeliver; remaining2 and other-order3 stay reserved.
 PASS: identical concurrent final-delivery retry returns same result with exactly one new delivery and stock effect.
 PASS: competing POS cannot consume reserved stock before/after final delivery; no extra sale/receipt, all reservations reconciled.
+PASS: concurrent Staff self-profile rename versus Owner AAL2 account preparation has exactly one alias owner/reservation; loser rejected, financial state unchanged (JWT stubs).

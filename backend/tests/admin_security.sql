@@ -13,9 +13,11 @@ end $$;
 reset role;
 select set_config('request.jwt.claims',jsonb_build_object('session_id','20000000-0000-4000-8000-000000000001','iat',extract(epoch from clock_timestamp()),'aal','aal2')::text,true);
 set local role authenticated;
-do $$declare r jsonb;begin
+do $$declare r jsonb;denied boolean;begin
  r:=public.aq_admin_update_staff(jsonb_build_object('operation','update','request_id',gen_random_uuid(),'payload_hash',repeat('b',64),'user_id','10000000-0000-4000-8000-000000000002','username','renamed.staff','full_name','Renamed Synthetic','contact_number','09000000002','active',true));
  if r->>'user_id'<>'10000000-0000-4000-8000-000000000002' or r->>'username'<>'renamed.staff' or r->>'role'<>'staff' then raise exception 'Identity/role not preserved';end if;
+ denied:=false;begin perform public.aq_admin_update_staff(jsonb_build_object('operation','update','request_id',gen_random_uuid(),'payload_hash',repeat('c',64),'user_id','10000000-0000-4000-8000-000000000002','username','owner.test','full_name','Synthetic Staff','contact_number','09000000002','active',true));exception when unique_violation then if sqlerrm='Username already exists.' then denied:=true;else raise;end if;end;
+ if not denied then raise exception 'Staff rename took another username or returned wrong error';end if;
  raise notice 'PASS: AAL2 account rename preserves stable Auth identity and Staff role';
 end $$;
 reset role;

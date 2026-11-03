@@ -1,9 +1,11 @@
-LOCAL API29 X86_64 SOFTWARE EMULATOR ONLY; not declared-device performance, real-data quality or managed Auth proof.
+LOCAL SOFTWARE API29 ONLY; no real-data accuracy, managed Auth or declared-device performance evidence.
 ro.build.version.sdk=29
 ro.product.cpu.abi=x86_64
 sys.boot_completed=1
+app/build/outputs/apk/debug/app-debug.apk: synthetic fixture assets=0
 Performing Streamed Install
 Success
+app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk: synthetic fixture assets=2
 Performing Streamed Install
 Success
 INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.SignInDeviceTest
@@ -38,7 +40,7 @@ INSTRUMENTATION_STATUS: test=pythonGoldenVectorsMatchOnAndroid
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 8.439
+Time: 7.603
 
 OK (2 tests)
 
