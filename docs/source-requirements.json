@@ -3036,7 +3036,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 56,
     "text": "1. The system shall open the Walk-in counter-sale form, require a customer name and positive whole-number gallon quantity, and allow a sale without a saved profile; delivery details shall not be required.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / aq_command create_sale",
@@ -3070,9 +3070,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-07-AC2",
@@ -3081,7 +3111,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 57,
     "text": "2. The system shall reject missing name, invalid quantity or insufficient filled stock with the relevant correction, including \"Not enough filled gallons.\"; save nothing on rejection.\n\nPOS shall use only unreserved Filled available stock and atomically recheck it at save. Stock reserved for deliveries shall remain unavailable to Walk-in sales.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / aq_command create_sale",
@@ -3115,9 +3145,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-07-AC3",
@@ -3126,7 +3186,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 58,
     "text": "3. The system shall display Walk-in payment with customer name, product, purchased gallons, fixed unit price, total, cash received, change or remaining credit and the appropriate Complete Sale or Confirm credit action. The Owner form shall also display available/after-sale stock, recording account and Cancel. The system shall reject negative or nonnumeric cash before saving.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / aq_command create_sale",
@@ -3160,9 +3220,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-07-SCA",
@@ -3205,6 +3295,36 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3216,7 +3336,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 59,
     "text": "4. The system shall show change and Paid when cash covers the total; when cash is below the total show the remaining credit and a confirmation before saving it as credit.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / aq_command create_sale",
@@ -3250,9 +3370,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-07-SCB",
@@ -3295,6 +3445,36 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3306,7 +3486,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 60,
     "text": "5. The system shall set Partially Paid after confirmed credit with some cash, or Unpaid after confirmed credit with zero cash; Cancel shall return to the unchanged payment form without saving.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / aq_command create_sale",
@@ -3340,9 +3520,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-07-AC6",
@@ -3351,7 +3561,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 61,
     "text": "6. The system shall complete a sale once with a unique transaction reference, customer name, date/time and recording account, deduct sold gallons from filled stock once, and display a result with a return action.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / aq_command create_sale",
@@ -3385,9 +3595,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-08-AC1",
@@ -3396,7 +3636,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 65,
     "text": "1. The system shall find an Unpaid or Partially Paid order by customer or Order ID, or a named Walk-in credit by its transaction reference, and open Record Payment.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / aq_command record_payment",
@@ -3442,9 +3682,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-08-AC2",
@@ -3453,7 +3717,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 66,
     "text": "2. Upon opening Record Payment, the system shall display the linked customer and order/sale reference, original total, amount already paid, outstanding balance, Payment amount, Cash method, calculated remaining balance, resulting payment status and Save Payment. The Owner form shall additionally show date, generated-reference information, recording account and Cancel.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / aq_command record_payment",
@@ -3499,9 +3763,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-08-AC3",
@@ -3510,7 +3798,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 67,
     "text": "3. The system shall reject zero, negative, nonnumeric or above-balance amounts without saving; use \"Payment cannot exceed the [outstanding amount] balance.\" for overpayment and \"Enter an amount greater than zero and not above the balance.\" for invalid nonpositive input.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / aq_command record_payment",
@@ -3556,9 +3844,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-08-SCA",
@@ -3613,6 +3925,30 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3624,7 +3960,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 68,
     "text": "4. The system shall save a unique payment reference, date/time, amount and recording account and reduce the linked balance once.\n\nPayments shall use actual payment date in Asia/Manila and immutable encoding time. Completed records shall require Owner-approved audited administrative compensation for exceptional mistakes; there is no app void/delete feature in this baseline.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / aq_command record_payment",
@@ -3670,9 +4006,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-08-SCB",
@@ -3727,6 +4087,30 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3738,7 +4122,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 69,
     "text": "5. The system shall derive Unpaid when no payment has been made, Partially Paid when paid value is positive and balance remains, or Paid when balance is zero.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / aq_command record_payment",
@@ -3784,9 +4168,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-08-AC6",
@@ -3795,7 +4203,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 70,
     "text": "6. The system shall show \"Payment recorded\", the payment reference, related reference, amount, status and remaining balance, update related payment history, and provide Done to return.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / aq_command record_payment",
@@ -3841,9 +4249,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-09-AC1",
@@ -3852,7 +4284,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 74,
     "text": "1. Upon opening Add Expense, the system shall display required Date, Category and Amount greater than zero; optional Remarks limited to 500 Unicode characters; Suggest category, Recorded by, Cancel and Save Expense. A manually chosen category shall allow saving without remarks or a prediction.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
@@ -3913,9 +4345,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-backend-outage.log",
         "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional criterion passes actual native negative/boundary checks plus previously verified manual no-remarks save. Figma and declared-device gates remain separate."
   },
   {
     "id": "A-09-AC2",
@@ -3985,6 +4423,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-backend-outage.log",
         "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
       }
     ],
     "gap": "Reviewed release model/dataset required for actual released suggestion/apply acceptance. Synthetic math/state tests pass; do not ship a synthetic release model."
@@ -3996,7 +4440,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 76,
     "text": "3. The system shall reject missing Date/Category with \"Complete the required fields.\", invalid Amount with \"Enter a valid expense amount.\" and Remarks beyond 500 characters with \"Use 500 characters or fewer.\" Selecting Suggest category with blank remarks shall display \"Enter remarks to request a suggestion.\" without making remarks mandatory for manual entry.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
@@ -4057,9 +4501,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-backend-outage.log",
         "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional criterion passes actual native negative/boundary checks plus previously verified manual no-remarks save. Figma and declared-device gates remain separate."
   },
   {
     "id": "A-09-SCA",
@@ -4129,6 +4579,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-backend-outage.log",
         "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
       }
     ],
     "gap": "Reviewed release model/dataset required for actual released suggestion/apply acceptance. Synthetic math/state tests pass; do not ship a synthetic release model."
@@ -4140,7 +4596,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 77,
     "text": "4. The system shall preserve manual selection on uncertain/unknown input with \"No reliable suggestion. Choose a category manually.\" and model failure with \"Category suggestion unavailable. Choose a category manually.\" Editing Remarks shall invalidate the old result and show \"Remarks changed. Request a new suggestion or choose a category manually.\" Apply shall show \"Suggestion applied. Review before saving.\" Save Expense shall save only the Owner-confirmed category, dated amount, authenticated recorder, selection source and accepted model version where applicable, once; then show \"Expense saved.\" A correction shall not retrain the model automatically.",
-    "status": "In Progress",
+    "status": "Blocked",
     "implementation": [
       {
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
@@ -4201,9 +4657,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-backend-outage.log",
         "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Manual/model-unavailable paths and local controller fixture checks pass. Actual released-model uncertain/unknown, apply/override and remarks-edit/stale-result UI need Owner-reviewed frozen training data, trained/released model and its acceptance evidence; illustrative predictions are not production output."
   },
   {
     "id": "A-09-SCB",
@@ -4212,7 +4674,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 77,
     "text": "B. Validate required fields and preserve manual entry\nGiven the Owner is recording an expense\nWhen Date or Category is missing, or Amount is nonpositive/nonnumeric\nThen the system shall show the corresponding required/amount error and save nothing\nGiven Remarks is blank\nWhen the Owner selects Suggest category\nThen display \"Enter remarks to request a suggestion.\"\nWhen the Owner instead selects a fixed Category and saves otherwise valid details\nThen the system shall save the manual expense without requiring a prediction\nGiven Remarks exceeds 500 characters\nWhen the Owner requests a suggestion or saves\nThen display \"Use 500 characters or fewer.\" and retain the inputs without saving\n\nSample Data:\nMissing Category; Amount 0 or abc; blank Remarks with manually selected Fuel; boundary inputs of 500 and 501 Unicode characters. No classifier output is assumed.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
@@ -4273,9 +4735,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-backend-outage.log",
         "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional criterion passes actual native negative/boundary checks plus previously verified manual no-remarks save. Figma and declared-device gates remain separate."
   },
   {
     "id": "A-09-AC5",
@@ -4345,6 +4813,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-backend-outage.log",
         "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4356,7 +4830,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 78,
     "text": "C. Uncertain result, override, stale result or model failure\nGiven a result is uncertain or the words are unknown\nWhen Suggest category is selected\nThen display \"No reliable suggestion. Choose a category manually.\"\nGiven the model is missing, invalid or fails\nWhen a suggestion is requested\nThen display \"Category suggestion unavailable. Choose a category manually.\" and preserve manual entry\nGiven a proposed category is visible\nWhen the Owner chooses manually or edits Remarks\nThen the manual choice shall take priority, or the old result shall be invalidated with \"Remarks changed. Request a new suggestion or choose a category manually.\"\nWhen valid details and the reviewed category are saved\nThen the system shall retain the Owner-confirmed record without automatic retraining\nGiven a Staff account attempts expense access\nWhen the request reaches the backend\nThen access shall be denied without an expense change\n\nSample Data:\nAll UI fixtures: top score 0.43 for an ambiguous remark; unknown text \"zzzxq\"; unavailable model; suggested Supplies overridden to Maintenance; Remarks edited after a Fuel suggestion. These are test cases, not trained-model results.",
-    "status": "In Progress",
+    "status": "Blocked",
     "implementation": [
       {
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
@@ -4417,9 +4891,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-backend-outage.log",
         "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Manual/model-unavailable paths and local controller fixture checks pass. Actual released-model uncertain/unknown, apply/override and remarks-edit/stale-result UI need Owner-reviewed frozen training data, trained/released model and its acceptance evidence; illustrative predictions are not production output."
   },
   {
     "id": "A-10-AC1",
@@ -9307,7 +9787,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 56,
     "text": "1. The system shall open the Walk-in counter-sale form, require a customer name and positive whole-number gallon quantity, and allow a sale without a saved profile; delivery details shall not be required.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / create_sale",
@@ -9341,9 +9821,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-18-AC2",
@@ -9352,7 +9862,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 57,
     "text": "2. The system shall reject missing name, invalid quantity or insufficient filled stock with the relevant correction, including \"Not enough filled gallons.\"; save nothing on rejection.\n\nPOS shall use only unreserved Filled available stock and atomically recheck it at save. Stock reserved for deliveries shall remain unavailable to Walk-in sales.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / create_sale",
@@ -9386,9 +9896,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-18-AC3",
@@ -9397,7 +9937,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 58,
     "text": "3. The system shall display Walk-in payment with customer name, product, purchased gallons, fixed unit price, total, cash received, change or remaining credit and the appropriate Complete Sale or Confirm credit action. The Owner form shall also display available/after-sale stock, recording account and Cancel. The system shall reject negative or nonnumeric cash before saving.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / create_sale",
@@ -9431,9 +9971,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-18-SCA",
@@ -9476,6 +10046,36 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -9487,7 +10087,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 59,
     "text": "4. The system shall show change and Paid when cash covers the total; when cash is below the total show the remaining credit and a confirmation before saving it as credit.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / create_sale",
@@ -9521,9 +10121,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-18-SCB",
@@ -9566,6 +10196,36 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -9577,7 +10237,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 60,
     "text": "5. The system shall set Partially Paid after confirmed credit with some cash, or Unpaid after confirmed credit with zero cash; Cancel shall return to the unchanged payment form without saving.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / create_sale",
@@ -9611,9 +10271,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-18-AC6",
@@ -9622,7 +10312,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 61,
     "text": "6. The system shall complete a sale once with a unique transaction reference, customer name, date/time and recording account, deduct sold gallons from filled stock once, and display a result with a return action.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / create_sale",
@@ -9656,9 +10346,39 @@
         "status": "Verified subset",
         "evidence": "evidence/android-named-credit.log",
         "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/payment_history.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-19-AC1",
@@ -9667,7 +10387,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 65,
     "text": "1. The system shall find an Unpaid or Partially Paid order by customer or Order ID, or a named Walk-in credit by its transaction reference, and open Record Payment.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / record_payment",
@@ -9713,9 +10433,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-19-AC2",
@@ -9724,7 +10468,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 66,
     "text": "2. Upon opening Record Payment, the system shall display the linked customer and order/sale reference, original total, amount already paid, outstanding balance, Payment amount, Cash method, calculated remaining balance, resulting payment status and Save Payment. The Owner form shall additionally show date, generated-reference information, recording account and Cancel.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / record_payment",
@@ -9770,9 +10514,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-19-AC3",
@@ -9781,7 +10549,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 67,
     "text": "3. The system shall reject zero, negative, nonnumeric or above-balance amounts without saving; use \"Payment cannot exceed the [outstanding amount] balance.\" for overpayment and \"Enter an amount greater than zero and not above the balance.\" for invalid nonpositive input.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / record_payment",
@@ -9827,9 +10595,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-19-SCA",
@@ -9884,6 +10676,30 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -9895,7 +10711,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 68,
     "text": "4. The system shall save a unique payment reference, date/time, amount and recording account and reduce the linked balance once.\n\nPayments shall use actual payment date in Asia/Manila and immutable encoding time. Completed records shall require Owner-approved audited administrative compensation for exceptional mistakes; there is no app void/delete feature in this baseline.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / record_payment",
@@ -9941,9 +10757,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-19-SCB",
@@ -9998,6 +10838,30 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -10009,7 +10873,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 69,
     "text": "5. The system shall derive Unpaid when no payment has been made, Partially Paid when paid value is positive and balance remains, or Paid when balance is zero.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / record_payment",
@@ -10055,9 +10919,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-19-AC6",
@@ -10066,7 +10954,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 70,
     "text": "6. The system shall show \"Payment recorded\", the payment reference, related reference, amount, status and remaining balance, update related payment history, and provide Done to return.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / record_payment",
@@ -10112,9 +11000,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-payment-history.log; evidence/android-payment-history-owner.log",
         "limit": "Actual Owner/Staff local synthetic services/API29 name/reference/empty/Back history checks; not full design/device/hosted acceptance."
+      },
+      {
+        "path": "admin/tests/partial_cash.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-partial-cash-staff.log; evidence/android-partial-cash-owner.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/named_credit.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "backend/tests/concurrency.py",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-concurrency.log",
+        "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
   },
   {
     "id": "A-20-AC1",

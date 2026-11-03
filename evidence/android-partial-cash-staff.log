@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.PartialCashDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.PartialCashDeviceTest:
+INSTRUMENTATION_STATUS: test=actualSomeCashCreditThenFinalReceiptSettlesExactlyOnce
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.PartialCashDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=actualSomeCashCreditThenFinalReceiptSettlesExactlyOnce
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 27.687
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: actual staff nonnumeric cash/credit Cancel no effects;1000centavo initial cash on3500sale yields Partially Paid/balance2500, then actual final2500receipt yields Paid/0 and history2unique refs. Exactly1sale/2receipts,3500charge+cash+net/stock-1, other balances/expenses/empty/reservations/all other records/Auth identities unchanged. Server receipt dates/actors exact; intent completed, no blind replay.
