@@ -868,6 +868,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -919,6 +925,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -930,7 +942,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 21,
     "text": "3. The system shall validate an 11-digit contact number and show \"Please enter a valid contact number. Use 11 digits.\" for invalid input. Display spacing shall not count as digits.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / aq_command create_customer,update_customer",
@@ -970,9 +982,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "No functional gap for eleven-digit contact validation/display-space normalization under actual local API29 checks and existing RulesTest. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-03-SCA",
@@ -1021,6 +1039,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1072,6 +1096,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1123,6 +1153,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1174,6 +1210,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1225,6 +1267,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6059,6 +6107,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6110,6 +6164,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6121,7 +6181,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 21,
     "text": "3. The system shall validate an 11-digit contact number and show \"Please enter a valid contact number. Use 11 digits.\" for invalid input. Display spacing shall not count as digits.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / create_customer,update_customer",
@@ -6161,9 +6221,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "No functional gap for eleven-digit contact validation/display-space normalization under actual local API29 checks and existing RulesTest. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-14-SCA",
@@ -6212,6 +6278,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6263,6 +6335,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6314,6 +6392,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6365,6 +6449,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6416,6 +6506,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit.log",
         "limit": "Actual Staff cancelled/required/type/invalid/duplicate profile edits unchanged; same ID/contact after rotation/name/address/Household edit. Exact all financial/stock records and old30-peso order/payment retained; new35-peso order preview cancelled, customer count unchanged."
+      },
+      {
+        "path": "admin/tests/customer_form.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
+        "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
