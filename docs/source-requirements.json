@@ -67,6 +67,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -139,6 +151,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -211,6 +235,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -283,6 +319,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -355,6 +403,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -427,6 +487,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -499,6 +571,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3569,6 +3653,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-cancel.log",
         "limit": "Actual DocumentsUI Back cancellation clears pending PDF, retains preview through rotation, no false success; exact protected financial/inventory snapshots unchanged. Cold-boot SystemUI ANR resolved using Wait;3failed attempts preserved."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PdfCancellationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-output-failure.log",
+        "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3580,7 +3670,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 83,
     "text": "2. The system shall reject end dates before start dates with \"The end date cannot be earlier than the start date.\" and preserve the previous report.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
@@ -3621,9 +3711,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-cancel.log",
         "limit": "Actual DocumentsUI Back cancellation clears pending PDF, retains preview through rotation, no false success; exact protected financial/inventory snapshots unchanged. Cold-boot SystemUI ANR resolved using Wait;3failed attempts preserved."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PdfCancellationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-output-failure.log",
+        "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Actual reversed-period error preserves prior valid report, corrected dates generate valid summary, exact protected financial snapshot unchanged. Design/declared-device gates tracked separately."
   },
   {
     "id": "A-10-AC3",
@@ -3673,6 +3769,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-cancel.log",
         "limit": "Actual DocumentsUI Back cancellation clears pending PDF, retains preview through rotation, no false success; exact protected financial/inventory snapshots unchanged. Cold-boot SystemUI ANR resolved using Wait;3failed attempts preserved."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PdfCancellationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-output-failure.log",
+        "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3725,6 +3827,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-cancel.log",
         "limit": "Actual DocumentsUI Back cancellation clears pending PDF, retains preview through rotation, no false success; exact protected financial/inventory snapshots unchanged. Cold-boot SystemUI ANR resolved using Wait;3failed attempts preserved."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PdfCancellationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-output-failure.log",
+        "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3777,6 +3885,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-cancel.log",
         "limit": "Actual DocumentsUI Back cancellation clears pending PDF, retains preview through rotation, no false success; exact protected financial/inventory snapshots unchanged. Cold-boot SystemUI ANR resolved using Wait;3failed attempts preserved."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PdfCancellationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-output-failure.log",
+        "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3788,7 +3902,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 85,
     "text": "B. Reject a reversed reporting period\nGiven the Owner is selecting a report period\nWhen End date is earlier than Start date and Generate Report is selected\nThen the system shall display \"The end date cannot be earlier than the start date.\"\nThen the system shall retain the previous valid report without generating a replacement\nWhen the dates are corrected and Generate Report is selected\nThen the system shall generate the summary for the valid period.\n\nSample Data:\nInvalid period: start 15 Oct 2026, end 01 Oct 2026.\nValid period: start 01 Oct 2026, end 15 Oct 2026.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
@@ -3829,9 +3943,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-cancel.log",
         "limit": "Actual DocumentsUI Back cancellation clears pending PDF, retains preview through rotation, no false success; exact protected financial/inventory snapshots unchanged. Cold-boot SystemUI ANR resolved using Wait;3failed attempts preserved."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PdfCancellationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-output-failure.log",
+        "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Actual reversed-period error preserves prior valid report, corrected dates generate valid summary, exact protected financial snapshot unchanged. Design/declared-device gates tracked separately."
   },
   {
     "id": "A-10-AC5",
@@ -3881,6 +4001,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-cancel.log",
         "limit": "Actual DocumentsUI Back cancellation clears pending PDF, retains preview through rotation, no false success; exact protected financial/inventory snapshots unchanged. Cold-boot SystemUI ANR resolved using Wait;3failed attempts preserved."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PdfCancellationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-output-failure.log",
+        "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4817,6 +4943,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4889,6 +5027,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4961,6 +5111,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5033,6 +5195,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5105,6 +5279,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5177,6 +5363,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5249,6 +5447,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-login-rate-fixed.log",
         "limit": "Real blocked local login429 gives availability feedback, retains username, navigation0. Does not reset limits or verify hosted policy."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5282,6 +5492,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5293,7 +5515,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 13,
     "text": "2. The system shall display Orders, For pickup, Ready to deliver and Pending gallons using the current work records.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / aq_query home",
@@ -5315,9 +5537,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "No remaining functional gap for this criterion under tested local API29 environment. Figma fidelity/declared-device and hosted operational gates are tracked separately; this does not mark full A13 or product acceptance complete."
   },
   {
     "id": "A-13-AC3",
@@ -5348,6 +5582,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5381,6 +5627,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5392,7 +5650,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 15,
     "text": "B. Keep the Staff dashboard within the assigned role\nGiven the signed-in account has the Staff role\nWhen the Staff member uses Home or its work shortcuts\nThen the system shall display only the permitted operational functions\nWhen Owner-only financial, expense or account-management functions are requested\nThen the system shall deny those operations and retain the Staff workspace.\n\nSample Data:\nStaff account: ana.mendoza.\nRestricted destinations: Owner financial reports, Expenses and other-user account management.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / aq_query home",
@@ -5414,9 +5672,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Staff counters/queue shortcuts/empty states/order-POS-cancel; reports/expenses/account-list403 preserve revalidated active same-ID Staff workspace; real account mutation403; all business/profile snapshots unchanged."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/DeniedSessionDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "No remaining functional gap for this criterion under tested local API29 environment. Figma fidelity/declared-device and hosted operational gates are tracked separately; this does not mark full A13 or product acceptance complete."
   },
   {
     "id": "A-14-AC1",

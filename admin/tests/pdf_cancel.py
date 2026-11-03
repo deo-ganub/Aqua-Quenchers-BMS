@@ -1,5 +1,6 @@
 """Real native DocumentsUI cancellation; read-only financial reconciliation."""
 import json
+import argparse
 import shlex
 import ssl
 import urllib.request
@@ -7,6 +8,9 @@ from connected_android import LOCAL, REPO, PACKAGE, adb
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output-failure', action='store_true')
+    output_failure = parser.parse_args().output_failure
     c = json.loads((LOCAL / 'private-config.json').read_text())
     assert c['kind'] == 'SYNTHETIC_LOCAL_INTEGRATION_ONLY' and c['url'] == 'https://127.0.0.1:55436'
     assert adb('emu', 'avd', 'name').stdout.decode().splitlines()[0] == 'aq_api29_software'
@@ -28,15 +32,16 @@ def main():
     fixture = json.loads((LOCAL / 'financial-fixture.json').read_text())
     assert fixture['kind'] == 'SYNTHETIC_LOCAL_FINANCIAL_READ_UI'
     adb('shell', 'run-as', PACKAGE, 'sh', '-c', shlex.quote('umask 077; cat > files/financial-test-credentials.json'), input=json.dumps(fixture).encode())
-    result = adb('shell', 'am', 'instrument', '-w', '-r', '-e', 'class', PACKAGE + '.PdfCancellationDeviceTest', PACKAGE + '.test/androidx.test.runner.AndroidJUnitRunner', timeout=240)
+    result = adb('shell', 'am', 'instrument', '-w', '-r', '-e', 'class', PACKAGE + '.PdfCancellationDeviceTest#' + ('controlledOutputFailureNeverAcknowledgesSave' if output_failure else 'realDocumentPickerCancelNeverAcknowledgesExport'), PACKAGE + '.test/androidx.test.runner.AndroidJUnitRunner', timeout=240)
     text = result.stdout.decode().replace(fixture['password'], '[private fixture withheld]')
-    evidence = REPO / 'evidence/android-pdf-cancel.log'
+    evidence = REPO / ('evidence/android-pdf-output-failure.log' if output_failure else 'evidence/android-pdf-cancel.log')
     evidence.write_text(text)
     assert 'OK (1 test)' in text, 'Inspect PDF cancellation evidence before retry'
     assert snapshot() == before, 'Financial/inventory state changed'
     adb('shell', 'run-as', PACKAGE, 'rm', 'files/financial-test-credentials.json')
     with evidence.open('a') as log:
-        log.write('\nPASS: actual DocumentsUI cancellation clears pending PDF, retains preview through rotation, gives no false success; financial/inventory snapshots unchanged.\n')
+        log.write('\nControlled negative platform-result fixtures exercised for missing-output/denied-contacts URI; no successful output claimed.\n' if output_failure else '')
+        log.write('\nPASS: actual IOException/SecurityException mapped to export failure; retry payload retained then cancelled/cleared; no false success; financial/inventory snapshots unchanged.\n' if output_failure else '\nPASS: actual DocumentsUI cancellation clears pending PDF, retains preview through rotation, gives no false success; financial/inventory snapshots unchanged.\n')
     print('PASS: native SAF cancellation and exact financial/inventory reconciliation')
 
 
