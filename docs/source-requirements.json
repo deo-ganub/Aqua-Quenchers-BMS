@@ -3007,6 +3007,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-financial-history.log",
         "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/BackendOutageDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-backend-outage.log",
+        "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3073,6 +3079,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-financial-history.log",
         "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/BackendOutageDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-backend-outage.log",
+        "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
       }
     ],
     "gap": "Reviewed release model/dataset required for actual released suggestion/apply acceptance. Synthetic math/state tests pass; do not ship a synthetic release model."
@@ -3139,6 +3151,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-financial-history.log",
         "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/BackendOutageDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-backend-outage.log",
+        "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3205,6 +3223,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-financial-history.log",
         "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/BackendOutageDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-backend-outage.log",
+        "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
       }
     ],
     "gap": "Reviewed release model/dataset required for actual released suggestion/apply acceptance. Synthetic math/state tests pass; do not ship a synthetic release model."
@@ -3271,6 +3295,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-financial-history.log",
         "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/BackendOutageDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-backend-outage.log",
+        "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3337,6 +3367,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-financial-history.log",
         "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/BackendOutageDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-backend-outage.log",
+        "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3403,6 +3439,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-financial-history.log",
         "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/BackendOutageDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-backend-outage.log",
+        "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3469,6 +3511,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-financial-history.log",
         "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/BackendOutageDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-backend-outage.log",
+        "limit": "Actual owned gateway stop: native connection failure preserves inputs/no false save and SQL confirms0commits. Restart/rotation/retry saves exactly1expense1299; charges/receipts/inventory/reservations unchanged. No live service affected."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."

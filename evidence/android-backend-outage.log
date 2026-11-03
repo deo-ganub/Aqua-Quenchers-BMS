@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.BackendOutageDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.BackendOutageDeviceTest:
+INSTRUMENTATION_STATUS: test=unavailableBackendPreservesExpenseAndRetriesOnce
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.BackendOutageDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=unavailableBackendPreservesExpenseAndRetriesOnce
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 30.845
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: owned gateway really stopped; native connection failure preserved inputs/no false save, independent0commits; gateway restored without reset, rotation/retry created exactly1 expense1299, other financial/stock/reservations unchanged.
