@@ -216,9 +216,9 @@ begin
  perform pg_advisory_xact_lock(71420261103);
  if op in ('create_customer','update_customer') then
   perform aq_private.require_keys(p_request,array['operation','request_id','id','name','customer_type','contact_number','address']);
-  if coalesce(length(btrim(p_request->>'name')),0)=0 or coalesce(length(btrim(p_request->>'address')),0)=0 or coalesce(length(btrim(p_request->>'contact_number')),0)=0 or coalesce(length(btrim(p_request->>'customer_type')),0)=0 then raise exception 'Complete the required fields.'; end if;
+  if coalesce(length(btrim(p_request->>'name')),0)=0 or coalesce(length(btrim(p_request->>'address')),0)=0 or coalesce(length(btrim(p_request->>'contact_number')),0)=0 then raise exception 'Complete the required fields.'; end if;
   if coalesce(p_request->>'customer_type','') not in ('household','dealer','walk_in') then raise exception 'Choose Household, Dealer, or Walk-in.'; end if;
-  if (p_request->>'contact_number') !~ '^[0-9]{11}$' then raise exception 'Please enter a valid contact number. Use 11 digits.'; end if;
+  if replace(p_request->>'contact_number',' ','') !~ '^[0-9]{11}$' then raise exception 'Please enter a valid contact number. Use 11 digits.'; end if;
   id:=case when op='update_customer' then (p_request->>'id')::uuid else gen_random_uuid() end;
   if exists(select 1 from aq_private.customers where contact_number=replace(p_request->>'contact_number',' ','') and customers.id<>id) then raise exception 'Customer already exists.'; end if;
   if op='update_customer' then
@@ -364,6 +364,8 @@ create function public.aq_query(p_request jsonb) returns jsonb language plpgsql 
 declare a uuid:=aq_private.require_actor(); resource text:=p_request->>'resource'; items jsonb; result jsonb; id uuid; search text:=coalesce(p_request->>'search',''); start_date date; end_date date;
 begin
  perform aq_private.require_keys(p_request,array['resource','id','reference','search','customer_id','status','start_date','end_date','category','unpaid_only']);
+ start_date:=nullif(p_request->>'start_date','')::date;end_date:=nullif(p_request->>'end_date','')::date;
+ if end_date<start_date then raise exception 'The end date cannot be earlier than the start date.';end if;
  if resource='me' then return public.aq_me();
  elsif resource='customers' then
   select coalesce(jsonb_agg(aq_private.customer_json(c.id) order by c.name),'[]') into items from aq_private.customers c where c.name ilike '%'||search||'%' or c.contact_number like '%'||replace(search,' ','')||'%';
@@ -376,6 +378,7 @@ begin
  elsif resource='orders' then
   select coalesce(jsonb_agg(aq_private.order_json(o.id) order by created_at desc),'[]') into items from aq_private.orders o
   where (nullif(p_request->>'customer_id','') is null or customer_id=(p_request->>'customer_id')::uuid)
+  and (start_date is null or o.business_date>=start_date) and (end_date is null or o.business_date<=end_date)
   and (nullif(p_request->>'status','') is null or status=p_request->>'status')
   and (o.reference ilike '%'||search||'%' or o.customer_name ilike '%'||search||'%')
   and (coalesce(p_request->>'unpaid_only','false')<>'true' or aq_private.paid(o.id,null)<o.quantity::bigint*o.unit_price_centavos);
@@ -395,7 +398,8 @@ begin
  elsif resource='payments' then
   select coalesce(jsonb_agg(to_jsonb(p)||jsonb_build_object('invoice_reference',coalesce(o.reference,s.reference),'customer_name',coalesce(o.customer_name,s.customer_name),'recorded_by_name',pr.full_name) order by received_at desc),'[]') into items
   from aq_private.payments p left join aq_private.orders o on o.id=p.order_id left join aq_private.sales s on s.id=p.sale_id left join aq_private.profiles pr on pr.user_id=p.recorded_by
-  where (coalesce(o.reference,s.reference) ilike '%'||search||'%') and (nullif(p_request->>'customer_id','') is null or o.customer_id=(p_request->>'customer_id')::uuid or s.customer_id=(p_request->>'customer_id')::uuid);
+  where (coalesce(o.reference,s.reference) ilike '%'||search||'%') and (nullif(p_request->>'customer_id','') is null or o.customer_id=(p_request->>'customer_id')::uuid or s.customer_id=(p_request->>'customer_id')::uuid)
+  and (start_date is null or (p.received_at at time zone 'Asia/Manila')::date>=start_date) and (end_date is null or (p.received_at at time zone 'Asia/Manila')::date<=end_date);
  elsif resource in ('inventory','home') then
   result:=aq_private.stock_json();
   return result||jsonb_build_object('orders_count',(select count(*) from aq_private.orders where status<>'delivered'),'for_pickup_count',(select count(*) from aq_private.orders where status='for_pickup'),

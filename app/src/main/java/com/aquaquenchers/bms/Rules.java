@@ -28,6 +28,7 @@ public final class Rules {
     public static String timestamp(String encoded){if(encoded==null||encoded.isEmpty())return "Not available";try{return java.time.OffsetDateTime.parse(encoded).atZoneSameInstant(MANILA).format(java.time.format.DateTimeFormatter.ofPattern("dd MMM uuuu, h:mm a 'Asia/Manila'",Locale.ENGLISH));}catch(java.time.DateTimeException e){throw new IllegalArgumentException("The server returned an invalid timestamp.");}}
     public static String money(long cents) { return "₱" + BigDecimal.valueOf(cents,2).setScale(2).toPlainString(); }
     public static void contact(String s) { if (!s.matches("[0-9]{11}")) throw new IllegalArgumentException("Please enter a valid contact number. Use 11 digits."); }
+    public static String customerContact(String s) { String normalized=s==null?"":s.replace(" ","");contact(normalized);return normalized; }
     public static void remarks(String s) { if (s.codePointCount(0,s.length()) > 500) throw new IllegalArgumentException("Use 500 characters or fewer."); }
     public static void password(String s) { if (s.codePointCount(0,s.length()) < 15) throw new IllegalArgumentException("Use at least 15 characters."); }
     public static LocalDate date(String s) { try { return LocalDate.parse(s); } catch (Exception e) { throw new IllegalArgumentException("Enter a valid date (YYYY-MM-DD)."); } }

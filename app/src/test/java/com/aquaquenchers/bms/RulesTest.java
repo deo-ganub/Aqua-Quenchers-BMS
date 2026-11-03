@@ -2,6 +2,7 @@ package com.aquaquenchers.bms;
 import org.junit.Test;
 import static org.junit.Assert.*;
 public class RulesTest {
+ @Test public void customerDisplaySpacesDoNotChangeContactIdentity(){assertEquals("09175550188",Rules.customerContact("0917 555 0188"));assertEquals("09175550188",Rules.customerContact("09175550188"));for(String value:new String[]{"0917 555","0917-555-0188","0917 555 01888"})assertThrows(IllegalArgumentException.class,()->Rules.customerContact(value));}
  @Test public void confirmationIdentifiersMustBeCanonical(){assertTrue(Rules.uuid("10000000-0000-4000-8000-000000000001"));for(String value:new String[]{"","1-1-1-1-1","not saved"})assertFalse(Rules.uuid(value));assertFalse(Rules.uuid(null));}
  @Test public void exactMoneyAndPrices(){assertEquals(75000,Rules.centavos("750.00",false));assertEquals(3500,Rules.fixedPrice("household"));assertEquals(3000,Rules.fixedPrice("dealer"));assertEquals("₱0.01",Rules.money(1));assertEquals("Paid",Rules.paymentStatus(3500,3500));assertEquals("Partially Paid",Rules.paymentStatus(3500,1));assertEquals("Unpaid",Rules.paymentStatus(3500,0));assertEquals("Partially Paid",Rules.label("partially_paid"));assertEquals("Ready for Delivery",Rules.label("ready_for_delivery"));}
  @Test public void positiveWholeQuantity(){assertEquals(8,Rules.quantity("8"));for(String s:new String[]{"0","-1","1.5","abc","999999999999"})assertThrows(IllegalArgumentException.class,()->Rules.quantity(s));}

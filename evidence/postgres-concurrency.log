@@ -1,3 +1,6 @@
 PASS: concurrent Owner/Staff sale of last gallon: one sale/receipt, one stock rejection, stock zero.
 PASS: identical concurrent request returns same sale and creates one additional stock/receipt effect.
 PASS: same-key/different-payload concurrent conflict has one sale/receipt effect.
+PASS: concurrent Owner/Staff partial deliveries cannot overdeliver; remaining2 and other-order3 stay reserved.
+PASS: identical concurrent final-delivery retry returns same result with exactly one new delivery and stock effect.
+PASS: competing POS cannot consume reserved stock before/after final delivery; no extra sale/receipt, all reservations reconciled.

@@ -6,7 +6,7 @@ Complete Java/XML Android29+ BMS, Supabase Auth/PostgreSQL/RLS and offline Pytho
 Decisions: only Owner/Staff; fixed35/30 pesos and integer centavos/gallons; Manila business dates separate from immutable actual receipts; backend active role/session/MFA authority; atomic stock/reservations/payments and payload-hash idempotency. Classifier suggests only, manual entry available; no fake saves/metrics. Case-specific approved corrections require reviewed compensating migration, never general in-app reversals.
 
 ## Git / persistence
-Branch `work`; HEAD at checkpoint write `a157805` (parent baseline3561b67). Current coherent checkpoint commit being prepared; inspect git log/status for its final ID. Modified/untracked work is our ongoing native session/draft/contract fixes; core+identity+logout migrations; Auth handler/config/security docs/tests; classifier validation-policy/provenance tests; correction-preview/recovery tooling; source trace/docs and evidence. No unrelated initial changes existed. Private handoff/builds/local.properties/keys/dumps/venvs ignored; CODEX_PROMPT tracked. No push/deploy.
+Branch `work`; Source checkpoint `123be4c` (parents a157805/3561b67). Modified/untracked work is our ongoing native session/draft/contract fixes; core+identity+logout migrations; Auth handler/config/security docs/tests; classifier validation-policy/provenance tests; correction-preview/recovery tooling; source trace/docs and evidence. No unrelated initial changes existed. Private handoff/builds/local.properties/keys/dumps/venvs ignored; CODEX_PROMPT tracked. No push/deploy.
 
 ## Verified (component subsets, not full product acceptance)
 - Android combined `assembleDebug assembleDebugAndroidTest testDebugUnitTest lintDebug :classifier-java:selfTest`: PASS,6 domain tests,155 Java assertions (8 synthetic cross-language cases), lint0 errors/29 warnings. `evidence/android-final-build.log`; app/test APKs under app/build/outputs/apk. No device execution/Figma match.
@@ -17,9 +17,9 @@ Branch `work`; HEAD at checkpoint write `a157805` (parent baseline3561b67). Curr
 
 ## Implemented but unverified / current task
 Native operational/Owner/settings/MFA/PDF forms, dynamic selection by stable IDs, per-account/entity draft+request-key restoration, stale callback/dialog/executor cleanup, refresh/logout/revocation, canonical save acknowledgements, manual/suggestion Apply/override, report/PDF snapshots and Manila presentation compile/pass host checks. Full native UI/rotation/network/actual Auth flows and all160 source criteria remain In Progress; compilation is not runtime proof.
-Python/Java strict release provenance/trusted model loading and benchmark harness implemented. Prior synthetic timing report predates validation-policy changes; preserve as historical, generate a new fixture-only report after clean code checkpoint. Actual model/data/tablet gates Blocked.
+Python/Java strict release provenance/trusted model loading and benchmark harness implemented. New evidence/classifier-synthetic-timing-v2.json completed one warmup +5 fresh processes on clean123be4c (source_dirty=false), fixture-only median1.915s/range1.892–1.940s/peakRSS116269056bytes; not station data. Prior report preserved as historical. Actual model/data/tablet gates Blocked.
 Private backup schedule/export/age/monitor/conservative7-verified-day retention, privacy ledger and protected correction preview implemented. Actual hosted custody/restore/alerts/approved correction execution Blocked on concrete approvals/access. Restored-session invalidation runbook added; hosted managed invalidation NOT RUN.
-Exact task: finalize coherent code/evidence checkpoint; then refresh synthetic timing provenance and exercise concurrent deliveries against reservation/account invariants.
+Concurrent partial/final-delivery/retry/POS-reservation checks PASS (six cases, evidence/postgres-concurrency.log). Source review found customer display-space normalization/type-message and Owner date-history/status gaps; implementation now added, unverified. Current task: run new customer_history.sql against current4 migrations and affected Android build/tests/lint.
 
 ## Commands / runtime / external operations
 Latest: isolated Python psql orchestration applied sorted supabase/migrations/*.sql +11 fixtures (PASS); `python3 admin/tests/database_restore.py` with PG/age PATH (PASS after new fixture reconciliation). Outputs above. Reuse valid evidence; rerun only affected checks.
@@ -41,4 +41,4 @@ No uncertain external write/process pending. Docker healthy earlier; SupabaseCLI
 3. Continue source-criterion review of independent UI/state/API/error gaps;160 entries map partial evidence, none declared fully Verified from compilation. Update mappings as new checks pass.
 4. Reconcile reusable setup/start draft with final commands; preserve existing additive config. Hosted/device/Figma/real-data/custody work proceeds when prerequisites exist.
 
-NEXT_ACTION: commit verified current source/docs/evidence, then run fixture-only classifier benchmark to new evidence/classifier-synthetic-timing-v2.json with /workspace/tooling/aq-python/bin/python and PYTHONPATH=classifier.
+NEXT_ACTION: run current ordered migrations plus customer_history.sql regression and affected Android app/test APK/unit/lint checks; fix failures, then update source trace and checkpoint.

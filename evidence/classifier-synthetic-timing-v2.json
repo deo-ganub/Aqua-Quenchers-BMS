@@ -1,0 +1,378 @@
+{
+  "evidence_kind": "SYNTHETIC ONLY",
+  "warmup_processes": 1,
+  "fresh_timed_processes": 5,
+  "median_seconds": 1.9147427630014136,
+  "range_seconds": [
+    1.8918217370010098,
+    1.9396978899967507
+  ],
+  "peak_rss_bytes": 116269056,
+  "runs": [
+    {
+      "seconds": 1.9231071500034886,
+      "peak_rss_bytes": 116260864,
+      "primary_candidates": [
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.011679320734659
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0195630240486115
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0944523682956357
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6072291193554095
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6235594384356883
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.7777541737559458
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.22637403132435935
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.25963781651628154
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.5608122367749409
+        }
+      ],
+      "model_bytes": 5249
+    },
+    {
+      "seconds": 1.9075777460020618,
+      "peak_rss_bytes": 116269056,
+      "primary_candidates": [
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.011679320734659
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0195630240486115
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0944523682956357
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6072291193554095
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6235594384356883
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.7777541737559458
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.22637403132435935
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.25963781651628154
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.5608122367749409
+        }
+      ],
+      "model_bytes": 5249
+    },
+    {
+      "seconds": 1.8918217370010098,
+      "peak_rss_bytes": 116260864,
+      "primary_candidates": [
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.011679320734659
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0195630240486115
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0944523682956357
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6072291193554095
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6235594384356883
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.7777541737559458
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.22637403132435935
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.25963781651628154
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.5608122367749409
+        }
+      ],
+      "model_bytes": 5249
+    },
+    {
+      "seconds": 1.9147427630014136,
+      "peak_rss_bytes": 116264960,
+      "primary_candidates": [
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.011679320734659
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0195630240486115
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0944523682956357
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6072291193554095
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6235594384356883
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.7777541737559458
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.22637403132435935
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.25963781651628154
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.5608122367749409
+        }
+      ],
+      "model_bytes": 5249
+    },
+    {
+      "seconds": 1.9396978899967507,
+      "peak_rss_bytes": 116264960,
+      "primary_candidates": [
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.011679320734659
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0195630240486115
+        },
+        {
+          "learning_rate": 0.05,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 1.0944523682956357
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6072291193554095
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.6235594384356883
+        },
+        {
+          "learning_rate": 0.1,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.7777541737559458
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.0001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.22637403132435935
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.001,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.25963781651628154
+        },
+        {
+          "learning_rate": 0.3,
+          "lambda": 0.01,
+          "actual_epochs": 500,
+          "best_epoch": 500,
+          "validation_loss": 0.5608122367749409
+        }
+      ],
+      "model_bytes": 5249
+    }
+  ],
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "scikit_learn": "1.8.0",
+    "platform": "Linux-6.18.57-x86_64-with-glibc2.41",
+    "machine": "x86_64",
+    "processor": "",
+    "logical_cpus": 5,
+    "source_commit": "123be4ce0a01a746ecac3877eb025eeda95ab8e2",
+    "source_dirty": false,
+    "unicode_version": "15.0.0"
+  },
+  "device_benchmark": "NOT RUN",
+  "held_out_evaluation": "NOT RUN; timing is not independent accuracy evidence"
+}

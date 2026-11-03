@@ -99,6 +99,7 @@ public final class OperationsUi {
             for (int i = 0; i < rows.length(); i++) {
                 JSONObject c = rows.optJSONObject(i); if (c == null) continue;
                 line(results, c.optString("name") + " · " + title(c.optString("customer_type")) + "\n" + c.optString("contact_number") + "\nBalance " + host.money(balance(c)));
+                if(host.isOwner())line(results,"Status: Active");
                 host.button(results, "View customer", () -> customer(id(c)));
             }
         });
@@ -106,18 +107,35 @@ public final class OperationsUi {
     }
 
     public void customer(String customerId) {
-        LinearLayout p = page("Customer Profile");
+        LinearLayout p = page("Customer Profile",customerId);
         query("customer", json("id", customerId), response -> {
             JSONObject c = nested(response, "customer");
             line(p, c.optString("name") + "\n" + title(c.optString("customer_type")) + "\n" + c.optString("contact_number") + "\n" + c.optString("address"));
             line(p, "Outstanding balance: " + host.money(balance(c)));
+            if(host.isOwner())line(p,"Status: Active");
             host.button(p, "Edit Customer", () -> customerForm(c, null));
             host.button(p, "Create Order", () -> newOrder(customerId));
             host.button(p, "Record Payment", () -> payments(customerId));
-            line(p, "Order history and unpaid orders");
-            query("orders", json("customer_id", customerId), orders -> renderOrders(p, items(orders), false));
-            line(p, "Payment history");
-            query("payments", json("customer_id", customerId), payments -> renderReceipts(p, items(payments)));
+            EditText start=host.isOwner()?date(p,"History start date",""):null;
+            EditText end=host.isOwner()?date(p,"History end date",""):null;
+            LinearLayout orderRows=new LinearLayout(host);orderRows.setOrientation(LinearLayout.VERTICAL);
+            LinearLayout paymentRows=new LinearLayout(host);paymentRows.setOrientation(LinearLayout.VERTICAL);
+            long[] historyRequest={0};
+            Runnable history=()->valid(()->{
+                String from=start==null?"":value(start),to=end==null?"":value(end);
+                if(!from.isEmpty())Rules.date(from);if(!to.isEmpty())Rules.date(to);
+                if(!from.isEmpty()&&!to.isEmpty())Rules.period(from,to);
+                long requested=++historyRequest[0];
+                query("orders",json("customer_id",customerId,"start_date",from,"end_date",to),orders->{if(requested==historyRequest[0]){orderRows.removeAllViews();renderOrders(orderRows,items(orders),false);}});
+                query("payments",json("customer_id",customerId,"start_date",from,"end_date",to),payments->{if(requested==historyRequest[0]){paymentRows.removeAllViews();renderReceipts(paymentRows,items(payments));}});
+            });
+            if(host.isOwner()){
+                line(p,"Orders use business date; payments use receipt date in Asia/Manila. Blank dates show all history.");
+                host.button(p,"Apply history dates",history);
+                host.button(p,"Clear history dates",()->{start.setText("");end.setText("");history.run();});
+            }
+            line(p,"Order history and unpaid orders");p.addView(orderRows);
+            line(p,"Payment history");p.addView(paymentRows);history.run();
             host.button(p, "Back to Customers", this::customers);
         });
     }
@@ -133,10 +151,9 @@ public final class OperationsUi {
         EditText contact = host.input(p, "Contact number", existing == null ? "" : existing.optString("contact_number"), InputType.TYPE_CLASS_PHONE);
         EditText address = host.input(p, "Address", existing == null ? "" : existing.optString("address"), InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
         host.button(p, "Save Customer", () -> valid(() -> {
-            if (value(name).isEmpty() || value(contact).isEmpty() || value(address).isEmpty() || type.getSelectedItemPosition()==0) throw new IllegalArgumentException("Complete the required fields.");
+            if (value(name).isEmpty() || value(contact).isEmpty() || value(address).isEmpty()) throw new IllegalArgumentException("Complete the required fields.");
             if (type.getSelectedItemPosition() == 0) throw new IllegalArgumentException("Choose Household, Dealer, or Walk-in.");
-            String number = value(contact);
-            if (!number.matches("[0-9]{11}")) throw new IllegalArgumentException("Please enter a valid contact number. Use 11 digits.");
+            String number = Rules.customerContact(value(contact));
             String t = type.getSelectedItemPosition() == 1 ? "household" : type.getSelectedItemPosition() == 2 ? "dealer" : "walk_in";
             JSONObject fields = json("name", value(name), "customer_type", t, "contact_number", number, "address", value(address));
             if (existing != null) try { fields.put("id", id(existing)); } catch (Exception e) { throw new IllegalArgumentException("Unable to prepare customer."); }
