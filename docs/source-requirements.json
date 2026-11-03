@@ -828,7 +828,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 19,
     "text": "1. The system shall display the Add Customer form with Full name, Customer type, Contact number, Address and Save Customer. Customer type shall offer Household, Dealer and Walk-in. The Owner form shall also provide Cancel. Upon valid submission, the system shall save the profile and display its confirmation.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / aq_command create_customer,update_customer",
@@ -874,9 +874,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-customer-create.log",
+        "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-03-AC2",
@@ -885,7 +891,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 20,
     "text": "2. The system shall reject missing required customer details with \"Complete the required fields.\"; an unselected type shall show \"Choose Household, Dealer, or Walk-in.\"",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / aq_command create_customer,update_customer",
@@ -931,9 +937,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-customer-create.log",
+        "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-03-AC3",
@@ -988,6 +1000,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-customer-create.log",
+        "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
       }
     ],
     "gap": "No functional gap for eleven-digit contact validation/display-space normalization under actual local API29 checks and existing RulesTest. Design/declared-device/hosted gates separate."
@@ -1045,6 +1063,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-customer-create.log",
+        "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1102,6 +1126,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-customer-create.log",
+        "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1159,6 +1189,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-customer-create.log",
+        "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1216,6 +1252,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-customer-create.log",
+        "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1273,6 +1315,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-form.log; evidence/android-customer-form-owner.log",
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-customer-create.log",
+        "limit": "Actual Owner Dealer save, normalized display-spaced contact, saved list/profile and30peso price/2gallon60peso Order preview/Cancel. Exactly1new server UUID customer; all preexisting customers/financial/stock/profile/Auth identity/factor mappings unchanged. Persisted synthetic intent completed; do not repeat."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6139,7 +6187,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 19,
     "text": "1. The system shall display the Add Customer form with Full name, Customer type, Contact number, Address and Save Customer. Customer type shall offer Household, Dealer and Walk-in. The Owner form shall also provide Cancel. Upon valid submission, the system shall save the profile and display its confirmation.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / create_customer,update_customer",
@@ -6187,7 +6235,7 @@
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-14-AC2",
@@ -6196,7 +6244,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 20,
     "text": "2. The system shall reject missing required customer details with \"Complete the required fields.\"; an unselected type shall show \"Choose Household, Dealer, or Walk-in.\".",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / create_customer,update_customer",
@@ -6244,7 +6292,7 @@
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-14-AC3",
@@ -6367,7 +6415,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 22,
     "text": "4. The system shall reject a contact number belonging to another customer with \"Customer already exists.\"; allow the current customer to keep their own number when editing.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / create_customer,update_customer",
@@ -6415,7 +6463,7 @@
         "limit": "Actual Owner/Staff required details/type/name/address, invalid contacts, real duplicate rejection for all3types including display-spaced11digits, rotation/Cancel. Exact customer/financial/stock/profile records unchanged; no successful new customer creation claimed by these negative tests."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
   },
   {
     "id": "A-14-SCB",
