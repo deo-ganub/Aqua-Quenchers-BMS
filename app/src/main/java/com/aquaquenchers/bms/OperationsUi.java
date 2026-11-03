@@ -355,9 +355,10 @@ public final class OperationsUi {
     public void pos() {
         LinearLayout p = page("Walk-in Sale / POS");
         line(p, "Purified water · fixed price ₱35.00 per gallon. A saved customer profile is optional.");
+        if(host.isOwner())line(p,"Recording account: "+host.recorder());
         TextView inventory = liveLine(p, "Checking unreserved filled availability…");
-        final int[] available = {-1};
-        query("inventory", json(), response -> { JSONObject i = nested(response, "inventory"); available[0] = i.optInt("filled_available", i.optInt("available_filled", -1)); inventory.setText(available[0] < 0 ? "Availability will be checked by the server when saving." : "Filled available: " + available[0]); });
+        final long[] available = {-1};
+        query("inventory", json(), response -> { JSONObject i = nested(response, "inventory"); available[0] = i.optLong("filled_available", i.optLong("available_filled", -1)); inventory.setText(available[0] < 0 ? "Availability will be checked by the server when saving." : "Filled available: " + available[0]); });
         EditText name = host.input(p, "Customer name", "", TEXT);
         Spinner profile = host.select(p, "Saved customer (optional)", new String[]{"No saved profile"});List<JSONObject> customers = new ArrayList<>();String desiredProfile=host.choice("pos_customer");boolean[] profilesReady={false};
         query("customers", json(), response -> {
@@ -386,13 +387,13 @@ public final class OperationsUi {
             long total = Math.multiplyExact((long) q, 3500); int index = profile.getSelectedItemPosition() - 1;
             JSONObject payload = json("customer_name", value(name), "quantity", q, "cash_centavos", tendered, "confirm_credit", tendered < total);
             if (index >= 0 && index < customers.size()) try { payload.put("customer_id", id(customers.get(index))); } catch (Exception e) { throw new IllegalArgumentException("Unable to prepare sale."); }
-            String text = value(name) + "\n" + q + " gallons × ₱35.00\nTotal: " + host.money(total) + "\nCash: " + host.money(tendered) + "\nChange: " + host.money(Math.max(0, tendered - total)) + "\nRemaining credit: " + host.money(Math.max(0, total - tendered));
+            String text = value(name) + "\nPurified water\n" + q + " gallons × ₱35.00\nTotal: " + host.money(total) + "\nCash: " + host.money(tendered) + "\nChange: " + host.money(Math.max(0, tendered - total)) + "\nRemaining credit: " + host.money(Math.max(0, total - tendered))+"\nPayment status: "+(tendered>=total?"Paid":tendered>0?"Partially Paid":"Unpaid")+"\nRecorded by: "+host.recorder();
             host.showDialog(new AlertDialog.Builder(host).setTitle(tendered < total ? "Confirm credit" : "Walk-in payment").setMessage(text).setNegativeButton("Cancel", null).setPositiveButton(tendered < total ? "Confirm and save" : "Complete Sale", (dialog, which) -> host.command("create_sale", payload, saved -> saleResult(nested(saved, "sale")))).create());
         })); cancel(p, this::orders);
     }
     private void saleResult(JSONObject sale) {
         LinearLayout p = page("Sale saved",id(sale));
-        line(p, "Walk-in sale completed.\n" + sale.optString("reference") + "\nCustomer: " + sale.optString("customer_name") + "\nDate/time: " + host.timestamp(sale.optString("created_at")) + "\nTotal: " + host.money(sale.optLong("total_centavos")) + "\nPayment status: " + title(sale.optString("payment_status")) + "\nBalance: " + host.money(balance(sale)) + "\nKeep the transaction reference for later credit payments.");
+        line(p, "Walk-in sale completed.\n" + sale.optString("reference") + "\nCustomer: " + sale.optString("customer_name") + "\nDate/time: " + host.timestamp(sale.optString("created_at")) + "\nRecorded by: "+sale.optString("recorded_by_name",sale.optString("recorded_by"))+"\nTotal: " + host.money(sale.optLong("total_centavos")) + "\nPayment status: " + title(sale.optString("payment_status")) + "\nBalance: " + host.money(balance(sale)) + "\nKeep the transaction reference for later credit payments.");
         if (balance(sale) > 0) host.button(p, "Record Payment", () -> payment(sale, "sale"));
         host.button(p, "Done", this::orders);
     }
@@ -402,12 +403,14 @@ public final class OperationsUi {
         LinearLayout p = page("Payments",customerId==null?"":customerId);
         EditText search = host.input(p, "Find customer, Order ID or Walk-in credit reference", "", InputType.TYPE_CLASS_TEXT);
         line(p, "Select one unpaid or partially paid reference. Payments are recorded on the actual server receipt date.");
-        LinearLayout balances = new LinearLayout(host); balances.setOrientation(LinearLayout.VERTICAL); p.addView(balances);
+        line(p,"Unpaid and Partially Paid Orders");LinearLayout orderBalances=new LinearLayout(host);orderBalances.setOrientation(LinearLayout.VERTICAL);p.addView(orderBalances);
+        line(p,"Named Walk-in Credits");LinearLayout saleBalances=new LinearLayout(host);saleBalances.setOrientation(LinearLayout.VERTICAL);p.addView(saleBalances);
+        long[] searchRequest={0};
         Runnable load = () -> {
-            balances.removeAllViews();
+            long requested=++searchRequest[0];
             JSONObject filter = json("search", value(search)); if (customerId != null) try { filter.put("customer_id", customerId); } catch (Exception ignored) {}
-            query("orders", filter, response -> renderBalances(balances, items(response), "order"));
-            query("sales", filter, response -> renderBalances(balances, items(response), "sale"));
+            query("orders", filter, response -> {if(requested==searchRequest[0]){orderBalances.removeAllViews();renderBalances(orderBalances,items(response),"order");}});
+            query("sales", filter, response -> {if(requested==searchRequest[0]){saleBalances.removeAllViews();renderBalances(saleBalances,items(response),"sale");}});
         };
         host.button(p, "Search balances", load); load.run();
         host.button(p, "Payment history", () -> {
@@ -428,6 +431,7 @@ public final class OperationsUi {
     }
     private void payment(JSONObject target, String kind) {
         LinearLayout p = page("Record Payment",target.optString("reference")); long due = balance(target);
+        if(host.isOwner())line(p,"Today: "+host.today()+" (Asia/Manila)\nRecording account: "+host.recorder());
         line(p, target.optString("reference") + " · " + target.optString("customer_name") + "\nOriginal total: " + host.money(target.optLong("total_centavos")) + "\nAmount already paid: " + host.money(paid(target)) + "\nOutstanding balance: " + host.money(due) + "\nMethod: Cash\nReceipt date/time and reference are assigned by the server.");
         EditText amount = host.input(p, "Payment amount (₱)", "", CASH);
         TextView preview = liveLine(p, "Enter payment amount to review remaining balance.");
@@ -435,10 +439,11 @@ public final class OperationsUi {
         host.button(p, "Save Payment", () -> valid(() -> {
             long c = cents(amount, "Enter an amount greater than zero and not above the balance.");
             if (c <= 0) throw new IllegalArgumentException("Enter an amount greater than zero and not above the balance.");
-            if (c > due) throw new IllegalArgumentException("Enter an amount greater than zero and not above the balance.");
+            if (c > due) throw new IllegalArgumentException("Payment cannot exceed the "+host.money(due)+" balance.");
             host.command("record_payment", json("reference", target.optString("reference"), "amount_centavos", c), result -> {
                 JSONObject receipt = nested(result, "payment"); LinearLayout saved = page("Payment recorded");
                 line(saved, "Payment recorded.\nPayment reference: " + receipt.optString("reference") + "\nRelated reference: " + target.optString("reference") + "\nAmount: " + host.money(c) + "\nBalance: " + host.money(receipt.optLong("balance_centavos", due - c)) + "\nPayment status: " + title(receipt.optString("payment_status", due == c ? "paid" : "partially_paid")) + "\nReceipt time: " + host.timestamp(receipt.optString("received_at", receipt.optString("created_at"))));
+                line(saved,"Recorded by: "+receipt.optString("recorded_by_name",receipt.optString("recorded_by")));
                 host.button(saved, "Done", () -> { if (kind.equals("order")) order(id(target)); else payments(); });
             });
         })); cancel(p, () -> { if (kind.equals("order")) order(id(target)); else payments(); });

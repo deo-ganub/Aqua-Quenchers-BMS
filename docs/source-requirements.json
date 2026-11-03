@@ -1678,6 +1678,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1705,6 +1711,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1732,6 +1744,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1759,6 +1777,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1786,6 +1810,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1813,6 +1843,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1840,6 +1876,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1867,6 +1909,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1894,6 +1942,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1921,6 +1975,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1948,6 +2008,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -1975,6 +2041,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2002,6 +2074,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2029,6 +2107,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2056,6 +2140,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2083,6 +2173,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4960,6 +5056,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4987,6 +5089,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5014,6 +5122,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5041,6 +5155,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5068,6 +5188,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5095,6 +5221,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5122,6 +5254,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5149,6 +5287,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5176,6 +5320,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5203,6 +5353,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5230,6 +5386,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5257,6 +5419,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5284,6 +5452,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5311,6 +5485,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5338,6 +5518,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -5365,6 +5551,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "backend/tests/pos_payment_context.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/postgres-utf8.log",
+        "limit": "Local zero-cash credit/scoped lookup/overpayment/recorder/idempotent receipt and stock totals pass; full connected native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."

@@ -85,9 +85,10 @@ public final class MainActivity extends Activity {
     private String requestHash(String payload){try{String scoped=(state.profile==null?"":state.profile.optString("user_id"))+"/"+payload;byte[] bytes=java.security.MessageDigest.getInstance("SHA-256").digest(scoped.getBytes(java.nio.charset.StandardCharsets.UTF_8));StringBuilder hash=new StringBuilder();for(byte b:bytes)hash.append(String.format(java.util.Locale.ROOT,"%02x",b&255));return hash.toString();}catch(java.security.NoSuchAlgorithmException e){throw new IllegalStateException(e);}}
     private void busy(boolean yes){outstanding=Math.max(0,outstanding+(yes?1:-1));loading.setVisibility(outstanding>0?View.VISIBLE:View.GONE);}
     public void query(String resource,JSONObject fields,Consumer<JSONObject> success){
-        try{fields.put("resource",resource);}catch(JSONException e){error("Invalid query.");return;}
+        JSONObject request;
+        try{request=new JSONObject(fields.toString());request.put("resource",resource);}catch(JSONException e){error("Invalid query.");return;}
         int origin=screen;
-        rpc("aq_query",fields,result->{
+        rpc("aq_query",request,result->{
             if(origin!=screen)return;
             try{
                 boolean validRole="owner".equals(result.optString("role"))||"staff".equals(result.optString("role"));

@@ -308,9 +308,9 @@ begin
    if not found then raise exception 'Order or sale reference not found.'; end if;
    total:=s.quantity::bigint*s.unit_price_centavos; paid:=aq_private.paid(null,s.id);
   end if;
-  if cash>total-paid then raise exception 'Enter an amount greater than zero and not above the balance.'; end if;
+  if cash>total-paid then raise exception 'Payment cannot exceed the ₱% balance.',to_char((total-paid)::numeric/100,'FM999999999999990.00'); end if;
   insert into aq_private.payments(reference,order_id,sale_id,amount_centavos,recorded_by) values(aq_private.new_reference('PAY'),o.id,s.id,cash,a) returning payments.id into id;
-  select to_jsonb(p)||jsonb_build_object('invoice_reference',reference,'balance_centavos',total-paid-cash,'payment_status',aq_private.payment_status(total,paid+cash)) into result from aq_private.payments p where p.id=id;
+  select to_jsonb(p)||jsonb_build_object('invoice_reference',reference,'balance_centavos',total-paid-cash,'payment_status',aq_private.payment_status(total,paid+cash),'recorded_by_name',(select full_name from aq_private.profiles where user_id=a)) into result from aq_private.payments p where p.id=id;
  elsif op='create_expense' then
   perform aq_private.require_actor(true);
   perform aq_private.require_keys(p_request,array['operation','request_id','business_date','category','amount_centavos','remarks','selection_source','accepted_model_version']);
@@ -399,7 +399,8 @@ begin
    return result||jsonb_build_object('payments',(select coalesce(jsonb_agg(to_jsonb(p)||jsonb_build_object('recorded_by_name',pr.full_name) order by received_at desc),'[]') from aq_private.payments p left join aq_private.profiles pr on pr.user_id=p.recorded_by where p.sale_id=id));
   end if;
   select coalesce(jsonb_agg(aq_private.sale_json(s.id) order by created_at desc),'[]') into items from aq_private.sales s
-  where (s.reference ilike '%'||search||'%' or s.customer_name ilike '%'||search||'%') and (coalesce(p_request->>'unpaid_only','false')<>'true' or aq_private.paid(null,s.id)<s.quantity::bigint*s.unit_price_centavos);
+  where (s.reference ilike '%'||search||'%' or s.customer_name ilike '%'||search||'%') and (nullif(p_request->>'customer_id','') is null or s.customer_id=(p_request->>'customer_id')::uuid)
+  and (coalesce(p_request->>'unpaid_only','false')<>'true' or aq_private.paid(null,s.id)<s.quantity::bigint*s.unit_price_centavos);
  elsif resource='payments' then
   select coalesce(jsonb_agg(to_jsonb(p)||jsonb_build_object('invoice_reference',coalesce(o.reference,s.reference),'customer_name',coalesce(o.customer_name,s.customer_name),'recorded_by_name',pr.full_name) order by received_at desc),'[]') into items
   from aq_private.payments p left join aq_private.orders o on o.id=p.order_id left join aq_private.sales s on s.id=p.sale_id left join aq_private.profiles pr on pr.user_id=p.recorded_by
