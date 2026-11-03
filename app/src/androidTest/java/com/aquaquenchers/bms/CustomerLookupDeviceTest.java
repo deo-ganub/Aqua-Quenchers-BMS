@@ -60,6 +60,21 @@ public class CustomerLookupDeviceTest {
     private int receiptCount(View root){int count=root instanceof TextView&&!(root instanceof EditText)&&((TextView)root).getText().toString().contains("Related reference:")?1:0;if(root instanceof ViewGroup)for(int i=0;i<((ViewGroup)root).getChildCount();i++)count+=receiptCount(((ViewGroup)root).getChildAt(i));return count;}
     private int customers(View root){int n=root instanceof Button&&"View customer".contentEquals(((Button)root).getText())?1:0;if(root instanceof ViewGroup)for(int i=0;i<((ViewGroup)root).getChildCount();i++)n+=customers(((ViewGroup)root).getChildAt(i));return n;}
     private void lookup(String value){click("Customers");fill("Search by name or contact number",value);click("Search");await("one exact customer",()->ui(a->a.findViewById(R.id.loading).getVisibility()!=View.VISIBLE&&customers(a.getWindow().getDecorView())==1));}
+    private void verifyOrder(JSONObject o,boolean owner)throws Exception{
+        for(String key:new String[]{"reference","customer_name","contact_number","address"})assertTrue(hasText(o.getString(key)));
+        assertTrue(hasText(Rules.label(o.getString("customer_type"))));
+        assertTrue(hasText("Order date: "+o.getString("business_date")));
+        assertTrue(hasText("Recorded: "+Rules.timestamp(o.getString("created_at"))));
+        assertTrue(hasText("Recorded by: "+o.getString("recorded_by_name")));
+        String[] labels={"Original expected gallons","Adjusted order gallons","Picked up","Shortfall","Delivered","Pending","Reserved for this order"};String[] keys={"expected_quantity","quantity","collected_quantity","shortfall","delivered_quantity","pending_quantity","reserved_quantity"};for(int i=0;i<keys.length;i++)assertTrue(hasText(labels[i]+": "+o.optLong(keys[i])));
+        assertTrue(hasText("Status: "+Rules.label(o.getString("status"))));
+        for(String[] pair:new String[][]{{"Fixed unit price","unit_price_centavos"},{"Order total","total_centavos"},{"Amount paid","paid_centavos"},{"Balance","balance_centavos"}})assertTrue(hasText(pair[0]+": "+Rules.money(o.optLong(pair[1]))));
+        assertTrue(hasText("Payment status: "+Rules.label(o.getString("payment_status"))));assertEquals(o.optLong("balance_centavos")>0,hasButton("Record Payment"));
+        String stage=o.getString("status");for(String[] pair:new String[][]{{"For Pickup","ordered"},{"Resume For Pickup","rescheduled"},{"Record Pickup","for_pickup"},{"Reschedule Pickup","for_pickup"},{"Start Refilling","picked_up"},{"Ready for Delivery","refilling"}})assertEquals(stage.equals(pair[1]),hasButton(pair[0]));assertEquals(stage.equals("ready_for_delivery")||stage.equals("undelivered"),hasButton("Record Delivery"));
+        if(o.optInt("pending_quantity")>0){long days=Math.max(0,java.time.temporal.ChronoUnit.DAYS.between(java.time.LocalDate.parse(o.getString("business_date")),java.time.LocalDate.parse(fixture.getString("today"))));assertTrue(hasText("Waiting: "+days+" days since original order date"));}
+        assertEquals(owner,hasText("Order timeline"));if(owner){JSONArray timeline=o.getJSONArray("timeline");assertTrue(timeline.length()>0);long previous=-1;for(int i=0;i<timeline.length();i++){JSONObject e=timeline.getJSONObject(i);assertTrue(e.getLong("event_id")>previous);previous=e.getLong("event_id");assertTrue(hasText(Rules.label(e.getString("action"))+" • "+Rules.label(e.getString("status"))));assertTrue(hasText(Rules.timestamp(e.getString("occurred_at"))));assertTrue(hasText("Recorded by: "+e.getString("recorded_by_name")));}}
+        assertTrue(hasButton("Back to Orders"));
+    }
     @Test public void actualNameContactEmptyLookupProfileHistoryAndNoPreviousQuantity()throws Exception{
         assertTrue(BuildConfig.DEBUG);assertEquals("https://127.0.0.1:55436",BuildConfig.SUPABASE_URL);File directory=InstrumentationRegistry.getInstrumentation().getTargetContext().getFilesDir();fixture=new JSONObject(new String(Files.readAllBytes(new File(directory,"customer-lookup-credentials.json").toPath()),StandardCharsets.UTF_8));assertEquals("SYNTHETIC_LOCAL_CUSTOMER_LOOKUP_UI",fixture.getString("kind"));
         try(ActivityScenario<MainActivity> active=ActivityScenario.launch(MainActivity.class)){
@@ -103,6 +118,8 @@ public class CustomerLookupDeviceTest {
             await("profile navigation",()->hasButton("Record Payment"));
             click("View Order");
             await("selected order detail",()->hasText("Order total: "+Rules.money(orders.optJSONObject(0).optLong("total_centavos")))&&hasText(orders.optJSONObject(0).optString("reference")));
+            verifyOrder(fixture.getJSONObject("detail"),owner);
+            JSONObject second=fixture.getJSONObject("second_detail");click("Orders");fill("Search Order ID or customer",second.getString("reference"));click("Search / filter");await("one current order result",()->ui(a->a.findViewById(R.id.loading).getVisibility()!=View.VISIBLE)&&hasText(second.optString("reference")));click("View Order");await("current Ordered detail",()->hasText("Order total: "+Rules.money(second.optLong("total_centavos")))&&hasText(second.optString("reference")));verifyOrder(second,owner);
             lookup(contact);
             click("View customer");
             await("payment route",()->hasButton("Record Payment"));

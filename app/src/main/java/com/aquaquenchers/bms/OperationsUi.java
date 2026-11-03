@@ -104,7 +104,11 @@ public final class OperationsUi {
         EditText search = host.input(p, "Search by name or contact number", "", InputType.TYPE_CLASS_TEXT);
         host.button(p, "Add Customer", () -> customerForm(null, null));
         LinearLayout results = new LinearLayout(host); results.setOrientation(LinearLayout.VERTICAL); p.addView(results);
-        Runnable find = () -> query("customers", json("search", value(search)), result -> {
+        long[] searchRequest={0};
+        Runnable find = () -> {
+            long requested=++searchRequest[0];
+            query("customers", json("search", value(search)), result -> {
+            if(requested!=searchRequest[0])return;
             results.removeAllViews(); JSONArray rows = items(result);
             if (rows.length() == 0) line(results, "No customers found.");
             for (int i = 0; i < rows.length(); i++) {
@@ -113,7 +117,8 @@ public final class OperationsUi {
                 if(host.isOwner())line(results,"Status: Active");
                 host.button(results, "View customer", () -> customer(id(c)));
             }
-        });
+            });
+        };
         host.button(p, "Search", find); find.run();
     }
 
@@ -186,12 +191,17 @@ public final class OperationsUi {
         host.button(p, "Walk-in Sale", this::pos);
         host.button(p, "Pending gallons", this::pending);
         LinearLayout rows = new LinearLayout(host); rows.setOrientation(LinearLayout.VERTICAL); p.addView(rows);
-        Runnable load = () -> query("orders", json("search", value(search)), response -> {
+        long[] searchRequest={0};
+        Runnable load = () -> {
+            long requested=++searchRequest[0];
+            query("orders", json("search", value(search)), response -> {
+            if(requested!=searchRequest[0])return;
             rows.removeAllViews(); JSONArray filtered = new JSONArray(); JSONArray all = items(response);
             String s = status.getSelectedItem().toString().toLowerCase(java.util.Locale.ROOT).replace(' ', '_');
             for (int i = 0; i < all.length(); i++) { JSONObject o = all.optJSONObject(i); if (o != null && (s.equals("all") || s.equals(o.optString("status")))) filtered.put(o); }
             renderOrders(rows, filtered, false);
-        });
+            });
+        };
         host.button(p, "Search / filter", load); load.run();
     }
 

@@ -6,7 +6,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 5,
     "text": "1. The system shall allow the Owner to enter Username and Password and select Sign in.\n\nThe system shall authenticate username aliases through a protected mapping to stable Supabase identities. Require passwords of at least 15 characters, verified administrator recovery outside the app and reauthentication after 30 minutes of inactivity. Use \"Use at least 15 characters.\" and \"Session expired. Sign in again.\" as applicable.",
-    "status": "In Progress",
+    "status": "Blocked",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -79,9 +79,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Stable alias/Auth identity, minimum15 password and unchanged30minute policy verified locally. Verified administrator recovery is documented outside app (admin/ACCOUNT_SECURITY.md); production identity-verification channel/custodian approval/provider-admin access is external and no actual production recovery is claimed. Deployment deferred."
   },
   {
     "id": "A-01-AC2",
@@ -90,7 +114,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 6,
     "text": "2. Upon successful login using valid credentials for an Active Owner account, the system shall display the Owner Dashboard with the Aqua Quenchers header and Owner account label; navigation for Dashboard, Orders, Customers, Payments, Expenses, Reports and Settings; the reporting-period selector; Revenue, Payments received, Expenses and Net income; Filled available, Reserved filled, Empty gallons, Pending delivery, Receivables and inventory last-update time; Inventory and Customer balances links; Create Order, Walk-in Sale and Reports quick actions; and the Recent orders table with Order, Customer, Status and View Orders.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -163,9 +187,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-01-AC3",
@@ -174,7 +222,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 7,
     "text": "3. The system shall keep the user on Sign in when a required field is empty and display \"Enter your username.\" and \"Enter your password.\" under the missing fields.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -247,9 +295,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-01-SCA",
@@ -258,7 +330,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 7,
     "text": "A. Successful login\n\nGiven the Owner has an Active account and is on Sign in\nWhen the Owner enters the assigned username and correct password\nThen the system shall accept the required entries\n\nWhen the Owner selects Sign in\nThen the system shall authenticate the account and display Owner Dashboard with the authorized navigation and dashboard information described in the acceptance criteria.\n\nSample Data:\nUsername: owner.elena\nPassword: the correct password for that account, masked in Figma.\nAccount status: Active.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -331,9 +403,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-01-AC4",
@@ -342,7 +438,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 8,
     "text": "4. The system shall reject incorrect credentials, nonexistent accounts and Inactive accounts with \"Invalid username or password.\" without opening a protected page.\n\nInactive accounts shall also lose backend access through already-open sessions; the backend shall check current active status on every protected request.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -415,9 +511,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-01-SCB",
@@ -426,7 +546,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 8,
     "text": "B. Missing, incorrect or inactive credentials\n\nGiven the Owner is on Sign in\nWhen Username or Password is blank and Sign in is selected\nThen the system shall display the corresponding required-field message and remain on Sign in\n\nWhen a supplied username or password is incorrect, the account does not exist, or the account is Inactive\nThen the system shall display \"Invalid username or password.\" and deny access\n\nWhen the Owner corrects the entries for an Active account and selects Sign in again\nThen the system shall allow authentication without requiring a new account.\n\nSample Data:\nEmpty username and/or password.\nIncorrect password: WrongPass123.\nRequired-field messages: \"Enter your username.\" and \"Enter your password.\".",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -499,9 +619,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-01-SCC",
@@ -510,7 +654,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 8,
     "text": "C. Expired session or deactivated account\nGiven an authenticated account is idle or has been set Inactive\nWhen 30 minutes of inactivity passes or an inactive account sends another protected request\nThen the system shall require Sign in again and deny protected data without saving a transaction.\n\nSample Data:\nIdle duration: 30 minutes. Existing Staff session: Ana Mendoza, changed to Inactive by Owner.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -583,9 +727,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/owner_dashboard.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-owner-dashboard.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-02-AC1",
@@ -1428,7 +1596,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 28,
     "text": "1. The system shall display Create Order / New order with Customer type, customer selection, most recent order quantity, Add New Customer, delivery address, gallon quantity, unit price, calculated total, initial Ordered status and Save Order. The Owner form shall additionally show Order date and Cancel. A newly registered customer shall be selectable when returning to this form.\n\nBoth roles shall enter Order date, defaulted to today in Asia/Manila, separately from the immutable server encoding timestamp.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1474,9 +1642,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-04-AC2",
@@ -1531,6 +1717,24 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
     "gap": "Matching actual create/edit/lookup/profile/history and Household/Dealer/Walk-in price evidence pass cumulatively; full design/declared-device/hosted gates remain separate."
@@ -1588,6 +1792,24 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
     "gap": "Matching actual both-role native quantity/date/create-order checks plus existing RulesTest and generic idempotency/authority evidence pass; full design/device/hosted gates separate."
@@ -1599,7 +1821,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 30,
     "text": "A. Create an order and follow its eligible stages\nGiven the Owner is signed in and a customer profile exists\nWhen the Owner opens Create Order or New order and selects the customer\nThen the system shall display the customer type, delivery address and previous order quantity\nWhen a positive whole-number gallon quantity is entered\nThen the system shall apply the customer-type unit price and calculate the order total\nWhen Save Order is selected\nThen the system shall assign a unique Order ID, save the date/time and recording account, set Ordered and display \"Order saved\"\nWhen the saved order is opened\nThen the system shall display its customer details, gallon tracking, operational status and separate payment information\nWhen the eligible next stage For Pickup is selected\nThen the system shall update the order to For Pickup\nWhen a valid pickup is recorded and refilling begins\nThen the system shall allow Picked Up followed by Refilling\nWhen Ready for Delivery is saved with sufficient empty stock\nThen the system shall convert the required empty gallons into filled gallons once\nWhen a delivery leaves a remainder\nThen the order shall be Undelivered with pending gallons\nWhen all remaining gallons are delivered\nThen the order shall become Delivered without changing its original monetary total.\n\nSample Data:\nNew Household order: Maria Santos; previous order 10 gallons; address 24 Mabini St., Brgy. San Jose; quantity 10 × ₱35.00 = ₱350.00; new reference ORD-2026-0005; order date 15 Oct 2026.\nDealer alternative: Cruz Store; 10 × ₱30.00 = ₱300.00.\nExisting-order alternative: ORD-2026-0001; ordered 10, picked up 10, delivered 7, pending 3; total ₱350.00, paid ₱200.00, balance ₱150.00.\nReadiness alternative: empty 80 → 70; physical filled 47 → 57; reserved 0 → 10; unreserved available stays 47. Retry leaves these counts unchanged.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1645,9 +1867,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-04-AC4",
@@ -1702,6 +1942,24 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
     "gap": "Matching actual both-role native quantity/date/create-order checks plus existing RulesTest and generic idempotency/authority evidence pass; full design/device/hosted gates separate."
@@ -1713,7 +1971,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 31,
     "text": "B. Invalid quantity or an ineligible stage\nGiven the Owner has selected a valid customer\nWhen a zero or negative gallon quantity is submitted\nThen the system shall display \"Quantity must be greater than zero.\" and not create an order\nWhen a fractional or nonnumeric quantity is submitted\nThen the system shall display \"Enter a whole-number gallon quantity.\"\nGiven an order is currently Ordered\nWhen the Owner attempts to change it directly to Delivered or selects a backward or skipped stage\nThen the system shall display \"Follow the next eligible order stage.\" and keep the saved status\nGiven an order is Refilling but empty stock is below the required quantity\nWhen Ready for Delivery is selected\nThen the system shall display \"Not enough empty gallons.\" and preserve the status and stock\nWhen the rejected entry or stage is corrected\nThen the system shall allow the appropriate process to continue.\n\nSample Data:\nInvalid quantities: 0 and 2.5.\nInvalid transition: Ordered directly to Delivered.\nInsufficient-empty-stock case: 10 gallons required, only 6 empty gallons available.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1759,9 +2017,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-04-AC5",
@@ -1770,7 +2046,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 32,
     "text": "5. Upon opening Order Details, the system shall display customer name/type, contact and address, Order ID, date/time and recording account; ordered, picked-up, cumulative delivered and pending gallons; operational status and eligible status/actions; unit price, order total, amount paid, balance, payment status and Record Payment; original order date and waiting information for pending deliveries. The Owner view shall also show the order timeline.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1816,9 +2092,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Exact both-role historical/current Order fields/actions and Owner-only chronological timeline pass on actual local signed Auth/native API, combined with carried-over/rescheduled/partial/ready states from existing flows. Design/device/hosted gates separate."
   },
   {
     "id": "A-04-AC6",
@@ -1827,7 +2121,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 33,
     "text": "6. The system shall permit only the next eligible operational stage: Ordered, For Pickup, Picked Up, Refilling, Ready for Delivery, Delivered. Pickup and delivery recording shall control their related stages; readiness shall convert stock once. Invalid skipped or backward changes shall retain the previous status.\n\nReady for Delivery shall convert the adjusted collected quantity and reserve it for that order atomically once. POS and other orders shall not consume that reservation.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1873,9 +2167,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-04-AC7",
@@ -1884,7 +2196,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 34,
     "text": "7. The system shall use Undelivered when a delivery leaves pending gallons and Rescheduled after a valid new pickup date; display original date and waiting days for carry-over gallons.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1930,9 +2242,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-05-AC1",
@@ -5944,7 +6274,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 5,
     "text": "1. The system shall allow the Staff to enter Username and Password and select Sign in.\n\nThe system shall authenticate username aliases through a protected mapping to stable Supabase identities. Require passwords of at least 15 characters, verified administrator recovery outside the app and reauthentication after 30 minutes of inactivity. Use \"Use at least 15 characters.\" and \"Session expired. Sign in again.\" as applicable.",
-    "status": "In Progress",
+    "status": "Blocked",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -6017,9 +6347,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Stable alias/Auth identity, minimum15 password and unchanged30minute policy verified locally. Verified administrator recovery is documented outside app (admin/ACCOUNT_SECURITY.md); production identity-verification channel/custodian approval/provider-admin access is external and no actual production recovery is claimed. Deployment deferred."
   },
   {
     "id": "A-12-AC2",
@@ -6028,7 +6382,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 6,
     "text": "2. Upon successful login using valid credentials for an Active Staff account, the system shall display the Staff Home screen with the Staff account label, personalized greeting and work summary; Orders, For pickup, Ready to deliver and Pending gallons; New order and Walk-in sale actions; a current order card showing the customer, Order ID, order status, gallons, balance and View order; and navigation for Home, Orders, POS, Customers and Settings.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -6101,9 +6455,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-12-AC3",
@@ -6112,7 +6490,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 7,
     "text": "3. The system shall keep the user on Sign in when a required field is empty and display \"Enter your username.\" and \"Enter your password.\" under the missing fields.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -6185,9 +6563,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-12-SCA",
@@ -6196,7 +6598,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 7,
     "text": "A. Successful login\nGiven the Staff member has an Active account and is on Sign in\nWhen the Staff member enters the assigned username and correct password\nThen the system shall accept the required entries\nWhen the Staff member selects Sign in\nThen the system shall authenticate the account and display Staff Home with the authorized navigation and dashboard information described in the acceptance criteria.\n\nSample Data:\nUsername: ana.mendoza\nPassword: the correct password for that account, masked in Figma.\nAccount status: Active.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -6269,9 +6671,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-12-AC4",
@@ -6280,7 +6706,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 8,
     "text": "4. The system shall reject incorrect credentials, nonexistent accounts and Inactive accounts with \"Invalid username or password.\" without opening a protected page.\n\nInactive accounts shall also lose backend access through already-open sessions; the backend shall check current active status on every protected request.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -6353,9 +6779,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-12-SCB",
@@ -6364,7 +6814,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 8,
     "text": "B. Missing, incorrect or inactive credentials\nGiven the Staff member is on Sign in\nWhen Username or Password is blank and Sign in is selected\nThen the system shall display the corresponding required-field message and remain on Sign in\nWhen a supplied username or password is incorrect, the account does not exist, or the account is Inactive\nThen the system shall display \"Invalid username or password.\" and deny access\nWhen the Staff member corrects the entries for an Active account and selects Sign in again\nThen the system shall allow authentication without requiring a new account.\n\nSample Data:\nEmpty username and/or password.\nIncorrect password: WrongPass123.\nRequired-field messages: \"Enter your username.\" and \"Enter your password.\".",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -6437,9 +6887,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-12-SCC",
@@ -6448,7 +6922,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 8,
     "text": "C. Expired session or deactivated account\nGiven an authenticated account is idle or has been set Inactive\nWhen 30 minutes of inactivity passes or an inactive account sends another protected request\nThen the system shall require Sign in again and deny protected data without saving a transaction.\n\nSample Data:\nIdle duration: 30 minutes. Existing Staff session: Ana Mendoza, changed to Inactive by Owner.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.signIn / username-login",
@@ -6521,9 +6995,33 @@
         "status": "Verified subset",
         "evidence": "evidence/android-denied-session.log",
         "limit": "Dedicated synthetic Staff actual managed-MFA deactivation still signs out on403/recheck; checked reactivation/fresh login, controlled31minute idle fixture rejected under unchanged30minute policy; no business changes, account restored active."
+      },
+      {
+        "path": "admin/tests/real_services_test.py",
+        "status": "Verified subset",
+        "evidence": "evidence/real-auth-rest-http.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/denied_session.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-denied-session.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/own_password.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-own-password.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
+      },
+      {
+        "path": "admin/tests/staff_home.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Reuse actual matching local official Auth/native missing-fields/active-role/alias/wrong/inactive/revoked session/home/idle evidence only; controlled31minute metadata boundary disclosed, not a real30minute wait. Hosted production recovery approval and visual/device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching missing-field/valid-active-home/incorrect-or-nonexistent/inactive/old-token-denial/corrected-login/idle checks pass cumulatively across actual native and official Auth/REST plus protected SQL. Only local functional scope; Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-13-AC1",
@@ -7369,7 +7867,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 28,
     "text": "1. The system shall display Create Order / New order with Customer type, customer selection, most recent order quantity, Add New Customer, delivery address, gallon quantity, unit price, calculated total, initial Ordered status and Save Order. The Owner form shall additionally show Order date and Cancel. A newly registered customer shall be selectable when returning to this form.\n\nBoth roles shall enter Order date, defaulted to today in Asia/Manila, separately from the immutable server encoding timestamp.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7415,9 +7913,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-15-AC2",
@@ -7472,6 +7988,24 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
     "gap": "Matching actual create/edit/lookup/profile/history and Household/Dealer/Walk-in price evidence pass cumulatively; full design/declared-device/hosted gates remain separate."
@@ -7529,6 +8063,24 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
     "gap": "Matching actual both-role native quantity/date/create-order checks plus existing RulesTest and generic idempotency/authority evidence pass; full design/device/hosted gates separate."
@@ -7540,7 +8092,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 30,
     "text": "A. Create an order and follow its eligible stages\nGiven the Staff member is signed in and a customer profile exists\nWhen the Staff member opens Create Order or New order and selects the customer\nThen the system shall display the customer type, delivery address and previous order quantity\nWhen a positive whole-number gallon quantity is entered\nThen the system shall apply the customer-type unit price and calculate the order total\nWhen Save Order is selected\nThen the system shall assign a unique Order ID, save the date/time and recording account, set Ordered and display \"Order saved\"\nWhen the saved order is opened\nThen the system shall display its customer details, gallon tracking, operational status and separate payment information\nWhen the eligible next stage For Pickup is selected\nThen the system shall update the order to For Pickup\nWhen a valid pickup is recorded and refilling begins\nThen the system shall allow Picked Up followed by Refilling\nWhen Ready for Delivery is saved with sufficient empty stock\nThen the system shall convert the required empty gallons into filled gallons once\nWhen a delivery leaves a remainder\nThen the order shall be Undelivered with pending gallons\nWhen all remaining gallons are delivered\nThen the order shall become Delivered without changing its original monetary total.\n\nSample Data:\nNew Household order: Maria Santos; previous order 10 gallons; address 24 Mabini St., Brgy. San Jose; quantity 10 × ₱35.00 = ₱350.00; new reference ORD-2026-0005; order date 15 Oct 2026.\nDealer alternative: Cruz Store; 10 × ₱30.00 = ₱300.00.\nExisting-order alternative: ORD-2026-0001; ordered 10, picked up 10, delivered 7, pending 3; total ₱350.00, paid ₱200.00, balance ₱150.00.\nReadiness alternative: empty 80 → 70; physical filled 47 → 57; reserved 0 → 10; unreserved available stays 47. Retry leaves these counts unchanged.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7586,9 +8138,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-15-AC4",
@@ -7643,6 +8213,24 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
     "gap": "Matching actual both-role native quantity/date/create-order checks plus existing RulesTest and generic idempotency/authority evidence pass; full design/device/hosted gates separate."
@@ -7654,7 +8242,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 31,
     "text": "B. Invalid quantity or an ineligible stage\nGiven the Staff member has selected a valid customer\nWhen a zero or negative gallon quantity is submitted\nThen the system shall display \"Quantity must be greater than zero.\" and not create an order\nWhen a fractional or nonnumeric quantity is submitted\nThen the system shall display \"Enter a whole-number gallon quantity.\"\nGiven an order is currently Ordered\nWhen the Staff member attempts to change it directly to Delivered or selects a backward or skipped stage\nThen the system shall display \"Follow the next eligible order stage.\" and keep the saved status\nGiven an order is Refilling but empty stock is below the required quantity\nWhen Ready for Delivery is selected\nThen the system shall display \"Not enough empty gallons.\" and preserve the status and stock\nWhen the rejected entry or stage is corrected\nThen the system shall allow the appropriate process to continue.\n\nSample Data:\nInvalid quantities: 0 and 2.5.\nInvalid transition: Ordered directly to Delivered.\nInsufficient-empty-stock case: 10 gallons required, only 6 empty gallons available.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7700,9 +8288,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-15-AC5",
@@ -7711,7 +8317,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 32,
     "text": "5. Upon opening Order Details, the system shall display customer name/type, contact and address, Order ID, date/time and recording account; ordered, picked-up, cumulative delivered and pending gallons; operational status and eligible status/actions; unit price, order total, amount paid, balance, payment status and Record Payment; original order date and waiting information for pending deliveries. The Owner view shall also show the order timeline.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7757,9 +8363,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Exact both-role historical/current Order fields/actions and Owner-only chronological timeline pass on actual local signed Auth/native API, combined with carried-over/rescheduled/partial/ready states from existing flows. Design/device/hosted gates separate."
   },
   {
     "id": "A-15-AC6",
@@ -7768,7 +8392,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 33,
     "text": "6. The system shall permit only the next eligible operational stage: Ordered, For Pickup, Picked Up, Refilling, Ready for Delivery, Delivered. Pickup and delivery recording shall control their related stages; readiness shall convert stock once. Invalid skipped or backward changes shall retain the previous status.\n\nReady for Delivery shall convert the adjusted collected quantity and reserve it for that order atomically once. POS and other orders shall not consume that reservation.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7814,9 +8438,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-15-AC7",
@@ -7825,7 +8467,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 34,
     "text": "7. The system shall use Undelivered when a delivery leaves pending gallons and Rescheduled after a valid new pickup date; display original date and waiting days for carry-over gallons.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7871,9 +8513,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
         "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
+      },
+      {
+        "path": "admin/tests/owner_customer_create.py --owner --inline-order",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-inline-customer.log",
+        "limit": "Actual Owner nested Order->Add New Customer->confirmed server master->new customer automatically selected, original quantity/date retained, null history unavailable/fixed-price preview and CancelOrder. Exactly1master; all preexisting/financial/stock/Auth mappings unchanged. Shared role-independent callback; Staff create/select/date paths separately verified."
+      },
+      {
+        "path": "backend/tests/order_stage_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/order-stage-boundary.log",
+        "limit": "Fresh disposable5migration/17fixture suite. Both-role exact skipped/backward/unsupported direct transitions from every stage reject with full protected-record rollback; corrected valid/reschedule/pickup/readiness/partial/final path succeeds. JWT stubs explicit; same-state no-op/replay tested separately."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py (extended Order details)",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log",
+        "limit": "Actual historical Delivered and current Ordered detail: original customer/type/contact/address/date/actor, expected/adjusted/picked/shortfall/delivered/pending/reserved gallons, price/total/paid/balance/status/eligible actions/waiting, Owner-only chronological event IDs/action/status/time/recorder. Readonly snapshots unchanged; normal search flows pass with new latest-request guards, no controlled-delay claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional criterion passes cumulatively across matching actual both-role native/API paths, nested Owner/shared callback, date/price/field/stock/carryover checks and exact disposable state-machine/replay/concurrency evidence. JWT-stub SQL is not native or cryptographic proof; full Figma/declared-device/hosted acceptance remains separate."
   },
   {
     "id": "A-16-AC1",

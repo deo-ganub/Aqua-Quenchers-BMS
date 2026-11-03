@@ -15,11 +15,11 @@ INSTRUMENTATION_STATUS: test=actualNameContactEmptyLookupProfileHistoryAndNoPrev
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 30.303
+Time: 36.862
 
 OK (1 test)
 
 
 INSTRUMENTATION_CODE: -1
 
-PASS: actual Staff name/contact-with-display-spaces/unknown lookup, exact list/profile balance/status/address/order/receipt fields and navigation, current previous quantity plus absent-history unavailable, fixed-price preview Cancel. All customer/financial/stock/profile records unchanged.
+PASS: actual Staff name/contact-with-display-spaces/unknown lookup, exact list/profile balance/status/address/order/receipt fields and navigation, current previous quantity plus absent-history unavailable, fixed-price preview Cancel; historical/current Order detail all customer/date/actor/tracking/money/action fields and Owner-only chronological timeline. All customer/financial/stock/profile records unchanged.

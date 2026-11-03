@@ -1,0 +1,371 @@
+CREATE DATABASE
+CREATE SCHEMA
+CREATE TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+RUN supabase/migrations/202611030001_core.sql
+BEGIN
+CREATE SCHEMA
+REVOKE
+ALTER DEFAULT PRIVILEGES
+ALTER DEFAULT PRIVILEGES
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+INSERT 0 1
+CREATE SEQUENCE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+CREATE INDEX
+DO
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+REVOKE
+GRANT
+COMMIT
+RUN supabase/migrations/202611030002_privacy.sql
+BEGIN
+NOTICE:  column "payload_hash" of relation "requests" already exists, skipping
+ALTER TABLE
+UPDATE 0
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE TABLE
+ALTER TABLE
+REVOKE
+CREATE FUNCTION
+REVOKE
+COMMIT
+RUN supabase/migrations/202611030003_identity_admin.sql
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE TABLE
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+GRANT
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+CREATE FUNCTION
+REVOKE
+GRANT
+CREATE FUNCTION
+REVOKE
+RUN supabase/migrations/202611030004_session_logout.sql
+BEGIN
+ALTER TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+REVOKE
+COMMIT
+RUN supabase/migrations/202611030005_payment_history_search.sql
+BEGIN
+CREATE FUNCTION
+NOTIFY
+COMMIT
+RUN backend/tests/account_recovery.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"aal": "aal2", "iat": 1793741132.686501, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+{"email": "40000000-0000-4000-8000-000000000001@identity.aquaquenchers.invalid", "state": "pending"}
+NOTICE:  PASS: ordinary Owner cannot mark a preparation failed
+DO
+RESET
+SET
+{"state": "failed", "reason": "AUTH_REJECTED"}
+{"state": "failed", "reason": "AUTH_REJECTED"}
+RESET
+DO
+SET
+{"email": "40000000-0000-4000-8000-000000000002@identity.aquaquenchers.invalid", "state": "pending"}
+RESET
+INSERT 0 1
+SET
+NOTICE:  PASS: existing Auth identity cannot be falsely marked failed
+DO
+RESET
+SET
+{"role": "staff", "active": true, "user_id": "10000000-0000-4000-8000-000000000002", "username": "synthetic.staff", "full_name": "Synthetic Staff", "created_at": "2026-11-03T21:25:32.692804+00:00", "updated_at": "2026-11-03T21:25:32.692804+00:00", "contact_number": "09000000002"}
+RESET
+NOTICE:  PASS: corrected request can reuse released alias and managed identity completes once
+DO
+ROLLBACK
+RUN backend/tests/admin_security.sql
+BEGIN
+INSERT 0 2
+INSERT 0 2
+10000000-0000-4000-8000-000000000001
+{"aal": "aal1", "iat": 1793741132.700787, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+NOTICE:  PASS: Owner AAL1 denied account mutation
+DO
+RESET
+{"aal": "aal2", "iat": 1793741132.702805, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+NOTICE:  PASS: AAL2 account rename preserves stable Auth identity and Staff role
+DO
+RESET
+SET
+NOTICE:  PASS: anonymous protected read denied by grant
+DO
+RESET
+UPDATE 1
+SET
+NOTICE:  PASS: expired session protected read denied
+DO
+ROLLBACK
+RUN backend/tests/client_contract.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"iat": 1793741132.712821, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+NOTICE:  PASS: stable customer edit id, duplicate contact denial, strict reschedule/date payload and active Home order counts.
+DO
+ROLLBACK
+RUN backend/tests/customer_history.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"iat": 1793741132.737113, "session_id": "d96eaac9-56fb-4ed5-ae7f-436b733fde7a"}
+DO
+UPDATE 4
+SET
+NOTICE:  PASS: normalized customer contact/duplicates/type validation; scoped business-date orders and inclusive Manila receipt history; clear/invalid date ranges.
+DO
+ROLLBACK
+RUN backend/tests/edge_cases.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+UPDATE 1
+10000000-0000-4000-8000-000000000001
+{"aal": "aal2", "iat": 1793741132.768474, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+NOTICE:  PASS: profileless credit/selected-reference settlement, invalid payments, cash/change receipts, skipped lifecycle, reschedule boundaries, overcollection and paid-total protection, pickup retries
+DO
+RESET
+NOTICE:  PASS: exact total retained receipts and no duplicate POS records
+DO
+ROLLBACK
+RUN backend/tests/empty_stock_boundary.sql
+BEGIN
+INSERT 0 2
+INSERT 0 2
+CREATE FUNCTION
+NOTICE:  PASS: Owner/Staff exact insufficient-empty error, full rejected-command rollback, restored same-key retry and exactly-once conversion/reservation/audit; disposable administrator boundary, JWT stubs only.
+DO
+ROLLBACK
+RUN backend/tests/expense_fixture.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"iat": 1793741132.845238, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+NOTICE:  PASS: manual no-remarks fixture7/6250 becomes8/7000 once; newest-first and filtered total reconcile. No model result asserted.
+DO
+ROLLBACK
+RUN backend/tests/identity_alias_guard.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"aal": "aal2", "iat": 1793741132.863708, "session_id": "906bdb8f-655d-4bd0-ad3f-1ff73b06911f"}
+SET
+DO
+RESET
+SET
+{"state": "failed", "reason": "AUTH_REJECTED"}
+RESET
+SET
+NOTICE:  PASS: checked self-profile cannot take pending Staff alias; only protected definitive failure releases it, stable Auth identity preserved.
+DO
+ROLLBACK
+RUN backend/tests/lifecycle.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"aal": "aal2", "iat": 1793741132.877468, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+NOTICE:  PASS: adjusted charge, conversion/reservation retry, reserved POS protection, partial/final delivery, Owner expenses, report date/receipt/as-of definitions and minimal exact-once ordered Owner timeline
+DO
+RESET
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000002
+{"iat": 1793741132.911055, "session_id": "6b17d1bf-8044-458b-881f-b9b0c72a76eb"}
+SET
+NOTICE:  PASS: Staff retains operational order details without Owner timeline evidence
+DO
+ROLLBACK
+RUN backend/tests/logout.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"iat": 1793741132.920221, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+{"role": "owner", "active": true, "user_id": "10000000-0000-4000-8000-000000000001", "username": "owner.test", "full_name": "Synthetic Owner", "contact_number": "09000000001"}
+{"logged_out": true}
+{"logged_out": true}
+NOTICE:  PASS: revoked app session denied even with otherwise valid JWT claims
+DO
+RESET
+DO
+{"iat": 1793741132.923535, "session_id": "20000000-0000-4000-8000-000000000002"}
+SET
+{"role": "owner", "active": true, "user_id": "10000000-0000-4000-8000-000000000001", "username": "owner.test", "full_name": "Synthetic Owner", "contact_number": "09000000001"}
+RESET
+UPDATE 1
+SET
+{"logged_out": true}
+RESET
+NOTICE:  PASS: fresh sign-in session works, inactive caller can logout, and revocation/audit remain exactly once
+DO
+ROLLBACK
+RUN backend/tests/order_stage_boundary.sql
+BEGIN
+INSERT 0 2
+INSERT 0 2
+CREATE FUNCTION
+CREATE FUNCTION
+NOTICE:  PASS: Owner+Staff skipped/backward/unsupported direct transitions at every lifecycle stage reject exact message with full rollback; corrected valid path/reschedule/pickup/readiness/partial/final delivery succeeds. JWT stubs only.
+DO
+ROLLBACK
+RUN backend/tests/own_profile.sql
+BEGIN
+INSERT 0 2
+INSERT 0 2
+10000000-0000-4000-8000-000000000002
+{"aal": "aal1", "iat": 1793741133.310643, "session_id": "20000000-0000-4000-8000-000000000002"}
+SET
+NOTICE:  PASS: Staff own-profile username edit preserves Auth ID/transaction recorder; target/role/activation changes denied.
+DO
+RESET
+DO
+ROLLBACK
+RUN backend/tests/payment_history_search.sql
+BEGIN
+INSERT 0 2
+INSERT 0 2
+UPDATE 1
+10000000-0000-4000-8000-000000000001
+{"aal": "aal2", "iat": 1793741133.327999, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+DO
+RESET
+ROLLBACK
+RUN backend/tests/pos_payment_context.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+UPDATE 1
+10000000-0000-4000-8000-000000000001
+{"iat": 1793741133.353403, "session_id": "ca0f6a01-ad67-4f6c-b973-7629a5a57453"}
+SET
+NOTICE:  PASS: explicit zero-cash credit, own-customer/global named credit lookup, exact overpayment feedback, recorder and exact-once selected receipt.
+DO
+RESET
+DO
+ROLLBACK
+RUN backend/tests/reservation_guards.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+UPDATE 1
+10000000-0000-4000-8000-000000000001
+{"iat": 1793741133.376203, "session_id": "20000000-0000-4000-8000-000000000001"}
+NOTICE:  PASS: missing order reservation rejects despite ample physical/unreserved/other-order stock; failed save preserves stock and other reservation; overdelivery denied.
+DO
+ROLLBACK
+RUN backend/tests/smoke.sql
+BEGIN
+INSERT 0 2
+INSERT 0 2
+10000000-0000-4000-8000-000000000002
+{"aal": "aal1", "iat": 1793741133.401419, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+NOTICE:  PASS: retry equality, payload conflict, exact phone validation, Staff expense and administration denial
+DO
+RESET
+UPDATE 1
+SET
+NOTICE:  PASS: existing inactive session rejected
+DO
+ROLLBACK
+RUN backend/tests/unicode.sql
+BEGIN
+INSERT 0 1
+INSERT 0 1
+10000000-0000-4000-8000-000000000001
+{"iat": 1793741133.417303, "session_id": "20000000-0000-4000-8000-000000000001"}
+SET
+NOTICE:  PASS: UTF8 expense 500/501 code point boundary
+DO
+ROLLBACK
+PASS: 5 ordered migrations and 17 rollback fixtures.
+DROP DATABASE

@@ -51,7 +51,11 @@ def main():
     assert empty_id, 'Need reviewed no-order synthetic customer; do not invent last quantity'
     empty=call('/rest/v1/rpc/aq_query',{'p_request':{'resource':'customer','id':empty_id}},token)
     assert empty['previous_order_quantity'] is None and len(history['orders'])==1
-    fixture={'kind':'SYNTHETIC_LOCAL_CUSTOMER_LOOKUP_UI','username':username,'password':password,'owner':options.owner,'history':history,'empty':empty,'empty_unit':3000 if empty['customer_type']=='dealer' else 3500,'unknown':'NO MATCH '+__import__('uuid').uuid4().hex}
+    detail=call('/rest/v1/rpc/aq_query',{'p_request':{'resource':'order','id':history['orders'][0]['id']}},token)
+    date_state=json.loads((LOCAL/('order-date-save-'+('owner' if options.owner else 'staff')+'-state.json')).read_text());assert date_state['completed']
+    second=call('/rest/v1/rpc/aq_query',{'p_request':{'resource':'order','id':date_state['verified_order_ids'][0]}},token)
+    assert ('timeline' in detail)==options.owner and ('timeline' in second)==options.owner
+    fixture={'kind':'SYNTHETIC_LOCAL_CUSTOMER_LOOKUP_UI','username':username,'password':password,'owner':options.owner,'history':history,'empty':empty,'empty_unit':3000 if empty['customer_type']=='dealer' else 3500,'unknown':'NO MATCH '+__import__('uuid').uuid4().hex,'detail':detail,'second_detail':second,'today':sql('select aq_private.today();')}
     private_json(LOCAL / 'customer-lookup-fixture.json', fixture); before = json.loads(sql(snapshot_sql))
     for path in ['app/build/outputs/apk/debug/app-debug.apk', 'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk']: adb('install', '-r', '-t', str(REPO / path))
     adb('reverse', 'tcp:55436', 'tcp:55436')
@@ -61,7 +65,7 @@ def main():
     assert 'OK (1 test)' in text, 'Inspect native customer-lookup evidence before retry'
     assert json.loads(sql(snapshot_sql)) == before
     adb('shell', 'run-as', PACKAGE, 'rm', 'files/customer-lookup-credentials.json')
-    with evidence.open('a') as log: log.write('\nPASS: actual ' + ('Owner' if options.owner else 'Staff') + ' name/contact-with-display-spaces/unknown lookup, exact list/profile balance/status/address/order/receipt fields and navigation, current previous quantity plus absent-history unavailable, fixed-price preview Cancel. All customer/financial/stock/profile records unchanged.\n')
+    with evidence.open('a') as log: log.write('\nPASS: actual ' + ('Owner' if options.owner else 'Staff') + ' name/contact-with-display-spaces/unknown lookup, exact list/profile balance/status/address/order/receipt fields and navigation, current previous quantity plus absent-history unavailable, fixed-price preview Cancel; historical/current Order detail all customer/date/actor/tracking/money/action fields and Owner-only chronological timeline. All customer/financial/stock/profile records unchanged.\n')
     print('PASS: native customer lookup/profile/history/absent quantity and exact business immutability')
 
 
