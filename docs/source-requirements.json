@@ -2271,7 +2271,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 38,
     "text": "1. The system shall open Record Pickup for a For Pickup order and provide a Reschedule action.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2307,7 +2307,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-05-AC2",
@@ -2352,7 +2352,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
   },
   {
     "id": "A-05-AC3",
@@ -2361,7 +2361,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 40,
     "text": "3. The system shall accept the actual positive whole-number gallons collected and save through Save Pickup.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2397,7 +2397,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-05-SCA",
@@ -2442,7 +2442,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
   },
   {
     "id": "A-05-AC4",
@@ -2487,7 +2487,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
   },
   {
     "id": "A-05-SCB",
@@ -2496,7 +2496,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 41,
     "text": "B. Invalid collection or a past pickup date\nGiven the Owner is recording a pickup\nWhen a zero or negative collected quantity is submitted\nThen the system shall display \"Quantity must be greater than zero.\"\nWhen a fractional or nonnumeric collected quantity is submitted\nThen the system shall display \"Enter a whole-number gallon quantity.\"\nThen the system shall save no pickup and leave order status and empty stock unchanged\nGiven the Owner is rescheduling an uncollected pickup\nWhen the new date is before the scenario business date\nThen the system shall display \"Select today or a future date.\" and retain the previous schedule\nWhen the invalid quantity or date is corrected\nThen the system shall validate the new submission before saving it.\n\nSample Data:\nInvalid collected quantities: −1 and 2.5.\nPast pickup date: 14 Oct 2026 when the business date is 15 Oct 2026.\nEmpty stock remains 80 when pickup is rejected.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2532,7 +2532,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-05-SCC",
@@ -2541,7 +2541,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 41,
     "text": "C. Reject overcollection or an adjustment below paid cash\nGiven a For Pickup order has an original expected quantity and recorded payment\nWhen collection exceeds expected or the adjusted charge would be below the amount already paid\nThen display \"Collected quantity cannot exceed the expected quantity.\" or \"Adjusted total cannot be less than the amount already paid.\" as applicable and save nothing.\n\nSample Data:\nOvercollection: 11 collected against 10 expected. Overpaid adjustment: Dealer 10 gallons, ₱270.00 paid, actual 8 × ₱30.00 = ₱240.00; refer to Owner-approved admin correction.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2577,7 +2577,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-05-AC5",
@@ -2586,7 +2586,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 42,
     "text": "5. The system shall allow Reschedule Pickup with a new pickup date and optional Notes, saved through Save Pickup Result (Owner) or Save result (Staff).",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2622,7 +2622,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-05-AC6",
@@ -2631,7 +2631,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 43,
     "text": "6. The system shall reject a past date with \"Select today or a future date.\"; save today or a future date as Rescheduled and restore For Pickup when collection resumes.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2667,7 +2667,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-06-AC1",
@@ -2676,7 +2676,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 47,
     "text": "1. The system shall allow Record Delivery for Ready for Delivery orders and Undelivered orders with pending gallons.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / aq_command record_delivery",
@@ -2710,9 +2710,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-06-AC2",
@@ -2755,9 +2767,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-06-AC3",
@@ -2800,9 +2824,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-06-SCA",
@@ -2845,9 +2881,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-06-AC4",
@@ -2856,7 +2904,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 50,
     "text": "4. The system shall save the actual delivery time and account, increase cumulative delivered gallons and reduce physical filled stock and the same order’s reservation by this trip once. Partial delivery shall retain the remaining reservation. Delivery shall not change the adjusted order charge.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / aq_command record_delivery",
@@ -2890,9 +2938,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-06-SCB",
@@ -2935,9 +2995,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-06-AC5",
@@ -2946,7 +3018,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 51,
     "text": "5. The system shall set Delivered only when pending gallons reach zero; otherwise set Undelivered and retain the remaining gallons as carry-over.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / aq_command record_delivery",
@@ -2980,9 +3052,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-06-AC6",
@@ -3025,9 +3109,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-07-AC1",
@@ -4908,7 +5004,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 82,
     "text": "1. Upon opening Reports, the system shall display Financial summary with Start date, End date, Generate Report and the consolidated summary. The summary shall show Revenue, Payments received, Expenses, Net income, outstanding customer balances and the net-income calculation. Generating a valid report shall allow the Owner to open Report Preview.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
@@ -4955,9 +5051,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-output-failure.log",
         "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Actual initial today report without Generate; exact protected figures/station/period/net formula/current Manila generation timestamp in summary and preview; return, invalid dates preservation/correction/rotation and immutable business snapshots."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ConnectedWorkflowDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/pdf-connected-text.log",
+        "limit": "Actual signed local Auth/REST report exported via real DocumentsUI SAF and opened in PDF viewer; all5figures independently reconciled from saved PDF. Actual export acknowledgement/return verified in android-connected-ui.log. No production data or hosted claim."
+      },
+      {
+        "path": "admin/tests/pdf_cancel.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-cancel.log",
+        "limit": "Actual DocumentsUI Cancel clears pending PDF, no success acknowledgement, preview survives rotation, protected state unchanged; IOException/SecurityException separately verified in android-pdf-output-failure.log."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional report criterion passes actual local native report/preview/SAF/PDF reconciliation with applicable SQL, dates/as-of, cancel/error checks. Figma/declared-device/hosted operational gates remain separate."
   },
   {
     "id": "A-10-AC2",
@@ -5013,9 +5127,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-output-failure.log",
         "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Actual initial today report without Generate; exact protected figures/station/period/net formula/current Manila generation timestamp in summary and preview; return, invalid dates preservation/correction/rotation and immutable business snapshots."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ConnectedWorkflowDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/pdf-connected-text.log",
+        "limit": "Actual signed local Auth/REST report exported via real DocumentsUI SAF and opened in PDF viewer; all5figures independently reconciled from saved PDF. Actual export acknowledgement/return verified in android-connected-ui.log. No production data or hosted claim."
+      },
+      {
+        "path": "admin/tests/pdf_cancel.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-cancel.log",
+        "limit": "Actual DocumentsUI Cancel clears pending PDF, no success acknowledgement, preview survives rotation, protected state unchanged; IOException/SecurityException separately verified in android-pdf-output-failure.log."
       }
     ],
-    "gap": "Actual reversed-period error preserves prior valid report, corrected dates generate valid summary, exact protected financial snapshot unchanged. Design/declared-device gates tracked separately."
+    "gap": "Matched functional report criterion passes actual local native report/preview/SAF/PDF reconciliation with applicable SQL, dates/as-of, cancel/error checks. Figma/declared-device/hosted operational gates remain separate."
   },
   {
     "id": "A-10-AC3",
@@ -5024,7 +5156,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 84,
     "text": "3. Upon successful report generation, the system shall display Revenue, Payments received, Expenses and Net income for the selected period and outstanding customer balances as of its end date. Net income shall equal Payments received minus Expenses. The summary shall keep Revenue separate from cash collected.\n\nRevenue is the full value of saved orders and completed Walk-in sales, including unpaid amounts, using the entered order business date or the completed sale date. A valid short pickup reduces the same order value on its original business date; retain the original request and the change in the protected audit history. Payments received use the actual payment date. Expenses use the entered expense date. All dates and date cutoffs use Asia/Manila. Outstanding balances as of an end date include all charges dated on or before that date less payments actually received on or before it, including balances from earlier periods. Net income means payments received less expenses. Server encoding timestamps remain immutable and separate from business dates.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
@@ -5071,9 +5203,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-output-failure.log",
         "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Actual initial today report without Generate; exact protected figures/station/period/net formula/current Manila generation timestamp in summary and preview; return, invalid dates preservation/correction/rotation and immutable business snapshots."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ConnectedWorkflowDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/pdf-connected-text.log",
+        "limit": "Actual signed local Auth/REST report exported via real DocumentsUI SAF and opened in PDF viewer; all5figures independently reconciled from saved PDF. Actual export acknowledgement/return verified in android-connected-ui.log. No production data or hosted claim."
+      },
+      {
+        "path": "admin/tests/pdf_cancel.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-cancel.log",
+        "limit": "Actual DocumentsUI Cancel clears pending PDF, no success acknowledgement, preview survives rotation, protected state unchanged; IOException/SecurityException separately verified in android-pdf-output-failure.log."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional report criterion passes actual local native report/preview/SAF/PDF reconciliation with applicable SQL, dates/as-of, cancel/error checks. Figma/declared-device/hosted operational gates remain separate."
   },
   {
     "id": "A-10-SCA",
@@ -5082,7 +5232,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 84,
     "text": "A. Generate, preview and export the financial summary\nGiven the Owner is signed in and opens Reports\nWhen a valid Start date and End date are entered and Generate Report is selected\nThen the system shall display the consolidated financial summary for that period\nThen the summary shall show Revenue, Payments received, Expenses, Net income and balances as of the period end\nWhen Report Preview opens\nThen the system shall display the business name, covered period, generation date and all five measures\nWhen Export PDF is selected\nThen the system shall generate the PDF and display \"Report exported successfully.\"\nWhen Back to Reports is selected\nThen the system shall return to the Financial summary screen.\n\nSample Data:\nBusiness: Aqua Quenchers. Covered period 01–15 Oct 2026; generated 15 Oct 2026.\nRevenue ₱18,200.00; Payments received ₱16,500.00; Outstanding balances ₱675.00; Expenses ₱6,250.00; Net income ₱10,250.00.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
@@ -5129,9 +5279,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-output-failure.log",
         "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Actual initial today report without Generate; exact protected figures/station/period/net formula/current Manila generation timestamp in summary and preview; return, invalid dates preservation/correction/rotation and immutable business snapshots."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ConnectedWorkflowDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/pdf-connected-text.log",
+        "limit": "Actual signed local Auth/REST report exported via real DocumentsUI SAF and opened in PDF viewer; all5figures independently reconciled from saved PDF. Actual export acknowledgement/return verified in android-connected-ui.log. No production data or hosted claim."
+      },
+      {
+        "path": "admin/tests/pdf_cancel.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-cancel.log",
+        "limit": "Actual DocumentsUI Cancel clears pending PDF, no success acknowledgement, preview survives rotation, protected state unchanged; IOException/SecurityException separately verified in android-pdf-output-failure.log."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional report criterion passes actual local native report/preview/SAF/PDF reconciliation with applicable SQL, dates/as-of, cancel/error checks. Figma/declared-device/hosted operational gates remain separate."
   },
   {
     "id": "A-10-AC4",
@@ -5140,7 +5308,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 85,
     "text": "4. The system shall open Report Preview with Aqua Quenchers, covered period, generation date and all five main financial measures.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
@@ -5187,9 +5355,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-output-failure.log",
         "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Actual initial today report without Generate; exact protected figures/station/period/net formula/current Manila generation timestamp in summary and preview; return, invalid dates preservation/correction/rotation and immutable business snapshots."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ConnectedWorkflowDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/pdf-connected-text.log",
+        "limit": "Actual signed local Auth/REST report exported via real DocumentsUI SAF and opened in PDF viewer; all5figures independently reconciled from saved PDF. Actual export acknowledgement/return verified in android-connected-ui.log. No production data or hosted claim."
+      },
+      {
+        "path": "admin/tests/pdf_cancel.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-cancel.log",
+        "limit": "Actual DocumentsUI Cancel clears pending PDF, no success acknowledgement, preview survives rotation, protected state unchanged; IOException/SecurityException separately verified in android-pdf-output-failure.log."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional report criterion passes actual local native report/preview/SAF/PDF reconciliation with applicable SQL, dates/as-of, cancel/error checks. Figma/declared-device/hosted operational gates remain separate."
   },
   {
     "id": "A-10-SCB",
@@ -5245,9 +5431,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-output-failure.log",
         "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Actual initial today report without Generate; exact protected figures/station/period/net formula/current Manila generation timestamp in summary and preview; return, invalid dates preservation/correction/rotation and immutable business snapshots."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ConnectedWorkflowDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/pdf-connected-text.log",
+        "limit": "Actual signed local Auth/REST report exported via real DocumentsUI SAF and opened in PDF viewer; all5figures independently reconciled from saved PDF. Actual export acknowledgement/return verified in android-connected-ui.log. No production data or hosted claim."
+      },
+      {
+        "path": "admin/tests/pdf_cancel.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-cancel.log",
+        "limit": "Actual DocumentsUI Cancel clears pending PDF, no success acknowledgement, preview survives rotation, protected state unchanged; IOException/SecurityException separately verified in android-pdf-output-failure.log."
       }
     ],
-    "gap": "Actual reversed-period error preserves prior valid report, corrected dates generate valid summary, exact protected financial snapshot unchanged. Design/declared-device gates tracked separately."
+    "gap": "Matched functional report criterion passes actual local native report/preview/SAF/PDF reconciliation with applicable SQL, dates/as-of, cancel/error checks. Figma/declared-device/hosted operational gates remain separate."
   },
   {
     "id": "A-10-AC5",
@@ -5256,7 +5460,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 86,
     "text": "5. The system shall export the preview as PDF through Export PDF and display \"Report exported successfully.\" with Back to Reports.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
@@ -5303,9 +5507,27 @@
         "status": "Verified subset",
         "evidence": "evidence/android-pdf-output-failure.log",
         "limit": "Actual Auth/report/picker, controlled negative platform-result URIs explicitly produce IOException and SecurityException; required error/no success, retry bytes retained then cancelled/cleared; exact financial/inventory unchanged. Not an invented successful export."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Actual initial today report without Generate; exact protected figures/station/period/net formula/current Manila generation timestamp in summary and preview; return, invalid dates preservation/correction/rotation and immutable business snapshots."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ConnectedWorkflowDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/pdf-connected-text.log",
+        "limit": "Actual signed local Auth/REST report exported via real DocumentsUI SAF and opened in PDF viewer; all5figures independently reconciled from saved PDF. Actual export acknowledgement/return verified in android-connected-ui.log. No production data or hosted claim."
+      },
+      {
+        "path": "admin/tests/pdf_cancel.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-pdf-cancel.log",
+        "limit": "Actual DocumentsUI Cancel clears pending PDF, no success acknowledgement, preview survives rotation, protected state unchanged; IOException/SecurityException separately verified in android-pdf-output-failure.log."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional report criterion passes actual local native report/preview/SAF/PDF reconciliation with applicable SQL, dates/as-of, cancel/error checks. Figma/declared-device/hosted operational gates remain separate."
   },
   {
     "id": "A-11-AC1",
@@ -9022,7 +9244,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 38,
     "text": "1. The system shall open Record Pickup for a For Pickup order and provide a Reschedule action.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9058,7 +9280,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-16-AC2",
@@ -9103,7 +9325,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
   },
   {
     "id": "A-16-AC3",
@@ -9112,7 +9334,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 40,
     "text": "3. The system shall accept the actual positive whole-number gallons collected and save through Save Pickup.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9148,7 +9370,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-16-SCA",
@@ -9193,7 +9415,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
   },
   {
     "id": "A-16-AC4",
@@ -9238,7 +9460,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
   },
   {
     "id": "A-16-SCB",
@@ -9247,7 +9469,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 41,
     "text": "B. Invalid collection or a past pickup date\nGiven the Staff member is recording a pickup\nWhen a zero or negative collected quantity is submitted\nThen the system shall display \"Quantity must be greater than zero.\"\nWhen a fractional or nonnumeric collected quantity is submitted\nThen the system shall display \"Enter a whole-number gallon quantity.\"\nThen the system shall save no pickup and leave order status and empty stock unchanged\nGiven the Staff member is rescheduling an uncollected pickup\nWhen the new date is before the scenario business date\nThen the system shall display \"Select today or a future date.\" and retain the previous schedule\nWhen the invalid quantity or date is corrected\nThen the system shall validate the new submission before saving it.\n\nSample Data:\nInvalid collected quantities: −1 and 2.5.\nPast pickup date: 14 Oct 2026 when the business date is 15 Oct 2026.\nEmpty stock remains 80 when pickup is rejected.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9283,7 +9505,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-16-SCC",
@@ -9292,7 +9514,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 41,
     "text": "C. Reject overcollection or an adjustment below paid cash\nGiven a For Pickup order has an original expected quantity and recorded payment\nWhen collection exceeds expected or the adjusted charge would be below the amount already paid\nThen display \"Collected quantity cannot exceed the expected quantity.\" or \"Adjusted total cannot be less than the amount already paid.\" as applicable and save nothing.\n\nSample Data:\nOvercollection: 11 collected against 10 expected. Overpaid adjustment: Dealer 10 gallons, ₱270.00 paid, actual 8 × ₱30.00 = ₱240.00; refer to Owner-approved admin correction.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9328,7 +9550,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-16-AC5",
@@ -9337,7 +9559,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 42,
     "text": "5. The system shall allow Reschedule Pickup with a new pickup date and optional Notes, saved through Save Pickup Result (Owner) or Save result (Staff).",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9373,7 +9595,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-16-AC6",
@@ -9382,7 +9604,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 43,
     "text": "6. The system shall reject a past date with \"Select today or a future date.\"; save today or a future date as Rescheduled and restore For Pickup when collection resumes.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9418,7 +9640,7 @@
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-17-AC1",
@@ -9427,7 +9649,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 47,
     "text": "1. The system shall allow Record Delivery for Ready for Delivery orders and Undelivered orders with pending gallons.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / record_delivery",
@@ -9461,9 +9683,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-17-AC2",
@@ -9506,9 +9740,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-17-AC3",
@@ -9551,9 +9797,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-17-SCA",
@@ -9596,9 +9854,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-17-AC4",
@@ -9607,7 +9877,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 50,
     "text": "4. The system shall save the actual delivery time and account, increase cumulative delivered gallons and reduce physical filled stock and the same order’s reservation by this trip once. Partial delivery shall retain the remaining reservation. Delivery shall not change the adjusted order charge.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / record_delivery",
@@ -9641,9 +9911,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-17-SCB",
@@ -9686,9 +9968,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-17-AC5",
@@ -9697,7 +9991,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 51,
     "text": "5. The system shall set Delivered only when pending gallons reach zero; otherwise set Undelivered and retain the remaining gallons as carry-over.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / record_delivery",
@@ -9731,9 +10025,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-17-AC6",
@@ -9776,9 +10082,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/CarryoverQueueDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-carryover-queue.log",
+        "limit": "Actual Staff original-date/waiting/pending card→order, invalid0/overdelivery no changes, restored form, final remaining2/cumulative3/reservation0, pending removal; initial partial and both-role deliveries in connected/empty-stock evidence. Single remaining order does not prove multiple-order UI sorting."
+      },
+      {
+        "path": "backend/tests/delivery_boundary.sql",
+        "status": "Verified subset",
+        "evidence": "evidence/delivery-boundary-suite.log",
+        "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
   },
   {
     "id": "A-18-AC1",
@@ -11035,7 +11353,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 74,
     "text": "1. The system shall display Staff Settings with Payments, My account, Orders, Pending gallons and Log out, plus Home, Orders, POS, Customers and Settings navigation. My account shall show the signed-in staff name, role, username, contact, Edit profile and Change password.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,profile,password / update_profile",
@@ -11094,9 +11412,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Settings content buttons Payments/Orders/Pending/My account (not duplicate navigation buttons), exact signed-in full name/role/username/contact, Edit profile/Change password/return; no Owner surfaces, real restricted RPC/account-management403, explicit logout; exact business including customer/profile snapshots unchanged. Combined with actual OwnProfileNegative/OwnPassword positive-negative and payment-history proof."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Staff Settings criterion/scenario passes actual readonly content-route/account/permission/logout checks plus prior actual profile/password and linked-payment checks. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-20-AC2",
@@ -11105,7 +11429,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 75,
     "text": "2. The system shall open the corresponding payment, order or pending-gallon screen from Settings and return through the existing staff navigation.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,profile,password / update_profile",
@@ -11164,9 +11488,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Settings content buttons Payments/Orders/Pending/My account (not duplicate navigation buttons), exact signed-in full name/role/username/contact, Edit profile/Change password/return; no Owner surfaces, real restricted RPC/account-management403, explicit logout; exact business including customer/profile snapshots unchanged. Combined with actual OwnProfileNegative/OwnPassword positive-negative and payment-history proof."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Staff Settings criterion/scenario passes actual readonly content-route/account/permission/logout checks plus prior actual profile/password and linked-payment checks. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-20-AC3",
@@ -11234,9 +11564,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Settings content buttons Payments/Orders/Pending/My account (not duplicate navigation buttons), exact signed-in full name/role/username/contact, Edit profile/Change password/return; no Owner surfaces, real restricted RPC/account-management403, explicit logout; exact business including customer/profile snapshots unchanged. Combined with actual OwnProfileNegative/OwnPassword positive-negative and payment-history proof."
       }
     ],
-    "gap": "Functional current-account/valid alias save/stable-ID/history and invalid/duplicate/cancel/rotation checks pass across existing connected UI/SQL and current real Auth/REST native negatives. Design/device/hosted gates separate."
+    "gap": "Matched functional Staff Settings criterion/scenario passes actual readonly content-route/account/permission/logout checks plus prior actual profile/password and linked-payment checks. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-20-SCA",
@@ -11245,7 +11581,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 76,
     "text": "A. Use Staff Settings, update my account and end my session\nGiven Ana Mendoza is signed in with the Staff role\nWhen Settings opens\nThen the system shall display Payments, My account, Orders, Pending gallons and Log out\nWhen Payments, Orders or Pending gallons is selected\nThen the system shall open its corresponding operational screen\nWhen My account opens\nThen the system shall display the signed-in name, role, username, contact, Edit profile and Change password\nWhen Edit profile is selected and valid permitted details are saved\nThen the system shall update only the current Staff profile and display \"Profile updated.\"\nWhen Change password is selected and the correct current password and matching new passwords are saved\nThen the system shall display \"Password updated.\"\nWhen Log out is selected\nThen the system shall end the session and return to Staff Sign in; protected pages shall require authentication again.\n\nSample Data:\nAna Mendoza; Staff; @ana.mendoza; 0917 555 0188.\nPending list example: Maria Santos, 3 gallons, original date 14 Oct 2026, waiting 1 day as of 15 Oct.\nPassword values remain masked in Figma.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,profile,password / update_profile",
@@ -11304,9 +11640,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Settings content buttons Payments/Orders/Pending/My account (not duplicate navigation buttons), exact signed-in full name/role/username/contact, Edit profile/Change password/return; no Owner surfaces, real restricted RPC/account-management403, explicit logout; exact business including customer/profile snapshots unchanged. Combined with actual OwnProfileNegative/OwnPassword positive-negative and payment-history proof."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Staff Settings criterion/scenario passes actual readonly content-route/account/permission/logout checks plus prior actual profile/password and linked-payment checks. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-20-AC4",
@@ -11374,9 +11716,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Settings content buttons Payments/Orders/Pending/My account (not duplicate navigation buttons), exact signed-in full name/role/username/contact, Edit profile/Change password/return; no Owner surfaces, real restricted RPC/account-management403, explicit logout; exact business including customer/profile snapshots unchanged. Combined with actual OwnProfileNegative/OwnPassword positive-negative and payment-history proof."
       }
     ],
-    "gap": "No remaining functional gap for this criterion under tested local API29 environment. Design, declared-device and hosted operational gates remain separate."
+    "gap": "Matched functional Staff Settings criterion/scenario passes actual readonly content-route/account/permission/logout checks plus prior actual profile/password and linked-payment checks. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-20-SCB",
@@ -11385,7 +11733,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 77,
     "text": "B. Reject invalid own-profile/password changes or restricted access\nGiven the Staff member is editing their own account\nWhen required details are missing, the username is not unique or the contact number is invalid\nThen the system shall display the required correction and preserve the saved profile\nWhen an incorrect current password is submitted\nThen the system shall display \"Current password is incorrect.\"\nWhen new-password entries do not match\nThen the system shall display \"New passwords do not match.\" and retain the old password\nGiven the account has the Staff role\nWhen another user’s account, manual inventory management, Expenses or financial Reports is requested\nThen the system shall deny the restricted operation without changing records.\n\nSample Data:\nCurrent Staff account ana.mendoza.\nWrong current password WrongPass123 or mismatched new-password entries.\nRestricted access result: \"Access denied.\"",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,profile,password / update_profile",
@@ -11444,9 +11792,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Settings content buttons Payments/Orders/Pending/My account (not duplicate navigation buttons), exact signed-in full name/role/username/contact, Edit profile/Change password/return; no Owner surfaces, real restricted RPC/account-management403, explicit logout; exact business including customer/profile snapshots unchanged. Combined with actual OwnProfileNegative/OwnPassword positive-negative and payment-history proof."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Staff Settings criterion/scenario passes actual readonly content-route/account/permission/logout checks plus prior actual profile/password and linked-payment checks. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-20-AC5",
@@ -11455,7 +11809,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 78,
     "text": "5. Staff shall not manage other accounts, opening stock or manual adjustments, expenses or financial reports. The Owner may view basic inventory; manual adjustments remain outside the app scope. Staff may record linked order and Walk-in credit payments. Expense category suggestions remain within the Owner Expenses module; local model execution shall never authorize Staff expense writes.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,profile,password / update_profile",
@@ -11514,9 +11868,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Settings content buttons Payments/Orders/Pending/My account (not duplicate navigation buttons), exact signed-in full name/role/username/contact, Edit profile/Change password/return; no Owner surfaces, real restricted RPC/account-management403, explicit logout; exact business including customer/profile snapshots unchanged. Combined with actual OwnProfileNegative/OwnPassword positive-negative and payment-history proof."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Staff Settings criterion/scenario passes actual readonly content-route/account/permission/logout checks plus prior actual profile/password and linked-payment checks. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-20-AC6",
@@ -11525,7 +11885,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 79,
     "text": "6. The system shall end the Staff session through Log out, return to Staff Sign in and require authentication for protected pages.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.settings,profile,password / update_profile",
@@ -11584,8 +11944,14 @@
         "status": "Verified subset",
         "evidence": "evidence/android-own-profile-negative.log; evidence/android-own-profile-negative-owner.log",
         "limit": "Actual Owner/Staff required name/username/contact, oversized name, invalid contacts, real server invalid/duplicate aliases, rotation/Cancel, original account redisplay; customers/financial/stock/profiles/Auth identities/verified-factor mappings unchanged. Existing successful alias save/stable-ID evidence remains android-connected-ui.log and own-profile.log."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/StaffHomeDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-staff-home.log",
+        "limit": "Actual Settings content buttons Payments/Orders/Pending/My account (not duplicate navigation buttons), exact signed-in full name/role/username/contact, Edit profile/Change password/return; no Owner surfaces, real restricted RPC/account-management403, explicit logout; exact business including customer/profile snapshots unchanged. Combined with actual OwnProfileNegative/OwnPassword positive-negative and payment-history proof."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Staff Settings criterion/scenario passes actual readonly content-route/account/permission/logout checks plus prior actual profile/password and linked-payment checks. Figma/declared-device/hosted gates remain separate."
   }
 ]

@@ -42,6 +42,9 @@ def main():
                'customer_name': customer['name'], 'business_date': business, 'receipt_date': receipt,
                'reports': {date: query('report', start_date=date, end_date=date) for date in [business, receipt]},
                'fuel_total': query('expenses', start_date=business, end_date=business, category='Fuel')['total_centavos']}
+    today = str(datetime.datetime.now(ZoneInfo('Asia/Manila')).date())
+    fixture['today'] = today
+    fixture['initial_report'] = query('report', start_date=today, end_date=today)
     assert fixture['fuel_total'] == 75000 and query('expenses', start_date=business, end_date=business, category='Electricity')['total_centavos'] == 0
     private_json(LOCAL / 'financial-fixture.json', fixture)
     private_json(LOCAL / 'financial-baseline.json', before)

@@ -21,7 +21,7 @@ def main():
     env = dict(os.environ, LD_LIBRARY_PATH='/workspace/tooling/sysroot/usr/lib/x86_64-linux-gnu')
     def sql(statement):
         return subprocess.run(['/workspace/tooling/sysroot/usr/lib/postgresql/17/bin/psql', '-X', '-At', '-h', '/workspace/tooling/pgtest', '-p', '55432', '-d', c['database'], '-v', 'ON_ERROR_STOP=1'], input=statement, text=True, capture_output=True, env=env, check=True).stdout.strip()
-    snapshot_sql = "select jsonb_build_object(" + ','.join("'" + table + "',(select coalesce(jsonb_agg(to_jsonb(t) order by to_jsonb(t)::text),'[]'::jsonb) from aq_private." + table + ' t)' for table in ['orders', 'sales', 'payments', 'expenses', 'inventory', 'reservations', 'profiles']) + ');'
+    snapshot_sql = "select jsonb_build_object(" + ','.join("'" + table + "',(select coalesce(jsonb_agg(to_jsonb(t) order by to_jsonb(t)::text),'[]'::jsonb) from aq_private." + table + ' t)' for table in ['orders', 'sales', 'payments', 'expenses', 'inventory', 'reservations', 'profiles', 'customers']) + ');'
     profiles = json.loads(sql("select jsonb_agg(jsonb_build_object('id',user_id,'username',username)) from aq_private.profiles where role='staff' and active;"))
     staff_id = json.loads((LOCAL / 'http-test-state.json').read_text())['staff_id']
     staff = next(p for p in profiles if p['id'] == staff_id)
@@ -35,7 +35,8 @@ def main():
         return data
     token = call('/functions/v1/username-login', {'username': staff['username'], 'password': c['staff_password']})['access_token']
     fixture = {'kind': 'SYNTHETIC_LOCAL_STAFF_HOME_UI', 'username': staff['username'], 'password': c['staff_password'], 'today': str(datetime.datetime.now(ZoneInfo('Asia/Manila')).date()), 'home': call('/rest/v1/rpc/aq_query', {'p_request': {'resource': 'home'}}, token)}
-    fixture['full_name'] = call('/rest/v1/rpc/aq_me', {}, token)['full_name']
+    fixture['me'] = call('/rest/v1/rpc/aq_me', {}, token)
+    fixture['full_name'] = fixture['me']['full_name']
     fixture['current_order'] = call('/rest/v1/rpc/aq_query', {'p_request': {'resource': 'orders'}}, token)['items'][0]
     private_json(LOCAL / 'staff-home-fixture.json', fixture)
     before = json.loads(sql(snapshot_sql))

@@ -1,0 +1,92 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.StaffHomeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.StaffHomeDeviceTest:
+INSTRUMENTATION_STATUS: test=actualCountersQueueLinksAndOwnerDenial
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.StaffHomeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Missing Settings content action: Payments
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.lambda$contentClick$3(StaffHomeDeviceTest.java:45)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.$r8$lambda$hWDHGqfXKeWuCc2vxT9MIpUAeic(Unknown Source:0)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest$$ExternalSyntheticLambda20.apply(D8$$SyntheticClass:0)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.lambda$ui$0(StaffHomeDeviceTest.java:42)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest$$ExternalSyntheticLambda21.perform(D8$$SyntheticClass:0)
+	at androidx.test.core.app.ActivityScenario.lambda$onActivity$2$androidx-test-core-app-ActivityScenario(ActivityScenario.java:794)
+	at androidx.test.core.app.ActivityScenario$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2207)
+	at android.os.Handler.handleCallback(Handler.java:883)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loop(Looper.java:214)
+	at android.app.ActivityThread.main(ActivityThread.java:7356)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+
+INSTRUMENTATION_STATUS: stream=
+Error in actualCountersQueueLinksAndOwnerDenial(com.aquaquenchers.bms.StaffHomeDeviceTest):
+java.lang.AssertionError: Missing Settings content action: Payments
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.lambda$contentClick$3(StaffHomeDeviceTest.java:45)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.$r8$lambda$hWDHGqfXKeWuCc2vxT9MIpUAeic(Unknown Source:0)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest$$ExternalSyntheticLambda20.apply(D8$$SyntheticClass:0)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.lambda$ui$0(StaffHomeDeviceTest.java:42)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest$$ExternalSyntheticLambda21.perform(D8$$SyntheticClass:0)
+	at androidx.test.core.app.ActivityScenario.lambda$onActivity$2$androidx-test-core-app-ActivityScenario(ActivityScenario.java:794)
+	at androidx.test.core.app.ActivityScenario$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2207)
+	at android.os.Handler.handleCallback(Handler.java:883)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loop(Looper.java:214)
+	at android.app.ActivityThread.main(ActivityThread.java:7356)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+
+INSTRUMENTATION_STATUS: test=actualCountersQueueLinksAndOwnerDenial
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 12.678
+There was 1 failure:
+1) actualCountersQueueLinksAndOwnerDenial(com.aquaquenchers.bms.StaffHomeDeviceTest)
+java.lang.AssertionError: Missing Settings content action: Payments
+	at org.junit.Assert.fail(Assert.java:89)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertNotNull(Assert.java:713)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.lambda$contentClick$3(StaffHomeDeviceTest.java:45)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.$r8$lambda$hWDHGqfXKeWuCc2vxT9MIpUAeic(Unknown Source:0)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest$$ExternalSyntheticLambda20.apply(D8$$SyntheticClass:0)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest.lambda$ui$0(StaffHomeDeviceTest.java:42)
+	at com.aquaquenchers.bms.StaffHomeDeviceTest$$ExternalSyntheticLambda21.perform(D8$$SyntheticClass:0)
+	at androidx.test.core.app.ActivityScenario.lambda$onActivity$2$androidx-test-core-app-ActivityScenario(ActivityScenario.java:794)
+	at androidx.test.core.app.ActivityScenario$$ExternalSyntheticLambda2.run(D8$$SyntheticClass:0)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:462)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at android.app.Instrumentation$SyncRunnable.run(Instrumentation.java:2207)
+	at android.os.Handler.handleCallback(Handler.java:883)
+	at android.os.Handler.dispatchMessage(Handler.java:100)
+	at android.os.Looper.loop(Looper.java:214)
+	at android.app.ActivityThread.main(ActivityThread.java:7356)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1
