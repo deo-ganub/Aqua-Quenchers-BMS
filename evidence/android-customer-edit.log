@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.CustomerEditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.CustomerEditDeviceTest:
+INSTRUMENTATION_STATUS: test=cancelledInvalidAndProspectiveCustomerEdit
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.CustomerEditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=cancelledInvalidAndProspectiveCustomerEdit
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 23.613
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: actual Staff cancelled/invalid/duplicate customer edit has no effects; same stable ID/contact after rotation/type/name/address edit; existing30-peso order snapshot/payment retained; prospective35-peso order preview cancelled. All orders/sales/payments/expenses/inventory/reservations exact unchanged; no customer duplicate.

@@ -5,8 +5,8 @@ Complete Java/XML Android29+ BMS + Supabase Auth/PostgreSQL/RLS + offline Python
 Only Owner/Staff; fixed35/30 pesos, whole gallons/integer centavos, Manila business dates separate from immutable real receipts. Backend active-role/session/MFA and atomic stock/reservations/payment/payload-hash idempotency remain authoritative. Manual expenses work without a reviewed model. No fabricated saves/design/benchmarks.
 
 ## Git / current task
-Branch `work`; latest committed implementation `c222f4f` (earlier eb5b12b,81bf0c1). Current changes: financial_history.py/FinancialHistoryDeviceTest, named_credit.py/NamedCreditDeviceTest, related evidence, LOCAL_REAL_SERVICES/REQUIREMENTS_TRACEABILITY/source-requirements and this checkpoint. No unrelated user changes found; inspect git status. No push/deploy.
-CURRENT_TASK: financial-history and named-credit verification complete; prepare coherent commit and next independent customer-edit/snapshot-preservation test. Named-credit runner67234 completed successfully, no pending native financial operation.
+Branch `work`; latest committed implementation `32aaf1b` (earlier eb5b12b,81bf0c1). Current changes: financial_history.py/FinancialHistoryDeviceTest, named_credit.py/NamedCreditDeviceTest, related evidence, LOCAL_REAL_SERVICES/REQUIREMENTS_TRACEABILITY/source-requirements and this checkpoint. No unrelated user changes found; inspect git status. No push/deploy.
+CURRENT_TASK: Staff customer edit verification complete run256df692 (native OK1test + host PASS), no pending profile mutation. Next independent native account edit/deactivation/reactivation requires a dedicated already-created synthetic Staff account and actual managed MFA; preserve all business records.
 
 ## Verified (reuse evidence)
 - Official source-built GoTruev2.197.0 + SHA-verified PostgREST16.5, real production Edge handlers over trusted HTTPS, all4 migrations on actual Auth schema. Password/JWT/forgery, real TOTP/AAL2, account reconciliation/deactivation/logout/refresh, permissions, exact operational/financial/stock workflow PASS: real-auth-rest-http.log, real-services-provenance.json.
@@ -35,4 +35,6 @@ Figma SECOND-page screens/components/prototype access; reviewed seven-category d
 2. Exercise remaining independent native account edit/deactivation and customer-edit/permission/error variants against isolated synthetic identities, preserving stable links/security and financial history.
 3. Complete remaining local acceptance variants; keep per-criterion evidence precise. Reviewed-model/design/declared-device/hosted recovery gates need actual external prerequisites.
 
-NEXT_ACTION: commit verified financial/credit tests/evidence/docs, then add targeted Staff customer edit/cancel/invalid/duplicate/type-change verification on its synthetic operational customer; require old order price/name/contact snapshots and ledger/stock unchanged, and prospective new-order preview35 without saving a new order.
+Customer edit run256df692 VERIFIED: cancel/missing/type/invalid/duplicate no effects; same stableID/contact after rotation and name/address/Household update; old30-peso order/name/payment retained; prospective35-peso order preview cancelled. Exact full orders/sales/payments/expenses/inventory/reservation snapshots unchanged and customer count unchanged. evidence/android-customer-edit.log; device fixture removed; host state completed. Build + Python syntax PASS.
+
+NEXT_ACTION: commit verified customer edit checks/docs, then implement gated native Owner Staff-account edit/deactivation/reactivation using the account created by connected run7f863325, actual MFA, old-session denial while inactive and fresh same-ID login afterward; no financial mutation.
