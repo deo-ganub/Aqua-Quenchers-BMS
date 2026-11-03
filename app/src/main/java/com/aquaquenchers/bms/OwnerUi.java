@@ -2,8 +2,8 @@ package com.aquaquenchers.bms;
 
 import android.app.*;
 import android.content.*;
-import android.graphics.*;
-import android.graphics.pdf.PdfDocument;
+
+
 import android.net.Uri;
 import android.text.*;
 import android.view.View;
@@ -63,7 +63,7 @@ final class OwnerUi {
  private void reportPreview(){if(!owner())return;if(report==null){reports();a.error("Generate a report first.");return;}LinearLayout p=a.page("Report Preview");summary(p,report);a.text(p,"Generated: "+generated(report));a.button(p,"Export PDF",this::exportPdf);a.button(p,"Back to Reports",this::reports);}
  private void exportPdf(){if(!owner())return;if(report==null)throw new IllegalArgumentException("Generate a report first.");pdf=renderPdf(report);a.pendingPdf(pdf);Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT).setType("application/pdf").addCategory(Intent.CATEGORY_OPENABLE).putExtra(Intent.EXTRA_TITLE,"Aqua-Quenchers-"+report.optString("start_date")+".pdf");a.startActivityForResult(intent,PDF_REQUEST);}
  private String generated(JSONObject r){return a.timestamp(r.optString("generated_at"));}
- private byte[] renderPdf(JSONObject r){PdfDocument doc=new PdfDocument();try(ByteArrayOutputStream out=new ByteArrayOutputStream()){PdfDocument.Page page=doc.startPage(new PdfDocument.PageInfo.Builder(595,842,1).create());Canvas c=page.getCanvas();Paint paint=new Paint();paint.setTextSize(14);int y=60;String[] lines={r.optString("station"),"Financial summary",r.optString("start_date")+" to "+r.optString("end_date"),"Generated: "+generated(r),"Revenue: "+a.money(r.optLong("revenue_centavos")),"Payments received: "+a.money(r.optLong("payments_received_centavos")),"Expenses: "+a.money(r.optLong("expenses_centavos")),"Net income: "+a.money(r.optLong("net_income_centavos")),"Outstanding balances: "+a.money(r.optLong("outstanding_centavos")),"Net income = Payments received - Expenses"};for(String line:lines){c.drawText(line,40,y,paint);y+=32;}doc.finishPage(page);doc.writeTo(out);return out.toByteArray();}catch(IOException e){throw new IllegalArgumentException("PDF could not be generated.");}finally{doc.close();}}
+ private byte[] renderPdf(JSONObject r){return ReportPdf.render(r);}
  void activityResult(int request,int result,Intent data){
   if(request!=PDF_REQUEST)return;
   if(result!=Activity.RESULT_OK||data==null){pdf=null;a.pendingPdf(null);return;}

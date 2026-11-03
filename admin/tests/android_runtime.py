@@ -1,4 +1,4 @@
-"""Two explicit local API29 runtime checks; never runs declared-tablet benchmarks.
+"""Three explicit local API29 runtime checks; never runs declared-tablet benchmarks.
 
 Requires the existing isolated aq_api29_software AVD and built app/test APKs.
 """
@@ -8,7 +8,7 @@ import zipfile
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 ADB = ['/workspace/tooling/android-sdk/platform-tools/adb', '-s', 'emulator-5554']
-CLASSES = 'com.aquaquenchers.bms.SignInDeviceTest,com.aquaquenchers.classifier.ClassifierParityDeviceTest'
+CLASSES = 'com.aquaquenchers.bms.SignInDeviceTest,com.aquaquenchers.classifier.ClassifierParityDeviceTest,com.aquaquenchers.bms.ReportPdfDeviceTest'
 
 
 def run(arguments, timeout=120):
@@ -40,9 +40,9 @@ def main():
         result = run(['shell', 'am', 'instrument', '-w', '-r', '-e', 'class', CLASSES,
                       'com.aquaquenchers.bms.test/androidx.test.runner.AndroidJUnitRunner'], timeout=180)
         log.write(result.stdout + result.stderr)
-        if 'OK (2 tests)' not in result.stdout or 'FAILURES!!!' in result.stdout:
-            raise RuntimeError('Instrumentation did not pass both tests; inspect evidence log.')
-    print('PASS: two actual API29 tests; synthetic fixtures absent from app APK.')
+        if 'OK (3 tests)' not in result.stdout or 'FAILURES!!!' in result.stdout:
+            raise RuntimeError('Instrumentation did not pass all three tests; inspect evidence log.')
+    print('PASS: three actual API29 tests; synthetic fixtures absent from app APK.')
 
 
 if __name__ == '__main__':

@@ -2580,7 +2580,8 @@
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "app/src/main/java/com/aquaquenchers/bms/ReportPdf.java"
         ]
       }
     ],
@@ -2590,6 +2591,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ReportPdfDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log; evidence/pdf-synthetic-text.log",
+        "limit": "Actual local API29 synthetic artifact render + independent text verification; real Auth/SAF/viewer/Figma scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2607,7 +2614,8 @@
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "app/src/main/java/com/aquaquenchers/bms/ReportPdf.java"
         ]
       }
     ],
@@ -2617,6 +2625,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ReportPdfDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log; evidence/pdf-synthetic-text.log",
+        "limit": "Actual local API29 synthetic artifact render + independent text verification; real Auth/SAF/viewer/Figma scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2634,7 +2648,8 @@
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "app/src/main/java/com/aquaquenchers/bms/ReportPdf.java"
         ]
       }
     ],
@@ -2644,6 +2659,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ReportPdfDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log; evidence/pdf-synthetic-text.log",
+        "limit": "Actual local API29 synthetic artifact render + independent text verification; real Auth/SAF/viewer/Figma scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2661,7 +2682,8 @@
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "app/src/main/java/com/aquaquenchers/bms/ReportPdf.java"
         ]
       }
     ],
@@ -2671,6 +2693,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ReportPdfDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log; evidence/pdf-synthetic-text.log",
+        "limit": "Actual local API29 synthetic artifact render + independent text verification; real Auth/SAF/viewer/Figma scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2688,7 +2716,8 @@
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "app/src/main/java/com/aquaquenchers/bms/ReportPdf.java"
         ]
       }
     ],
@@ -2698,6 +2727,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ReportPdfDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log; evidence/pdf-synthetic-text.log",
+        "limit": "Actual local API29 synthetic artifact render + independent text verification; real Auth/SAF/viewer/Figma scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2715,7 +2750,8 @@
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "app/src/main/java/com/aquaquenchers/bms/ReportPdf.java"
         ]
       }
     ],
@@ -2725,6 +2761,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ReportPdfDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log; evidence/pdf-synthetic-text.log",
+        "limit": "Actual local API29 synthetic artifact render + independent text verification; real Auth/SAF/viewer/Figma scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -2742,7 +2784,8 @@
         "symbol": "OwnerUi.reports,renderPdf / aq_private.financial_summary",
         "paths": [
           "app/src/main/java/com/aquaquenchers/bms/OwnerUi.java",
-          "supabase/migrations/202611030001_core.sql"
+          "supabase/migrations/202611030001_core.sql",
+          "app/src/main/java/com/aquaquenchers/bms/ReportPdf.java"
         ]
       }
     ],
@@ -2752,6 +2795,12 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
         "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ReportPdfDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-api29-instrumentation.log; evidence/pdf-synthetic-text.log",
+        "limit": "Actual local API29 synthetic artifact render + independent text verification; real Auth/SAF/viewer/Figma scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."

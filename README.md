@@ -45,4 +45,4 @@ External requirements: development Supabase access/MFA settings; Figma second-pa
 
 Recovery/correction/privacy procedures: `admin/recovery/RUNBOOK.md`, `admin/EXCEPTION_AND_PRIVACY_RUNBOOK.md`. The schedule remains disabled until configured on a private runner; no paid service/public backup artifacts are used. Handoff sources are retained locally under `handoff/`, with `handoff/CODEX_PROMPT.md` as the actual baseline. Private academic originals are excluded from source publication.
 
-Native runtime checks: see docs/ANDROID_RUNTIME_CHECKS.md. Two tests actually passed on local software API29 (sign-in denial and8-case synthetic Python/Java parity). Test fixtures are absent from the app APK. These results do not establish real Auth, Figma fidelity or declared-tablet benchmark gates.
+Native runtime checks: see docs/ANDROID_RUNTIME_CHECKS.md. Three tests actually passed on local software API29 (sign-in denial,8-case synthetic Python/Java parity and synthetic financial PDF rendering). Test fixtures are absent from the app APK. These results do not establish real Auth, Figma fidelity or declared-tablet benchmark gates.
