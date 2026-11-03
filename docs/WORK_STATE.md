@@ -5,7 +5,7 @@ Complete native Java/XML Android29+ BMS, Supabase Auth/PostgreSQL/RLS and offlin
 Only Owner/Staff, fixed35/30 pesos, whole gallons/integer centavos, Manila business dates vs immutable real receipts, backend authority/session/MFA, atomic reservations/stock/payments/idempotency. No fabricated saves/model/device/design results. Manual expense remains usable without release model.
 
 ## Git / current task
-Branch work; starting HEAD4c08fad restored clean from published environment. Latest committed local checkpoint before this write99f5c75 (verified PDF cancellation). Current modifications: BackendOutageDeviceTest.java/backend_outage.py, traceability/source inventory/LOCAL_REAL_SERVICES and this checkpoint; new android-backend-outage.log. No unrelated user changes found. Current task: checkpoint verified outage result and publish source to established work branch, then continue next independent negative case. Inspect git status/remote before writes; never force push.
+Branch work; starting HEAD4c08fad restored clean from published environment. Latest verified implementation commit afa8272 (PDF cancellation99f5c75 + actual outage test). GitHub origin/work matches full SHAafa82723d5204625ef3e66e600368c84b524c6f8; worktree clean before this state update. Only this checkpoint note is modified at write time. No unrelated user changes found. Current task: next independent native PDF output failure case; current checks complete and no pending service/mutation. Inspect git status/remote before writes; never force push.
 
 ## Verified latest progress
 - Published environment restarted: retained official Auth/PostgREST/gateway/PG healthy, no reset. Owned API29 cold boot completed. Prior source/local fixture restored, no production data/credentials.
@@ -29,8 +29,8 @@ Private config0600 `/workspace/tooling/aq-auth-rest-local/private-config.json`, 
 ## Blockers / remaining work
 Figma supplied URL still fails at proxy CONNECT403 although published runtime reports unrestricted/enforced networking; missing allowlist is not an established cause. No available Figma/browser connector, no rendered SECOND-page assets. Do not claim fidelity or reapply previous domain settings.
 Reviewed7category dataset/release model required for actual classifier quality/training gates. Declared Owner tablet/Staff phone/network required for performance/physical acceptance. Independent recovery destinations/keys/custody/retention approvals and hosted drill required for production recovery gates. No invented approvals/results. Local unexercised variants remain In Progress, not externally Blocked.
-1. Complete source checkpoint and verify remote work SHA after push, preserving all user changes.
+1. Source checkpoints published and matching remote SHA verified; all405historical blobs scanned against known private fixture secrets/tokens, no matches.
 2. Test actual PDF output-stream failure/permission handling without false acknowledgement; retain export retry/cancel behavior and business immutability.
 3. Continue remaining per-source native variants where independent; finish design/model/device/hosted gates only with actual prerequisites.
 
-NEXT_ACTION: commit verified backend-outage test/evidence/traceability, check private-literal exclusion and push established work branch; verify remote SHA. Then implement controlled native PDF output failure check and exact financial/stock reconciliation, with no real business mutation or production access.
+NEXT_ACTION: implement controlled native PDF output-stream failure/permission-denial verification on the owned API29 emulator, preserving actual Auth/report generation, truthful failure/no success acknowledgement, retry/cancel behavior and exact financial/inventory snapshots. Current services healthy; no outage/push outcome pending. Do not change/publish environment settings or rerun completed mutating suites.
