@@ -736,6 +736,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -775,6 +781,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -814,6 +826,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -853,6 +871,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -892,6 +916,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -931,6 +961,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -970,6 +1006,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1009,6 +1051,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2110,6 +2158,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2149,6 +2203,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2188,6 +2248,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2227,6 +2293,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2266,6 +2338,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2305,6 +2383,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2344,6 +2428,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2383,6 +2473,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2422,6 +2518,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2461,6 +2563,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2500,6 +2608,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2539,6 +2653,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2578,6 +2698,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2617,6 +2743,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2656,6 +2788,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2695,6 +2833,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2755,6 +2899,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2815,6 +2965,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Reviewed release model/dataset required for actual released suggestion/apply acceptance. Synthetic math/state tests pass; do not ship a synthetic release model."
@@ -2875,6 +3031,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -2935,6 +3097,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Reviewed release model/dataset required for actual released suggestion/apply acceptance. Synthetic math/state tests pass; do not ship a synthetic release model."
@@ -2995,6 +3163,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3055,6 +3229,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3115,6 +3295,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3175,6 +3361,12 @@
         "status": "Verified subset",
         "evidence": "evidence/real-auth-expiry-retry.log",
         "limit": "Actual native refresh, one committed expense despite lost response/recreation/retry, backend idle negative fixture and actual signed-token rejection. Local software device only."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3215,6 +3407,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3255,6 +3453,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3295,6 +3499,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3335,6 +3545,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3375,6 +3591,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3415,6 +3637,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -3455,6 +3683,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4955,6 +5189,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -4994,6 +5234,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5033,6 +5279,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5072,6 +5324,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5111,6 +5369,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5150,6 +5414,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5189,6 +5459,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -5228,6 +5504,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/FinancialHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-financial-history.log",
+        "limit": "Read-only native exact reports/preview/rotation/date error repair, Fuel75000/empty category and customer business-date orders vs receipt-date payments/clear/rotation. Exact financial/inventory/customer snapshots unchanged; excludes only generated response timestamp."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6329,6 +6611,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6368,6 +6656,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6407,6 +6701,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6446,6 +6746,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6485,6 +6791,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6524,6 +6836,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6563,6 +6881,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6602,6 +6926,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6641,6 +6971,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6680,6 +7016,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6719,6 +7061,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6758,6 +7106,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6797,6 +7151,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6836,6 +7196,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6875,6 +7241,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6914,6 +7286,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-connected-ui.log",
         "limit": "Actual local official Auth/REST and connected Owner/Staff workflow; only exercised steps, not all variants or Figma/declared-device acceptance."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/NamedCreditDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-named-credit.log",
+        "limit": "Actual Owner+Staff invalid/cancelled POS no effects; optional-profile zero-cash named credit after rotation, cancelled/invalid/partial receipt. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
