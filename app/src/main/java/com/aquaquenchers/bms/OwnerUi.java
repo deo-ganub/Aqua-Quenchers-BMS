@@ -26,7 +26,9 @@ final class OwnerUi {
  private static final int TEXT=android.text.InputType.TYPE_CLASS_TEXT;
  private static final int MONEY=android.text.InputType.TYPE_CLASS_NUMBER|android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL;
  OwnerUi(MainActivity activity){a=activity;report=a.reportSnapshot();pdf=a.pendingPdf();}
- boolean restore(String route){switch(route){case "Expenses":if(a.isOwner()){expenses();return true;}break;case "Add Expense":if(a.isOwner()){expense();return true;}break;case "Financial summary":if(a.isOwner()){reports();return true;}break;case "Settings":settings();return true;case "My account":profile();return true;case "Change password":password();return true;case "Staff accounts":if(a.isOwner()){staff();return true;}break;}return false;}
+ boolean restore(String route,String entity){
+  if(a.isOwner()&&"Edit Staff account".equals(route)&&Rules.uuid(entity)){a.page(route,entity);a.query("staff",a.json(),r->{JSONArray users=r.optJSONArray("items");if(users!=null)for(int i=0;i<users.length();i++){JSONObject user=users.optJSONObject(i);if(user!=null&&entity.equals(user.optString("user_id"))){staffForm(user);return;}}staff();a.error("Staff account no longer available.");});return true;}
+  switch(route){case "Expenses":if(a.isOwner()){expenses();return true;}break;case "Add Expense":if(a.isOwner()){expense();return true;}break;case "Financial summary":if(a.isOwner()){reports();return true;}break;case "Inventory":if(a.isOwner()){inventory();return true;}break;case "Create Staff account":if(a.isOwner()){staffForm(null);return true;}break;case "Settings":settings();return true;case "My account":profile();return true;case "Change password":password();return true;case "Staff accounts":if(a.isOwner()){staff();return true;}break;}return false;}
  private ExpenseCategoryClassifier.Result predict(String remarks){if(cachedClassifier==null)cachedClassifier=ClassifierAssets.load(a.getApplicationContext());return cachedClassifier.suggest(remarks);}
  void close(){predictions.shutdown();}
  private boolean owner(){if(a.isOwner())return true;a.error("Access denied.");return false;}

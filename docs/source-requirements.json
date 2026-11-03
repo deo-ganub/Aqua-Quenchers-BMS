@@ -783,7 +783,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -810,7 +810,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -837,7 +837,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -864,7 +864,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -891,7 +891,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -918,7 +918,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -945,7 +945,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -972,7 +972,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -999,7 +999,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3921,7 +3921,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3948,7 +3948,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -3975,7 +3975,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4002,7 +4002,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4029,7 +4029,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4056,7 +4056,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4083,7 +4083,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4110,7 +4110,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."
@@ -4137,7 +4137,7 @@
         "path": "backend/tests/lifecycle.sql",
         "status": "Verified subset",
         "evidence": "evidence/postgres-utf8.log",
-        "limit": "Passing backend assertions cover only part of this full UI criterion/scenario."
+        "limit": "Local operational/financial invariants plus minimal exact-once ordered Owner timeline and Staff omission pass; full native scenario not run."
       }
     ],
     "gap": "Full individual Given-When-Then/UI/hosted integration evidence pending; source text remains the acceptance oracle. Figma/device/Auth access external where applicable."

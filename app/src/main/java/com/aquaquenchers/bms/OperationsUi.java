@@ -33,7 +33,24 @@ public final class OperationsUi {
     private static final String[] TYPES = {"Choose customer type", "Household", "Dealer", "Walk-in"};
     public OperationsUi(MainActivity host) { this.host = host; }
 
-    public boolean restore(String route){switch(route){case "Customers":customers();return true;case "Orders":orders();return true;case "Pending gallons / Carry-over Details":pending();return true;case "Walk-in Sale / POS":pos();return true;case "Payments":payments();return true;case "Create Order":newOrder(null);return true;case "Add Customer":customerForm(null,null);return true;}return false;}
+    public boolean restore(String route,String entity){
+        if(Rules.uuid(entity)){
+            switch(route){
+                case "Customer Profile":customer(entity);return true;
+                case "Order Details":order(entity);return true;
+                case "Payments":payments(entity);return true;
+                case "Edit Customer":page(route,entity);query("customer",json("id",entity),r->customerForm(nested(r,"customer"),null));return true;
+                case "Record Pickup":page(route,entity);query("order",json("id",entity),r->pickup(nested(r,"order")));return true;
+                case "Reschedule Pickup":page(route,entity);query("order",json("id",entity),r->reschedule(nested(r,"order")));return true;
+                case "Record Delivery":page(route,entity);query("order",json("id",entity),r->delivery(nested(r,"order")));return true;
+                case "Sale saved":page(route,entity);query("sale",json("id",entity),r->saleResult(nested(r,"sale")));return true;
+            }
+        }
+        if("Record Payment".equals(route)&&(entity.startsWith("ORD-")||entity.startsWith("SALE-"))){
+            String kind=entity.startsWith("ORD-")?"order":"sale";
+            page(route,entity);query(kind,json("reference",entity),r->payment(nested(r,kind),kind));return true;
+        }
+        switch(route){case "Customers":customers();return true;case "Orders":orders();return true;case "Pending gallons / Carry-over Details":pending();return true;case "Walk-in Sale / POS":pos();return true;case "Payments":payments();return true;case "Create Order":newOrder(null);return true;case "Add Customer":customerForm(null,null);return true;}return false;}
     private LinearLayout page(String title,String id){generation++;return host.page(title,id);}
     private LinearLayout page(String title) { generation++; return host.page(title); }
     private void query(String resource, JSONObject data, Consumer<JSONObject> action) {
@@ -55,13 +72,7 @@ public final class OperationsUi {
         });
     }
     private int quantity(EditText input) {
-        String text = value(input);
-        if (!text.matches("-?[0-9]+")) throw new IllegalArgumentException("Enter a whole-number gallon quantity.");
-        try {
-            int q = Integer.parseInt(text);
-            if (q <= 0) throw new IllegalArgumentException("Quantity must be greater than zero.");
-            return q;
-        } catch (NumberFormatException e) { throw new IllegalArgumentException("Enter a whole-number gallon quantity."); }
+        return Rules.quantity(value(input));
     }
     private long cents(EditText input, String invalid) {
         try {
@@ -246,7 +257,7 @@ public final class OperationsUi {
         host.button(p, "Save Order", () -> valid(() -> {
             int position = customer.getSelectedItemPosition() - 1;
             if (position < 0 || position >= list.size()) throw new IllegalArgumentException("Choose a customer.");
-            int q;try{q=quantity(quantity);}catch(IllegalArgumentException e){throw new IllegalArgumentException("Enter a valid gallon quantity.");} String d;
+            int q=quantity(quantity); String d;
             try { d = LocalDate.parse(value(businessDate)).toString(); } catch (Exception e) { throw new IllegalArgumentException("Complete the required fields."); }
             host.command("create_order", json("customer_id", id(list.get(position)), "quantity", q, "business_date", d), result -> {
                 JSONObject o = nested(result, "order"); if (!id(o).isEmpty()) order(id(o)); else orders();host.info("Order saved.");
@@ -256,12 +267,13 @@ public final class OperationsUi {
     }
 
     public void order(String orderId) {
-        LinearLayout p = page("Order Details");
+        LinearLayout p = page("Order Details",orderId);
         query("order", json("id", orderId), response -> {
             JSONObject o = nested(response, "order");
             line(p, o.optString("reference") + "\n" + o.optString("customer_name") + " · " + title(o.optString("customer_type")) + "\n" + o.optString("contact_number") + "\n" + o.optString("address"));
             line(p, "Order date: " + o.optString("business_date") + "\nRecorded: " + host.timestamp(o.optString("created_at")) + "\nRecorded by: " + o.optString("recorded_by_name", o.optString("recorded_by")));
             line(p, "Status: " + title(o.optString("status")) + "\nOriginal expected gallons: " + o.optInt("expected_quantity", o.optInt("quantity")) + "\nAdjusted order gallons: " + o.optInt("quantity") + "\nPicked up: " + o.optInt("collected_quantity") + "\nShortfall: " + o.optInt("shortfall") + "\nDelivered: " + o.optInt("delivered_quantity") + "\nPending: " + pending(o) + "\nReserved for this order: " + o.optInt("reserved_quantity"));
+            if(pending(o)>0)line(p,"Waiting: "+Math.max(0,ChronoUnit.DAYS.between(Rules.date(o.optString("business_date")),Rules.date(host.today())))+" days since original order date");
             line(p, "Fixed unit price: " + host.money(o.optLong("unit_price_centavos")) + "\nOrder total: " + host.money(o.optLong("total_centavos")) + "\nAmount paid: " + host.money(paid(o)) + "\nBalance: " + host.money(balance(o)) + "\nPayment status: " + title(o.optString("payment_status")));
             String status = o.optString("status");
             if (status.equals("ordered")) transition(p, o, "for_pickup", "For Pickup");
@@ -278,6 +290,11 @@ public final class OperationsUi {
             if (balance(o) > 0) host.button(p, "Record Payment", () -> payment(o, "order"));
             JSONArray receipts=o.optJSONArray("payments");if(receipts!=null){line(p,"Payment history");renderReceipts(p,receipts);}
             JSONArray deliveries=o.optJSONArray("deliveries");if(deliveries!=null&&deliveries.length()>0){line(p,"Delivery history");for(int i=0;i<deliveries.length();i++){JSONObject d=deliveries.optJSONObject(i);if(d!=null)line(p,d.optInt("quantity")+" gallons • "+host.timestamp(d.optString("created_at"))+" • Recorded by: "+d.optString("recorded_by_name",d.optString("recorded_by")));}}
+            if(host.isOwner()){
+                line(p,"Order timeline");JSONArray timeline=o.optJSONArray("timeline");
+                if(timeline==null||timeline.length()==0)line(p,"No timeline events available.");
+                else for(int i=0;i<timeline.length();i++){JSONObject event=timeline.optJSONObject(i);if(event!=null)line(p,title(event.optString("action"))+" • "+title(event.optString("status"))+"\n"+host.timestamp(event.optString("occurred_at"))+"\nRecorded by: "+event.optString("recorded_by_name"));}
+            }
             host.button(p, "Back to Orders", this::orders);
         });
     }
@@ -368,7 +385,7 @@ public final class OperationsUi {
         })); cancel(p, this::orders);
     }
     private void saleResult(JSONObject sale) {
-        LinearLayout p = page("Sale saved");
+        LinearLayout p = page("Sale saved",id(sale));
         line(p, "Walk-in sale completed.\n" + sale.optString("reference") + "\nCustomer: " + sale.optString("customer_name") + "\nDate/time: " + host.timestamp(sale.optString("created_at")) + "\nTotal: " + host.money(sale.optLong("total_centavos")) + "\nPayment status: " + title(sale.optString("payment_status")) + "\nBalance: " + host.money(balance(sale)) + "\nKeep the transaction reference for later credit payments.");
         if (balance(sale) > 0) host.button(p, "Record Payment", () -> payment(sale, "sale"));
         host.button(p, "Done", this::orders);
@@ -376,7 +393,7 @@ public final class OperationsUi {
 
     public void payments() { payments(null); }
     private void payments(String customerId) {
-        LinearLayout p = page("Payments");
+        LinearLayout p = page("Payments",customerId==null?"":customerId);
         EditText search = host.input(p, "Find customer, Order ID or Walk-in credit reference", "", InputType.TYPE_CLASS_TEXT);
         line(p, "Select one unpaid or partially paid reference. Payments are recorded on the actual server receipt date.");
         LinearLayout balances = new LinearLayout(host); balances.setOrientation(LinearLayout.VERTICAL); p.addView(balances);

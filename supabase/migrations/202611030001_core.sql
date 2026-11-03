@@ -231,7 +231,7 @@ begin
   result:=aq_private.customer_json(id);
  elsif op='create_order' then
   perform aq_private.require_keys(p_request,array['operation','request_id','customer_id','quantity','business_date']);
-  begin q:=aq_private.positive_quantity(p_request->'quantity');exception when others then raise exception 'Enter a valid gallon quantity.';end;
+  q:=aq_private.positive_quantity(p_request->'quantity');
   select * into c from aq_private.customers where customers.id=(p_request->>'customer_id')::uuid;
   if not found then raise exception 'Choose a customer.'; end if;
   if c.contact_number is null or c.address is null then raise exception 'Complete the required fields.';end if;
@@ -385,6 +385,9 @@ begin
  elsif resource='order' then
   select o.id into id from aq_private.orders o where o.id=nullif(p_request->>'id','')::uuid or o.reference=p_request->>'reference';
   result:=aq_private.order_json(id); if result is null then raise exception 'Order not found.'; end if;
+  if exists(select 1 from aq_private.profiles where user_id=a and role='owner') then
+   result:=result||jsonb_build_object('timeline',(select coalesce(jsonb_agg(jsonb_build_object('event_id',e.id,'action',e.action,'status',e.after_state->>'status','occurred_at',e.created_at,'recorded_by_name',pr.full_name) order by e.created_at,e.id),'[]') from aq_private.audit_events e left join aq_private.profiles pr on pr.user_id=e.actor_id where e.entity_id=id and e.action in ('create_order','transition_order','record_pickup','record_delivery','reschedule_pickup')));
+  end if;
   return result||jsonb_build_object('payments',(select coalesce(jsonb_agg(to_jsonb(p)||jsonb_build_object('recorded_by_name',pr.full_name) order by received_at desc),'[]') from aq_private.payments p left join aq_private.profiles pr on pr.user_id=p.recorded_by where p.order_id=id),
    'deliveries',(select coalesce(jsonb_agg(to_jsonb(d) order by created_at desc),'[]') from aq_private.deliveries d where order_id=id));
  elsif resource in ('sales','sale') then

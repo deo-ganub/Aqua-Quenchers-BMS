@@ -1,20 +1,19 @@
-Starting a Gradle Daemon (subsequent builds will be faster)
 > Task :app:preBuild UP-TO-DATE
 > Task :app:preDebugBuild UP-TO-DATE
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
 > Task :app:generateDebugBuildConfig UP-TO-DATE
-> Task :classifier-java:compileJava UP-TO-DATE
 > Task :app:javaPreCompileDebug UP-TO-DATE
+> Task :classifier-java:compileJava UP-TO-DATE
 > Task :classifier-java:processResources NO-SOURCE
 > Task :classifier-java:classes UP-TO-DATE
-> Task :classifier-java:jar UP-TO-DATE
 > Task :app:checkDebugAarMetadata UP-TO-DATE
+> Task :classifier-java:jar UP-TO-DATE
 > Task :app:generateDebugResValues UP-TO-DATE
-> Task :app:mapDebugSourceSetPaths UP-TO-DATE
 > Task :classifier-java:compileTestJava UP-TO-DATE
-> Task :app:generateDebugResources UP-TO-DATE
+> Task :app:mapDebugSourceSetPaths UP-TO-DATE
 > Task :classifier-java:processTestResources NO-SOURCE
 > Task :classifier-java:testClasses UP-TO-DATE
+> Task :app:generateDebugResources UP-TO-DATE
 > Task :app:mergeDebugResources UP-TO-DATE
 > Task :app:packageDebugResources UP-TO-DATE
 > Task :app:parseDebugLocalResources UP-TO-DATE
@@ -87,8 +86,8 @@ Note: Recompile with -Xlint:deprecation for details.
 > Task :app:createDebugAndroidTestApkListingFileRedirect UP-TO-DATE
 > Task :app:assembleDebugAndroidTest UP-TO-DATE
 > Task :app:preDebugUnitTestBuild UP-TO-DATE
-> Task :app:bundleDebugClassesToRuntimeJar
 > Task :app:javaPreCompileDebugUnitTest UP-TO-DATE
+> Task :app:bundleDebugClassesToRuntimeJar
 > Task :app:compileDebugUnitTestJavaWithJavac
 > Task :app:processDebugUnitTestJavaRes NO-SOURCE
 > Task :app:testDebugUnitTest
@@ -109,5 +108,5 @@ Wrote HTML report to file:///workspace/Aqua-Quenchers-BMS/app/build/reports/lint
 > Task :app:lintDebug
 [Incubating] Problems report is available at: file:///workspace/Aqua-Quenchers-BMS/build/reports/problems/problems-report.html
 
-BUILD SUCCESSFUL in 11s
+BUILD SUCCESSFUL in 2s
 77 actionable tasks: 18 executed, 59 up-to-date

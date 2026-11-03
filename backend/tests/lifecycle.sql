@@ -6,7 +6,7 @@ select set_config('request.jwt.claim.sub','10000000-0000-4000-8000-000000000001'
 select set_config('request.jwt.claims',jsonb_build_object('session_id','20000000-0000-4000-8000-000000000001','iat',extract(epoch from clock_timestamp()),'aal','aal2')::text,true);
 set local role authenticated;
 do $$
-declare c jsonb;o jsonb;r jsonb; sale jsonb; key uuid; denied boolean; params jsonb;
+declare c jsonb;o jsonb;r jsonb; sale jsonb; key uuid; denied boolean; params jsonb;stages text[];event jsonb;
 begin
  c:=public.aq_command(jsonb_build_object('operation','create_customer','request_id',gen_random_uuid(),'name','Synthetic','customer_type','household','contact_number','09000000003','address','Synthetic'));
  o:=public.aq_command(jsonb_build_object('operation','create_order','request_id',gen_random_uuid(),'customer_id',c->>'id','quantity',10,'business_date','2026-10-15'));
@@ -34,6 +34,24 @@ begin
  if (r->>'revenue_centavos')::bigint<>28000 or (r->>'payments_received_centavos')::bigint<>0 or (r->>'net_income_centavos')::bigint<>-75000 or (r->>'outstanding_centavos')::bigint<>28000 then raise exception 'Business date/receipts/as-of definitions failed: %',r;end if;
  r:=public.aq_query(jsonb_build_object('resource','report','start_date',(clock_timestamp() at time zone 'Asia/Manila')::date,'end_date',(clock_timestamp() at time zone 'Asia/Manila')::date));
  if (r->>'payments_received_centavos')::bigint<>10000 or (r->>'outstanding_centavos')::bigint<>18000 then raise exception 'Receipt/current as-of calculation failed';end if;
- raise notice 'PASS: adjusted charge, conversion/reservation retry, reserved POS protection, partial/final delivery, Owner expenses, report date/receipt/as-of definitions';
+ r:=public.aq_query(jsonb_build_object('resource','order','id',o->>'id'));
+ select array_agg(value->>'status') into stages from jsonb_array_elements(r->'timeline');
+ if stages is distinct from array['ordered','for_pickup','picked_up','refilling','ready_for_delivery','undelivered','delivered'] then raise exception 'Timeline missing/reordered/duplicated stages: %',stages;end if;
+ for event in select value from jsonb_array_elements(r->'timeline') loop
+  if (select count(*) from jsonb_object_keys(event))<>5 or event->>'occurred_at' is null or event->>'recorded_by_name'<>'Synthetic Owner' then raise exception 'Timeline fields not minimized/server-derived';end if;
+ end loop;
+ raise notice 'PASS: adjusted charge, conversion/reservation retry, reserved POS protection, partial/final delivery, Owner expenses, report date/receipt/as-of definitions and minimal exact-once ordered Owner timeline';
+end $$;
+reset role;
+insert into auth.users values ('10000000-0000-4000-8000-000000000002','staff@test.invalid');
+insert into aq_private.profiles(user_id,username,full_name,contact_number,role) values ('10000000-0000-4000-8000-000000000002','staff.test','Synthetic Staff','09000000002','staff');
+select set_config('request.jwt.claim.sub','10000000-0000-4000-8000-000000000002',true);
+select set_config('request.jwt.claims',jsonb_build_object('session_id',gen_random_uuid(),'iat',extract(epoch from clock_timestamp()))::text,true);
+set local role authenticated;
+do $$declare orders jsonb;r jsonb;begin
+ orders:=public.aq_query('{"resource":"orders"}');
+ r:=public.aq_query(jsonb_build_object('resource','order','id',orders->'items'->0->>'id'));
+ if r ? 'timeline' or r->>'reference' is null then raise exception 'Staff operational details/timeline scope incorrect';end if;
+ raise notice 'PASS: Staff retains operational order details without Owner timeline evidence';
 end $$;
 rollback;

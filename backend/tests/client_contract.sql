@@ -6,7 +6,7 @@ insert into aq_private.profiles(user_id,username,full_name,contact_number,role) 
 select set_config('request.jwt.claim.sub','10000000-0000-4000-8000-000000000001',true);
 select set_config('request.jwt.claims',jsonb_build_object('session_id','20000000-0000-4000-8000-000000000001','iat',extract(epoch from clock_timestamp()))::text,true);
 set local role authenticated;
-do $$declare p jsonb;c jsonb;r jsonb;o jsonb;denied boolean;begin
+do $$declare p jsonb;c jsonb;r jsonb;o jsonb;denied boolean;invalid jsonb;expected text;begin
  p:=jsonb_build_object('name','Synthetic customer','customer_type','household','contact_number','09000000003','address','Synthetic');
  c:=public.aq_command(p||jsonb_build_object('operation','create_customer','request_id',gen_random_uuid()));
  r:=public.aq_command(p||jsonb_build_object('operation','update_customer','request_id',gen_random_uuid(),'id',c->>'id','name','Edited synthetic'));
@@ -15,6 +15,11 @@ do $$declare p jsonb;c jsonb;r jsonb;o jsonb;denied boolean;begin
  if not denied then raise exception 'Obsolete customer_id edit key accepted';end if;
  denied:=false;begin perform public.aq_command(p||jsonb_build_object('operation','create_customer','request_id',gen_random_uuid()));exception when others then if sqlerrm='Customer already exists.' then denied:=true;else raise;end if;end;
  if not denied then raise exception 'Duplicate contact accepted';end if;
+ for invalid in select value from jsonb_array_elements('[0,-1,1.5,"abc"]') loop
+  expected:=case when invalid in ('0'::jsonb,'-1'::jsonb) then 'Quantity must be greater than zero.' else 'Enter a whole-number gallon quantity.' end;
+  denied:=false;begin perform public.aq_command(jsonb_build_object('operation','create_order','request_id',gen_random_uuid(),'customer_id',c->>'id','quantity',invalid));exception when others then if sqlerrm=expected then denied:=true;else raise;end if;end;
+  if not denied then raise exception 'Invalid order quantity/message accepted: %',invalid;end if;
+ end loop;
  o:=public.aq_command(jsonb_build_object('operation','create_order','request_id',gen_random_uuid(),'customer_id',c->>'id','quantity',2));
  perform public.aq_command(jsonb_build_object('operation','transition_order','request_id',gen_random_uuid(),'order_id',o->>'id','status','for_pickup'));
  p:=jsonb_build_object('operation','reschedule_pickup','request_id',gen_random_uuid(),'order_id',o->>'id','scheduled_date',(clock_timestamp() at time zone 'Asia/Manila')::date+1);

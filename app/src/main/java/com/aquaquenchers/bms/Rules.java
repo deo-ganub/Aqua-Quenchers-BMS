@@ -13,7 +13,7 @@ public final class Rules {
     private Rules() {}
     public static boolean uuid(String value){if(value==null)return false;try{return java.util.UUID.fromString(value).toString().equalsIgnoreCase(value);}catch(IllegalArgumentException e){return false;}}
     public static int quantity(String text) {
-        if (text == null || !text.trim().matches("[0-9]+")) throw new IllegalArgumentException("Enter a whole-number gallon quantity.");
+        if (text == null || !text.trim().matches("-?[0-9]+")) throw new IllegalArgumentException("Enter a whole-number gallon quantity.");
         try { int n = Integer.parseInt(text.trim()); if (n <= 0) throw new IllegalArgumentException("Quantity must be greater than zero."); return n; }
         catch (NumberFormatException e) { throw new IllegalArgumentException("Enter a valid gallon quantity."); }
     }
