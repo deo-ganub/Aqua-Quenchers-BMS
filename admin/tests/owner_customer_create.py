@@ -18,9 +18,10 @@ from connected_android import LOCAL, REPO, PACKAGE, adb, private_json
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--owner', action='store_true')
+    parser.add_argument('--no-order-fixture', action='store_true')
     options = parser.parse_args()
     assert options.owner, 'Only missing Owner path; reuse existing verified Staff creation'
-    state_path = LOCAL / 'owner-customer-create-state.json'
+    state_path = LOCAL / ('customer-lookup-empty-state.json' if options.no_order_fixture else 'owner-customer-create-state.json')
     assert not state_path.exists(), 'Inspect prior customer intent/outcome before retry'
     c = json.loads((LOCAL / 'private-config.json').read_text())
     assert c['kind'] == 'SYNTHETIC_LOCAL_INTEGRATION_ONLY' and c['url'] == 'https://127.0.0.1:55436'
@@ -54,27 +55,28 @@ def main():
     nonce = secrets.token_hex(4)
     contact = '09' + str(int(nonce,16) % 1000000000).zfill(9)
     assert not call('/rest/v1/rpc/aq_query', {'p_request': {'resource': 'customers', 'search': contact}}, token)['items']
-    fixture = {'kind': 'SYNTHETIC_LOCAL_OWNER_CUSTOMER_CREATE_UI', 'username': username, 'password': password, 'customer_name': 'LOCAL OWNER CUSTOMER ' + nonce, 'contact': contact, 'contact_display': contact[:4]+' '+contact[4:7]+' '+contact[7:], 'address': 'LOCAL SYNTHETIC OWNER CUSTOMER ' + nonce}
+    fixture = {'kind': 'SYNTHETIC_LOCAL_OWNER_CUSTOMER_CREATE_UI', 'username': username, 'password': password, 'customer_name': 'LOCAL OWNER CUSTOMER ' + nonce, 'contact': contact, 'contact_display': contact[:4]+' '+contact[4:7]+' '+contact[7:], 'address': 'LOCAL SYNTHETIC OWNER CUSTOMER ' + nonce, 'customer_type':'walk_in' if options.no_order_fixture else 'dealer','type_index':3 if options.no_order_fixture else 2,'unit_centavos':3500 if options.no_order_fixture else 3000,'verify_no_history':options.no_order_fixture}
     before = json.loads(sql(snapshot_sql))
-    state = {'kind': fixture['kind'], 'contact': contact, 'intended_name': fixture['customer_name'], 'intended_type': 'dealer', 'intended_address': fixture['address'], 'before': before, 'completed': False}
-    private_json(state_path, state); private_json(LOCAL / 'owner-customer-create-fixture.json', fixture)
+    state = {'kind': fixture['kind'], 'contact': contact, 'intended_name': fixture['customer_name'], 'intended_type': fixture['customer_type'], 'intended_address': fixture['address'], 'before': before, 'completed': False}
+    private_json(state_path, state); private_json(LOCAL / ('customer-lookup-empty-fixture.json' if options.no_order_fixture else 'owner-customer-create-fixture.json'), fixture)
     for path in ['app/build/outputs/apk/debug/app-debug.apk', 'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk']: adb('install', '-r', '-t', str(REPO / path))
     adb('reverse', 'tcp:55436', 'tcp:55436')
     adb('shell', 'run-as', PACKAGE, 'sh', '-c', shlex.quote('umask 077; cat > files/owner-customer-create-credentials.json'), input=json.dumps(fixture).encode())
     run = adb('shell', 'am', 'instrument', '-w', '-r', '-e', 'class', PACKAGE + '.OwnerCustomerCreateDeviceTest', PACKAGE + '.test/androidx.test.runner.AndroidJUnitRunner', timeout=300)
-    text = run.stdout.decode().replace(fixture['password'], '[private fixture withheld]'); evidence = REPO / 'evidence/android-owner-customer-create.log'; evidence.write_text(text)
+    text = run.stdout.decode().replace(fixture['password'], '[private fixture withheld]'); evidence = REPO / ('evidence/android-customer-lookup-empty-create.log' if options.no_order_fixture else 'evidence/android-owner-customer-create.log'); evidence.write_text(text)
     # Resolve the unique persisted intent BEFORE allowing any future retry.
     after = json.loads(sql(snapshot_sql)); created = [row for row in after['customers'] if row['contact_number'] == contact]
     state['observed_customers'] = created; private_json(state_path, state)
     assert 'OK (1 test)' in text and len(created)==1, 'Inspect recorded intent/customer outcome before retry'
     row = created[0]; uuid.UUID(row['id'])
-    assert (row['name'],row['customer_type'],row['contact_number'],row['address']) == (fixture['customer_name'],'dealer',contact,fixture['address'])
+    assert (row['name'],row['customer_type'],row['contact_number'],row['address']) == (fixture['customer_name'],fixture['customer_type'],contact,fixture['address'])
     assert len(after['customers']) == len(before['customers'])+1
     after['customers'] = [r for r in after['customers'] if r['id'] != row['id']]
     assert after == before, 'Owner customer creation changed unrelated records or finances'
+    if options.no_order_fixture: assert not any(o['customer_id']==row['id'] for o in before['orders'])
     state.update(completed=True, customer_id=row['id']); private_json(state_path, state)
     adb('shell', 'run-as', PACKAGE, 'rm', 'files/owner-customer-create-credentials.json')
-    with evidence.open('a') as log: log.write('\nPASS: actual Owner Dealer customer save/normalized display-spaced contact, saved profile/list and fixed30pesos price/60pesos2gallon preview, cancelled Order. Exactly1server UUID customer; every preexisting customer/financial/stock/profile/Auth identity/factor mapping unchanged.\n')
+    with evidence.open('a') as log: log.write('\nPASS: actual Owner customer save/normalized display-spaced contact, saved profile/list and selected fixed-price2gallon preview, cancelled Order. Exactly1server UUID customer; every preexisting customer/financial/stock/profile/Auth identity/factor mapping unchanged.\n')
     print('PASS: actual Owner customer creation and exact nonfinancial reconciliation')
 
 

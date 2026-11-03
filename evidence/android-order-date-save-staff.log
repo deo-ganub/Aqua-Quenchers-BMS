@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OrderDateSaveDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OrderDateSaveDeviceTest:
+INSTRUMENTATION_STATUS: test=realPastAndFutureSavesKeepServerEncodingDate
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OrderDateSaveDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=realPastAndFutureSavesKeepServerEncodingDate
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 35.089
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: actual staff past+future picker/save acknowledgements, next new form defaults today,2server orders/6000centavos each with correct stable actor/customer IDs and immutable real encoding day. Business-date revenue and as-of balances exact; cash/expenses/net/stock/all preexisting records/Auth identities unchanged. Persisted intent completed; no blind creation replay.

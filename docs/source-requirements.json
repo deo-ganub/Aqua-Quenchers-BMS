@@ -886,6 +886,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -955,6 +961,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -1024,6 +1036,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "No functional gap for eleven-digit contact validation/display-space normalization under actual local API29 checks and existing RulesTest. Design/declared-device/hosted gates separate."
@@ -1035,7 +1053,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 21,
     "text": "A. Add, find, view and update a customer\nGiven the Owner is signed in and the sample contact number is not assigned to another customer\nWhen the Owner opens Customers and selects Add Customer\nThen the system shall display Full name, Customer type, Contact number, Address and the save action\nWhen the Owner enters valid customer details and selects Save Customer\nThen the system shall save the profile and display \"Customer saved.\"\nWhen the Owner searches for the saved name or contact number and opens the matching result\nThen the system shall display the Customer Profile\nWhen the Owner selects Edit Customer, changes permitted details or retains the same valid contact number, and saves\nThen the system shall update the same record without duplicating the customer\nGiven that customer has existing orders and payments\nWhen the Owner opens the order and payment history\nThen the system shall display the linked orders, payment references, payment amounts and remaining balance.\n\nSample Data:\nMaria Santos; Household; 09175550125, displayed as 0917 555 0125; 24 Mabini St., Brgy. San Jose.\nORD-2026-0001: 10 gallons, total ₱350.00, Undelivered, Partially Paid.\nPAY-2026-0001: ₱200.00, recorded by Ana Mendoza on 14 Oct 2026. Remaining balance: ₱150.00.\nAlternative Dealer profile: Cruz Store; 0919 555 0123; Rizal St., Brgy. San Jose.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / aq_command create_customer,update_customer",
@@ -1093,9 +1111,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching actual create/edit/lookup/profile/history and Household/Dealer/Walk-in price evidence pass cumulatively; full design/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-03-AC4",
@@ -1162,6 +1186,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Functional duplicate/own-number/corrected same-ID edit checks pass for both roles with immutable linked history. Design/declared-device/hosted gates separate."
@@ -1231,6 +1261,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Functional duplicate/own-number/corrected same-ID edit checks pass for both roles with immutable linked history. Design/declared-device/hosted gates separate."
@@ -1242,7 +1278,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 23,
     "text": "5. The system shall allow customer lookup by name or contact number, open the selected Customer Profile and provide Edit Customer. Upon saving valid edits, the system shall update the same record and retain linked transactions. The Owner list shall show customer/contact, type, balance and status. The Staff list shall show customer name, type, balance and View customer.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / aq_command create_customer,update_customer",
@@ -1300,9 +1336,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional lookup/list/profile/order/receipt fields and navigation pass for both roles with earlier same-ID edits and actual Owner history-date filters. Visual Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-03-AC6",
@@ -1311,7 +1353,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 24,
     "text": "6. Upon opening Customer Profile, the system shall display customer name, type, contact number and address; outstanding balance; order history including ordered gallons, total and operational/payment status; payment history including reference, date, amount and recorder; View Order, Record Payment and navigation/return controls.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / aq_command create_customer,update_customer",
@@ -1369,9 +1411,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional lookup/list/profile/order/receipt fields and navigation pass for both roles with earlier same-ID edits and actual Owner history-date filters. Visual Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-04-AC1",
@@ -1414,6 +1462,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1425,7 +1485,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 29,
     "text": "2. The system shall apply ₱35.00 per gallon for Household and Walk-in and ₱30.00 for Dealer, and calculate quantity multiplied by unit price.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1459,9 +1519,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching actual create/edit/lookup/profile/history and Household/Dealer/Walk-in price evidence pass cumulatively; full design/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-04-AC3",
@@ -1470,7 +1542,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 30,
     "text": "3. The system shall reject zero, negative, fractional or nonnumeric gallon quantities; show \"Quantity must be greater than zero.\" for nonpositive input and \"Enter a whole-number gallon quantity.\" for fractional or nonnumeric input.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1504,9 +1576,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching actual both-role native quantity/date/create-order checks plus existing RulesTest and generic idempotency/authority evidence pass; full design/device/hosted gates separate."
   },
   {
     "id": "A-04-SCA",
@@ -1549,6 +1633,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1560,7 +1656,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 31,
     "text": "4. The system shall save a valid order once with a unique Order ID, date/time and recording account, initial status Ordered, and an \"Order saved\" confirmation.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / aq_command create_order,transition_order",
@@ -1594,9 +1690,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching actual both-role native quantity/date/create-order checks plus existing RulesTest and generic idempotency/authority evidence pass; full design/device/hosted gates separate."
   },
   {
     "id": "A-04-SCB",
@@ -1639,6 +1747,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1684,6 +1804,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1729,6 +1861,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -1774,6 +1918,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -6713,6 +6869,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -6776,6 +6938,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -6839,6 +7007,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "No functional gap for eleven-digit contact validation/display-space normalization under actual local API29 checks and existing RulesTest. Design/declared-device/hosted gates separate."
@@ -6850,7 +7024,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 21,
     "text": "A. Add, find, view and update a customer\nGiven the Staff member is signed in and the sample contact number is not assigned to another customer\nWhen the Staff member opens Customers and selects Add Customer\nThen the system shall display Full name, Customer type, Contact number, Address and the save action\nWhen the Staff member enters valid customer details and selects Save Customer\nThen the system shall save the profile and display \"Customer saved.\"\nWhen the Staff member searches for the saved name or contact number and opens the matching result\nThen the system shall display the Customer Profile\nWhen the Staff member selects Edit Customer, changes permitted details or retains the same valid contact number, and saves\nThen the system shall update the same record without duplicating the customer\nGiven that customer has existing orders and payments\nWhen the Staff member opens the order and payment history\nThen the system shall display the linked orders, payment references, payment amounts and remaining balance.\n\nSample Data:\nMaria Santos; Household; 09175550125, displayed as 0917 555 0125; 24 Mabini St., Brgy. San Jose.\nORD-2026-0001: 10 gallons, total ₱350.00, Undelivered, Partially Paid.\nPAY-2026-0001: ₱200.00, recorded by Ana Mendoza on 14 Oct 2026. Remaining balance: ₱150.00.\nAlternative Dealer profile: Cruz Store; 0919 555 0123; Rizal St., Brgy. San Jose.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / create_customer,update_customer",
@@ -6902,9 +7076,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching actual create/edit/lookup/profile/history and Household/Dealer/Walk-in price evidence pass cumulatively; full design/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-14-AC4",
@@ -6965,6 +7145,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Functional criterion passes cumulatively across actual connected Staff save, Owner save, both-role negatives and existing same-ID Staff edit as applicable. Design/declared-device/hosted gates separate."
@@ -7028,6 +7214,12 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Functional duplicate/own-number/corrected same-ID edit checks pass for both roles with immutable linked history. Design/declared-device/hosted gates separate."
@@ -7039,7 +7231,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 23,
     "text": "5. The system shall allow customer lookup by name or contact number, open the selected Customer Profile and provide Edit Customer. Upon saving valid edits, the system shall update the same record and retain linked transactions. The Owner list shall show customer/contact, type, balance and status. The Staff list shall show customer name, type, balance and View customer.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / create_customer,update_customer",
@@ -7091,9 +7283,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional lookup/list/profile/order/receipt fields and navigation pass for both roles with earlier same-ID edits and actual Owner history-date filters. Visual Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-14-AC6",
@@ -7102,7 +7300,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 24,
     "text": "6. Upon opening Customer Profile, the system shall display customer name, type, contact number and address; outstanding balance; order history including ordered gallons, total and operational/payment status; payment history including reference, date, amount and recorder; View Order, Record Payment and navigation/return controls. The Owner profile shall additionally show Active status and date-filtered history.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.customers / customer / create_customer,update_customer",
@@ -7154,9 +7352,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-customer-edit-owner.log",
         "limit": "Actual Owner reviewed same-ID/contact edit after cancel/invalid/duplicate/rotation; original27000centavo order and receipt snapshots exact unchanged, prospective3000centavo price preview cancelled; other customers/financial/stock/profiles/Auth identities unchanged. Prior Staff proof retained."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Functional lookup/list/profile/order/receipt fields and navigation pass for both roles with earlier same-ID edits and actual Owner history-date filters. Visual Figma/declared-device/hosted gates separate."
   },
   {
     "id": "A-15-AC1",
@@ -7199,6 +7403,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7210,7 +7426,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 29,
     "text": "2. The system shall apply ₱35.00 per gallon for Household and Walk-in and ₱30.00 for Dealer, and calculate quantity multiplied by unit price.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7244,9 +7460,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching actual create/edit/lookup/profile/history and Household/Dealer/Walk-in price evidence pass cumulatively; full design/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-15-AC3",
@@ -7255,7 +7483,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 30,
     "text": "3. The system shall reject zero, negative, fractional or nonnumeric gallon quantities; show \"Quantity must be greater than zero.\" for nonpositive input and \"Enter a whole-number gallon quantity.\" for fractional or nonnumeric input.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7289,9 +7517,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching actual both-role native quantity/date/create-order checks plus existing RulesTest and generic idempotency/authority evidence pass; full design/device/hosted gates separate."
   },
   {
     "id": "A-15-SCA",
@@ -7334,6 +7574,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7345,7 +7597,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 31,
     "text": "4. The system shall save a valid order once with a unique Order ID, date/time and recording account, initial status Ordered, and an \"Order saved\" confirmation.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.orders / order / create_order,transition_order",
@@ -7379,9 +7631,21 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matching actual both-role native quantity/date/create-order checks plus existing RulesTest and generic idempotency/authority evidence pass; full design/device/hosted gates separate."
   },
   {
     "id": "A-15-SCB",
@@ -7424,6 +7688,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7469,6 +7745,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7514,6 +7802,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
@@ -7559,6 +7859,18 @@
         "status": "Verified subset",
         "evidence": "evidence/android-order-form.log; evidence/android-order-form-owner.log",
         "limit": "Actual Owner/Staff required customer/zero-negative-fractional-overflow quantity validation, fixed-price preview, real calendar Cancel/past/future selection, rotation/form cancellation and exact financial/stock/profile immutability. This read-only test does not claim successful historical/future order saves or full lifecycle coverage."
+      },
+      {
+        "path": "admin/tests/order_date_save.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-order-date-save-staff.log; evidence/android-order-date-save-owner.log",
+        "limit": "Actual real-picker past+future saves BOTH roles, default today on each new form,4distinct server UUID orders/correct stable actors/customer/unit price/initial Ordered, immutable real server encoding day, exact business-date revenue/as-of balance deltas. No cash/expense/stock/other records/Auth changes. Staff raw-total verifier corrected and existing records reconciled without replay; intents completed."
+      },
+      {
+        "path": "admin/tests/customer_lookup.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-customer-lookup.log; evidence/android-customer-lookup-owner.log; evidence/android-customer-lookup-empty-create.log",
+        "limit": "Actual both-role name/contact-space/unknown lookup, list/profile/status/balance/address/order/receipt/nav/previous quantity fields; missing previous quantity now Not yet available, never0. One separately intent-recorded Walk-in master created through actual Owner form/35price preview/CancelOrder; lookup itself changes no customers/financial/stock/profiles."
       }
     ],
     "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."

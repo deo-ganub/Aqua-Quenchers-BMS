@@ -237,7 +237,7 @@ public final class OperationsUi {
             int index = customer.getSelectedItemPosition() - 1;
             if(index<0||index>=list.size()){if(!list.isEmpty())host.rememberChoice("order_customer","");return;}
             JSONObject c = list.get(index);host.rememberChoice("order_customer",id(c)); long unit = c.optString("customer_type").equals("dealer") ? 3000 : 3500;
-            details.setText(c.optString("name") + " · " + title(c.optString("customer_type")) + "\nDelivery address: " + c.optString("address") + "\nMost recent order quantity: " + (c.has("previous_order_quantity") ? c.optInt("previous_order_quantity") + " gallons" : "Not yet available"));
+            details.setText(c.optString("name") + " · " + title(c.optString("customer_type")) + "\nDelivery address: " + c.optString("address") + "\nMost recent order quantity: " + (c.optInt("previous_order_quantity",0)>0 ? c.optInt("previous_order_quantity") + " gallons" : "Not yet available"));
             try { total.setText("Unit price: " + host.money(unit) + "\nTotal: " + host.money(Math.multiplyExact((long) quantity(quantity), unit))); }
             catch (Exception e) { total.setText("Unit price: " + host.money(unit) + "\nEnter a positive whole-number quantity."); }
         };
