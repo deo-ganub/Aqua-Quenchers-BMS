@@ -320,10 +320,10 @@ public final class OperationsUi {
         line(p, o.optString("reference") + " · " + o.optString("customer_name") + "\n" + o.optString("contact_number") + "\n" + o.optString("address") + "\nPickup date: " + host.today() + "\nOriginal expected gallons: " + expected + "\nFixed unit price: " + host.money(unit));
         EditText collected = host.input(p, "Actual collected gallons", "", QTY);
         TextView adjusted = liveLine(p, "Enter actual collected gallons to review the shortfall and adjusted total.");
-        watch(collected, () -> {
+        Runnable refreshPreview = () -> {
             try { int q = quantity(collected); if (q > expected) throw new IllegalArgumentException(); adjusted.setText("Shortfall: " + (expected - q) + "\nAdjusted order gallons: " + q + "\nAdjusted total: " + host.money(Math.multiplyExact((long) q, unit))); }
             catch (Exception e) { adjusted.setText("Enter a positive whole number no greater than " + expected + "."); }
-        });
+        }; watch(collected, refreshPreview); if (!value(collected).isEmpty()) refreshPreview.run();
         host.button(p, "Save Pickup", () -> valid(() -> {
             int q = quantity(collected);
             if (q > expected) throw new IllegalArgumentException("Collected quantity cannot exceed the expected quantity.");
@@ -350,10 +350,10 @@ public final class OperationsUi {
         if(host.isOwner())line(p,"Recording account: "+host.recorder()+"\nToday: "+host.today()+" (Asia/Manila); actual delivery time is assigned on save.");
         EditText trip = host.input(p, "Gallons delivered this trip", "", QTY);
         TextView preview = liveLine(p, "Enter delivered gallons to review cumulative delivered and pending quantities.");
-        watch(trip, () -> {
+        Runnable refreshPreview = () -> {
             try { int q = quantity(trip); if (q > remaining) throw new IllegalArgumentException(); preview.setText("Cumulative delivered: " + (delivered + q) + "\nPending after saving: " + (remaining - q) + "\nResult: " + (q == remaining ? "Delivered" : "Undelivered")); }
             catch (Exception e) { preview.setText("Enter a positive whole number within the " + remaining + " remaining gallons."); }
-        });
+        }; watch(trip, refreshPreview); if (!value(trip).isEmpty()) refreshPreview.run();
         host.button(p, "Save Delivery", () -> valid(() -> {
             int q = quantity(trip);
             if (q > remaining) throw new IllegalArgumentException("Delivered quantity cannot exceed the remaining " + remaining + " gallons.");

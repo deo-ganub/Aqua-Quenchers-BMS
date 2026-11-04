@@ -1,1 +1,1 @@
-PASS: 17 known private literals absent from 303 source/evidence files, all reachable Git blobs and both current APKs. Public anon client configuration intentionally allowed.
+PASS: 17 known private literals absent from 313 source/evidence files, all reachable Git blobs and both current APKs. Public anon client configuration intentionally allowed.

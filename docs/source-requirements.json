@@ -2305,9 +2305,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-05-AC2",
@@ -2316,7 +2322,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 39,
     "text": "2. Upon opening Record Pickup, the system shall display the selected customer/order, contact and address, expected gallons, actual collected input, shortfall/difference, Save Pickup and a reschedule/return action. The Owner screen shall also display Pickup date.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2350,9 +2356,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-05-AC3",
@@ -2395,9 +2407,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-05-SCA",
@@ -2406,7 +2424,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 40,
     "text": "A. Record pickup or reschedule an uncollected pickup\nGiven the Owner has selected a For Pickup order\nWhen Record Pickup is opened\nThen the system shall display the order, customer contact/address and expected gallons\nWhen the actual positive whole-number collected quantity is entered and Save Pickup is selected\nThen the system shall save that quantity, display the shortfall, reduce the order quantity and charge to actual collection before refilling, retain the original request and shortfall, set Picked Up and add the actual collected gallons to empty stock once\nThen the system shall display \"Pickup recorded\" and allow a return to the order list\nGiven an alternative pickup is still uncollected and needs a different date\nWhen the Owner opens Reschedule, chooses today or a future date, optionally enters Notes, and saves the pickup result\nThen the system shall save the new date, set Rescheduled and display \"Order rescheduled\"\nWhen collection resumes\nThen the order shall return to For Pickup.\n\nSample Data:\nCruz Store; ORD-2026-0002; 0919 555 0123; Rizal St., Brgy. San Jose.\nPickup date 15 Oct 2026; original expected 10, collected 8, shortfall 2; adjusted Dealer order 8 × ₱30.00 = ₱240.00 instead of ₱300.00; amount paid ₱0.00; empty stock 80 → 88.\nAlternative reschedule: 29 Oct 2026; Notes Customer unavailable; scenario business date 15 Oct 2026.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2440,9 +2458,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-05-AC4",
@@ -2451,7 +2475,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 41,
     "text": "4. The system shall reject invalid or above-expected collection without changing order or stock. On valid save it shall retain original expected gallons and shortfall, reduce order quantity and charge to actual collection before refilling, set Picked Up and add actual collection to Empty once. It shall display adjusted gallons, unit price and adjusted total before save. Reject a total below the amount already paid with \"Adjusted total cannot be less than the amount already paid.\" and refer it for Owner-approved administrative correction. Overcollection shall display \"Collected quantity cannot exceed the expected quantity.\".",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / aq_command record_pickup,reschedule_pickup",
@@ -2485,9 +2509,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-05-SCB",
@@ -2530,9 +2560,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-05-SCC",
@@ -2575,9 +2611,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-05-AC5",
@@ -2620,9 +2662,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-05-AC6",
@@ -2665,9 +2713,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-06-AC1",
@@ -2722,9 +2776,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-06-AC2",
@@ -2733,7 +2805,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 48,
     "text": "2. The system shall display Record Delivery with customer/order, previously delivered quantity, remaining gallons, current-trip delivered input, pending after saving, Save Delivery and navigation/return controls. The Owner screen shall additionally display date/time, recording account and cumulative total preview.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / aq_command record_delivery",
@@ -2779,9 +2851,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-06-AC3",
@@ -2790,7 +2880,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 49,
     "text": "3. The system shall reject nonpositive, fractional, nonnumeric or above-remaining delivery quantities and any trip above that order’s reserved filled gallons. Use \"Not enough reserved gallons for this order.\" for insufficient reservation and preserve all saved records on rejection.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / aq_command record_delivery",
@@ -2836,9 +2926,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-06-SCA",
@@ -2847,7 +2955,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 49,
     "text": "A. Record a full delivery or carry over a partial delivery\nGiven the Owner has selected a Ready for Delivery or Undelivered order with pending gallons\nWhen Record Delivery is opened\nThen the system shall display previously delivered and remaining gallons\nWhen the current-trip quantity is within the remaining quantity and the order’s reserved filled stock\nThen the system shall preview cumulative deliveries and the remainder\nWhen Save Delivery is selected\nThen the system shall record the date/time and account, add this trip to cumulative delivered gallons and deduct this trip from filled stock once\nWhen no gallons remain\nThen the system shall set Delivered and display \"Delivery recorded\"\nGiven an alternative trip delivers fewer than the remaining gallons\nWhen that trip is saved\nThen the system shall set Undelivered and retain the remainder as carry-over\nWhen Carry-over Gallons or Pending gallons is opened\nThen the system shall show the original date, waiting days and remaining quantity, oldest first\nWhen the final remaining quantity is later delivered\nThen the system shall remove the completed order from the pending list.\n\nSample Data:\nMaria Santos; ORD-2026-0001; ordered 10, previously delivered 7, remaining 3.\nFull trip: 3 now → delivered 10, pending 0, physical filled 47 → 44; this order’s reserved 3 → 0; available stays 44; Delivered.\nIndependent partial trip: 2 now → delivered 9, pending 1, physical filled 47 → 45; this order’s reserved 3 → 1; available stays 44; Undelivered.\nOriginal date 14 Oct 2026; business date 15 Oct; 1 day waiting.\nOrder total stays ₱350.00 and payment balance stays ₱150.00 until a payment is recorded.\nReady-order alternative: Juan Reyes; ORD-2026-0003; 3 gallons; ₱105.00 Paid.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / aq_command record_delivery",
@@ -2893,9 +3001,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-06-AC4",
@@ -2950,9 +3076,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-06-SCB",
@@ -2961,7 +3105,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 50,
     "text": "B. Invalid quantity or insufficient filled stock\nGiven the Owner is recording a delivery with 3 gallons remaining\nWhen the current-trip entry exceeds those remaining gallons\nThen the system shall display \"Delivered quantity cannot exceed the remaining 3 gallons.\"\nWhen the quantity is zero or negative\nThen the system shall display \"Quantity must be greater than zero.\"\nWhen the quantity is fractional or nonnumeric\nThen the system shall require a positive whole-number quantity\nGiven the requested trip quantity is greater than the order’s reserved filled stock\nWhen Save Delivery is selected\nThen the system shall display \"Not enough reserved gallons for this order.\"\nThen the system shall preserve the previous delivery total, pending quantity, order value and stock until a valid trip is saved.\n\nSample Data:\nPreviously delivered 7; remaining 3; attempted trip 5.\nInvalid quantity: 0.\nStock-shortage alternative: deliver 3 when only 2 gallons are reserved for that order.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / aq_command record_delivery",
@@ -3007,9 +3151,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-06-AC5",
@@ -3064,9 +3226,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-06-AC6",
@@ -3075,7 +3255,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 52,
     "text": "6. The system shall show carry-over by original order date, oldest first, with days waiting and pending gallons; remove an order from the pending list after its remaining gallons are delivered.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / aq_command record_delivery",
@@ -3121,9 +3301,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-07-AC1",
@@ -9332,9 +9530,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-16-AC2",
@@ -9343,7 +9547,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 39,
     "text": "2. Upon opening Record Pickup, the system shall display the selected customer/order, contact and address, expected gallons, actual collected input, shortfall/difference, Save Pickup and a reschedule/return action. The Owner screen shall also display Pickup date.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9377,9 +9581,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-16-AC3",
@@ -9422,9 +9632,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-16-SCA",
@@ -9433,7 +9649,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 40,
     "text": "A. Record pickup or reschedule an uncollected pickup\nGiven the Staff member has selected a For Pickup order\nWhen Record Pickup is opened\nThen the system shall display the order, customer contact/address and expected gallons\nWhen the actual positive whole-number collected quantity is entered and Save Pickup is selected\nThen the system shall save that quantity, display the shortfall, reduce the order quantity and charge to actual collection before refilling, retain the original request and shortfall, set Picked Up and add the actual collected gallons to empty stock once\nThen the system shall display \"Pickup recorded\" and allow a return to the order list\nGiven an alternative pickup is still uncollected and needs a different date\nWhen the Staff member opens Reschedule, chooses today or a future date, optionally enters Notes, and saves the pickup result\nThen the system shall save the new date, set Rescheduled and display \"Order rescheduled\"\nWhen collection resumes\nThen the order shall return to For Pickup.\n\nSample Data:\nCruz Store; ORD-2026-0002; 0919 555 0123; Rizal St., Brgy. San Jose.\nPickup date 15 Oct 2026; original expected 10, collected 8, shortfall 2; adjusted Dealer order 8 × ₱30.00 = ₱240.00 instead of ₱300.00; amount paid ₱0.00; empty stock 80 → 88.\nAlternative reschedule: 29 Oct 2026; Notes Customer unavailable; scenario business date 15 Oct 2026.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9467,9 +9683,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-16-AC4",
@@ -9478,7 +9700,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 41,
     "text": "4. The system shall reject invalid or above-expected collection without changing order or stock. On valid save it shall retain original expected gallons and shortfall, reduce order quantity and charge to actual collection before refilling, set Picked Up and add actual collection to Empty once. It shall display adjusted gallons, unit price and adjusted total before save. Reject a total below the amount already paid with \"Adjusted total cannot be less than the amount already paid.\" and refer it for Owner-approved administrative correction. Overcollection shall display \"Collected quantity cannot exceed the expected quantity.\".",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi pickup/reschedule / record_pickup,reschedule_pickup",
@@ -9512,9 +9734,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Native both-role collection/reschedule/invalid/rotation/short-pickup and exact ledger/stock checks pass. Add focused actual contact/address/Owner pickup-date and pre-save shortfall/adjusted gallons/fixed price/total field assertions; no repeat of completed operational intent."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-16-SCB",
@@ -9557,9 +9785,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-16-SCC",
@@ -9602,9 +9836,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-16-AC5",
@@ -9647,9 +9887,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-16-AC6",
@@ -9692,9 +9938,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-operational-edges.log",
         "limit": "Actual Owner+Staff six invalid quantities no effects, past-date/cancel/rotation/reschedule/resume and short pickup9 of10/paid270. Independent exact2order charges/receipts54000 and empty+18. Remaining full variants/Figma/declared-device gates separate."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
       }
     ],
-    "gap": "Matched functional pickup/reschedule criterion passes actual both-role OperationalEdge native checks with independent stock/charge/receipt assertions and existing backend checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional pickup/delivery criterion/scenario passes exact native fields/previews/negative/cancel/rotation/partial/multiple-date queue checks with final actor/time/stock/charge and preexisting-row reconciliation; prior native final-delivery/pending removal and backend boundary/replay checks retained. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-17-AC1",
@@ -9749,9 +10001,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-17-AC2",
@@ -9760,7 +10030,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 48,
     "text": "2. The system shall display Record Delivery with customer/order, previously delivered quantity, remaining gallons, current-trip delivered input, pending after saving, Save Delivery and navigation/return controls. The Owner screen shall additionally display date/time, recording account and cumulative total preview.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / record_delivery",
@@ -9806,9 +10076,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-17-AC3",
@@ -9817,7 +10105,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 49,
     "text": "3. The system shall reject nonpositive, fractional, nonnumeric or above-remaining delivery quantities and any trip above that order’s reserved filled gallons. Use \"Not enough reserved gallons for this order.\" for insufficient reservation and preserve all saved records on rejection.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / record_delivery",
@@ -9863,9 +10151,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-17-SCA",
@@ -9874,7 +10180,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 49,
     "text": "A. Record a full delivery or carry over a partial delivery\nGiven the Staff member has selected a Ready for Delivery or Undelivered order with pending gallons\nWhen Record Delivery is opened\nThen the system shall display previously delivered and remaining gallons\nWhen the current-trip quantity is within the remaining quantity and the order’s reserved filled stock\nThen the system shall preview cumulative deliveries and the remainder\nWhen Save Delivery is selected\nThen the system shall record the date/time and account, add this trip to cumulative delivered gallons and deduct this trip from filled stock once\nWhen no gallons remain\nThen the system shall set Delivered and display \"Delivery recorded\"\nGiven an alternative trip delivers fewer than the remaining gallons\nWhen that trip is saved\nThen the system shall set Undelivered and retain the remainder as carry-over\nWhen Carry-over Gallons or Pending gallons is opened\nThen the system shall show the original date, waiting days and remaining quantity, oldest first\nWhen the final remaining quantity is later delivered\nThen the system shall remove the completed order from the pending list.\n\nSample Data:\nMaria Santos; ORD-2026-0001; ordered 10, previously delivered 7, remaining 3.\nFull trip: 3 now → delivered 10, pending 0, physical filled 47 → 44; this order’s reserved 3 → 0; available stays 44; Delivered.\nIndependent partial trip: 2 now → delivered 9, pending 1, physical filled 47 → 45; this order’s reserved 3 → 1; available stays 44; Undelivered.\nOriginal date 14 Oct 2026; business date 15 Oct; 1 day waiting.\nOrder total stays ₱350.00 and payment balance stays ₱150.00 until a payment is recorded.\nReady-order alternative: Juan Reyes; ORD-2026-0003; 3 gallons; ₱105.00 Paid.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / record_delivery",
@@ -9920,9 +10226,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-17-AC4",
@@ -9977,9 +10301,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-17-SCB",
@@ -9988,7 +10330,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 50,
     "text": "B. Invalid quantity or insufficient filled stock\nGiven the Staff member is recording a delivery with 3 gallons remaining\nWhen the current-trip entry exceeds those remaining gallons\nThen the system shall display \"Delivered quantity cannot exceed the remaining 3 gallons.\"\nWhen the quantity is zero or negative\nThen the system shall display \"Quantity must be greater than zero.\"\nWhen the quantity is fractional or nonnumeric\nThen the system shall require a positive whole-number quantity\nGiven the requested trip quantity is greater than the order’s reserved filled stock\nWhen Save Delivery is selected\nThen the system shall display \"Not enough reserved gallons for this order.\"\nThen the system shall preserve the previous delivery total, pending quantity, order value and stock until a valid trip is saved.\n\nSample Data:\nPreviously delivered 7; remaining 3; attempted trip 4.\nInvalid quantity: 0.\nStock-shortage alternative: deliver 3 when only 2 gallons are reserved for that order.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / record_delivery",
@@ -10034,9 +10376,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-17-AC5",
@@ -10091,9 +10451,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Matched functional delivery availability/atomic stock-reservation/time-actor/partial-final state criteria pass actual native/API/SQL/concurrency checks. Figma/declared-device gates remain separate."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-17-AC6",
@@ -10102,7 +10480,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 52,
     "text": "6. The system shall show carry-over by original order date, oldest first, with days waiting and pending gallons; remove an order from the pending list after its remaining gallons are delivered.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi delivery / record_delivery",
@@ -10148,9 +10526,27 @@
         "status": "Verified subset",
         "evidence": "evidence/delivery-boundary-suite.log",
         "limit": "Both roles under authenticated grants; exact invalid0/negative/fractional/nonnumeric/null/overdelivery and missing-own-reservation errors; all protected business/request/audit rows unchanged. Restore fixture reservation, same rejected request succeeds, exact replay unchanged, actual server timestamp/actor and partial/final charge/reservation preserved. New disposable DB5migrations/18rollbackfixtures PASS/dropped. JWT stubs do not prove signatures/native UI."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-operational-preview-cycle.log",
+        "limit": "Separate guarded both-role actual pickup exact contact/address/Today/expected/fixed-price/shortfall/adjusted totals; delivery fields/account/server-time semantics,0/negative/fractional/abc/overdelivery, Cancel, restored preview and real partial4. Both roles exact2original-date oldest-first carryovers with days/pending; real final5RPCs retain actor/time.4deliveries/54000charges+cash/net; stock/reservations baseline, all preexisting rows unchanged. Initial rotation failure preserved; Owner resumed same inspected Ready/no-delivery intent, Staff fresh path also verifies restored pickup preview. No original fixture replay."
+      },
+      {
+        "path": "admin/tests/reservation_shortage_native.py",
+        "status": "Verified subset",
+        "evidence": "evidence/android-reservation-shortage.log",
+        "limit": "Actual native own-reservation shortage despite ample physical stock; exact error and unchanged ALL protected/request/audit rows. Guarded test-admin reservation1→2 restoration; rotated retry retains2gal input/recomputed preview, real final delivery once, signed exact delivery replay unchanged; baseline stock restored, charge6000only/no receipts/expenses, all preexisting rows unchanged. Shared client guard plus both-role SQL reservation denial; no production/manual-adjustment product endpoint."
+      },
+      {
+        "path": "admin/tests/operational_preview_cycle.py",
+        "status": "Verified subset",
+        "evidence": "evidence/operational-delivery-actor-time.log",
+        "limit": "Readonly reconciliation after completed cycle confirms all4 delivery rows: each role native4 and real final5 RPC retains exact matching stable authenticated actor and actual server timestamp between order encoding and verification; no operation replay."
       }
     ],
-    "gap": "Partial/final delivery, carry-over single order/removal and server reservation denial pass. Remaining focused native checks: complete form/pre-save cumulative-pending/Owner account/date fields; negative/fractional/nonnumeric/insufficient-reservation exact error with unchanged rows; multiple original-date oldest-first carry-over display. Avoid replaying completed delivery intents."
+    "gap": "Matched functional delivery criterion/scenario passes exact native form/preview/invalid/reservation/Cancel/rotation/partial/multiple-date queue checks plus existing final/pending removal; full protected-row, actor/time, stock/reservation/charge/replay reconciliations pass. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-18-AC1",

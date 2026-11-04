@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.ReservationShortageDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.ReservationShortageDeviceTest:
+INSTRUMENTATION_STATUS: test=realShortageErrorPreservesStateThenRestoredRetryDelivers
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.ReservationShortageDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=realShortageErrorPreservesStateThenRestoredRetryDelivers
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 31.588
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: actual native insufficient-own-reservation error despite ample physical stock; all protected/request/audit rows unchanged. Explicit owned test-admin reservation-only shortage restored with guards; rotated retry retains2gallon input/previews and saves one final delivery. Stock/reservations return baseline, charge6000only/no receipts/expenses, all preexisting rows unchanged; exact signed delivery replay has no effect. SQL separately verifies server reservation denial for both roles. No product adjustment endpoint or production data.
