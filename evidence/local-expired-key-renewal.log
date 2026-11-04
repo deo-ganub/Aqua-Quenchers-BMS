@@ -1,0 +1,2 @@
+PASS: retained local PostgreSQL, official Auth/short Auth, REST and HTTPS gateway healthy; no fixture reset.
+PASS: expired synthetic keys renewed for24hours with same signing secret/roles; no active quota windows, users or DB rows modified; owned gateway healthy. Rebuild public debug client configuration.

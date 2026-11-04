@@ -762,7 +762,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 12,
     "text": "1. Upon opening Dashboard, the system shall display the Owner Dashboard with the Aqua Quenchers header and Owner account label; navigation for Dashboard, Orders, Customers, Payments, Expenses, Reports and Settings; the reporting-period selector; Revenue, Payments received, Expenses and Net income; Filled available, Reserved filled, Empty gallons, Pending delivery, Receivables and inventory last-update time; Inventory and Customer balances links; Create Order, Walk-in Sale and Reports quick actions; and the Recent orders table with Order, Customer, Status and View Orders.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / OwnerUi.summary / aq_query dashboard",
@@ -792,7 +792,7 @@
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Dashboard criterion/scenario passes actual OwnerDashboard figures/inventory/time/dialog cancel/valid/reversed-period preservation/correction/rotation/recent row and six content actions, with real dated-revenue/as-of SQL/API evidence. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-02-AC2",
@@ -801,7 +801,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 13,
     "text": "2. The system shall open Select dashboard period, accept START DATE and END DATE, and apply valid dates through Apply period; reject an end date before the start date.\n\nRevenue is the full value of saved orders and completed Walk-in sales, including unpaid amounts, using the entered order business date or the completed sale date. A valid short pickup reduces the same order value on its original business date; retain the original request and the change in the protected audit history. Payments received use the actual payment date. Expenses use the entered expense date. All dates and date cutoffs use Asia/Manila. Outstanding balances as of an end date include all charges dated on or before that date less payments actually received on or before it, including balances from earlier periods. Net income means payments received less expenses. Server encoding timestamps remain immutable and separate from business dates.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / OwnerUi.summary / aq_query dashboard",
@@ -831,7 +831,7 @@
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Dashboard criterion/scenario passes actual OwnerDashboard figures/inventory/time/dialog cancel/valid/reversed-period preservation/correction/rotation/recent row and six content actions, with real dated-revenue/as-of SQL/API evidence. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-02-AC3",
@@ -840,7 +840,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 14,
     "text": "3. The system shall calculate Net income as Payments received minus Expenses, separately from Revenue.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / OwnerUi.summary / aq_query dashboard",
@@ -870,7 +870,7 @@
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Dashboard criterion/scenario passes actual OwnerDashboard figures/inventory/time/dialog cancel/valid/reversed-period preservation/correction/rotation/recent row and six content actions, with real dated-revenue/as-of SQL/API evidence. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-02-SCA",
@@ -879,7 +879,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 14,
     "text": "A. View the dashboard and apply a reporting period\nGiven the Owner has signed in successfully\nWhen Owner Dashboard opens\nThen the system shall display the financial figures, inventory counts, pending delivery information, recent orders and authorized navigation\nWhen the Owner opens the period selector and enters a valid start and end date\nThen the system shall show the selected dates for review\nWhen Apply period is selected\nThen the system shall refresh the period figures and show customer balances as of the end date\nThen Net income shall equal Payments received less Expenses, separately from Revenue\nWhen Inventory, Customer balances, Create Order, Walk-in Sale, Reports or View Orders is selected\nThen the system shall open the corresponding screen.\n\nSample Data:\n01–15 Oct 2026; Revenue ₱18,200.00; Payments received ₱16,500.00; Expenses ₱6,250.00; Net income ₱10,250.00; Receivables ₱675.00.\nInventory updated 15 Oct 2026, 9:00 AM: unreserved filled 47, reserved filled 3 (physical filled 50), empty 80, pending 3.\nRecent orders: Maria Santos / ORD-2026-0001 / Undelivered; Cruz Store / ORD-2026-0002 / For Pickup.\n\nAdditional period check\nGiven an unpaid order exists on its business date\nWhen the Owner views that date’s summary\nThen its full saved value shall appear in Revenue while Payments received includes only actual receipts; a later valid short pickup shall adjust the charge on the original order date.\n\nSample Data:\nHousehold order dated 14 Oct: 10 gallons × ₱35.00 = ₱350.00 unpaid; Revenue ₱350.00, Payments received ₱0.00. A ₱200.00 receipt on 15 Oct belongs to 15 Oct cash collection.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / OwnerUi.summary / aq_query dashboard",
@@ -909,7 +909,7 @@
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Dashboard criterion/scenario passes actual OwnerDashboard figures/inventory/time/dialog cancel/valid/reversed-period preservation/correction/rotation/recent row and six content actions, with real dated-revenue/as-of SQL/API evidence. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-02-AC4",
@@ -918,7 +918,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 15,
     "text": "4. The system shall display Filled gallons, Empty gallons, Pending delivery, Receivables, the inventory last-update time, recent orders and the existing quick actions.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / OwnerUi.summary / aq_query dashboard",
@@ -948,7 +948,7 @@
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Dashboard criterion/scenario passes actual OwnerDashboard figures/inventory/time/dialog cancel/valid/reversed-period preservation/correction/rotation/recent row and six content actions, with real dated-revenue/as-of SQL/API evidence. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-02-SCB",
@@ -957,7 +957,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 15,
     "text": "B. Reject an invalid reporting period\nGiven a valid dashboard period and its figures are currently displayed\nWhen the Owner enters an end date before the start date and selects Apply period\nThen the system shall display \"The end date cannot be earlier than the start date.\"\nThen the system shall keep the previous valid dashboard figures\nWhen the Owner corrects the dates and applies the period\nThen the system shall update the figures for the valid range.\n\nSample Data:\nInvalid range: start 15 Oct 2026, end 01 Oct 2026.\nPrevious valid range: 01–15 Oct 2026.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "MainActivity.showHome / OwnerUi.summary / aq_query dashboard",
@@ -987,7 +987,7 @@
         "limit": "Actual local synthetic services/API29; applies only to matching functional assertions, not full design/device/hosted acceptance."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional Dashboard criterion/scenario passes actual OwnerDashboard figures/inventory/time/dialog cancel/valid/reversed-period preservation/correction/rotation/recent row and six content actions, with real dated-revenue/as-of SQL/API evidence. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-03-AC1",
@@ -3357,7 +3357,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 58,
     "text": "A. Complete a Paid, Partially Paid or Unpaid counter sale\nGiven the Owner is signed in and filled stock is available\nWhen Walk-in Sale or POS is opened and the customer name and gallon quantity are entered\nThen the system shall calculate the total without requiring a saved customer profile or delivery address\nWhen Continue to payment is selected\nThen the system shall display Walk-in payment\nWhen cash covers the sale total\nThen the system shall display the change and Paid status\nWhen Complete Sale is selected\nThen the system shall assign a transaction reference, save the customer name/date/time/account and deduct sold gallons from filled stock once\nGiven an alternative sale has cash below the total\nWhen Confirm credit is selected\nThen the system shall display the unpaid amount and ask for confirmation\nWhen Confirm and save is selected\nThen the system shall record Partially Paid when cash is positive or Unpaid when cash is zero\nWhen Cancel is selected instead\nThen the system shall return to the payment form without saving or deducting stock\nWhen the saved result is acknowledged through Done\nThen the system shall return to the sale/order list.\n\nSample Data:\nPedro Garcia; Purified water; 10 gallons × ₱35.00 = ₱350.00; reference WI-2026-0001; initial filled stock 47.\nPaid outcome: cash ₱500.00, change ₱150.00, balance ₱0.00.\nPartial-credit alternative: cash ₱100.00, credit ₱250.00.\nZero-payment alternative: cash ₱0.00, credit ₱350.00.\nEach independently saved sale changes filled stock from 47 to 37. Recorder: Elena Mendoza; 15 Oct 2026.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / aq_command create_sale",
@@ -3423,7 +3423,7 @@
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional POS scenario passes actual both-role named-credit negative/stock/cancel/rotation/Unpaid, both-role positive-partial-cash/final receipt, shared paid POS and exact signed API/SQL/stock-concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-07-AC4",
@@ -3507,7 +3507,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 59,
     "text": "B. Missing name, invalid gallons/cash or insufficient stock\nGiven the Owner is entering a Walk-in sale\nWhen the name is blank\nThen the system shall display \"Enter the customer name.\"\nWhen gallons are not a positive whole number\nThen the system shall display the required quantity correction\nWhen requested gallons exceed filled stock\nThen the system shall display \"Not enough filled gallons.\"\nWhen cash is negative\nThen the system shall display \"Cash received cannot be negative.\"\nWhen cash is nonnumeric\nThen the system shall display \"Enter a valid cash amount.\"\nThen the system shall save no sale or credit and leave stock unchanged\nWhen the entries are corrected\nThen the system shall allow payment or credit confirmation to continue.\n\nSample Data:\nBlank name; quantity 2.5; attempted purchase 48 with stock 47; cash −₱10.00 or abc.\nRejected sale leaves filled stock at 47.\n\nReservation check\nGiven filled stock includes active delivery reservations\nWhen a Walk-in sale exceeds unreserved availability\nThen the system shall display \"Not enough filled gallons.\" and save no sale or payment.\n\nSample Data:\nPhysical filled 5, reserved 3, available 2; attempted Walk-in sale 3 gallons is rejected.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / aq_command create_sale",
@@ -3573,7 +3573,7 @@
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional POS scenario passes actual both-role named-credit negative/stock/cancel/rotation/Unpaid, both-role positive-partial-cash/final receipt, shared paid POS and exact signed API/SQL/stock-concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-07-AC5",
@@ -3802,9 +3802,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history-owner.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-08-AC2",
@@ -3883,9 +3889,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history-owner.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-08-AC3",
@@ -3964,9 +3976,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history-owner.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-08-SCA",
@@ -3975,7 +3993,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 67,
     "text": "A. Find a balance and record a partial or final payment\nGiven the Owner has an Unpaid or Partially Paid order\nWhen it is selected from the customer, order or Payments screen\nThen the system shall display Record Payment with its reference, total, amount already paid, outstanding balance and cash method\nWhen a positive amount not above the balance is entered\nThen the system shall show the resulting balance and payment status\nWhen Save Payment is selected\nThen the system shall assign a payment reference, record the date/time/account, reduce the balance once and update payment history\nThen the system shall display \"Payment recorded\" with the amount, reference, status and balance\nWhen Done is selected\nThen the system shall return to the updated related record\nGiven an alternative payment settles the full remaining balance\nWhen it is saved\nThen the system shall set Paid and a zero balance without changing delivery status\nGiven a named Walk-in credit exists without a saved customer profile\nWhen its transaction reference is searched and Record Payment is opened\nThen the system shall allow settlement against that same sale reference.\n\nSample Data:\nMaria Santos; ORD-2026-0001; total ₱350.00; already paid ₱200.00; balance ₱150.00.\nNew payment ₱100.00 → PAY-2026-0003, cumulative paid ₱300.00, balance ₱50.00, Partially Paid.\nFinal payment ₱50.00 → PAY-2026-0004, Paid, balance ₱0.00.\nWalk-in alternative: Pedro Garcia; WI-2026-0001; total ₱350.00; paid ₱100.00; outstanding ₱250.00; new payment ₱100.00 leaves ₱150.00.\nDate 15 Oct 2026; recorder Elena Mendoza.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / aq_command record_payment",
@@ -4045,9 +4063,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history-owner.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-08-AC4",
@@ -4126,9 +4150,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history-owner.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-08-SCB",
@@ -4137,7 +4167,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 68,
     "text": "B. Nonpositive, nonnumeric or excessive payment\nGiven the Owner is recording a payment against an outstanding balance\nWhen the amount is zero, negative or nonnumeric\nThen the system shall display \"Enter an amount greater than zero and not above the balance.\"\nWhen the entered amount exceeds the outstanding balance\nThen the system shall display a message identifying the current balance\nThen the system shall create no payment reference and preserve existing receipts, payment status and balance\nWhen a permitted amount is entered and submitted\nThen the system shall validate it before saving.\n\nSample Data:\nOutstanding ₱150.00; attempted payments ₱0.00 or ₱200.00.\nOverpayment message: \"Payment cannot exceed the ₱150.00 balance.\"\nPreviously paid ₱200.00 and outstanding ₱150.00 remain unchanged after rejection.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / aq_command record_payment",
@@ -4207,9 +4237,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history-owner.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-08-AC5",
@@ -4288,9 +4324,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history-owner.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-08-AC6",
@@ -4369,9 +4411,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history-owner.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-09-AC1",
@@ -4848,7 +4896,7 @@
     "source": "handoff/source_readable/owner_stories.json",
     "row": 78,
     "text": "5. The system shall retain date/category filtering, newest-first expense records and their filtered total. Prediction shall not alter financial figures, dates, payments or stock. Owner-only backend validation shall govern saves even when inference runs locally. Staff shall have no expense or suggestion screen. Classifier unavailability shall preserve a valid manual save.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OwnerUi.expenses,expense / ExpenseSuggestionController / create_expense",
@@ -4915,9 +4963,15 @@
         "status": "Verified subset",
         "evidence": "evidence/android-manual-expense-validation-owner.log",
         "limit": "Actual Owner missing date/category,0/negative/nonnumeric/fractional-cent amounts,blank Suggest,501Unicode rejected for Suggest/Save,500Unicode accepted with actual missing-model fallback/manual inputs retained; corrected request clears obsolete error. Cancel; exact business/Auth mappings unchanged. Earlier ConnectedWorkflow verifies manual no-remarks save; no trained-model output claimed."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/ManualExpenseValidationDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-manual-expense-validation-owner.log",
+        "limit": "Actual full historical range with multiple preexisting expense rows: backend newest-first independently checked, native row traversal exactly matches fields/order and total; no new expense created. Existing validation/boundary/model-unavailable/manual preservation repeated PASS23.008sec; protected/Auth mapping snapshots unchanged."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Actual historical multiple-expense newest-first complete rows/recorder/reference/date/category/amount/remarks and exact total, date/category filters, unchanged financial/stock records, role denial and manual no-remarks/unavailable-model save pass. Real released-model quality/apply/override remain separate Blocked criteria."
   },
   {
     "id": "A-09-SCC",
@@ -10330,7 +10384,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 58,
     "text": "A. Complete a Paid, Partially Paid or Unpaid counter sale\nGiven the Staff member is signed in and filled stock is available\nWhen Walk-in Sale or POS is opened and the customer name and gallon quantity are entered\nThen the system shall calculate the total without requiring a saved customer profile or delivery address\nWhen Continue to payment is selected\nThen the system shall display Walk-in payment\nWhen cash covers the sale total\nThen the system shall display the change and Paid status\nWhen Complete Sale is selected\nThen the system shall assign a transaction reference, save the customer name/date/time/account and deduct sold gallons from filled stock once\nGiven an alternative sale has cash below the total\nWhen Confirm credit is selected\nThen the system shall display the unpaid amount and ask for confirmation\nWhen Confirm and save is selected\nThen the system shall record Partially Paid when cash is positive or Unpaid when cash is zero\nWhen Cancel is selected instead\nThen the system shall return to the payment form without saving or deducting stock\nWhen the saved result is acknowledged through Done\nThen the system shall return to the sale/order list.\n\nSample Data:\nPedro Garcia; Purified water; 10 gallons × ₱35.00 = ₱350.00; reference WI-2026-0001; initial filled stock 47.\nPaid outcome: cash ₱500.00, change ₱150.00, balance ₱0.00.\nPartial-credit alternative: cash ₱100.00, credit ₱250.00.\nZero-payment alternative: cash ₱0.00, credit ₱350.00.\nEach independently saved sale changes filled stock from 47 to 37. Recorder: Ana Mendoza; 15 Oct 2026.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / create_sale",
@@ -10396,7 +10450,7 @@
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional POS scenario passes actual both-role named-credit negative/stock/cancel/rotation/Unpaid, both-role positive-partial-cash/final receipt, shared paid POS and exact signed API/SQL/stock-concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-18-AC4",
@@ -10480,7 +10534,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 59,
     "text": "B. Missing name, invalid gallons/cash or insufficient stock\nGiven the Staff member is entering a Walk-in sale\nWhen the name is blank\nThen the system shall display \"Enter the customer name.\"\nWhen gallons are not a positive whole number\nThen the system shall display the required quantity correction\nWhen requested gallons exceed filled stock\nThen the system shall display \"Not enough filled gallons.\"\nWhen cash is negative\nThen the system shall display \"Cash received cannot be negative.\"\nWhen cash is nonnumeric\nThen the system shall display \"Enter a valid cash amount.\"\nThen the system shall save no sale or credit and leave stock unchanged\nWhen the entries are corrected\nThen the system shall allow payment or credit confirmation to continue.\n\nSample Data:\nBlank name; quantity 2.5; attempted purchase 48 with stock 47; cash −₱10.00 or abc.\nRejected sale leaves filled stock at 47.\n\nReservation check\nGiven filled stock includes active delivery reservations\nWhen a Walk-in sale exceeds unreserved availability\nThen the system shall display \"Not enough filled gallons.\" and save no sale or payment.\n\nSample Data:\nPhysical filled 5, reserved 3, available 2; attempted Walk-in sale 3 gallons is rejected.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.pos / create_sale",
@@ -10546,7 +10600,7 @@
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional POS scenario passes actual both-role named-credit negative/stock/cancel/rotation/Unpaid, both-role positive-partial-cash/final receipt, shared paid POS and exact signed API/SQL/stock-concurrency checks. Figma/declared-device gates remain separate."
   },
   {
     "id": "A-18-AC5",
@@ -10775,9 +10829,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-19-AC2",
@@ -10856,9 +10916,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-19-AC3",
@@ -10937,9 +11003,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-19-SCA",
@@ -10948,7 +11020,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 67,
     "text": "A. Find a balance and record a partial or final payment\nGiven the Staff member has an Unpaid or Partially Paid order\nWhen it is selected from the customer, order or Payments screen\nThen the system shall display Record Payment with its reference, total, amount already paid, outstanding balance and cash method\nWhen a positive amount not above the balance is entered\nThen the system shall show the resulting balance and payment status\nWhen Save Payment is selected\nThen the system shall assign a payment reference, record the date/time/account, reduce the balance once and update payment history\nThen the system shall display \"Payment recorded\" with the amount, reference, status and balance\nWhen Done is selected\nThen the system shall return to the updated related record\nGiven an alternative payment settles the full remaining balance\nWhen it is saved\nThen the system shall set Paid and a zero balance without changing delivery status\nGiven a named Walk-in credit exists without a saved customer profile\nWhen its transaction reference is searched and Record Payment is opened\nThen the system shall allow settlement against that same sale reference.\n\nSample Data:\nMaria Santos; ORD-2026-0001; total ₱350.00; already paid ₱200.00; balance ₱150.00.\nNew payment ₱100.00 → PAY-2026-0003, cumulative paid ₱300.00, balance ₱50.00, Partially Paid.\nFinal payment ₱50.00 → PAY-2026-0004, Paid, balance ₱0.00.\nWalk-in alternative: Pedro Garcia; WI-2026-0001; total ₱350.00; paid ₱100.00; outstanding ₱250.00; new payment ₱100.00 leaves ₱150.00.\nDate 15 Oct 2026; recorder Ana Mendoza.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / record_payment",
@@ -11018,9 +11090,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-19-AC4",
@@ -11099,9 +11177,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-19-SCB",
@@ -11110,7 +11194,7 @@
     "source": "handoff/source_readable/staff_stories.json",
     "row": 68,
     "text": "B. Nonpositive, nonnumeric or excessive payment\nGiven the Staff member is recording a payment against an outstanding balance\nWhen the amount is zero, negative or nonnumeric\nThen the system shall display \"Enter an amount greater than zero and not above the balance.\"\nWhen the entered amount exceeds the outstanding balance\nThen the system shall display a message identifying the current balance\nThen the system shall create no payment reference and preserve existing receipts, payment status and balance\nWhen a permitted amount is entered and submitted\nThen the system shall validate it before saving.\n\nSample Data:\nOutstanding ₱150.00; attempted payments ₱0.00 or ₱200.00.\nOverpayment message: \"Payment cannot exceed the ₱150.00 balance.\"\nPreviously paid ₱200.00 and outstanding ₱150.00 remain unchanged after rejection.",
-    "status": "In Progress",
+    "status": "Verified",
     "implementation": [
       {
         "symbol": "OperationsUi.payments / payment / record_payment",
@@ -11180,9 +11264,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Remaining per-scenario variants need targeted native checks; actual local Auth/REST and broad connected workflows now pass. Figma/declared hardware/model/hosted recovery require their documented external prerequisites where applicable."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-19-AC5",
@@ -11261,9 +11351,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-19-AC6",
@@ -11342,9 +11438,15 @@
         "status": "Verified subset",
         "evidence": "evidence/postgres-concurrency.log",
         "limit": "Matching actual both-role paid/zero/some-cash named credit/settlement/history/invalid/Cancel/actor/date/stock and actual signed API plus SQL race/replay checks reused. SQL JWT stubs and local/physical/hosted boundaries disclosed; no production compensation or benchmark claim."
+      },
+      {
+        "path": "app/src/androidTest/java/com/aquaquenchers/bms/PaymentHistoryDeviceTest.java",
+        "status": "Verified subset",
+        "evidence": "evidence/android-payment-history.log",
+        "limit": "Actual both-role existing-reference full payment-entry fields;0/negative/abc/fractional-cent/above-balance errors; retained invalid input, corrected partial/final previews; Cancel returns original Order/reference/status/balance, no valid submission; exact business/customer/delivery/profile snapshot unchanged. Prior actual partial/final receipt and history evidence reused."
       }
     ],
-    "gap": "Functional criterion covered cumulatively by matching actual paid/zero/some-cash/partial-final/history/native/official Auth/API and SQL replay/concurrency proof. Baseline has no void/delete; exceptional compensation remains reviewed Owner-approved admin migration per runbook, no production correction executed. Visual/device/hosted governance gates separate."
+    "gap": "Matched functional payment criterion/scenario passes actual readonly negative/preview/Cancel checks combined with previously verified real partial/final receipts/order and named-credit reference/history/time/actor/idempotency evidence. Figma/declared-device/hosted gates remain separate."
   },
   {
     "id": "A-20-AC1",

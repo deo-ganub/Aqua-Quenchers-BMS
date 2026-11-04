@@ -49,6 +49,11 @@ def main():
     token = call('/functions/v1/username-login', {'username': username, 'password': password})['access_token']
     me=call('/rest/v1/rpc/aq_me',{},token);assert me['role']=='owner'
     fixture={'kind':'SYNTHETIC_LOCAL_MANUAL_EXPENSE_VALIDATION_UI','username':username,'password':password,'full_name':me['full_name'],'today':sql('select aq_private.today();')}
+    fixture['expenses'] = call('/rest/v1/rpc/aq_query', {'p_request': {'resource': 'expenses', 'start_date': '1900-01-01', 'end_date': '2100-12-31'}}, token)
+    rows = fixture['expenses']['items']
+    assert len(rows) >= 2, 'Need existing multiple expense rows; do not manufacture a save'
+    assert rows == sorted(rows, key=lambda row: (row['business_date'], row['created_at']), reverse=True)
+    assert sum(row['amount_centavos'] for row in rows) == fixture['expenses']['total_centavos']
     private_json(LOCAL / 'manual-expense-validation-fixture.json', fixture); before = json.loads(sql(snapshot_sql))
     for path in ['app/build/outputs/apk/debug/app-debug.apk', 'app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk']: adb('install', '-r', '-t', str(REPO / path))
     adb('reverse', 'tcp:55436', 'tcp:55436')
@@ -58,7 +63,7 @@ def main():
     assert 'OK (1 test)' in text, 'Inspect native manual-expense-validation evidence before retry'
     assert json.loads(sql(snapshot_sql)) == before
     adb('shell', 'run-as', PACKAGE, 'rm', 'files/manual-expense-validation-credentials.json')
-    with evidence.open('a') as log: log.write('\nPASS: actual ' + ('Owner' if options.owner else 'Staff') + ' manual expense date/category/amount/blank Suggest/501-Unicode validation,500-Unicode model-unavailable/manual preservation, Cancel without save. Customers/financial/stock/profiles/Auth identity/factor mappings unchanged.\n')
+    with evidence.open('a') as log: log.write('\nPASS: actual ' + ('Owner' if options.owner else 'Staff') + ' manual expense date/category/amount/blank Suggest/501-Unicode validation,500-Unicode model-unavailable/manual preservation, Cancel without save; existing newest-first expense rows/reference/date/category/amount/remarks/recorder and exact total verified. Customers/financial/stock/profiles/Auth identity/factor mappings unchanged.\n')
     print('PASS: native manual expense/Unicode/unavailable model validation and exact business immutability')
 
 

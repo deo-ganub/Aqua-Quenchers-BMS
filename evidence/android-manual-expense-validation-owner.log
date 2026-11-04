@@ -15,11 +15,11 @@ INSTRUMENTATION_STATUS: test=actualManualValidationUnicodeBoundaryAndUnavailable
 INSTRUMENTATION_STATUS_CODE: 0
 INSTRUMENTATION_RESULT: stream=
 
-Time: 18.655
+Time: 23.008
 
 OK (1 test)
 
 
 INSTRUMENTATION_CODE: -1
 
-PASS: actual Owner manual expense date/category/amount/blank Suggest/501-Unicode validation,500-Unicode model-unavailable/manual preservation, Cancel without save. Customers/financial/stock/profiles/Auth identity/factor mappings unchanged.
+PASS: actual Owner manual expense date/category/amount/blank Suggest/501-Unicode validation,500-Unicode model-unavailable/manual preservation, Cancel without save; existing newest-first expense rows/reference/date/category/amount/remarks/recorder and exact total verified. Customers/financial/stock/profiles/Auth identity/factor mappings unchanged.
