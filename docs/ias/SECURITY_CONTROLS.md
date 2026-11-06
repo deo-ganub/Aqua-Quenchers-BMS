@@ -1,3 +1,20 @@
+# Current Security Implementation Update
+
+This update attributes new algo-ias code and executed local checks explicitly. The older reference-design matrix below remains historical evidence at its cited revision.
+
+| Control | Current source | Executed local check |
+|---|---|---|
+| Active sessions,30-minute idle, logout and deactivation | [Session/privacy migration](../../supabase/migrations/202611070001_session_privacy.sql) | [14database/privacy tests](../../evidence/database-privacy-tests.log) |
+| Exact retries, server customer price and payment bounds | Same migration and existing checked financial functions | Same SQL suite includes concurrent retry and unchanged overpayment/receipt tests |
+| Approved minimal contact removal and restored-copy cleanup | Private erasure procedure and [ledger CLI](../../tools/privacy_ledger.py) | Real local export/dry-run/replay into a second disposable synthetic database |
+| Session-bound native requests and honest outcomes | Api.java/Session.java/OwnerDashboardActivity.java | [36 host assertions](../../evidence/native-transport-tests.log); actual APK/unit/lint build |
+| Strict identity boundaries and safe audit failure | identity/index.ts and _shared/identity_safety.ts | [Input tests](../../evidence/identity-safety-tests.log), [handler tests](../../evidence/identity-handler-tests.log) and typecheck |
+| Local classifier approval/manual controls | classifier-java module, ClassifierAssets.java and ExpenseScreens.java | [155Java assertions and 10 app unit tests](../../evidence/android-build.log); 18 Python tests and actual synthetic notebook execution |
+
+Production deployment, actual provider revocation/settings, declared-device behavior, reviewed model/data and policy/retention/custody approval remain external. These are implementation tests, not a completed independent security audit. The operational procedure is [DATABASE_PRIVACY_OPERATIONS.md](../security/DATABASE_PRIVACY_OPERATIONS.md).
+
+---
+
 # Security-Control Assessment and Implementation Traceability
 
 **Document identifier:** AQ-IAS-03

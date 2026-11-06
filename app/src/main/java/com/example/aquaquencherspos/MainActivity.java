@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE);
         if (Session.isSignedIn()) {
             // Reopened from the launcher while signed in. The shell applies the idle rule.
             startActivity(new Intent(this, OwnerDashboardActivity.class));
@@ -43,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
         etUsername = findViewById(R.id.etUsername);
         etPassword = findViewById(R.id.etPassword);
+        etPassword.setSaveEnabled(false);
+        etPassword.setFreezesText(false);
         tvUsernameError = findViewById(R.id.tvUsernameError);
         tvPasswordError = findViewById(R.id.tvPasswordError);
         btnLogin = findViewById(R.id.btnLogin);
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         setBusy(true);
         Api.login(username, password, this::onSignedIn, error -> {
+            if (isDestroyed() || isFinishing()) return;
             setBusy(false);
             if (error.connection) {
                 showError(tvUsernameError, null);
@@ -80,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onSignedIn(JSONObject session) {
+        if (isDestroyed() || isFinishing()) return;
         setBusy(false);
         if (!"owner".equals(session.optString("role"))) {
             // Only the Owner module exists so far, so a Staff account stops here.

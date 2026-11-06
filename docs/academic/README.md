@@ -40,4 +40,8 @@ The current [Algorithms and Complexity milestone](https://docs.google.com/docume
 
 ### Submission and acceptance status
 
-This edition completes the formal presentation of the available documentation. The privacy policy and terms retain draft status pending organizational approval. Reviewed-data classifier evaluation, physical-device performance measurements, application-branch classifier integration, independent security-review completion and operational deployment verification remain outstanding. These limitations are recorded in the relevant assessment sections; no unobserved result is represented as completed evidence.
+This edition completes the formal presentation of the available documentation. The privacy policy and terms retain draft status pending organizational approval. Reviewed-data classifier evaluation, physical-device performance measurements, reviewed-model release verification, independent security-review completion and operational deployment verification remain outstanding. These limitations are recorded in the relevant assessment sections; no unobserved result is represented as completed evidence.
+
+### Implemented database/privacy and runnable benchmark update
+
+See [database/privacy operations](../security/DATABASE_PRIVACY_OPERATIONS.md) for the actual additive migration, controlled rights workflow and local verification. The [notebook guide](BENCHMARK_NOTEBOOK_GUIDE.md) explains the included offline code, synthetic demonstration and private reviewed-data workflow. The Android classifier bridge is implemented with approved-model guards; no reviewed release model is fabricated.

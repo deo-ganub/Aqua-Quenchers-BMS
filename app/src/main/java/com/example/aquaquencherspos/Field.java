@@ -97,7 +97,10 @@ public final class Field extends LinearLayout {
     }
 
     static Field password(Context c, String label) {
-        return editable(c, label, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD, null);
+        Field field=editable(c, label, InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD, null);
+        field.input.setSaveEnabled(false);
+        field.input.setFreezesText(false);
+        return field;
     }
 
     static Field readOnly(Context c, String label, String value) {

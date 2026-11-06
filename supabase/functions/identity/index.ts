@@ -1,3 +1,4 @@
+import { boundedText, requestObject, InputError } from "../_shared/identity_safety.ts";
 // Protected identity service (Requirements A-01, A-11, B-03).
 // Maps usernames to Supabase Auth accounts and performs privileged account
 // changes, so the service-role key never enters the Android app.
@@ -17,7 +18,7 @@ class Problem extends Error {
 }
 
 const reply = (status: number, body: unknown) =>
-  new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
+  new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff" } });
 
 const serviceHeaders = {
   apikey: SERVICE_KEY,
@@ -25,8 +26,16 @@ const serviceHeaders = {
   "Content-Type": "application/json",
 };
 
+async function upstream(input: string, init: RequestInit = {}) {
+  if (!SUPABASE_URL?.startsWith("https://") || !ANON_KEY || !SERVICE_KEY)
+    throw new Problem(503, "Account service is not configured.");
+  const response=await fetch(input,{...init,redirect:"error",signal:AbortSignal.timeout(15000)});
+  const text=await boundedText(response.body,256*1024);
+  return new Response(text || null,{status:response.status,headers:response.headers});
+}
+
 async function rest(path: string, init: RequestInit = {}) {
-  const res = await fetch(`${SUPABASE_URL}${path}`, {
+  const res = await upstream(`${SUPABASE_URL}${path}`, {
     ...init,
     headers: { ...serviceHeaders, ...(init.headers ?? {}) },
   });
@@ -51,7 +60,7 @@ async function findProfileByUsername(username: string) {
 }
 
 async function passwordGrant(email: string, password: string) {
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+  const res = await upstream(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
     method: "POST",
     headers: { apikey: ANON_KEY, "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -72,12 +81,16 @@ async function login(body: any) {
   const password = String(body.password ?? "");
   if (!validUsername(username) || !password) throw invalid;
 
-  const profile = await findProfileByUsername(username);
+  let profile = await findProfileByUsername(username);
   if (!profile || profile.status !== "Active") throw invalid;
   const email = await emailOf(profile.id);
   if (!email) throw invalid;
   const session = await passwordGrant(email, password);
-  if (!session) throw invalid;
+  if (!session || session.user?.id !== profile.id) throw invalid;
+  // Account status/role may change while the managed password grant is in flight.
+  const latest=await rest(`/rest/v1/profiles?select=id,role,username,full_name,status&id=eq.${profile.id}`);
+  profile=latest.ok ? latest.body?.[0] : null;
+  if (!profile || profile.status!=="Active") throw invalid;
 
   await audit(profile.id, "login", "account", profile.id, {});
   return {
@@ -96,11 +109,17 @@ async function requireUser(req: Request) {
   const expired = new Problem(401, "Session expired. Sign in again.");
   const token = (req.headers.get("Authorization") ?? "").replace(/^Bearer\s+/i, "");
   if (!token) throw expired;
-  const res = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+  const res = await upstream(`${SUPABASE_URL}/auth/v1/user`, {
     headers: { apikey: ANON_KEY, Authorization: `Bearer ${token}` },
   });
   if (!res.ok) throw expired;
   const user = await res.json();
+  // The same database session policy applies to account-admin Edge requests.
+  const session = await upstream(`${SUPABASE_URL}/rest/v1/rpc/aq_session_touch`, {
+    method: "POST", headers: { apikey: ANON_KEY, Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json" }, body: "{}", signal: AbortSignal.timeout(15000),
+  });
+  if (!session.ok) throw expired;
   const r = await rest(`/rest/v1/profiles?select=id,role,status&id=eq.${user.id}`);
   const profile = r.ok ? r.body[0] : null;
   if (!profile || profile.status !== "Active") throw expired;
@@ -123,11 +142,13 @@ function requireRecentMfa(token: string) {
 }
 
 async function audit(actor: string, action: string, entity: string, id: string, details: unknown) {
-  await rest("/rest/v1/audit_log", {
+  const recorded = await rest("/rest/v1/audit_log", {
     method: "POST",
     headers: { Prefer: "return=minimal" },
     body: JSON.stringify({ actor, action, entity, entity_id: id, details }),
   });
+  if (!recorded.ok) throw new Problem(503, "The account operation needs reconciliation.",
+    "The account may already have changed. Review the original operation before retrying; audit confirmation failed.");
 }
 
 async function saveStaff(req: Request, body: any) {
@@ -177,7 +198,7 @@ async function saveStaff(req: Request, body: any) {
       method: "PATCH",
       body: JSON.stringify({ full_name: fullName, username, contact_number: contact, status, updated_at: new Date().toISOString() }),
     });
-    if (!p.ok) throw new Problem(400, "Staff account was not saved.");
+    if (!p.ok) throw new Problem(503, "Unable to confirm the account update.", "A password or profile change may already have completed. Review the account before retrying.");
   } else {
     // The sign-in email is internal only: staff always use their username, so
     // username edits never touch the stable Auth user ID or linked records.
@@ -197,7 +218,9 @@ async function saveStaff(req: Request, body: any) {
       body: JSON.stringify({ id: userId, role: "staff", full_name: fullName, username, contact_number: contact, status }),
     });
     if (!p.ok) {
-      await rest(`/auth/v1/admin/users/${userId}`, { method: "DELETE" });
+      if (![400,409,422].includes(p.status)) throw new Problem(503, "Account creation needs reconciliation.", "Do not create another identity until the original outcome is checked.");
+      const cleanup=await rest(`/auth/v1/admin/users/${userId}`, { method: "DELETE" });
+      if (!cleanup.ok) throw new Problem(503, "Account creation needs reconciliation.", "The identity cleanup was not confirmed.");
       throw new Problem(400, "Staff account was not created.");
     }
   }
@@ -229,7 +252,7 @@ async function changePassword(req: Request, body: any) {
 Deno.serve(async (req) => {
   if (req.method !== "POST") return reply(405, { message: "Method not allowed." });
   try {
-    const body = await req.json();
+    const body = await requestObject(req);
     switch (body.action) {
       case "login":
         return reply(200, await login(body));
@@ -242,7 +265,8 @@ Deno.serve(async (req) => {
     }
   } catch (e) {
     if (e instanceof Problem) return reply(e.status, { message: e.message, details: e.detail });
-    console.error(e);
-    return reply(500, { message: "Unable to complete the request. Please try again." });
+    if (e instanceof InputError) return reply(400, { message: e.message });
+    console.error("identity operation failed; private details omitted");
+    return reply(503, { message: "Unable to confirm the request.", details: "For an account change, review the original operation before retrying." });
   }
 });

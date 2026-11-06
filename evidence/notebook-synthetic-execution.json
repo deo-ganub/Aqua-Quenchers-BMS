@@ -1,0 +1,286 @@
+{
+  "evidence_kind": "SYNTHETIC NOTEBOOK EXECUTION ONLY",
+  "notebook_code_cells": 7,
+  "default_run": "PASS: no experiment created",
+  "full_demo": "PASS: actual prepare/train/evaluate/timing cells",
+  "repeat_held_out": "PASS: rejected; original result unchanged",
+  "reviewed_mode_guard": "PASS",
+  "privacy_display": "PASS: aggregate-only output",
+  "quality_summary": {
+    "evidence": "SYNTHETIC ONLY \u2014 classroom demonstration",
+    "test_examples": 7,
+    "labels": [
+      "Fuel",
+      "Electricity",
+      "Water",
+      "Maintenance",
+      "Supplies",
+      "Salary",
+      "Others"
+    ],
+    "models": {
+      "primary": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "per_class": [
+          {
+            "category": "Fuel",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Electricity",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Water",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Maintenance",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Supplies",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Salary",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Others",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          }
+        ],
+        "confusion_matrix": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "suggestion_coverage": 1.0,
+        "error_among_offered": 0.0,
+        "quality_gate_pass": true
+      },
+      "comparison": {
+        "accuracy": 1.0,
+        "macro_f1": 1.0,
+        "per_class": [
+          {
+            "category": "Fuel",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Electricity",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Water",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Maintenance",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Supplies",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Salary",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          },
+          {
+            "category": "Others",
+            "f1": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "support": 1
+          }
+        ],
+        "confusion_matrix": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1
+          ]
+        ],
+        "suggestion_coverage": 0.0,
+        "error_among_offered": null,
+        "quality_gate_pass": true
+      }
+    },
+    "device_benchmark": "NOT RUN",
+    "release_approved": false
+  },
+  "timing_summary": {
+    "evidence": "SYNTHETIC ONLY \u2014 classroom demonstration",
+    "scope": "preparation + training + tuning",
+    "warmup_processes": 1,
+    "fresh_timed_processes": 5,
+    "median_seconds": 2.755314134999935,
+    "range_seconds": [
+      2.708612220998475,
+      2.8634699060021376
+    ],
+    "peak_rss_bytes": 116600832,
+    "device_benchmark": "NOT RUN"
+  },
+  "source_note": "Uncommitted source state is reported; synthetic results do not meet station/device release gates."
+}

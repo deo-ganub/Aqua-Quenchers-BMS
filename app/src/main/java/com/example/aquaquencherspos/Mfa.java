@@ -70,11 +70,14 @@ final class Mfa {
             p.addView(Ui.spaced(c, Ui.body(c, "First-time setup: add this key to your authenticator app, then enter its code."), 8));
             android.widget.TextView key = Ui.text(c, setupSecret, Ui.medium(c), 14, Ui.PRIMARY);
             key.setTextIsSelectable(true);
+            key.setSaveEnabled(false);
             p.addView(Ui.spaced(c, key, 12));
         } else {
             p.addView(Ui.spaced(c, Ui.body(c, "Enter your authenticator verification code to save this account change."), 12));
         }
         Field code = Field.quantity(c, "Verification code", "123456");
+        code.setSaveFromParentEnabled(false);
+        code.setImportantForAutofill(android.view.View.IMPORTANT_FOR_AUTOFILL_NO_EXCLUDE_DESCENDANTS);
         p.addView(Ui.spaced(c, code, 12));
         AlertDialog[] holder = new AlertDialog[1];
         p.addView(Ui.spaced(c, Ui.primary(c, "Verify and save", v -> {
@@ -87,8 +90,8 @@ final class Mfa {
                 JSONObject verify = BaseScreen.params("challenge_id", challenge.optString("id"), "code", value);
                 Api.authPost("factors/" + factorId + "/verify", verify, session -> {
                     // The verified session carries the proof the identity service checks.
-                    Session.accessToken = session.optString("access_token");
-                    Session.refreshToken = session.optString("refresh_token");
+                    if (!Session.installTokens(Session.generation(),session.optString("access_token"),
+                            session.optString("refresh_token"))) return;
                     holder[0].dismiss();
                     done.onVerified();
                 }, error -> {
@@ -110,6 +113,7 @@ final class Mfa {
         holder[0] = d;
         d.show();
         if (d.getWindow() != null) {
+            d.getWindow().addFlags(android.view.WindowManager.LayoutParams.FLAG_SECURE);
             d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             int screen = c.getResources().getDisplayMetrics().widthPixels;
             d.getWindow().setLayout(Math.min(Ui.dp(c, 520), screen - Ui.dp(c, 32)),

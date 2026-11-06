@@ -2,7 +2,11 @@ plugins {
     alias(libs.plugins.android.application)
 }
 
+val classifierDigest = providers.gradleProperty("AQ_CLASSIFIER_SHA256").orElse("").get()
+require(classifierDigest.isEmpty() || classifierDigest.matches(Regex("[a-fA-F0-9]{64}"))) { "AQ_CLASSIFIER_SHA256 must be a SHA-256 digest." }
+
 android {
+    buildFeatures { buildConfig = true }
     namespace = "com.example.aquaquencherspos"
     compileSdk {
         version = release(37)
@@ -15,6 +19,7 @@ android {
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"
+        buildConfigField("String", "CLASSIFIER_SHA256", "\"$classifierDigest\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -33,6 +38,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":classifier-java"))
     implementation(libs.activity.ktx)
     implementation(libs.appcompat)
     implementation(libs.constraintlayout)

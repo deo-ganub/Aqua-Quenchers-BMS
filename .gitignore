@@ -13,3 +13,24 @@
 .externalNativeBuild
 .cxx
 local.properties
+
+# Build caches, private data and document downloads stay outside source control.
+**/build/
+**/__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+*.dump
+*.backup
+*.age
+private/
+classifier/experiments/
+handoff/*
+!handoff/CODEX_PROMPT.md
+
+# User preference: document downloads are delivered in the conversation only.
+*.doc
+*.docx
+*.pdf
+.ipynb_checkpoints/

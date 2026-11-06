@@ -49,90 +49,116 @@ public final class Api {
     private Api() {
     }
 
-    /** Reads a table or view. The path holds the PostgREST query, e.g. "orders_view?select=*". */
+    private static long loginAttempt;
+
     public static void select(String path, Callback<JSONArray> ok, Failure no) {
-        run(() -> new JSONArray(send("/rest/v1/" + path, "GET", null, true)), ok, no);
+        run(c -> new JSONArray(send("/rest/v1/" + path,"GET",null,c)),ok,no,true);
     }
-
-    /** Calls a database function that returns a JSON object. */
     public static void rpc(String function, JSONObject params, Callback<JSONObject> ok, Failure no) {
-        run(() -> new JSONObject(send("/rest/v1/rpc/" + function, "POST", params, true)), ok, no);
+        JSONObject request=copy(params);
+        run(c -> new JSONObject(send("/rest/v1/rpc/"+function,"POST",request,c)),ok,no,true);
     }
-
-    /** Signs in through the protected username mapping. */
-    public static void login(String username, String password, Callback<JSONObject> ok, Failure no) {
-        run(() -> {
-            JSONObject body = new JSONObject().put("action", "login")
-                    .put("username", username).put("password", password);
-            return new JSONObject(send("/functions/v1/identity", "POST", body, false));
-        }, ok, no);
+    public static void login(String username,String password,Callback<JSONObject> ok,Failure no) {
+        synchronized (Api.class) { loginAttempt++; }
+        run(c -> new JSONObject(send("/functions/v1/identity","POST",
+            new JSONObject().put("action","login").put("username",username).put("password",password),null)),ok,no,false);
     }
-
-    public static void identity(JSONObject body, Callback<JSONObject> ok, Failure no) {
-        run(() -> new JSONObject(send("/functions/v1/identity", "POST", body, true)), ok, no);
+    public static void identity(JSONObject body,Callback<JSONObject> ok,Failure no) {
+        JSONObject request=copy(body);
+        run(c -> new JSONObject(send("/functions/v1/identity","POST",request,c)),ok,no,true);
     }
-
-    public static void authGet(String path, Callback<JSONObject> ok, Failure no) {
-        run(() -> new JSONObject(send("/auth/v1/" + path, "GET", null, true)), ok, no);
+    public static void authGet(String path,Callback<JSONObject> ok,Failure no) {
+        run(c -> new JSONObject(send("/auth/v1/"+path,"GET",null,c)),ok,no,true);
     }
-
-    public static void authPost(String path, JSONObject body, Callback<JSONObject> ok, Failure no) {
-        run(() -> new JSONObject(send("/auth/v1/" + path, "POST", body, true)), ok, no);
+    public static void authPost(String path,JSONObject body,Callback<JSONObject> ok,Failure no) {
+        JSONObject request=copy(body);
+        run(c -> new JSONObject(send("/auth/v1/"+path,"POST",request,c)),ok,no,true);
     }
-
-    private interface Work<T> {
-        T call() throws IOException, ApiError, JSONException;
+    private static JSONObject copy(JSONObject body) {
+        if (body==null) return null;
+        try { return new JSONObject(body.toString()); }
+        catch (JSONException e) { throw new IllegalArgumentException("Invalid request."); }
     }
-
-    private static <T> void run(Work<T> work, Callback<T> ok, Failure no) {
+    private interface Work<T> { T call(Session.Credentials credentials) throws IOException,ApiError,JSONException; }
+    private static synchronized long attempt() { return loginAttempt; }
+    private static <T> void run(Work<T> work,Callback<T> ok,Failure no,boolean signedIn) {
+        final long generation=Session.generation(), attempt=attempt();
+        final Session.Credentials credentials=signedIn ? Session.snapshot() : null;
         EXECUTOR.execute(() -> {
             try {
-                T value = work.call();
-                MAIN.post(() -> ok.onResult(value));
+                if (!Session.isCurrent(generation) || signedIn && credentials==null)
+                    throw new ApiError(EXPIRED,"",false,true);
+                T value=work.call(credentials);
+                MAIN.post(() -> { if (Session.isCurrent(generation) && (signedIn || attempt()==attempt)) ok.onResult(value); });
             } catch (ApiError e) {
-                MAIN.post(() -> no.onFailure(e));
+                MAIN.post(() -> { if (Session.isCurrent(generation) && (signedIn || attempt()==attempt)) no.onFailure(e); });
             } catch (IOException e) {
-                ApiError error = new ApiError("Unable to connect.",
-                        "Check the internet connection and try again. Nothing was saved.", true, false);
-                MAIN.post(() -> no.onFailure(error));
+                ApiError error=new ApiError("Unable to confirm the request.",
+                    "Check the connection and review the original record before retrying. A timeout does not confirm whether a save completed.",true,false);
+                MAIN.post(() -> { if (Session.isCurrent(generation) && (signedIn || attempt()==attempt)) no.onFailure(error); });
             } catch (JSONException e) {
-                ApiError error = new ApiError("Unexpected server response.",
-                        "Please try again.", false, false);
-                MAIN.post(() -> no.onFailure(error));
+                ApiError error=new ApiError("Unexpected server response.","Review the original operation before retrying.",false,false);
+                MAIN.post(() -> { if (Session.isCurrent(generation) && (signedIn || attempt()==attempt)) no.onFailure(error); });
             }
         });
     }
-
-    private static String send(String endpoint, String method, JSONObject body, boolean signedIn)
-            throws IOException, ApiError {
-        Response response = exchange(endpoint, method, body, signedIn ? Session.accessToken : null);
-        if (signedIn && response.status == 401 && refreshSession()) {
-            response = exchange(endpoint, method, body, Session.accessToken);
-        }
-        if (response.status >= 200 && response.status < 300) {
-            return response.text;
-        }
-        throw toError(response, signedIn);
+    private static void current(Session.Credentials c) throws ApiError {
+        if (c!=null && !Session.isCurrent(c.generation)) throw new ApiError(EXPIRED,"",false,true);
     }
-
-    private static synchronized boolean refreshSession() throws IOException {
-        String refresh = Session.refreshToken;
-        if (refresh == null) {
-            return false;
-        }
-        try {
-            JSONObject body = new JSONObject().put("refresh_token", refresh);
-            Response r = exchange("/auth/v1/token?grant_type=refresh_token", "POST", body, null);
-            if (r.status < 200 || r.status >= 300) {
-                return false;
+    private static String send(String endpoint,String method,JSONObject body,Session.Credentials credentials)
+            throws IOException,ApiError {
+        Session.Credentials c=credentials;
+        boolean refreshed=false;
+        if (c!=null) {
+            current(c);
+            Response guard=exchange("/rest/v1/rpc/aq_session_touch","POST",new JSONObject(),c.access);
+            if (guard.status==401) {
+                c=refreshSession(c); refreshed=true;
+                guard=exchange("/rest/v1/rpc/aq_session_touch","POST",new JSONObject(),c.access);
             }
-            JSONObject session = new JSONObject(r.text);
-            Session.accessToken = session.getString("access_token");
-            Session.refreshToken = session.getString("refresh_token");
-            return true;
-        } catch (JSONException e) {
-            return false;
+            current(c);
+            if (guard.status<200 || guard.status>=300) throw toError(guard,true);
         }
+        current(c);
+        Response response=exchange(endpoint,method,body,c==null ? null : c.access);
+        if (c!=null && response.status==401 && !refreshed) {
+            c=refreshSession(c); current(c);
+            response=exchange(endpoint,method,body,c.access);
+        }
+        current(c);
+        if (response.status>=200 && response.status<300) return response.text;
+        throw toError(response,credentials!=null);
+    }
+    private static synchronized Session.Credentials refreshSession(Session.Credentials expected)
+            throws IOException,ApiError {
+        current(expected);
+        Session.Credentials latest=Session.snapshot(expected.generation);
+        if (latest==null) throw new ApiError(EXPIRED,"",false,true);
+        if (!latest.access.equals(expected.access)) return latest;
+        try {
+            if (latest.refresh==null) throw new ApiError(EXPIRED,"",false,true);
+            Response r=exchange("/auth/v1/token?grant_type=refresh_token","POST",
+                new JSONObject().put("refresh_token",latest.refresh),null);
+            if (r.status<200 || r.status>=300) throw new ApiError(EXPIRED,"",false,true);
+            JSONObject session=new JSONObject(r.text);
+            if (!latest.userId.equals(session.getJSONObject("user").getString("id"))
+                || !Session.installTokens(expected.generation,session.getString("access_token"),session.getString("refresh_token")))
+                throw new ApiError(EXPIRED,"",false,true);
+            Session.Credentials refreshed=Session.snapshot(expected.generation);
+            if (refreshed==null) throw new ApiError(EXPIRED,"",false,true);
+            return refreshed;
+        } catch (JSONException e) { throw new ApiError(EXPIRED,"",false,true); }
+    }
+    /** Captures the outgoing identity. Local cleanup never waits for remote connectivity. */
+    public static void signOut() {
+        Session.Credentials old=Session.snapshot();
+        if (old==null) return;
+        EXECUTOR.execute(() -> {
+            try { exchange("/rest/v1/rpc/aq_logout","POST",new JSONObject(),old.access); }
+            catch (IOException ignored) { /* Best effort; local cleanup is still required. */ }
+            try { exchange("/auth/v1/logout?scope=local","POST",new JSONObject(),old.access); }
+            catch (IOException ignored) { /* Provider invalidation is not promised on failure. */ }
+        });
     }
 
     private static ApiError toError(Response response, boolean signedIn) {
@@ -171,8 +197,10 @@ public final class Api {
     private static Response exchange(String endpoint, String method, JSONObject body, String token)
             throws IOException {
         URL url = new URL(SupabaseConfig.SUPABASE_URL + endpoint);
+        if (!"https".equals(url.getProtocol())) throw new IOException("HTTPS is required.");
         HttpURLConnection c = (HttpURLConnection) url.openConnection();
         try {
+            c.setInstanceFollowRedirects(false);
             c.setRequestMethod(method);
             c.setConnectTimeout(15000);
             c.setReadTimeout(20000);
@@ -190,17 +218,17 @@ public final class Api {
             }
             int status = c.getResponseCode();
             InputStream stream = status >= 200 && status < 300 ? c.getInputStream() : c.getErrorStream();
-            StringBuilder text = new StringBuilder();
-            if (stream != null) {
-                try (BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(stream, StandardCharsets.UTF_8))) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        text.append(line);
+            java.io.ByteArrayOutputStream text=new java.io.ByteArrayOutputStream();
+            if (stream!=null) {
+                try (InputStream input=stream) {
+                    byte[] buffer=new byte[8192]; int count;
+                    while ((count=input.read(buffer))!=-1) {
+                        if (text.size()+count>4*1024*1024) throw new IOException("Response is too large.");
+                        text.write(buffer,0,count);
                     }
                 }
             }
-            return new Response(status, text.toString());
+            return new Response(status,new String(text.toByteArray(),StandardCharsets.UTF_8));
         } finally {
             c.disconnect();
         }

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Figma "01 · Login": brand panel on the left, sign-in card on the right. -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/loginRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -64,7 +65,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_aq_drop"
-                    android:tint="@color/aq_white" />
+                    app:tint="@color/aq_white" />
             </FrameLayout>
 
             <LinearLayout
@@ -126,7 +127,7 @@
                     android:layout_gravity="center"
                     android:contentDescription="@null"
                     android:src="@drawable/ic_aq_drop"
-                    android:tint="@color/aq_white" />
+                    app:tint="@color/aq_white" />
             </FrameLayout>
 
             <LinearLayout

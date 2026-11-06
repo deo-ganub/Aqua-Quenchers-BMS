@@ -24,4 +24,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "aquaquencherspos"
 include(":app")
- 
+
+include(":classifier-java")

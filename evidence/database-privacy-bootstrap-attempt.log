@@ -1,0 +1,28 @@
+test_approved_bootstrap_is_once_only_and_recovery_revokes (__main__.DatabasePrivacy.test_approved_bootstrap_is_once_only_and_recovery_revokes) ... ERROR
+test_concurrent_identical_retry_has_one_effect (__main__.DatabasePrivacy.test_concurrent_identical_retry_has_one_effect) ... ok
+test_current_customer_price_payment_bounds_and_receipt_retry (__main__.DatabasePrivacy.test_current_customer_price_payment_bounds_and_receipt_retry) ... ok
+test_deactivation_and_role_changes_revoke_existing_sessions (__main__.DatabasePrivacy.test_deactivation_and_role_changes_revoke_existing_sessions) ... ok
+test_expired_session_cannot_be_renewed_or_browsed (__main__.DatabasePrivacy.test_expired_session_cannot_be_renewed_or_browsed) ... ok
+test_independent_ledger_export_restore_replay_and_safe_paths (__main__.DatabasePrivacy.test_independent_ledger_export_restore_replay_and_safe_paths) ... ok
+test_logout_binds_identity_and_audits_exactly_once (__main__.DatabasePrivacy.test_logout_binds_identity_and_audits_exactly_once) ... ok
+test_payload_bound_retries_and_legacy_fail_closed (__main__.DatabasePrivacy.test_payload_bound_retries_and_legacy_fail_closed) ... ok
+test_privacy_cutoff_preserves_later_reacquired_contact (__main__.DatabasePrivacy.test_privacy_cutoff_preserves_later_reacquired_contact) ... ok
+test_privacy_dry_run_authority_and_active_balance_guard (__main__.DatabasePrivacy.test_privacy_dry_run_authority_and_active_balance_guard) ... ok
+test_privacy_removes_copies_preserves_money_hashes_and_retry (__main__.DatabasePrivacy.test_privacy_removes_copies_preserves_money_hashes_and_retry) ... ok
+test_redaction_targets_only_subject_and_descendants (__main__.DatabasePrivacy.test_redaction_targets_only_subject_and_descendants) ... ok
+test_removed_contact_requires_complete_reacquisition_for_new_order (__main__.DatabasePrivacy.test_removed_contact_requires_complete_reacquisition_for_new_order) ... ok
+test_session_registration_role_and_raw_table_boundaries (__main__.DatabasePrivacy.test_session_registration_role_and_raw_table_boundaries) ... ok
+
+======================================================================
+ERROR: test_approved_bootstrap_is_once_only_and_recovery_revokes (__main__.DatabasePrivacy.test_approved_bootstrap_is_once_only_and_recovery_revokes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/Aqua-Quenchers-BMS/supabase/tests/test_database_privacy.py", line 178, in test_approved_bootstrap_is_once_only_and_recovery_revokes
+    self.assertEqual(sql(self.db,'select physical_filled||'/'||empty_gallons from public.inventory;'),'10/20')
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for /: 'str' and 'str'
+
+----------------------------------------------------------------------
+Ran 14 tests in 1.855s
+
+FAILED (errors=1)

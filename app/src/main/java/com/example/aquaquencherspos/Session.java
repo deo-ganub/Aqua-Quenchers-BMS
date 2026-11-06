@@ -4,7 +4,7 @@ import android.os.SystemClock;
 
 /**
  * The signed-in account. Tokens stay in memory only, so nothing sensitive is
- * written to the device and closing the app ends the session.
+ * written to the device and tokens are cleared when the process ends or the user signs out.
  */
 public final class Session {
 
@@ -18,11 +18,34 @@ public final class Session {
     static String username;
     static String fullName;
     private static volatile long lastActivity;
+    private static volatile long generation;
+
+    static final class Credentials {
+        final long generation;
+        final String access, refresh, userId;
+        Credentials(long generation, String access, String refresh, String userId) {
+            this.generation=generation; this.access=access; this.refresh=refresh; this.userId=userId;
+        }
+    }
+    static synchronized long generation() { return generation; }
+    static synchronized boolean isCurrent(long expected) { return generation==expected; }
+    static synchronized Credentials snapshot() {
+        return accessToken==null ? null : new Credentials(generation,accessToken,refreshToken,userId);
+    }
+    static synchronized Credentials snapshot(long expected) {
+        return generation==expected ? snapshot() : null;
+    }
+    static synchronized boolean installTokens(long expected, String access, String refresh) {
+        if (generation!=expected || accessToken==null || access==null || access.isEmpty()
+                || refresh==null || refresh.isEmpty()) return false;
+        accessToken=access; refreshToken=refresh; return true;
+    }
 
     private Session() {
     }
 
-    static void start(String access, String refresh, String id, String userRole, String name, String display) {
+    static synchronized void start(String access, String refresh, String id, String userRole, String name, String display) {
+        generation++;
         accessToken = access;
         refreshToken = refresh;
         userId = id;
@@ -32,7 +55,8 @@ public final class Session {
         touch();
     }
 
-    static void clear() {
+    static synchronized void clear() {
+        generation++;
         accessToken = null;
         refreshToken = null;
         userId = null;

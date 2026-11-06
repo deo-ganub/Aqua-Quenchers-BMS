@@ -1,0 +1,9 @@
+Check supabase/tests/identity_handler_test.ts
+running 5 tests from ./supabase/tests/identity_handler_test.ts
+actual login rechecks current identity and returns no-store ... ok (11ms)
+deactivation during password grant denies returned session ... ok (1ms)
+revoked database session denies privileged operation ... ok (1ms)
+account mutation with failed audit returns reconciliation not success ... ok (3ms)
+privileged unknown input denied before provider access ... ok (536µs)
+
+ok | 5 passed | 0 failed (23ms)

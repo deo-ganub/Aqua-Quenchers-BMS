@@ -1,0 +1,63 @@
+test_concurrent_identical_retry_has_one_effect (__main__.DatabasePrivacy.test_concurrent_identical_retry_has_one_effect) ... ok
+test_deactivation_and_role_changes_revoke_existing_sessions (__main__.DatabasePrivacy.test_deactivation_and_role_changes_revoke_existing_sessions) ... FAIL
+test_expired_session_cannot_be_renewed_or_browsed (__main__.DatabasePrivacy.test_expired_session_cannot_be_renewed_or_browsed) ... FAIL
+test_logout_binds_identity_and_audits_exactly_once (__main__.DatabasePrivacy.test_logout_binds_identity_and_audits_exactly_once) ... FAIL
+test_payload_bound_retries_and_legacy_fail_closed (__main__.DatabasePrivacy.test_payload_bound_retries_and_legacy_fail_closed) ... FAIL
+test_privacy_cutoff_preserves_later_reacquired_contact (__main__.DatabasePrivacy.test_privacy_cutoff_preserves_later_reacquired_contact) ... ok
+test_privacy_dry_run_authority_and_active_balance_guard (__main__.DatabasePrivacy.test_privacy_dry_run_authority_and_active_balance_guard) ... ok
+test_privacy_removes_copies_preserves_money_hashes_and_retry (__main__.DatabasePrivacy.test_privacy_removes_copies_preserves_money_hashes_and_retry) ... FAIL
+test_redaction_targets_only_subject_and_descendants (__main__.DatabasePrivacy.test_redaction_targets_only_subject_and_descendants) ... ok
+test_session_registration_role_and_raw_table_boundaries (__main__.DatabasePrivacy.test_session_registration_role_and_raw_table_boundaries) ... FAIL
+
+======================================================================
+FAIL: test_deactivation_and_role_changes_revoke_existing_sessions (__main__.DatabasePrivacy.test_deactivation_and_role_changes_revoke_existing_sessions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/Aqua-Quenchers-BMS/supabase/tests/test_database_privacy.py", line 113, in test_deactivation_and_role_changes_revoke_existing_sessions
+    self.assertIn('Session expired',self.touch(ok=False))
+AssertionError: 'Session expired' not found in 'CONTEXT:  PL/pgSQL function public.aq_session_touch() line 7 at RAISE'
+
+======================================================================
+FAIL: test_expired_session_cannot_be_renewed_or_browsed (__main__.DatabasePrivacy.test_expired_session_cannot_be_renewed_or_browsed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/Aqua-Quenchers-BMS/supabase/tests/test_database_privacy.py", line 100, in test_expired_session_cannot_be_renewed_or_browsed
+    self.assertIn('Session expired',self.touch(issued=int(time.time())-1900,ok=False))
+AssertionError: 'Session expired' not found in 'CONTEXT:  PL/pgSQL function public.aq_session_touch() line 22 at RAISE'
+
+======================================================================
+FAIL: test_logout_binds_identity_and_audits_exactly_once (__main__.DatabasePrivacy.test_logout_binds_identity_and_audits_exactly_once)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/Aqua-Quenchers-BMS/supabase/tests/test_database_privacy.py", line 109, in test_logout_binds_identity_and_audits_exactly_once
+    self.assertIn('Session expired',self.touch(ok=False))
+AssertionError: 'Session expired' not found in 'CONTEXT:  PL/pgSQL function public.aq_session_touch() line 13 at RAISE'
+
+======================================================================
+FAIL: test_payload_bound_retries_and_legacy_fail_closed (__main__.DatabasePrivacy.test_payload_bound_retries_and_legacy_fail_closed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/Aqua-Quenchers-BMS/supabase/tests/test_database_privacy.py", line 124, in test_payload_bound_retries_and_legacy_fail_closed
+    self.assertIn('conflicts',changed)
+AssertionError: 'conflicts' not found in 'PL/pgSQL function public.save_customer(uuid,text,text,text,text,uuid) line 7 at assignment'
+
+======================================================================
+FAIL: test_privacy_removes_copies_preserves_money_hashes_and_retry (__main__.DatabasePrivacy.test_privacy_removes_copies_preserves_money_hashes_and_retry)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/Aqua-Quenchers-BMS/supabase/tests/test_database_privacy.py", line 161, in test_privacy_removes_copies_preserves_money_hashes_and_retry
+    self.assertIn('Complete the required',self.actor(f"select public.save_customer(null,'Missing Contact','Household',null,null,'{uuid.uuid4()}');",ok=False))
+AssertionError: 'Complete the required' not found in 'CONTEXT:  PL/pgSQL function public.save_customer(uuid,text,text,text,text,uuid) line 12 at RAISE'
+
+======================================================================
+FAIL: test_session_registration_role_and_raw_table_boundaries (__main__.DatabasePrivacy.test_session_registration_role_and_raw_table_boundaries)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/workspace/Aqua-Quenchers-BMS/supabase/tests/test_database_privacy.py", line 92, in test_session_registration_role_and_raw_table_boundaries
+    self.assertIn('Session expired',self.actor('select public.whoami();',ok=False))
+AssertionError: 'Session expired' not found in 'PL/pgSQL function public.whoami() line 4 at SQL statement'
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.991s
+
+FAILED (failures=6)

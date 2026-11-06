@@ -89,3 +89,5 @@ Before publication, complete all bracketed operator/contact/region/retention det
 | Authorized approving representative | Approve version and effective date | Pending |
 
 Implementation and deployment evidence is assessed separately in the Security-Control Assessment. This policy establishes proposed governance obligations; adoption does not itself verify technical compliance.
+
+Implementation reference: the approved-contact process is documented in [Database, Privacy and Recovery Operations](../security/DATABASE_PRIVACY_OPERATIONS.md). Its local synthetic verification does not adopt this policy or select the operator's retention periods.

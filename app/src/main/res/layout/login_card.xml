@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/aq_login_card_bg"
@@ -24,7 +25,7 @@
             android:layout_height="16dp"
             android:contentDescription="@null"
             android:src="@drawable/ic_aq_drop"
-            android:tint="@color/aq_primary" />
+            app:tint="@color/aq_primary" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -153,7 +154,7 @@
             android:layout_height="18dp"
             android:contentDescription="@null"
             android:src="@drawable/ic_aq_lock"
-            android:tint="@color/aq_primary" />
+            app:tint="@color/aq_primary" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -1,6 +1,7 @@
 package com.example.aquaquencherspos;
 
 import android.content.Context;
+import com.aquaquenchers.classifier.ExpenseCategoryClassifier;
 import android.os.Handler;
 import android.os.Looper;
 import android.widget.Button;
@@ -22,7 +23,6 @@ import java.util.concurrent.Executors;
 public final class ExpenseScreens {
 
     static final String[] CATEGORIES = ExpenseClassifier.LABELS.toArray(new String[0]);
-    private static final String MODEL_ASSET = "expense_model.json";
     private static final ExecutorService CLASSIFIER = Executors.newSingleThreadExecutor();
     private static final Handler MAIN = new Handler(Looper.getMainLooper());
 
@@ -127,6 +127,8 @@ public final class ExpenseScreens {
         private String modelVersion;
         /** Remarks the current suggestion was made for; a change makes it stale. */
         private String suggestedFor;
+        private long suggestionGeneration;
+        private boolean predictionBusy;
 
         @Override
         String section() {
@@ -163,6 +165,7 @@ public final class ExpenseScreens {
 
         private void chooseCategory() {
             Dialogs.options(c, "Expense category", CATEGORIES, pick -> {
+                suggestionGeneration++;
                 category.setValue(pick);
                 category.setError(null);
                 // A manual choice overrides any suggestion that was applied.
@@ -172,6 +175,7 @@ public final class ExpenseScreens {
         }
 
         private void remarksEdited() {
+            suggestionGeneration++;
             if (suggestedFor != null && !suggestedFor.equals(remarks.rawValue())) {
                 suggestedFor = null;
                 source = "manual";
@@ -194,60 +198,55 @@ public final class ExpenseScreens {
                         "Back to expense", null);
                 return;
             }
+            if (predictionBusy) return;
+            predictionBusy=true;
+            long generation=++suggestionGeneration, session=Session.generation();
             Context app = c.getApplicationContext();
             // Classification runs on a background executor (B-01.4).
             CLASSIFIER.execute(() -> {
-                ExpenseClassifier model = null;
-                ExpenseClassifier.Prediction prediction = null;
+                ExpenseCategoryClassifier model = null;
+                ExpenseCategoryClassifier.Result prediction = null;
                 try {
-                    model = ExpenseClassifier.parse(readAsset(app));
-                    prediction = model.predict(text);
+                    model = ClassifierAssets.get(app);
+                    prediction = model.suggest(text);
                 } catch (Exception e) {
                     prediction = null;
                     model = null;
                 }
-                ExpenseClassifier finalModel = model;
-                ExpenseClassifier.Prediction finalPrediction = prediction;
+                ExpenseCategoryClassifier finalModel = model;
+                ExpenseCategoryClassifier.Result finalPrediction = prediction;
                 MAIN.post(() -> {
-                    if (isAdded()) {
-                        showSuggestion(finalModel, finalPrediction, text);
+                    predictionBusy=false;
+                    if (isAdded() && getView()!=null && isResumed() && Session.isCurrent(session)
+                            && generation==suggestionGeneration && text.equals(remarks.value())) {
+                        showSuggestion(finalModel, finalPrediction, text, generation, session);
                     }
                 });
             });
         }
 
-        private static String readAsset(Context context) throws java.io.IOException {
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(
-                    context.getAssets().open(MODEL_ASSET), StandardCharsets.UTF_8))) {
-                StringBuilder out = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    out.append(line);
-                }
-                return out.toString();
-            }
-        }
-
-        private void showSuggestion(ExpenseClassifier model, ExpenseClassifier.Prediction prediction, String forText) {
-            if (model == null) {
+        private void showSuggestion(ExpenseCategoryClassifier model, ExpenseCategoryClassifier.Result prediction, String forText, long generation, long session) {
+            if (model == null || prediction==null || prediction.status==ExpenseCategoryClassifier.Status.UNAVAILABLE) {
                 Dialogs.message(c, "Category suggestion unavailable. Choose a category manually.",
                         "You can still select Category and save a valid expense normally.", "Choose manually", this::chooseCategory);
                 return;
             }
-            if (prediction.category == null) {
+            if (prediction.suggestedCategory == null) {
                 Dialogs.message(c, "No reliable suggestion. Choose a category manually.",
                         "Review the remarks and choose one of the existing categories. The expense has not been saved.",
                         "Choose manually", this::chooseCategory);
                 return;
             }
             suggestedFor = forText;
-            Dialogs.confirmChoice(c, "Suggested category: " + prediction.category + ".",
+            Dialogs.confirmChoice(c, "Suggested category: " + prediction.suggestedCategory + ".",
                     "Review this suggestion before saving the expense. You can apply it or choose a category manually.",
                     "Apply suggestion", () -> {
-                        category.setValue(prediction.category);
+                        if (!Session.isCurrent(session) || Session.isIdleTooLong() || generation!=suggestionGeneration
+                                || !forText.equals(remarks.value()) || !isAdded()) return;
+                        category.setValue(prediction.suggestedCategory);
                         category.setError(null);
                         source = "suggestion";
-                        modelVersion = model.version;
+                        modelVersion = prediction.modelVersion;
                         suggestionNote.setText("Suggestion applied. Review before saving.");
                         Dialogs.message(c, "Suggestion applied. Review before saving.",
                                 "Date, Amount and Remarks are unchanged. Select Save Expense to record the confirmed category.",

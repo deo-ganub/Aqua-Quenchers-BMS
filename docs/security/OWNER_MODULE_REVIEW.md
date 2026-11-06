@@ -1,3 +1,23 @@
+# Current Application Security and Integration Status
+
+The original source assessment below concerns owner-module bf2b43e. The following implementation update applies to the subsequent algo-ias source; source-review observations are not represented as production certification.
+
+| Area | Implemented update | Verification and remaining gate |
+|---|---|---|
+| Database idle/roles/revocation | New current-session/RLS checks, 30-minute expiry, bound logout and role/status revocation | 14isolated SQL tests; hosted signed-Auth/configuration still required |
+| Retry/payment/price integrity | Full typed-intent SHA-256, exact replay/conflict handling, protected customer price, once-only opening counts | SQL positive/negative/concurrent/receipt tests pass; legacy retry keys require reconciliation |
+| Privacy and restore | Administrator-only dry-run/approved contact removal, structured copy cleanup, independent ledger and cutoff-aware replay | SQL/CLI tests pass; real approval/retention/custody remains external |
+| Native transport/lifecycle | Session generation and identity binding, single refresh, bounded HTTPS, exact intent, local cleanup and captured-identity remote logout | 36 in-memory assertions plus actual Android build; provider/device behavior separate |
+| Native privacy | Secure activity/MFA windows, password/OTP saved-state protection and destroyed-login callback guard | Build/lint pass; physical-device behavior not newly observed |
+| Identity handler | Bounded/deadlined strict requests/upstream responses, live session/current-profile recheck, safe errors and audit-failure reconciliation | 5input and 5 actual-handler fixture tests/typecheck pass; managed Auth/profile/audit creation is still multi-service, not an atomic distributed transaction |
+| Classifier integration | Canonical Java engine wired into expense form; cached strict 2 MiB/digest/nonsynthetic asset gate and stale/manual/session guards | 155Java assertions,10app unit tests, APK/lint pass; actual approved model/tablet/real-data parity remain pending |
+
+See [DATABASE_PRIVACY_OPERATIONS.md](DATABASE_PRIVACY_OPERATIONS.md), [benchmark guide](../academic/BENCHMARK_NOTEBOOK_GUIDE.md) and docs/REQUIREMENTS_TRACEABILITY.md for evidence. Independent Cloudflare audit completion, actual hosted deployment and legal adoption remain separate. Account-creation uncertainty still requires reviewed reconciliation; do not blindly create another identity.
+
+---
+
+## Historical source assessment (bf2b43e; superseded where updated above)
+
 # Application Branch Security and Integration Assessment
 
 **Document identifier:** AQ-SEC-02

@@ -13,7 +13,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Local TF-IDF plus multiclass logistic regression (A-09.3). This class only runs
+ * Legacy fixture parser retained for regression coverage. Production expense
+ * inference uses ClassifierAssets and the canonical classifier-java module.
+ * Legacy TF-IDF plus multiclass logistic regression. This class only runs
  * a released model. No model ships yet, so the app reports "Category suggestion
  * unavailable" until a validated expense_model.json is added under assets.
  *

@@ -1,0 +1,9 @@
+Check supabase/tests/identity_safety_test.ts
+running 5 tests from ./supabase/tests/identity_safety_test.ts
+strict request and no privileged fields ... ok (23ms)
+actual streamed bytes bounded without trusting content length ... ok (1ms)
+JSON shape, encoding, content type and field lengths ... ok (1ms)
+stream deadline cancels rather than hanging ... ok (12ms)
+bounded upstream decoding preserves valid content ... ok (1ms)
+
+ok | 5 passed | 0 failed (43ms)
