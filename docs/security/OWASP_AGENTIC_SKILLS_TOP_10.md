@@ -1,6 +1,18 @@
-# OWASP Agentic Skills Top 10 assessment
+# OWASP Agentic Skills Security Assessment
 
-7 November 2026. Source: [official OWASP checklist](https://github.com/OWASP/www-project-agentic-skills-top-10/blob/d6f7d7d0de314f52a83a85d1828e06ab096e595c/checklist.md). This is a manual applicability assessment, not a completed scanner/certification. The BMS has no autonomous runtime agent. The taxonomy applies to the AI-assisted development workflow, not to claiming the expense classifier executes instructions.
+**Document identifier:** AQ-SEC-03
+
+**Edition:** 1.0 — Manual Applicability Assessment
+
+**Issue date:** 7 November 2026
+
+## 1. Assessment Basis
+
+This assessment applies the official OWASP Agentic Skills Top 10 checklist at revision `d6f7d7d0de314f52a83a85d1828e06ab096e595c` to the AI-assisted development workflow. The business application contains no autonomous runtime agent. Expense classification is advisory numerical inference and does not execute natural-language instructions or invoke privileged tools.
+
+The assessment is a manual applicability and gap analysis. It does not constitute certification, a completed automated scan or proof of runtime isolation. The framework's category risk labels shall not be interpreted as severity assignments for unconfirmed application findings.
+
+## 2. Assessment Matrix
 
 | Risk | Observed safeguard / remaining gap |
 |---|---|
@@ -15,4 +27,13 @@
 | AST09 No Governance | Persistent scope/checkpoint and source refs retained; formal organizational inventory/revocation/review cadence pending |
 | AST10 Cross-Platform Reuse | Android/Supabase and development-agent boundaries distinguished; no cross-platform certification |
 
-Community scholarly360/owasp-top10-web-skills b066b36aa62cd576d02ddf91edabe7359059fcf8 was discovered as a separate Python-web reference. It is not the official OWASP Agentic Skills project and no completed execution of that pack is claimed. Product control implementation is mapped separately in the IAS checklist, with explicit source-branch limitations.
+
+## 3. Interpretation and Required Follow-up
+
+Pinned source revisions and documented scope support repeatable review. Complete signed dependency verification, metadata/behavior analysis, enforceable per-agent isolation, independent dynamic assessment and organizational governance remain incomplete. Application web/mobile controls are assessed separately through the IAS control matrix; an agentic-workflow checklist does not replace them.
+
+The community `scholarly360/owasp-top10-web-skills` reference at revision `b066b36aa62cd576d02ddf91edabe7359059fcf8` is separate from the official OWASP Agentic Skills project. No completed execution of that community pack is claimed.
+
+## 4. Reference
+
+OWASP. (n.d.). [Skill Security Assessment Checklist](https://github.com/OWASP/www-project-agentic-skills-top-10/blob/d6f7d7d0de314f52a83a85d1828e06ab096e595c/checklist.md). OWASP Agentic Skills Top 10. Reviewed source revision as identified above.

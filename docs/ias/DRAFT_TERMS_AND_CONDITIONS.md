@@ -1,27 +1,28 @@
-> Branch scope: this academic package is added to `algo-ias` based on `owner-module` at `bf2b43e`. Implementation links to `424c701` describe the separate `work` baseline; they do **not** prove those controls exist in `owner-module`. See [branch review](../security/OWNER_MODULE_REVIEW.md).
-
 # DRAFT Terms and Conditions — Aqua Quenchers BMS
 
-**Version:** AQ-TERMS-DRAFT-0.1 · **Prepared:** 6 November 2026 (Asia/Manila)  
-**Status:** For Owner/authorized reviewer approval; not adopted terms, proof of acceptance or production release.  
-**Operator:** [registered business name, approved address and contact]  
+**Version:** AQ-TERMS-DRAFT-0.2 · **Prepared:** 7 November 2026 (Asia/Manila)
+
+**Status:** Draft for organizational and academic review; adoption and effective date pending.
+
+**Operator:** [registered business name, approved address and contact]
+
 **Effective date:** [to be approved]
 
 ## 1. Purpose and authorized users
 
 The BMS supports the station's customer, order, pickup/delivery, inventory, cash-sale, payment, expense and financial-report work. Access is for individually authorized Owner and Staff accounts. There is no public customer registration, public password-reset workflow or customer marketing program in the approved release.
 
-The Owner approves business access. Shared account credentials, impersonation, access after authorization is withdrawn and use outside assigned business duties are prohibited. Course governance titles are not extra application roles.
+The Owner approves business access. Shared account credentials, impersonation, access after authorization is withdrawn and use outside assigned business duties are prohibited. Application permissions are limited to the approved Owner and Staff roles.
 
 ## 2. Account security
 
-Use the approved managed-authentication account, a passphrase of at least 15 characters and required authenticator verification. Keep passwords and factor/recovery secrets private; do not place them in GitHub, screenshots or ordinary support messages. Use an appropriate device lock and report lost devices or suspected account misuse through the approved contact.
+Use the approved managed-authentication account, a passphrase of at least 15 characters and required authenticator verification. Keep passwords and factor/recovery secrets private; do not place them in GitHub, public images or ordinary support messages. Use an appropriate device lock and report lost devices or suspected account misuse through the approved contact.
 
-The app requires reauthentication after 30 minutes of inactivity. Backend current-role/active-status checks remain authoritative. Account recovery and lost-factor handling require the designated administrator's identity-verification procedure; knowing a username is insufficient. The operator must verify hosted Auth and recovery settings before production use.
+The approved security policy requires reauthentication after 30 minutes of inactivity. Compliance must be verified for the deployed application revision. Backend current-role/active-status checks remain authoritative. Account recovery and lost-factor handling require the designated administrator's identity-verification procedure; knowing a username is insufficient. The operator must verify hosted Auth and recovery settings before production use.
 
 ## 3. Correct records and authority
 
-Enter accurate, necessary information and check the selected customer/reference, business date, quantity, amount and final result before confirming work. Quantities are whole gallons; monetary calculations use centavos. The approved fixed rates are PHP35 per gallon for Household/Walk-in and PHP30 for Dealer orders; counter Walk-in POS remains PHP35. The backend controls applicable prices, actors, receipt times, stock reservations and transaction references.
+Enter accurate, necessary information and check the selected customer/reference, business date, quantity, amount and final result before confirming work. Quantities are whole gallons; monetary calculations use centavos. The approved fixed rates are PHP 35 per gallon for Household/Walk-in and PHP 30 for Dealer orders; counter Walk-in POS remains PHP 35. The backend controls applicable prices, actors, receipt times, stock reservations and transaction references.
 
 Revenue by order business date, cash received by actual receipt date, expenses by entered expense date and balances as of period end are different measures. Net income in this BMS is payments received minus expenses. A short pickup retains the original request/audit history and adjusts billable quantity under the permitted rules. Delivery progress and payment status are independent.
 
@@ -57,4 +58,12 @@ The authorized operator may deactivate an account or restrict work when authorit
 
 Support/privacy/security contact: **[approved channel required]**. Applicable Philippine law governs to the extent appropriate to the approved operator arrangement; any dispute/complaint process and contract wording require review before adoption.
 
-Complete operator/contact/effective-date fields and obtain the designated approval before using these terms. The repository currently records this document as a draft; no new mandatory checkbox or claim of an already-signed agreement is introduced.
+Complete operator/contact/effective-date fields and obtain the designated approval before using these terms. Acceptance procedures shall be approved and implemented before these terms take effect; this draft records no executed acceptance agreement.
+
+## 9. Approval Record
+
+| Approval responsibility | Required action | Status |
+|---|---|---|
+| Authorized operator | Confirm service scope, account responsibilities and support channel | Pending |
+| Designated privacy or legal reviewer | Review applicable obligations and policy consistency | Pending |
+| Authorized approving representative | Approve version, acceptance process and effective date | Pending |

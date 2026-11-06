@@ -1,25 +1,41 @@
-> Branch scope: this academic package is added to `algo-ias` based on `owner-module` at `bf2b43e`. Implementation links to `424c701` describe the separate `work` baseline; they do **not** prove those controls exist in `owner-module`. See [branch review](../security/OWNER_MODULE_REVIEW.md).
+# Aqua Quenchers Business Management System
+## Academic Technical Documentation Portfolio
 
-# Professor presentation readiness
+**Academic areas:** Algorithms and Complexity; Information Assurance and Security
 
-Prepared 6 November 2026. Use links on the reviewed branch/commit when presenting; a local file is not on GitHub until its source push is verified. Production remains deferred. Public demonstrations use synthetic/redacted examples, never customer records, account passwords or backup keys.
+**Document edition:** 1.0
 
-| Professor request | Repository output | Status / precise missing input |
+**Issue date:** 7 November 2026
+
+**Repository branch:** `algo-ias`
+
+### Portfolio overview
+
+This portfolio presents the algorithm methodology, evaluation protocol, draft governance documents and security-control assessment for the Aqua Quenchers Business Management System. The consolidated report is provided in editable and print-ready formats. The technical assessment distinguishes the application source on the assessed branch from the separately maintained reference implementation and identifies the evidence required for operational acceptance.
+
+### Consolidated submission
+
+- [Technical and Compliance Report — PDF](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.pdf)
+- [Technical and Compliance Report — Word](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.docx)
+- [Technical and Compliance Report — source document](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.md)
+
+### Document register
+
+| Identifier | Document | Purpose |
 |---|---|---|
-| ALGOCOM: latest PBL Milestone1 | User identifies the linked [ALGOCOM and IAS documents](../ias/README.md) as the latest milestones | **Provided by user:** latest milestone links recorded; live documents remain authoritative |
-| Benchmarking analysis notebook or code | [Benchmark analysis](BENCHMARK_ANALYSIS.md), [notebook](Aqua_Quenchers_Benchmark.ipynb), [five-process timing implementation](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/424c70112d22e37dccdef41e5471e283587c0726/classifier/aqua_classifier/benchmark.py) | Harness/code and methodology available. Notebook intentionally has no execution outputs. Actual reviewed-data/device results **Not Run** |
-| Algorithm implementation/demo | [Classifier workflow](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/424c70112d22e37dccdef41e5471e283587c0726/classifier/README.md), [student training pipeline](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/424c70112d22e37dccdef41e5471e283587c0726/classifier/aqua_classifier/pipeline.py), [logistic regression](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/424c70112d22e37dccdef41e5471e283587c0726/classifier/aqua_classifier/math_models.py), [Java inference](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/424c70112d22e37dccdef41e5471e283587c0726/classifier-java/src/main/java/com/aquaquenchers/classifier/ExpenseCategoryClassifier.java) | Synthetic mathematics/parity evidence exists; no approved station model packaged. Manual expense entry remains operational |
-| IAS: draft privacy policy and terms | [IAS package](../ias/README.md) | Drafts available; operator/privacy adoption fields explicitly pending |
-| IAS: recommended and implemented controls | [Security checklist with code/tests](../ias/SECURITY_CONTROLS.md) | Source/local evidence available; hosted/physical/custody controls remain external |
-| Whole-codebase Cloudflare/OWASP reports | [Security review index](../security/README.md) | Report scopes, independent checks, unresolved items and methodology provenance included |
+| AQ-ALG-01 | [Algorithm and Benchmark Analysis](BENCHMARK_ANALYSIS.md) | Algorithm specification, experimental controls, metrics and acceptance criteria |
+| AQ-ALG-02 | [Benchmark Notebook](Aqua_Quenchers_Benchmark.ipynb) | Reproducible preparation, training, evaluation and timing workflow |
+| AQ-IAS-01 | [Draft Privacy Policy](../ias/DRAFT_PRIVACY_POLICY.md) | Proposed personal-information processing and rights framework |
+| AQ-IAS-02 | [Draft Terms and Conditions](../ias/DRAFT_TERMS_AND_CONDITIONS.md) | Proposed authorized-use and operational responsibilities |
+| AQ-IAS-03 | [Security-Control Assessment](../ias/SECURITY_CONTROLS.md) | Requirements, implementation references, evidence and outstanding verification |
+| AQ-SEC-01 | [Security Assessment Methodology and Status](../security/README.md) | Assessment scope, procedures and limitations |
+| AQ-SEC-02 | [Application Branch Assessment](../security/OWNER_MODULE_REVIEW.md) | Revision-specific application observations and integration requirements |
+| AQ-SEC-03 | [OWASP Agentic Skills Assessment](../security/OWASP_AGENTIC_SKILLS_TOP_10.md) | Applicability of the development-workflow security taxonomy |
 
-## Reproducible demonstration order
+### Milestone sources
 
-1. Open the repository branch and record its commit. Show the native Java/XML [login design source (local unpublished commit de7a03b)](../security/README.md) and existing role-specific app flow using the approved isolated development setup in [local services](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/424c70112d22e37dccdef41e5471e283587c0726/docs/LOCAL_REAL_SERVICES.md). Do not blindly rerun closed financial/account fixture controllers.
-2. Show the [synthetic golden cases](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/424c70112d22e37dccdef41e5471e283587c0726/classifier/fixtures/golden.json), Python/Java implementation and retained [Python evidence](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/424c70112d22e37dccdef41e5471e283587c0726/evidence/classifier-python.log). Explain that fixture consistency is not station accuracy. A missing/unapproved model visibly offers manual entry; no successful classifier result is fabricated.
-3. Open the unexecuted notebook/analysis to explain grouped splits, validation-only tuning, frozen test use, NB comparison and timing gates. Use private reviewed data and an isolated new experiment only when available. Keep raw remarks/results containing private errors outside public commits.
-4. Show the IAS drafts, each control's implementation and actual retained test evidence. Explain the hosted, legal/adoption, backup-custody and device checks still required. No draft or archive result constitutes the professor's/Owner's acceptance.
+The current [Algorithms and Complexity milestone](https://docs.google.com/document/d/1ad4xmnPsoNZSpVCHALvLoQ5zGRYaHF0hEQ5UhTwF4_o/edit) and [Information Assurance and Security milestone](https://docs.google.com/document/d/1irULKgUcm4PbGIXDn3hNofR9M5Ou4VDE/edit) are the primary academic source documents. Snapshot identifiers and source boundaries appear in the [IAS document register](../ias/README.md).
 
-## Remaining presentation/release dependencies
+### Submission and acceptance status
 
-Owner-reviewed anonymized labeled corpus and approved frozen model; declared physical Owner tablet and Staff phone/network; legal operator/privacy channel/lawful-basis/retention decisions; effective hosted Auth/schema/security settings; named independent backup/key/ledger custody and monitored restore/RPO/RTO evidence. The paper's deadlines are planning targets, not promises that missing dependencies have been delivered.
+This edition completes the formal presentation of the available documentation. The privacy policy and terms retain draft status pending organizational approval. Reviewed-data classifier evaluation, physical-device performance measurements, application-branch classifier integration, independent security-review completion and operational deployment verification remain outstanding. These limitations are recorded in the relevant assessment sections; no unobserved result is represented as completed evidence.
