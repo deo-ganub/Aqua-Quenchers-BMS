@@ -11,12 +11,10 @@
 
 ### Portfolio overview
 
-This portfolio presents the algorithm methodology, evaluation protocol, draft governance documents and security-control assessment for the Aqua Quenchers Business Management System. The consolidated report is provided in editable and print-ready formats. The technical assessment distinguishes the application source on the assessed branch from the separately maintained reference implementation and identifies the evidence required for operational acceptance.
+This portfolio presents the algorithm methodology, evaluation protocol, draft governance documents and security-control assessment for the Aqua Quenchers Business Management System. Editable and print-ready documents are delivered separately through the conversation. The technical assessment distinguishes the application source on the assessed branch from the separately maintained reference implementation and identifies the evidence required for operational acceptance.
 
 ### Consolidated submission
 
-- [Technical and Compliance Report — PDF](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.pdf)
-- [Technical and Compliance Report — Word](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.docx)
 - [Technical and Compliance Report — source document](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.md)
 
 ### Document register
@@ -34,7 +32,7 @@ This portfolio presents the algorithm methodology, evaluation protocol, draft go
 
 ### Presentation script
 
-The [13-minute presentation script](PRESENTATION_SCRIPT.md) provides spoken passages, timed sections, exact document/code locations and brief responses to likely questions. An [editable Word copy](PRESENTATION_SCRIPT.docx) is available. The script preserves the recorded distinction between completed documentation and outstanding implementation or verification.
+The [13-minute presentation script](PRESENTATION_SCRIPT.md) provides spoken passages, timed sections, exact document/code locations and brief responses to likely questions. The editable Word copy is delivered separately through the conversation. The script preserves the recorded distinction between completed documentation and outstanding implementation or verification.
 
 ### Milestone sources
 

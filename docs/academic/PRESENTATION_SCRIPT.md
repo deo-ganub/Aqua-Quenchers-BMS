@@ -17,7 +17,7 @@
 | 6 | Draft policies | [Privacy Policy](../ias/DRAFT_PRIVACY_POLICY.md); [Terms and Conditions](../ias/DRAFT_TERMS_AND_CONDITIONS.md) |
 | 7 | Security checklist and implementation evidence | [Control matrix](../ias/SECURITY_CONTROLS.md); [actual application-branch assessment](../security/OWNER_MODULE_REVIEW.md) |
 | 8 | Application security code | [Owner-module SQL](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/algo-ias/supabase/migrations/20261105000000_owner_module.sql); [identity Edge handler](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/algo-ias/supabase/functions/identity/index.ts) |
-| 9 | Consolidated formal submission | [PDF report](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.pdf); [editable Word report](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.docx) |
+| 9 | Consolidated formal submission | [Report source](AQUA_QUENCHERS_TECHNICAL_AND_COMPLIANCE_REPORT.md); Word/PDF copies supplied separately |
 
 All relative links above resolve within the `algo-ias` documentation branch. Algorithm reference links deliberately identify revision `424c701`; that reference implementation has not been integrated into the owner-module application base. Keep the document tabs open before presenting. Download the PDF and Word report beforehand for offline reference; opening the live milestones still requires access to those documents.
 
