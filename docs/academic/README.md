@@ -32,6 +32,10 @@ This portfolio presents the algorithm methodology, evaluation protocol, draft go
 | AQ-SEC-02 | [Application Branch Assessment](../security/OWNER_MODULE_REVIEW.md) | Revision-specific application observations and integration requirements |
 | AQ-SEC-03 | [OWASP Agentic Skills Assessment](../security/OWASP_AGENTIC_SKILLS_TOP_10.md) | Applicability of the development-workflow security taxonomy |
 
+### Presentation script
+
+The [13-minute presentation script](PRESENTATION_SCRIPT.md) provides spoken passages, timed sections, exact document/code locations and brief responses to likely questions. An [editable Word copy](PRESENTATION_SCRIPT.docx) is available. The script preserves the recorded distinction between completed documentation and outstanding implementation or verification.
+
 ### Milestone sources
 
 The current [Algorithms and Complexity milestone](https://docs.google.com/document/d/1ad4xmnPsoNZSpVCHALvLoQ5zGRYaHF0hEQ5UhTwF4_o/edit) and [Information Assurance and Security milestone](https://docs.google.com/document/d/1irULKgUcm4PbGIXDn3hNofR9M5Ou4VDE/edit) are the primary academic source documents. Snapshot identifiers and source boundaries appear in the [IAS document register](../ias/README.md).

@@ -1,3 +1,6 @@
+## Timed presentation script added
+Prepared a13-minute script with1131spoken words, navigation directions for every requested ALGOCOM/IAS item, exact source/document links and accurate statements of incomplete audit/classifier integration. Added Markdown and editable Word copies and portfolio index links. Documentation-only change; no application execution or benchmark claim. Validate published algo-ias SHA after push.
+
 # Academic Documentation Continuation Record
 
 ## Current objective and approved scope
