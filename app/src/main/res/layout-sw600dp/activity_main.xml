@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Figma "01 · Login": brand panel on the left, sign-in card on the right. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/loginRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/aq_page"
+    android:baselineAligned="false"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="535"
+        android:background="@drawable/aq_login_gradient"
+        android:clipChildren="true">
+
+        <View
+            android:layout_width="410dp"
+            android:layout_height="410dp"
+            android:layout_gravity="top|start"
+            android:layout_marginStart="265dp"
+            android:layout_marginTop="-180dp"
+            android:background="@drawable/aq_circle_soft" />
+
+        <View
+            android:layout_width="330dp"
+            android:layout_height="330dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="270dp"
+            android:background="@drawable/aq_circle_line" />
+
+        <View
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="325dp"
+            android:background="@drawable/aq_circle_line" />
+
+        <View
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="-100dp"
+            android:layout_marginBottom="-126dp"
+            android:background="@drawable/aq_circle_soft" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/aq_glass_tile">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_aq_drop"
+                    android:tint="@color/aq_white" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="AQUA QUENCHER"
+                    android:textColor="@color/aq_white"
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="WATER REFILLING STATION"
+                    android:textColor="@color/aq_active_border"
+                    android:textSize="10sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="46dp"
+            android:fontFamily="@font/poppins_semibold"
+            android:lineSpacingExtra="4dp"
+            android:text="Every refill.\nEvery detail.\nIn one place."
+            android:textColor="@color/aq_white"
+            android:textSize="40sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="48dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginBottom="110dp"
+            android:background="@drawable/aq_glass_card"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="18dp"
+            android:paddingEnd="18dp">
+
+            <FrameLayout
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/aq_glass_tile">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_aq_drop"
+                    android:tint="@color/aq_white" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
+                    android:text="One connected workspace"
+                    android:textColor="@color/aq_white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Customers  ·  Orders  ·  Payments"
+                    android:textColor="@color/aq_active"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|start"
+            android:layout_marginStart="49dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/open_sans"
+            android:text="AQUA QUENCHER  •  BMS"
+            android:textColor="@color/aq_active_border"
+            android:textSize="11sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="659">
+
+        <View
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="-82dp"
+            android:layout_marginEnd="-56dp"
+            android:background="@drawable/aq_circle_active" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_gravity="top|end"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="35dp"
+            android:background="@drawable/aq_pill_active"
+            android:fontFamily="@font/poppins_semibold"
+            android:gravity="center"
+            android:paddingStart="22dp"
+            android:paddingEnd="22dp"
+            android:text="PORTAL"
+            android:textColor="@color/aq_primary"
+            android:textSize="11sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:paddingStart="48dp"
+            android:paddingEnd="48dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingTop="72dp"
+                android:paddingBottom="16dp">
+
+                <include layout="@layout/login_card" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="@font/open_sans"
+                    android:text="Aqua Quenchers  ·  Business Management System"
+                    android:textColor="@color/aq_body"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
+</LinearLayout>

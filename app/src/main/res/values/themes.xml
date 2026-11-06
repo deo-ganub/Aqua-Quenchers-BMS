@@ -1,0 +1,10 @@
+<resources>
+    <!-- The design is light-only, so dark mode does not change this theme. -->
+    <style name="Base.Theme.Aquaquencherspos" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/aq_primary</item>
+        <item name="android:windowBackground">@color/aq_page</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Theme.Aquaquencherspos" parent="Base.Theme.Aquaquencherspos" />
+</resources>

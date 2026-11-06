@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Phone sizes. values-sw600dp holds the larger tablet values from Figma. -->
+<resources>
+    <dimen name="login_card_padding">22dp</dimen>
+    <dimen name="login_card_padding_top">26dp</dimen>
+    <dimen name="login_title">26sp</dimen>
+    <dimen name="login_subtitle">14sp</dimen>
+    <dimen name="login_gap">18dp</dimen>
+    <dimen name="login_notice_gap">20dp</dimen>
+</resources>

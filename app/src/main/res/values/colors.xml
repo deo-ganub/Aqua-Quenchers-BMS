@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Exact tokens from the Figma "AQ" component library. -->
+    <color name="aq_primary">#0369A1</color>
+    <color name="aq_primary_dark">#075985</color>
+    <color name="aq_active">#E0F2FE</color>
+    <color name="aq_active_border">#BAE6FD</color>
+    <color name="aq_page">#F8FAFC</color>
+    <color name="aq_ink">#0F172A</color>
+    <color name="aq_body">#475569</color>
+    <color name="aq_muted">#64748B</color>
+    <color name="aq_border">#E2E8F0</color>
+    <color name="aq_input_border">#CBD5E1</color>
+    <color name="aq_error">#B91C1C</color>
+    <color name="aq_success">#1A7338</color>
+    <color name="aq_warning">#92400E</color>
+    <color name="aq_white">#FFFFFF</color>
+</resources>

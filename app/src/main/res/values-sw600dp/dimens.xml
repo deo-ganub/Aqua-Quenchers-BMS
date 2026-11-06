@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="login_card_padding">40dp</dimen>
+    <dimen name="login_card_padding_top">36dp</dimen>
+    <dimen name="login_title">32sp</dimen>
+    <dimen name="login_subtitle">15sp</dimen>
+    <dimen name="login_gap">24dp</dimen>
+    <dimen name="login_notice_gap">28dp</dimen>
+</resources>
