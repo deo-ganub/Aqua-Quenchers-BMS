@@ -33,3 +33,5 @@ The papers contain proposals, archived laboratory/reference results and older pr
 Confirm the legal operator and privacy/security channel; approve lawful bases and commercial retention; verify the effective hosted Auth/grants/session settings and device controls; establish independent encrypted-copy/key/erasure-ledger custody and complete an isolated restore drill. Only the Owner's reviewed anonymized corpus and declared physical device can close classifier quality and device-performance gates. Keep production deployment deferred.
 
 The separately discovered `owner-module` branch has unrelated history. Its [supplemental review](../security/OWNER_MODULE_REVIEW.md) is explicitly revision-specific; no controls from the reviewed `Design-overhaul-v.10` source are silently claimed for that branch.
+
+Latest-milestone confirmation: on7November2026 the user explicitly identified both linked live documents above as the latest group milestones. Their earlier exported hashes identify the reviewed snapshots; subsequent live edits require re-reading. No separate Messenger artifact is required to acknowledge receipt.
