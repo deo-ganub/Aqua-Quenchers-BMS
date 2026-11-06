@@ -1,3 +1,6 @@
+## Source checkpoint
+Implementation commit47ae254 is complete. Follow-up source includes explicit Android backup/device-transfer exclusions and cleartext denial, plus all five measured training runs/environment in notebook summaries. Android resource build/lint PASS for privacy XML. Final clean-source notebook verification and SHA/source sync are next. Full app tests10/Java155 and native transport36 were verified before the XML-only follow-up; no functional Java changes since.
+
 # Current implementation checkpoint — 7 November 2026 Asia/Manila
 
 ## Objective / approved scope

@@ -20,6 +20,7 @@ with tempfile.TemporaryDirectory(prefix='aq-notebook-fixture-') as directory:
     assert summary['evidence'].startswith('SYNTHETIC ONLY') and not summary['release_approved']
     assert summary['device_benchmark']=='NOT RUN' and summary['test_examples']>0
     assert timing['warmup_processes']==1 and timing['fresh_timed_processes']==5
+    assert len(timing['runs'])==5 and 'python' in timing['environment']
     assert 'remarks' not in captured.getvalue() and 'demo-' not in captured.getvalue()
     # A second held-out command must fail without changing the first result or marker.
     result=context['experiment']/'test-results.json';before=result.read_bytes()
@@ -35,7 +36,7 @@ with tempfile.TemporaryDirectory(prefix='aq-notebook-fixture-') as directory:
     evidence={'evidence_kind':'SYNTHETIC NOTEBOOK EXECUTION ONLY','notebook_code_cells':len(code),'code_cells_sha256':hashlib.sha256(json.dumps(code).encode()).hexdigest(),
       'default_run':'PASS: no experiment created','full_demo':'PASS: actual prepare/train/evaluate/timing cells',
       'repeat_held_out':'PASS: rejected; original result unchanged','reviewed_mode_guard':'PASS',
-      'privacy_display':'PASS: aggregate-only output','quality_summary':summary,'timing_summary':timing,
-      'source_note':'Uncommitted source state is reported; synthetic results do not meet station/device release gates.'}
+      'privacy_display':'PASS: aggregate-only output','training_summary':ns['TRAINING_SUMMARY'],'quality_summary':summary,'timing_summary':timing,
+      'source_note':'Actual source_commit/source_dirty and environment are recorded; synthetic results do not meet station/device release gates.'}
     out=ROOT/'evidence/notebook-synthetic-execution.json';out.write_text(json.dumps(evidence,indent=2)+'\n')
 print('PASS: notebook default and opt-in synthetic execution; frozen repeat rejection; reviewed-mode guard; aggregate-only summaries.')

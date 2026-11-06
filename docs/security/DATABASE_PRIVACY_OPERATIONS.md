@@ -59,7 +59,7 @@ Replay uses one transaction and bound SQL parameters. A conflicting decision/uns
 ## Executed local evidence
 
 - `evidence/database-privacy-tests.log`: 14 tests in a new database, including RLS/roles/idle/revocation, changed/identical/concurrent retry, payment/price bounds, privacy copies/cutoffs/rights guards, independent restore replay and once-only inventory.
-- `evidence/native-transport-tests.log`: 36 in-memory native assertions; delayed callbacks/refresh, exact retry intent, session denial, bounds and captured-identity logout. No account/network access.
+- `evidence/native-transport-tests.log`: 36 in-memory native assertions; delayed callbacks/refresh, exact retry intent, session denial, bounds and captured-identity logout. No account/network access. Explicit cloud/device-transfer exclusions and cleartext prohibition are included; actual OEM/device behavior requires separate verification.
 - `evidence/identity-safety-tests.log`: 5 Deno input/byte/deadline/schema checks. `identity-typecheck.log` records handler type checking.
 - `evidence/android-build.log`:actual APK/unit/lint build; physical-device and hosted behavior remain separate.
 
