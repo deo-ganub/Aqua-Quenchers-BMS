@@ -1,0 +1,1 @@
+PASS: final debug APK has no dataset JSONL, synthetic model/golden fixture, approved-model asset or known host/server fixture markers. Publishable client configuration is public. No device-runtime or release-signature certification claimed.

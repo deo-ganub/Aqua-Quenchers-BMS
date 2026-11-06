@@ -1,3 +1,5 @@
+> Version notice: this edition preserves the original assessed application revisionbf2b43e and reference evidence. Subsequent database/privacy and classifier implementation is recorded in [current traceability](../REQUIREMENTS_TRACEABILITY.md), [operations](../security/DATABASE_PRIVACY_OPERATIONS.md) and [the notebook guide](BENCHMARK_NOTEBOOK_GUIDE.md). The original assessment is not a claim that later source changes lack these implementations.
+
 # Aqua Quenchers Business Management System
 ## Algorithm Evaluation, Information Assurance and Compliance Documentation
 

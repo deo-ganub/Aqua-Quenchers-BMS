@@ -1,6 +1,6 @@
 # How to use and explain the benchmark notebook
 
-Open [Aqua_Quenchers_Benchmark.ipynb](Aqua_Quenchers_Benchmark.ipynb). It now contains 16 cells, including 7 code cells and student-language explanations. The offline `classifier/` source and canonical `classifier-java/` module are included on this branch. The Android expense screen now uses the canonical engine, but an independently approved real model/digest and actual-device verification are still required.
+Open [Aqua_Quenchers_Benchmark.ipynb](Aqua_Quenchers_Benchmark.ipynb), or [open the branch notebook in Colab](https://colab.research.google.com/github/deo-ganub/Aqua-Quenchers-BMS/blob/algo-ias/docs/academic/Aqua_Quenchers_Benchmark.ipynb). It now contains 16 cells, including 7 code cells and student-language explanations. The offline `classifier/` source and canonical `classifier-java/` module are included on this branch. The Android expense screen now uses the canonical engine, but an independently approved real model/digest and actual-device verification are still required.
 
 ## What each stage does
 
@@ -18,7 +18,7 @@ Open [Aqua_Quenchers_Benchmark.ipynb](Aqua_Quenchers_Benchmark.ipynb). It now co
 
 ## Immediate classroom demonstration
 
-1. Prepare the source/environment using section 1.
+1. Prepare the source/environment using section 1. For local Jupyter, set `PROJECT_ROOT` to the repository root. For a complete synthetic-only demonstration, you may set all three `RUN_` switches to `True` before Run All; reviewed data still requires the separate freeze review.
 2. In settings, choose `MODE="synthetic"` and `RUN_EXPERIMENT=True`.
 3. Run the helper, training and training-summary cells.
 4. Inspect the frozen experiment. Set `RUN_HELD_OUT_ONCE=True`, then run the evaluation and final-summary cells. Do not rerun the settings cell while trying to continue the same context; that resets its in-memory context. If you intentionally restart, begin a new experiment and preserve the earlier outputs.
