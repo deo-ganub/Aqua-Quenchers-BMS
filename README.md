@@ -14,3 +14,7 @@ Use Android Studio with the declared Gradle9.6/AGP9.4.1/JDK25 toolchain and SDK3
 ## Privacy and artifact handling
 
 Privileged service/recovery keys, private customer/training data and independent ledgers stay outside source control. Word/PDF documents are delivered directly through the conversation, not GitHub. Policy adoption, lawful bases/retention, actual independent recovery custody, reviewed model/data and physical-device/hosted verification require the corresponding authorized evidence. Local tests do not constitute an independent full security audit or production/legal certification.
+
+## Presentation and IAS legal references
+
+Read the [presentation script](docs/academic/PRESENTATION_SCRIPT.md), [laws and sections table](docs/ias/LAWS_AND_SECTIONS.md), [draft Privacy Policy](docs/ias/DRAFT_PRIVACY_POLICY.md) and [draft Terms and Conditions with clause table](docs/ias/DRAFT_TERMS_AND_CONDITIONS.md). These distinguish legal references, project rules, local verification and remaining operational requirements.

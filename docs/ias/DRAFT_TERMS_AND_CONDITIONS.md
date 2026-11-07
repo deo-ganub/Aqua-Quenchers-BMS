@@ -8,6 +8,25 @@
 
 **Effective date:** [to be approved]
 
+## Terms and Conditions at a glance
+
+Clause numbers below refer to **this draft**, not to sections of a law. Legal references explain relevant obligations and risks; operational rules such as prices and timeout length are project decisions, not statutory requirements.
+
+| Draft clause | User obligation in plain language | Relevant law / section or project basis | Implementation / remaining obligation |
+|---|---|---|---|
+| §1 Authorized users | Use only your own authorized account for assigned work. | RA 10175 §4(a)(1); approved Owner/Staff roles | Current active-role/session checks; operator assigns authority. |
+| §2 Account security | Protect passwords and factors, lock devices and report loss. | RA 10173 §20; project minimum 15-character passphrase and 30-minute idle rule | Session controls tested locally; hosted Auth/MFA settings and actual tablet behavior need verification. |
+| §3 Correct records | Enter accurate quantities/payments; do not falsify records or bypass prices. | RA 10173 §11(c); RA 10175 §§4(a)(3), 4(b)(2), where offense elements apply; approved financial rules | Checked transactions, backend prices and payment limits; [local database evidence](../../evidence/database-privacy-tests.log). |
+| §4 Confirmation and corrections | A timeout is not a confirmed save; use the same request and controlled reconciliation. | Project integrity rule supporting RA 10173 §20 | Immutable intent/idempotency and honest unknown outcomes; hosted verification pending. |
+| §5 Acceptable use | Respect Owner-only functions; do not publish records, attack services or run unauthorized tests. | RA 10173 §20; RA 10175 §§4(a)(1), 4(a)(3), 4(a)(4) | Permission checks and bounded transport; no authorization to probe unrelated systems. |
+| §6 Privacy and classifier | Protect reports; use synthetic public examples; review category suggestions before saving. | RA 10173 §§11–12, 16, 20; human-review requirement | Local inference integration; approved real model/data and device results remain missing. |
+| §7 Availability and custody | Follow outage procedures and protect backups; verify physical/accounting records. | RA 10173 §§20–21; project continuity targets | Seven daily copies plus independent protection, RPO 24h and RTO eight operating hours are targets; hosted drill/custody not verified. |
+| §7 Preserved rights | These terms do not waive applicable legal rights or excuse negligent handling. | RA 10173 §16(f), where applicable | Draft wording; no executed acceptance agreement or legal certification claimed. |
+| §8 Suspension and inquiries | Report problems through the approved channel; access can end when authority ends. | RA 10173 §§16, 20–21; operator access policy | Role/status revocation tested locally; supply actual support/privacy contact. |
+| §9 Adoption | Complete operator details, effective date and acceptance process before operation under these terms. | Organizational governance; applicable Philippine law | Requester project acceptance is recorded; missing operational facts and role attestations remain explicit. |
+
+See [Laws and Sections](LAWS_AND_SECTIONS.md) for full legal-reference tables and [the presentation script](../academic/PRESENTATION_SCRIPT.md) for the spoken explanation.
+
 ## 1. Purpose and authorized users
 
 The BMS supports the station's customer, order, pickup/delivery, inventory, cash-sale, payment, expense and financial-report work. Access is for individually authorized Owner and Staff accounts. There is no public customer registration, public password-reset workflow or customer marketing program in the approved release.

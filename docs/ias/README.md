@@ -38,6 +38,15 @@ The application under review is the `owner-module` revision `bf2b43ea2ce0731ff14
 
 The architecture uses native Android components, managed Supabase authentication and checked PostgreSQL operations. Persistence of authentication tokens would require an approved Android Keystore design. Protected transactional audit records do not establish cryptographic protection against a privileged database administrator. The expense classifier supplies advisory categories and does not exercise autonomous tool or financial authority.
 
+Current `algo-ias` implementation has advanced beyond that historical assessment baseline: local database/privacy, native transport and classifier integration evidence is recorded in [current traceability](../REQUIREMENTS_TRACEABILITY.md). Historical assessment findings are not automatically current hosted verification.
+
 ## 5. Approval requirements
 
 Organizational adoption requires confirmation of the legal operator, privacy contact, lawful processing bases, retention schedule and provider arrangements. Operational acceptance additionally requires effective hosted security configuration, independent recovery-copy and key custody, an isolated restoration exercise and device-based verification. Algorithm acceptance requires reviewed anonymized data, an approved model and measurements on the declared physical device. Production deployment remains deferred.
+
+## Presentation and legal-reference tables
+
+- [Laws and exact sections](LAWS_AND_SECTIONS.md): RA 10173, RA 10175, notification and retention references.
+- [Privacy Policy clause table](DRAFT_PRIVACY_POLICY.md#policy-and-legal-reference-table).
+- [Terms and Conditions clause table](DRAFT_TERMS_AND_CONDITIONS.md#terms-and-conditions-at-a-glance).
+- [Student presentation script](../academic/PRESENTATION_SCRIPT.md), aligned with milestone methods and current evidence.

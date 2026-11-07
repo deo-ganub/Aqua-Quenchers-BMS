@@ -6,6 +6,21 @@
 
 **Effective date:** [Owner approval required]
 
+## Policy and legal-reference table
+
+| Policy clause | What the policy says in student language | Relevant law / section |
+|---|---|---|
+| §1 Controller and scope | Identify who is responsible and how to contact them. | RA 10173 §§16(a), 21 |
+| §§2–3 Information and purpose | Collect necessary information and identify a lawful reason for each use. | RA 10173 §§11–12 |
+| §4 Access and sharing | Limit access and review the cloud provider's handling of information. | RA 10173 §§20–21 |
+| §5 Classifier | Minimize training data and keep the Owner responsible for the final category. | RA 10173 §11; project human-review rule |
+| §6 Retention | Keep records only under justified schedules; distinguish contacts, accounting records and backups. | RA 10173 §11(e); NIRC §235 as amended, where applicable |
+| §7 Rights | Provide a reviewed process for information, access, correction and eligible removal requests. | RA 10173 §16 |
+| §8 Security and incidents | Protect records and assess whether breach notification is legally required. | RA 10173 §20, including §20(f); NPC Circular 16-03 |
+| §§9–10 Changes and adoption | Communicate material changes and complete operator approval particulars. | RA 10173 §§11(a), 16(a), 21; project governance |
+
+See [Laws and Sections](LAWS_AND_SECTIONS.md) for the exact provisions, examples, implementation evidence and outstanding obligations. This table does not claim that adoption or hosted compliance is complete.
+
 ## 1. Personal Information Controller and Scope
 
 This draft covers the Aqua Quenchers Water Refilling Business Management System used by authorized Owner and Staff accounts for the station in General Mariano Alvarez, Cavite, Philippines.

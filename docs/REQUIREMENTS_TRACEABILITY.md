@@ -19,3 +19,5 @@ Current scope: algo-ias database/privacy/native-session improvements, canonical 
 Exact commands and current NEXT_ACTION are in WORK_STATE.md. The source handoff remains handoff/CODEX_PROMPT.md. All test accounts, tokens, examples, payments and restored copies in new tests are synthetic and isolated.
 
 Requester authorization and target-device declaration are recorded in [PROJECT_APPROVALS.md](PROJECT_APPROVALS.md). General development/source-sync approval is confirmed. The Xiaomi Pad 8 is declared, not physically measured; missing access/data/operational particulars remain input/evidence gates. Device-preflight fixture tests pass3cases without marking actual hardware verified.
+
+| IAS-DOC-LAW | Explicit laws/sections, privacy and terms clause tables; Markdown presentation script and navigation | Documentation links, table structure, statutory references and diff checked; no runtime changes | Verified documentation: 39 relative file links and table structure pass; statutory texts retrieved; NPC source URLs returned HTTP403, so live NPC publications not revalidated |
