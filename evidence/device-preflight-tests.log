@@ -1,0 +1,8 @@
+test_capture_does_not_claim_measurements_or_record_serial (__main__.Preflight.test_capture_does_not_claim_measurements_or_record_serial) ... ok
+test_emulator_or_wrong_manufacturer_rejected (__main__.Preflight.test_emulator_or_wrong_manufacturer_rejected) ... ok
+test_no_device_cannot_be_marked_verified (__main__.Preflight.test_no_device_cannot_be_marked_verified) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.002s
+
+OK

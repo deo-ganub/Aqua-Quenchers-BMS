@@ -1,3 +1,5 @@
 # Aqua Quenchers continuation
 
 Before changes read docs/WORK_STATE.md, docs/REQUIREMENTS_TRACEABILITY.md and handoff/CODEX_PROMPT.md. Resume the exact NEXT_ACTION and preserve unrelated source and stashed work. Native Java/XML Android plus Supabase; offline Python training only. No production deployment, purchases, real customer-data changes or replay of closed retained fixtures. Use new isolated synthetic fixtures for verification. Distinguish source review, implemented/unverified, verified and external blockers. Record meaningful progress atomically. Word/PDF documents are direct conversation downloads only; do not upload them to GitHub. Do not create worktrees unless requested. Never fabricate classifier results, saves or audit/legal approval.
+
+Standing requester authorization is recorded in docs/PROJECT_APPROVALS.md; do not request routine confirmation again. The declared Owner tablet is Xiaomi Pad 8. Approval is not proof of dataset review, missing operational particulars or measured device results. Preserve measurement and privacy guards.

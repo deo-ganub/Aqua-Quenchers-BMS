@@ -67,3 +67,5 @@ Complete operator/contact/effective-date fields and obtain the designated approv
 | Authorized operator | Confirm service scope, account responsibilities and support channel | Pending |
 | Designated privacy or legal reviewer | Review applicable obligations and policy consistency | Pending |
 | Authorized approving representative | Approve version, acceptance process and effective date | Pending |
+
+Project acceptance: the requester approved the prepared project draft and continued implementation on 7 November 2026. See [authorization record](../PROJECT_APPROVALS.md). Actual controller/contact/retention/effective-date particulars and organizational-role attestations are not invented by this project acceptance.

@@ -48,3 +48,7 @@ The proposed gates remain macro-F1>=0.80, every category recall>=0.60, model<=2M
 ## Checks executed for this revision
 
 `tools/test_benchmark_notebook.py` executes the actual code cells in default and opt-in synthetic modes, including full training/evaluation/timing. It verifies aggregate-only output, reviewed-mode prerequisites and rejection of repeated held-out use without changing the original results. See `evidence/notebook-tests.log` and the explicitly synthetic `evidence/notebook-synthetic-execution.json`. Classifier correctness/provenance tests are in `evidence/classifier-python-tests.log` (18 tests).
+
+## Declared tablet and requester authorization
+
+The requester selected **Xiaomi Pad 8** and authorized continued project work on 7 November 2026. The tablet model is now recorded in [device_profile.json](../../benchmark/device_profile.json). Read [PROJECT_APPROVALS.md](../PROJECT_APPROVALS.md) for device setup and standing authorization. `tools/device_preflight.py` captures safe observed properties on the connected trusted computer, without installing an app, collecting a serial in the report or claiming benchmark results. CPU, RAM and Android version remain unfilled until observed.

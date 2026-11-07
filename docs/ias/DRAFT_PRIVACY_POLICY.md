@@ -91,3 +91,5 @@ Before publication, complete all bracketed operator/contact/region/retention det
 Implementation and deployment evidence is assessed separately in the Security-Control Assessment. This policy establishes proposed governance obligations; adoption does not itself verify technical compliance.
 
 Implementation reference: the approved-contact process is documented in [Database, Privacy and Recovery Operations](../security/DATABASE_PRIVACY_OPERATIONS.md). Its local synthetic verification does not adopt this policy or select the operator's retention periods.
+
+Project acceptance: the requester approved the prepared project draft and continued implementation on 7 November 2026. See [authorization record](../PROJECT_APPROVALS.md). Actual controller/contact/retention/effective-date particulars and organizational-role attestations are not invented by this project acceptance.

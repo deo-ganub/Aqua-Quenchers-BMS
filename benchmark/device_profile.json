@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "target_device": "Xiaomi Pad 8",
+  "manufacturer": "Xiaomi",
+  "device_role": "Owner tablet",
+  "identity_source": "Project requester declaration, 2026-11-07",
+  "hardware_access": "NOT CONNECTED",
+  "observed_android_version": null,
+  "observed_api_level": null,
+  "observed_ram_bytes": null,
+  "release_model_sha256": null,
+  "warmup_calls": 100,
+  "timed_calls": 1000,
+  "p95_limit_ms": 100,
+  "incremental_memory_limit_bytes": 33554432,
+  "model_size_limit_bytes": 2097152,
+  "measurement_status": "NOT RUN"
+}
