@@ -159,10 +159,12 @@ create table if not exists public.idempotency_keys (
   actor uuid not null,
   key uuid not null,
   action text not null,
+  payload_hash bytea,
   result jsonb,
   created_at timestamptz not null default now(),
   primary key (actor, key)
 );
+alter table public.idempotency_keys add column if not exists payload_hash bytea;
 
 -- Protected audit history: no client can read it and there is no screen for it.
 create table if not exists public.audit_log (
@@ -244,19 +246,29 @@ end $$;
 -- Claims a key for this request. A non-null result means the save already
 -- happened, so the caller returns it unchanged. A concurrent duplicate waits
 -- here until the first request commits.
-create or replace function public.idem_claim(p_actor uuid, p_key uuid, p_action text) returns jsonb
+-- A retry with the same key returns the stored result. The key is bound to a
+-- SHA-256 fingerprint of the request, so the same key sent with different data
+-- is a conflict rather than a second, different save.
+drop function if exists public.idem_claim(uuid, uuid, text);
+create or replace function public.idem_claim(p_actor uuid, p_key uuid, p_action text, p_payload jsonb) returns jsonb
 language plpgsql security definer set search_path = '' as $$
-declare v_result jsonb;
+declare
+  v_hash bytea := sha256(convert_to(coalesce(p_payload::text, ''), 'UTF8'));
+  v_row public.idempotency_keys;
 begin
   if p_key is null then
     raise exception 'Missing idempotency key.';
   end if;
-  insert into public.idempotency_keys (actor, key, action)
-  values (p_actor, p_key, p_action) on conflict do nothing;
+  insert into public.idempotency_keys (actor, key, action, payload_hash)
+  values (p_actor, p_key, p_action, v_hash) on conflict do nothing;
   if found then return null; end if;
-  select i.result into v_result from public.idempotency_keys i
+  select * into v_row from public.idempotency_keys i
   where i.actor = p_actor and i.key = p_key;
-  return v_result;
+  if v_row.action <> p_action or v_row.payload_hash is distinct from v_hash then
+    raise exception 'Request key was already used with different data.'
+      using detail = 'This retry does not match the original request, so nothing was saved. Start the action again to get a new request key.';
+  end if;
+  return v_row.result;
 end $$;
 
 create or replace function public.idem_finish(p_actor uuid, p_key uuid, p_result jsonb) returns jsonb
@@ -290,7 +302,8 @@ declare
   v_contact text := regexp_replace(coalesce(p_contact, ''), '[^0-9]', '', 'g');
 begin
   select * into a from public.require_active();
-  v_stored := public.idem_claim(a.actor, p_key, 'save_customer');
+  v_stored := public.idem_claim(a.actor, p_key, 'save_customer',
+    jsonb_build_object('id', p_id, 'name', p_name, 'type', p_type, 'contact', p_contact, 'address', p_address));
   if v_stored is not null then return v_stored; end if;
 
   if coalesce(trim(p_name), '') = '' or coalesce(p_type, '') = ''
@@ -339,7 +352,8 @@ declare
   v_price numeric := public.unit_price_for(p_customer_type);
 begin
   select * into a from public.require_active();
-  v_stored := public.idem_claim(a.actor, p_key, 'create_order');
+  v_stored := public.idem_claim(a.actor, p_key, 'create_order',
+    jsonb_build_object('customer_id', p_customer_id, 'customer_type', p_customer_type, 'gallons', p_gallons, 'order_date', p_order_date));
   if v_stored is not null then return v_stored; end if;
 
   select * into v_customer from public.customers where id = p_customer_id;
@@ -372,7 +386,8 @@ declare
   a record; v_stored jsonb; v_order public.orders; v_inv public.inventory; v_result jsonb;
 begin
   select * into a from public.require_active();
-  v_stored := public.idem_claim(a.actor, p_key, 'set_order_status');
+  v_stored := public.idem_claim(a.actor, p_key, 'set_order_status',
+    jsonb_build_object('order_id', p_order_id, 'status', p_status));
   if v_stored is not null then return v_stored; end if;
 
   select * into v_order from public.orders where id = p_order_id for update;
@@ -423,7 +438,8 @@ declare
   a record; v_stored jsonb; v_order public.orders; v_inv public.inventory; v_new_total numeric; v_result jsonb;
 begin
   select * into a from public.require_active();
-  v_stored := public.idem_claim(a.actor, p_key, 'record_pickup');
+  v_stored := public.idem_claim(a.actor, p_key, 'record_pickup',
+    jsonb_build_object('order_id', p_order_id, 'collected', p_collected));
   if v_stored is not null then return v_stored; end if;
 
   select * into v_order from public.orders where id = p_order_id for update;
@@ -472,7 +488,8 @@ returns jsonb language plpgsql security definer set search_path = '' as $$
 declare a record; v_stored jsonb; v_order public.orders; v_result jsonb;
 begin
   select * into a from public.require_active();
-  v_stored := public.idem_claim(a.actor, p_key, 'reschedule_pickup');
+  v_stored := public.idem_claim(a.actor, p_key, 'reschedule_pickup',
+    jsonb_build_object('order_id', p_order_id, 'new_date', p_new_date, 'reason', p_reason));
   if v_stored is not null then return v_stored; end if;
 
   select * into v_order from public.orders where id = p_order_id for update;
@@ -505,7 +522,8 @@ declare
   v_pending integer; v_status text; v_result jsonb;
 begin
   select * into a from public.require_active();
-  v_stored := public.idem_claim(a.actor, p_key, 'record_delivery');
+  v_stored := public.idem_claim(a.actor, p_key, 'record_delivery',
+    jsonb_build_object('order_id', p_order_id, 'quantity', p_quantity));
   if v_stored is not null then return v_stored; end if;
 
   select * into v_order from public.orders where id = p_order_id for update;
@@ -574,7 +592,8 @@ declare
   v_sale public.walkin_sales; v_payment_no text; v_result jsonb;
 begin
   select * into a from public.require_active();
-  v_stored := public.idem_claim(a.actor, p_key, 'complete_walkin_sale');
+  v_stored := public.idem_claim(a.actor, p_key, 'complete_walkin_sale',
+    jsonb_build_object('customer_name', p_customer_name, 'customer_id', p_customer_id, 'gallons', p_gallons, 'cash', p_cash, 'confirm_credit', p_confirm_credit));
   if v_stored is not null then return v_stored; end if;
 
   if coalesce(trim(p_customer_name), '') = '' then
@@ -637,7 +656,8 @@ declare
   v_customer uuid; v_name text; v_total numeric; v_paid numeric;
 begin
   select * into a from public.require_active();
-  v_stored := public.idem_claim(a.actor, p_key, 'record_payment');
+  v_stored := public.idem_claim(a.actor, p_key, 'record_payment',
+    jsonb_build_object('order_id', p_order_id, 'sale_id', p_sale_id, 'amount', p_amount));
   if v_stored is not null then return v_stored; end if;
 
   if (p_order_id is null) = (p_sale_id is null) then
@@ -690,7 +710,8 @@ create or replace function public.save_expense(
 declare a record; v_stored jsonb; v_row public.expenses;
 begin
   select * into a from public.require_owner();
-  v_stored := public.idem_claim(a.actor, p_key, 'save_expense');
+  v_stored := public.idem_claim(a.actor, p_key, 'save_expense',
+    jsonb_build_object('date', p_date, 'category', p_category, 'amount', p_amount, 'remarks', p_remarks, 'source', p_source, 'model_version', p_model_version));
   if v_stored is not null then return v_stored; end if;
 
   if p_date is null or coalesce(p_category, '') = '' then
@@ -837,7 +858,7 @@ create policy aq_expenses_select on public.expenses for select to authenticated 
 
 -- Internal helpers cannot be called from the API.
 revoke all on function public.require_active(), public.require_owner(), public.next_reference(text),
-  public.idem_claim(uuid, uuid, text), public.idem_finish(uuid, uuid, jsonb),
+  public.idem_claim(uuid, uuid, text, jsonb), public.idem_finish(uuid, uuid, jsonb),
   public.audit(uuid, text, text, text, jsonb), public.unit_price_for(text), public.peso(numeric),
   public.manila_today()
   from public, anon, authenticated;

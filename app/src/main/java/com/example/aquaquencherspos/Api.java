@@ -68,6 +68,19 @@ public final class Api {
         }, ok, no);
     }
 
+    /** Ends the server session named in the token. The app clears its own state whatever the answer. */
+    public static void logout(String token) {
+        if (token == null) {
+            return;
+        }
+        run(() -> {
+            exchange("/rest/v1/rpc/aq_logout", "POST", new JSONObject(), token);
+            return new JSONObject();
+        }, result -> {
+        }, error -> {
+        });
+    }
+
     public static void identity(JSONObject body, Callback<JSONObject> ok, Failure no) {
         run(() -> new JSONObject(send("/functions/v1/identity", "POST", body, true)), ok, no);
     }

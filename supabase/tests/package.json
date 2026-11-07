@@ -1,0 +1,11 @@
+{
+  "name": "aq-db-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node test.mjs ../migrations/20261105000000_owner_module.sql ../migrations/20261107000000_session_privacy.sql"
+  },
+  "dependencies": {
+    "@electric-sql/pglite": "^0.5.15"
+  }
+}

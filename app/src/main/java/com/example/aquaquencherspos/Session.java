@@ -11,6 +11,9 @@ public final class Session {
     /** Requirement A-01.4: reauthenticate after 30 minutes of inactivity. */
     static final long IDLE_LIMIT_MS = 30L * 60L * 1000L;
 
+    /** The server guard renews a session only when asked; ask at most this often while active. */
+    private static final long SERVER_TOUCH_MS = 5L * 60L * 1000L;
+
     static volatile String accessToken;
     static volatile String refreshToken;
     static String userId;
@@ -18,6 +21,7 @@ public final class Session {
     static String username;
     static String fullName;
     private static volatile long lastActivity;
+    private static volatile long lastServerTouch;
 
     private Session() {
     }
@@ -43,6 +47,14 @@ public final class Session {
 
     static void touch() {
         lastActivity = SystemClock.elapsedRealtime();
+    }
+
+    static boolean serverTouchDue() {
+        return SystemClock.elapsedRealtime() - lastServerTouch >= SERVER_TOUCH_MS;
+    }
+
+    static void serverTouched() {
+        lastServerTouch = SystemClock.elapsedRealtime();
     }
 
     static boolean isSignedIn() {

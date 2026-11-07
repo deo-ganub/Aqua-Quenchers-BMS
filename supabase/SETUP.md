@@ -13,8 +13,9 @@ The Android app is already pointed at your project (`ypwzwiljtjrvfppqyjgl`). The
 
 1. Open **SQL Editor → New query**.
 2. Paste all of [migrations/20261105000000_owner_module.sql](migrations/20261105000000_owner_module.sql) and select **Run**.
+3. In a new query, paste all of [migrations/20261107000000_session_privacy.sql](migrations/20261107000000_session_privacy.sql) and select **Run**. This adds the session guard, logout and the contact-removal procedure.
 
-It only adds to the database and is safe to run again. Your existing `profiles` rows are kept.
+Both only add to the database and are safe to run again, in that order. Your existing `profiles` rows are kept.
 
 ## 3. Deploy the identity function
 
@@ -80,7 +81,29 @@ Open the app and sign in with the username from step 4.
 
 If the Owner forgets the password, they contact the administrator, who follows step 6 to issue a new one.
 
+Signing in opens a server-side session. It ends after 30 minutes without activity, on **Log out**, or the moment the account is set Inactive; an old token is refused after any of those.
+
 The first time you save a staff account, the app shows a setup key. Add it to an authenticator app such as Google Authenticator, then enter the 6-digit code. Later changes only ask for the code.
+
+## 8. Removing a customer's contact details (privacy)
+
+Contact number and address can be removed from a customer's record; the name and all financial history stay. This runs only in the **SQL Editor**, never from the app, and only after the Owner has approved the request in writing.
+
+1. Find the customer id: `select id, name, contact_number from public.customers where name ilike '%maria%';`
+2. Dry run first. Nothing changes; the answer shows what would be removed:
+
+```sql
+select public.erase_customer_contact(
+  'customer-id-here'::uuid,
+  gen_random_uuid(),          -- decision id: keep this value for step 3
+  'APR-2026-001',             -- the Owner's approval reference
+  'Customer asked for removal on 07 Nov 2026',
+  false);                     -- dry run
+```
+
+3. Run the same statement again with `true` and the **same decision id** to execute it.
+
+It is refused while the customer has an order still in progress or an unpaid balance. A contact number entered after the decision's cutoff is left alone (`protected_by_later_update`). The decision, who ran it and the result are kept in `public.privacy_decisions` and the audit history.
 
 ## Keep these private
 

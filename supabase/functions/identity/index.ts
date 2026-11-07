@@ -104,6 +104,13 @@ async function requireUser(req: Request) {
   const r = await rest(`/rest/v1/profiles?select=id,role,status&id=eq.${user.id}`);
   const profile = r.ok ? r.body[0] : null;
   if (!profile || profile.status !== "Active") throw expired;
+  // The session guard: an idle or revoked session is refused even while the token is still valid.
+  const guard = await fetch(`${SUPABASE_URL}/rest/v1/rpc/aq_session_touch`, {
+    method: "POST",
+    headers: { apikey: ANON_KEY, Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
+    body: "{}",
+  });
+  if (!guard.ok) throw expired;
   return { user, profile, token };
 }
 

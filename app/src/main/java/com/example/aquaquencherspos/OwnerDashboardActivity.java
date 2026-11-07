@@ -166,6 +166,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
     }
 
     void signOut() {
+        Api.logout(Session.accessToken);
         Session.clear();
         startActivity(new Intent(this, MainActivity.class));
         finish();
@@ -178,6 +179,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         }
         expiring = true;
         handler.removeCallbacks(idleCheck);
+        Api.logout(Session.accessToken);
         Session.clear();
         Dialogs.message(this, "Session expired. Sign in again.",
                 "The account was idle for 30 minutes or its active access was removed. Protected requests are denied.",
@@ -188,6 +190,15 @@ public class OwnerDashboardActivity extends AppCompatActivity {
     public void onUserInteraction() {
         super.onUserInteraction();
         Session.touch();
+        if (Session.isSignedIn() && Session.serverTouchDue()) {
+            Session.serverTouched();
+            Api.rpc("aq_session_touch", new JSONObject(), result -> {
+            }, error -> {
+                if (error.sessionExpired) {
+                    expireSession();
+                }
+            });
+        }
     }
 
     @Override
@@ -202,8 +213,7 @@ public class OwnerDashboardActivity extends AppCompatActivity {
         }
         handler.postDelayed(idleCheck, IDLE_CHECK_MS);
         // Also catches an account deactivated while the app was in the background.
-        Api.rpc("whoami", new JSONObject(), me -> {
-        }, error -> {
+        Api.rpc("whoami", new JSONObject(), me -> Session.serverTouched(), error -> {
             if (error.sessionExpired) {
                 expireSession();
             }
