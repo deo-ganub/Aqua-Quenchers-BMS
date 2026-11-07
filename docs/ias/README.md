@@ -1,5 +1,19 @@
 # Information Assurance and Security Documentation
 
+## IAS submission — the four required deliverables
+
+These files are on **algo-ias**. If GitHub opens another branch, select `algo-ias` before browsing. The links below open the requested files directly.
+
+| Professor's requirement | Open the deliverable | What it contains |
+|---|---|---|
+| DRAFT Privacy Policy | [DRAFT Privacy Policy](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/algo-ias/docs/ias/DRAFT_PRIVACY_POLICY.md) | Information collected, purposes, rights, retention, security and exact Philippine laws/sections inside the policy |
+| DRAFT Terms and Conditions | [DRAFT Terms and Conditions](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/algo-ias/docs/ias/DRAFT_TERMS_AND_CONDITIONS.md) | Account responsibilities, authorized use, records, privacy, provider services and adoption |
+| Checklist of Recommended Security Controls | [Security Controls Checklist](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/algo-ias/docs/ias/RECOMMENDED_SECURITY_CONTROLS_CHECKLIST.md) | Explicit checkboxes distinguishing locally verified work and outstanding acceptance requirements |
+| Implementation of Security Controls | [Security Implementation and Code Links](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/algo-ias/docs/ias/IMPLEMENTATION_OF_SECURITY_CONTROLS.md) | Direct app/database/Edge source links, executed test evidence and remaining verification |
+
+**Professor-recommended generator:** [nisrulz/app-privacy-policy-generator](https://github.com/nisrulz/app-privacy-policy-generator). [Drafting method and adaptations](https://github.com/deo-ganub/Aqua-Quenchers-BMS/blob/algo-ias/docs/ias/POLICY_GENERATOR_METHOD.md) records the reviewed source templates and app-specific revisions. Policies remain drafts; checked local tests do not establish production/legal certification.
+
+
 **Document identifier:** AQ-IAS-REG-01
 
 **Edition:** 1.0

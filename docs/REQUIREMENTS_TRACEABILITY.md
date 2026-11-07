@@ -23,3 +23,5 @@ Requester authorization and target-device declaration are recorded in [PROJECT_A
 | IAS-DOC-LAW | Explicit laws/sections, privacy and terms clause tables; Markdown presentation script and navigation | Documentation links, table structure, statutory references and diff checked; no runtime changes | Verified documentation: 39 relative file links and table structure pass; statutory texts retrieved; NPC source URLs returned HTTP403, so live NPC publications not revalidated |
 
 | IAS-POLICY-INLINE | Privacy Policy v0.3 directly contains full law names, 13 provision/application rows, nine clause-level legal-basis statements and primary sources | Checked statutory references reused; table structure and relative links pass; no runtime change | Verified documentation |
+
+| IAS-SUBMISSION | Four explicitly indexed IAS deliverables; dedicated checklist and source/evidence map; professor-recommended generator source-template adaptation recorded in both drafts | 75 relative targets and table structure pass; generator attribution in both drafts verified; no runtime change | Verified documentation |

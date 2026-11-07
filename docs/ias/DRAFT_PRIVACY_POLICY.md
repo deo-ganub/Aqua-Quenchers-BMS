@@ -1,6 +1,8 @@
 # DRAFT Privacy Policy — Aqua Quenchers BMS
 
-**Version:** AQ-PRIV-DRAFT-0.3 · **Prepared:** 7 November 2026 (Asia/Manila)
+**Version:** AQ-PRIV-DRAFT-0.4 · **Prepared:** 7 November 2026 (Asia/Manila)
+
+**Drafting method:** Reviewed and tailored using the professor-recommended [App Privacy Policy Generator](https://github.com/nisrulz/app-privacy-policy-generator) source templates; see the [method and adaptation record](POLICY_GENERATOR_METHOD.md). Philippine-law and project-specific requirements are retained.
 
 **Status:** Draft for review by the operator, designated privacy lead and authorized academic reviewers; organizational adoption is pending.
 
@@ -73,7 +75,7 @@ The active release does not introduce a marketing program or customer registrati
 
 Active Owner and Staff accounts share the approved operational customer/order/payment work. Only the Owner may access expenses, financial reports and Staff-account administration. Cloud/database administration and approved recovery/privacy actions require separately designated administrator or custodian access.
 
-Supabase is the selected managed authentication/database platform. The operator must approve the actual project region, provider arrangements and any cross-border processing before launch: **[project region and processor details to confirm]**. Restricted recovery storage and support access require named custodians and separate approval. Public GitHub repositories, presentation slides and academic reports must use code, redacted evidence and synthetic examples rather than customer records, private exports or access secrets.
+Supabase is the selected managed authentication/database platform. Its published [Privacy Policy](https://supabase.com/privacy) and [Terms of Service](https://supabase.com/terms) provide provider information; they do not replace this station policy or determine the project's actual processing arrangements. The operator must approve the actual project region, provider arrangements and any cross-border processing before launch: **[project region and processor details to confirm]**. Restricted recovery storage and support access require named custodians and separate approval. Public GitHub repositories, presentation slides and academic reports must use code, redacted evidence and synthetic examples rather than customer records, private exports or access secrets.
 
 ## 5. Automated Classification Assistance
 

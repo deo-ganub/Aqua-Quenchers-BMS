@@ -1,6 +1,8 @@
 # DRAFT Terms and Conditions — Aqua Quenchers BMS
 
-**Version:** AQ-TERMS-DRAFT-0.2 · **Prepared:** 7 November 2026 (Asia/Manila)
+**Version:** AQ-TERMS-DRAFT-0.3 · **Prepared:** 7 November 2026 (Asia/Manila)
+
+**Drafting method:** Reviewed and tailored using the professor-recommended [App Privacy Policy Generator](https://github.com/nisrulz/app-privacy-policy-generator) source templates; see the [method and adaptation record](POLICY_GENERATOR_METHOD.md). Philippine-law and project-specific requirements are retained.
 
 **Status:** Draft for organizational and academic review; adoption and effective date pending.
 
@@ -88,3 +90,10 @@ Complete operator/contact/effective-date fields and obtain the designated approv
 | Authorized approving representative | Approve version, acceptance process and effective date | Pending |
 
 Project acceptance: the requester approved the prepared project draft and continued implementation on 7 November 2026. See [authorization record](../PROJECT_APPROVALS.md). Actual controller/contact/retention/effective-date particulars and organizational-role attestations are not invented by this project acceptance.
+
+
+## 10. Third-party services, updates and document changes
+
+The application uses Supabase for managed authentication and database services. Review the provider's [Privacy Policy](https://supabase.com/privacy) and [Terms of Service](https://supabase.com/terms); the operator must confirm the arrangements applicable to the actual project. Using a provider does not remove the operator's accountability under RA 10173, Section 21.
+
+The operator shall communicate supported application versions, required security updates and material changes to these terms through approved staff channels. Record the approved version and effective date, explain material changes and complete the approved acceptance procedure before the revised terms take effect. Updates do not authorize deletion of required business records or waiver of applicable rights. Operator/support contact remains the approved channel specified in Clause 8.

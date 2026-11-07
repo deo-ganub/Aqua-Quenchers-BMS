@@ -1,7 +1,13 @@
+## Current checkpoint — four visible IAS deliverables and recommended generator
+Objective: make all four professor-required items explicit and visible on algo-ias. Reviewed nisrulz/app-privacy-policy-generator revision906e635798b3bf925c67d90558a25858d544b93f; used privacy/terms source templates as coverage guide, no wizard-export or legal certification claim. Added dedicated checklist and implementation/code-evidence index; top-of-README four-item tables; provenance/adaptation record; provider and version-change clauses in drafts. Policies remain tailored to Philippine law and approved app, not generic tracking/marketing assumptions. No runtime changes or Word/PDF upload.
+Branch algo-ias parent6d99bfe209bc8bf183db64138c8e31c71660ff53. Existing checkpoint changes preserved. Verification PASS: 75 local link targets, consistent table columns, generator attribution in both drafts, no workspace/download paths and git diff --check. Checklist contains13 locally completed and11 open checks; source/runtime evidence reused. External device/data/hosted/operational gates unchanged. No deployment or data operation pending.
+NEXT_ACTION: verify changed documents and source/evidence links, commit named Markdown files, push algo-ias and confirm remote SHA; provide four direct links.
+
 ## Current checkpoint — laws directly inside Privacy Policy, 7 November 2026
 User clarified that laws and sections must appear within the Privacy Policy itself. Updated docs/ias/DRAFT_PRIVACY_POLICY.md v0.3 with full law names, 13 provision rows, nine clause-level legal-basis statements and primary sources. Preserved old navigation anchor and unrelated checkpoint edits. Clarified NIRC235/RA11976 section33 without blanket personal-data retention. No runtime/production/binary changes.
 Branch algo-ias, parent 6919dadb549d19e4f8c9333d87b7257d7e7c481d. Four-column legal table, nine inline statements and relative links PASS. Initial checker incorrectly expected five columns; corrected checker to match the four-column schema, no content weakened. Reused verified statutory sources. External model/device/hosted/organizational gates unchanged.
-NEXT_ACTION: commit policy, traceability and checkpoint; push origin/algo-ias and verify remote SHA before reporting. Check any interrupted push remotely before retrying.
+Publication verified: 6d99bfe209bc8bf183db64138c8e31c71660ff53 pushed to origin/algo-ias; remote SHA matches. No external operation pending; this post-push checkpoint update remains local.
+NEXT_ACTION: deliver the updated Privacy Policy GitHub link. Further implementation follows the recorded independent audit/reconciliation register and external data/device/backend gates.
 
 ## Current checkpoint — explicit GitHub law/terms tables, 7 November 2026
 - Objective: publish the script's law/section explanations, privacy and draft-terms clause tables on algo-ias; Markdown only, no Word/PDF uploads or runtime changes.
