@@ -169,6 +169,21 @@ public final class Ui {
         return b;
     }
 
+    /** White button with a hairline border (the design's tertiary action). */
+    static Button outline(Context c, String label, View.OnClickListener click) {
+        Button b = button(c, label);
+        b.setTextColor(INK);
+        b.setBackground(box(c, WHITE, INPUT_BORDER, 10));
+        b.setOnClickListener(click);
+        return b;
+    }
+
+    /** Stretches a button across its parent, as the dashboard action stack does. */
+    static <T extends View> T fullWidth(Context c, T view) {
+        view.setLayoutParams(matchWrap());
+        return view;
+    }
+
     /** A full-width pale row button, as on the Settings screen. */
     static Button listButton(Context c, String label, View.OnClickListener click) {
         Button b = button(c, label);
