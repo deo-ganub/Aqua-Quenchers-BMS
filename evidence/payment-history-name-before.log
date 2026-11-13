@@ -1,0 +1,1 @@
+CONFIRMED: real authenticated Staff customer has2retained receipts; Payments search/history by the same customer name returns0, because payments query matches invoice reference only. No financial mutation.

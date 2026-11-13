@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/Aqua-Quenchers-BMS/admin/tests/order_date_save.py", line 77, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/Aqua-Quenchers-BMS/admin/tests/order_date_save.py", line 63, in main
+    assert (o['customer_id'],o['recorded_by'],o['quantity'],o['unit_price_centavos'],o['total_centavos'],o['status'])==(customer['id'],actor,2,3000,6000,'ordered')
+                                                                                     ~^^^^^^^^^^^^^^^^^^
+KeyError: 'total_centavos'

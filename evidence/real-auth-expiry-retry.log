@@ -1,0 +1,4 @@
+PASS: official2-second signed token accepted then rejected401/expired; normal issuer remains3600 seconds.
+PASS: native actual refresh returns3600-second token and protected Owner read succeeds.
+PASS: upstream really committed expense; native shows error, recreates fields/keys, retries same expense ID; independent ledger delta1234/count1.
+PASS: unchanged30-minute backend idle policy rejects real signed native session on resume after controlled31-minute fixture timestamp; fresh login succeeds.

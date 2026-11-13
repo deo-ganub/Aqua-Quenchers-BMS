@@ -1,0 +1,51 @@
+OWNER
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.NamedCreditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.NamedCreditDeviceTest:
+INSTRUMENTATION_STATUS: test=creditCancellationValidationAndPartialReceipt
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.NamedCreditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=creditCancellationValidationAndPartialReceipt
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 25.958
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+STAFF
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.NamedCreditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.NamedCreditDeviceTest:
+INSTRUMENTATION_STATUS: test=creditCancellationValidationAndPartialReceipt
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.NamedCreditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=creditCancellationValidationAndPartialReceipt
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 27.582
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: Owner/Staff invalid and cancelled POS have no effects; actual zero-cash named credit and partial receipt each. Independent2sales/7000charges/3500receipts/outstanding+3500/filled-2; expenses/empty/reservations unchanged.

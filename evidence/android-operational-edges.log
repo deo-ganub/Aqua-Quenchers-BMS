@@ -1,0 +1,51 @@
+OWNER
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OperationalEdgeDeviceTest:
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 30.828
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+STAFF
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OperationalEdgeDeviceTest:
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 29.77
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: Owner and Staff invalid collection/past-date/cancel/rotation/resume/short-pickup; exact2 orders,54,000 charges/receipts, empty+18 with filled/reservations/expenses/outstanding unchanged.

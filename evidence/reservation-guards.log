@@ -1,0 +1,17 @@
+BEGIN
+INSERT 0 1
+INSERT 0 1
+UPDATE 1
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config                                    
+----------------------------------------------------------------------------------
+ {"iat": 1793654439.360169, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+psql:backend/tests/reservation_guards.sql:31: NOTICE:  PASS: missing order reservation rejects despite ample physical/unreserved/other-order stock; failed save preserves stock and other reservation; overdelivery denied.
+DO
+ROLLBACK

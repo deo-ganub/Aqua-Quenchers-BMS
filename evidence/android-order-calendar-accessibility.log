@@ -1,0 +1,4 @@
+11-03 16:37:50.828  6912  6931 I System.out: CALENDAR NODE: description=03 November 2026 text=3 clickable=false enabled=true actions=80
+11-03 16:39:15.219  7001  7020 I System.out: CALENDAR NODE: description=03 November 2026 numericText=3 clickable=false enabled=true actions=80
+11-03 16:39:15.546  7001  7020 I System.out: CALENDAR NODE: description=Previous month numericText= clickable=true enabled=true actions=131933
+11-03 16:39:15.548  7001  7020 I System.out: CALENDAR NODE: description=Next month numericText= clickable=true enabled=true actions=131933

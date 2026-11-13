@@ -1,0 +1,9 @@
+usage: benchmark.py [-h] --dataset DATASET --output OUTPUT [--synthetic]
+                    [--child]
+
+options:
+  -h, --help         show this help message and exit
+  --dataset DATASET
+  --output OUTPUT
+  --synthetic
+  --child

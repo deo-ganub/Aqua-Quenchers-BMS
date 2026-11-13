@@ -1,0 +1,6 @@
+WARNING: The directory '/home/agent/.cache/pip' or its parent directory is not owned or is not writable by the current user. The cache has been disabled. Check the permissions and owner of that directory. If executing pip with sudo, you should use sudo's -H flag.
+Requirement already satisfied: numpy==2.3.5 in /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages (from -r classifier/requirements.txt (line 1)) (2.3.5)
+Requirement already satisfied: scipy==1.17.0 in /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages (from -r classifier/requirements.txt (line 2)) (1.17.0)
+Requirement already satisfied: scikit-learn==1.8.0 in /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages (from -r classifier/requirements.txt (line 3)) (1.8.0)
+Requirement already satisfied: joblib>=1.3.0 in /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages (from scikit-learn==1.8.0->-r classifier/requirements.txt (line 3)) (1.5.3)
+Requirement already satisfied: threadpoolctl>=3.2.0 in /opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages (from scikit-learn==1.8.0->-r classifier/requirements.txt (line 3)) (3.6.0)

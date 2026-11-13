@@ -1,0 +1,7 @@
+usage: backup.py [-h] {package,restore-files} ...
+
+positional arguments:
+  {package,restore-files}
+
+options:
+  -h, --help            show this help message and exit

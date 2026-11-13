@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OrderFormDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OrderFormDeviceTest:
+INSTRUMENTATION_STATUS: test=datesQuantityPreviewRotationAndCancelNeverSave
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OrderFormDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=datesQuantityPreviewRotationAndCancelNeverSave
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 35.469
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: actual Staff required customer/invalid quantity/fixed price preview, actual date-picker cancel/past/future selection and rotation, form cancellation with no save. All business/profile records unchanged.

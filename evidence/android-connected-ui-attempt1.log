@@ -1,0 +1,45 @@
+REAL LOCAL HTTPS/AUTH/REST, OWNED SOFTWARE API29; not hosted or declared-device performance.
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.ConnectedWorkflowDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.ConnectedWorkflowDeviceTest:
+INSTRUMENTATION_STATUS: test=ownerAndStaffUseRealBackendAndManagedMfa
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.ConnectedWorkflowDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.aquaquenchers.bms.ConnectedWorkflowDeviceTest.ownerAndStaffUseRealBackendAndManagedMfa(ConnectedWorkflowDeviceTest.java:83)
+
+INSTRUMENTATION_STATUS: stream=
+Error in ownerAndStaffUseRealBackendAndManagedMfa(com.aquaquenchers.bms.ConnectedWorkflowDeviceTest):
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.aquaquenchers.bms.ConnectedWorkflowDeviceTest.ownerAndStaffUseRealBackendAndManagedMfa(ConnectedWorkflowDeviceTest.java:83)
+
+INSTRUMENTATION_STATUS: test=ownerAndStaffUseRealBackendAndManagedMfa
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 28.922
+There was 1 failure:
+1) ownerAndStaffUseRealBackendAndManagedMfa(com.aquaquenchers.bms.ConnectedWorkflowDeviceTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.aquaquenchers.bms.ConnectedWorkflowDeviceTest.ownerAndStaffUseRealBackendAndManagedMfa(ConnectedWorkflowDeviceTest.java:83)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

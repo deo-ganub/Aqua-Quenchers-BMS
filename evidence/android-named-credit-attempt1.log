@@ -1,0 +1,45 @@
+OWNER
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.NamedCreditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.NamedCreditDeviceTest:
+INSTRUMENTATION_STATUS: test=creditCancellationValidationAndPartialReceipt
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.NamedCreditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError: Timed out: POS; UI message: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.await(NamedCreditDeviceTest.java:47)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.click(NamedCreditDeviceTest.java:48)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.creditCancellationValidationAndPartialReceipt(NamedCreditDeviceTest.java:69)
+
+INSTRUMENTATION_STATUS: stream=
+Error in creditCancellationValidationAndPartialReceipt(com.aquaquenchers.bms.NamedCreditDeviceTest):
+java.lang.AssertionError: Timed out: POS; UI message: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.await(NamedCreditDeviceTest.java:47)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.click(NamedCreditDeviceTest.java:48)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.creditCancellationValidationAndPartialReceipt(NamedCreditDeviceTest.java:69)
+
+INSTRUMENTATION_STATUS: test=creditCancellationValidationAndPartialReceipt
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 40.562
+There was 1 failure:
+1) creditCancellationValidationAndPartialReceipt(com.aquaquenchers.bms.NamedCreditDeviceTest)
+java.lang.AssertionError: Timed out: POS; UI message: 
+	at org.junit.Assert.fail(Assert.java:89)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.await(NamedCreditDeviceTest.java:47)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.click(NamedCreditDeviceTest.java:48)
+	at com.aquaquenchers.bms.NamedCreditDeviceTest.creditCancellationValidationAndPartialReceipt(NamedCreditDeviceTest.java:69)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

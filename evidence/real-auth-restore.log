@@ -1,0 +1,4 @@
+PASS: actual official Auth schema/users/factors and BMS records restored into NEW local UTF8 database with exact ownership, financial/stock totals, RLS and grants.
+PASS: isolated restored app sessions revoked and real Auth sessions/refresh tokens invalidated; old access403 and refresh400.
+PASS: fresh official password login, retained TOTP factor/AAL2 and protected expense reconciliation. Source business state unchanged.
+NOT RUN: hosted project/config/Storage, independent custody, controller erasure approval or measured RPO/RTO.

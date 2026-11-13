@@ -1,0 +1,78 @@
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :app:preBuild UP-TO-DATE
+> Task :app:preDebugBuild UP-TO-DATE
+> Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
+> Task :wrapper
+> Task :app:generateDebugBuildConfig
+> Task :app:javaPreCompileDebug
+> Task :app:checkDebugAarMetadata
+> Task :app:generateDebugResValues
+> Task :app:mapDebugSourceSetPaths
+> Task :app:generateDebugResources
+> Task :app:mergeDebugResources
+> Task :app:packageDebugResources
+> Task :classifier-java:compileJava
+> Task :classifier-java:processResources NO-SOURCE
+> Task :classifier-java:classes
+> Task :classifier-java:jar
+> Task :app:parseDebugLocalResources
+> Task :app:createDebugCompatibleScreenManifests
+> Task :app:extractDeepLinksDebug
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
+> Task :app:processDebugManifestForPackage
+> Task :app:mergeDebugShaders
+> Task :app:compileDebugShaders NO-SOURCE
+> Task :app:generateDebugAssets UP-TO-DATE
+> Task :app:mergeDebugAssets
+> Task :app:compressDebugAssets
+> Task :app:desugarDebugFileDependencies
+> Task :app:processDebugJavaRes NO-SOURCE
+> Task :app:mergeDebugJavaResource
+> Task :app:checkDebugDuplicateClasses
+> Task :app:mergeExtDexDebug
+> Task :app:processDebugResources
+> Task :app:mergeLibDexDebug
+
+> Task :app:compileDebugJavaWithJavac
+Note: /workspace/Aqua-Quenchers-BMS/app/src/main/java/com/aquaquenchers/bms/MainActivity.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :app:dexBuilderDebug
+> Task :app:mergeDebugGlobalSynthetics
+> Task :app:mergeDebugJniLibFolders
+> Task :app:mergeDebugNativeLibs NO-SOURCE
+> Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:mergeProjectDexDebug
+> Task :app:validateSigningDebug
+> Task :app:writeDebugAppMetadata
+> Task :app:writeDebugSigningConfigVersions
+> Task :app:bundleDebugClassesToRuntimeJar
+> Task :app:bundleDebugClassesToCompileJar
+> Task :app:preDebugUnitTestBuild UP-TO-DATE
+> Task :app:javaPreCompileDebugUnitTest
+> Task :app:compileDebugUnitTestJavaWithJavac
+> Task :app:processDebugUnitTestJavaRes NO-SOURCE
+> Task :app:testDebugUnitTest
+> Task :app:preDebugAndroidTestBuild SKIPPED
+> Task :app:generateDebugAndroidTestResValues
+> Task :app:generateDebugAndroidTestLintModel
+> Task :app:packageDebug
+> Task :app:createDebugApkListingFileRedirect
+> Task :app:assembleDebug
+> Task :app:extractProguardFiles
+> Task :app:generateDebugLintReportModel
+> Task :app:generateDebugUnitTestLintModel
+> Task :app:lintAnalyzeDebug
+> Task :app:lintAnalyzeDebugAndroidTest
+> Task :app:lintAnalyzeDebugUnitTest
+
+> Task :app:lintReportDebug
+Wrote HTML report to file:///workspace/Aqua-Quenchers-BMS/app/build/reports/lint-results-debug.html
+
+> Task :app:lintDebug
+[Incubating] Problems report is available at: file:///workspace/Aqua-Quenchers-BMS/build/reports/problems/problems-report.html
+
+BUILD SUCCESSFUL in 1m 3s
+51 actionable tasks: 51 executed

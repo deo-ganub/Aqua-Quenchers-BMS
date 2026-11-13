@@ -1,0 +1,150 @@
+OWNER
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OperationalEdgeDeviceTest:
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.aquaquenchers.bms.OperationalEdgeDeviceTest.partialDeliveryPreview(OperationalEdgeDeviceTest.java:72)
+	at com.aquaquenchers.bms.OperationalEdgeDeviceTest.rejectedCollectionRescheduleRotationAndShortPickup(OperationalEdgeDeviceTest.java:92)
+
+INSTRUMENTATION_STATUS: stream=
+Error in rejectedCollectionRescheduleRotationAndShortPickup(com.aquaquenchers.bms.OperationalEdgeDeviceTest):
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.aquaquenchers.bms.OperationalEdgeDeviceTest.partialDeliveryPreview(OperationalEdgeDeviceTest.java:72)
+	at com.aquaquenchers.bms.OperationalEdgeDeviceTest.rejectedCollectionRescheduleRotationAndShortPickup(OperationalEdgeDeviceTest.java:92)
+
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 50.064
+There was 1 failure:
+1) rejectedCollectionRescheduleRotationAndShortPickup(com.aquaquenchers.bms.OperationalEdgeDeviceTest)
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at com.aquaquenchers.bms.OperationalEdgeDeviceTest.partialDeliveryPreview(OperationalEdgeDeviceTest.java:72)
+	at com.aquaquenchers.bms.OperationalEdgeDeviceTest.rejectedCollectionRescheduleRotationAndShortPickup(OperationalEdgeDeviceTest.java:92)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1
+
+OWNER
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OperationalEdgeDeviceTest:
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 30.269
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+STAFF
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OperationalEdgeDeviceTest:
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 50.129
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+OWNER READONLY MULTIPLE-DATE QUEUE
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OperationalEdgeDeviceTest:
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 17.618
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+STAFF READONLY MULTIPLE-DATE QUEUE
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.OperationalEdgeDeviceTest:
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.OperationalEdgeDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=rejectedCollectionRescheduleRotationAndShortPickup
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 13.924
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: both-role exact pickup/contact/address/date/fixed-price/shortfall-adjusted previews; delivery form/cumulative-pending preview/0-negative-fractional-nonnumeric-overdelivery rejection/Cancel/rotation and actual partial4; multiple-date carryover oldest-first both roles. Real final5 RPCs settle2orders with exact actor/time,4deliveries;54,000charges/cash/net, stock/reservations restored and all preexisting business rows unchanged. No production/manual stock mutation.

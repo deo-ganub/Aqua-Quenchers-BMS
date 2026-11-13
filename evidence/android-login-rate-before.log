@@ -1,0 +1,41 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.LoginRateLimitDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.LoginRateLimitDeviceTest:
+INSTRUMENTATION_STATUS: test=actualRateLimitKeepsSignInAndReportsAvailability
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.LoginRateLimitDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stack=org.junit.ComparisonFailure: expected:<[Sign-in unavailable. Try again later].> but was:<[Invalid username or password].>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.aquaquenchers.bms.LoginRateLimitDeviceTest.actualRateLimitKeepsSignInAndReportsAvailability(LoginRateLimitDeviceTest.java:33)
+
+INSTRUMENTATION_STATUS: stream=
+Error in actualRateLimitKeepsSignInAndReportsAvailability(com.aquaquenchers.bms.LoginRateLimitDeviceTest):
+org.junit.ComparisonFailure: expected:<[Sign-in unavailable. Try again later].> but was:<[Invalid username or password].>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.aquaquenchers.bms.LoginRateLimitDeviceTest.actualRateLimitKeepsSignInAndReportsAvailability(LoginRateLimitDeviceTest.java:33)
+
+INSTRUMENTATION_STATUS: test=actualRateLimitKeepsSignInAndReportsAvailability
+INSTRUMENTATION_STATUS_CODE: -2
+INSTRUMENTATION_RESULT: stream=
+
+Time: 7.837
+There was 1 failure:
+1) actualRateLimitKeepsSignInAndReportsAvailability(com.aquaquenchers.bms.LoginRateLimitDeviceTest)
+org.junit.ComparisonFailure: expected:<[Sign-in unavailable. Try again later].> but was:<[Invalid username or password].>
+	at org.junit.Assert.assertEquals(Assert.java:117)
+	at org.junit.Assert.assertEquals(Assert.java:146)
+	at com.aquaquenchers.bms.LoginRateLimitDeviceTest.actualRateLimitKeepsSignInAndReportsAvailability(LoginRateLimitDeviceTest.java:33)
+
+FAILURES!!!
+Tests run: 1,  Failures: 1
+
+
+INSTRUMENTATION_CODE: -1

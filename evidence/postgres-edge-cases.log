@@ -1,0 +1,21 @@
+BEGIN
+INSERT 0 1
+INSERT 0 1
+UPDATE 1
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                           set_config                                            
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal2", "iat": 1793652945.900544, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+psql:backend/tests/edge_cases.sql:40: NOTICE:  PASS: profileless credit/selected-reference settlement, invalid payments, cash/change receipts, skipped lifecycle, reschedule boundaries, overcollection and paid-total protection, pickup retries
+DO
+RESET
+psql:backend/tests/edge_cases.sql:46: NOTICE:  PASS: exact total retained receipts and no duplicate POS records
+DO
+ROLLBACK

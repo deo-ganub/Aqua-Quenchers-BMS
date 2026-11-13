@@ -1,0 +1,25 @@
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.CustomerEditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=
+com.aquaquenchers.bms.CustomerEditDeviceTest:
+INSTRUMENTATION_STATUS: test=cancelledInvalidAndProspectiveCustomerEdit
+INSTRUMENTATION_STATUS_CODE: 1
+INSTRUMENTATION_STATUS: class=com.aquaquenchers.bms.CustomerEditDeviceTest
+INSTRUMENTATION_STATUS: current=1
+INSTRUMENTATION_STATUS: id=AndroidJUnitRunner
+INSTRUMENTATION_STATUS: numtests=1
+INSTRUMENTATION_STATUS: stream=.
+INSTRUMENTATION_STATUS: test=cancelledInvalidAndProspectiveCustomerEdit
+INSTRUMENTATION_STATUS_CODE: 0
+INSTRUMENTATION_RESULT: stream=
+
+Time: 35.227
+
+OK (1 test)
+
+
+INSTRUMENTATION_CODE: -1
+
+PASS: actual Owner cancel/invalid/duplicate/rotation corrected same-ID customer edit; original order/payment snapshots retained; prospective 3000centavo price preview cancelled. All financial/stock/profiles/Auth identities/other customers unchanged; no duplicate.

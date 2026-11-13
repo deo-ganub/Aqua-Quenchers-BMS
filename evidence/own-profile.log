@@ -1,0 +1,19 @@
+BEGIN
+INSERT 0 2
+INSERT 0 2
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000002
+(1 row)
+
+                                           set_config                                            
+-------------------------------------------------------------------------------------------------
+ {"aal": "aal1", "iat": 1793655455.113592, "session_id": "20000000-0000-4000-8000-000000000002"}
+(1 row)
+
+SET
+psql:backend/tests/own_profile.sql:20: NOTICE:  PASS: Staff own-profile username edit preserves Auth ID/transaction recorder; target/role/activation changes denied.
+DO
+RESET
+DO
+ROLLBACK

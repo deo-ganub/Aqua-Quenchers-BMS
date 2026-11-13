@@ -1,0 +1,1 @@
+PASS: all historical Git blobs scanned against known private local fixture passwords, signing/service keys and session tokens; no matches. Credential files remain outside Git. This is a literal scan, not a guarantee against unknown secrets.

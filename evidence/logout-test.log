@@ -1,0 +1,64 @@
+BEGIN
+ALTER TABLE
+CREATE FUNCTION
+CREATE FUNCTION
+REVOKE
+GRANT
+REVOKE
+COMMIT
+BEGIN
+INSERT 0 1
+INSERT 0 1
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config                                    
+----------------------------------------------------------------------------------
+ {"iat": 1793657644.882900, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+                                                                                      aq_me                                                                                      
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"role": "owner", "active": true, "user_id": "10000000-0000-4000-8000-000000000001", "username": "owner.test", "full_name": "Synthetic Owner", "contact_number": "09000000001"}
+(1 row)
+
+      aq_logout       
+----------------------
+ {"logged_out": true}
+(1 row)
+
+      aq_logout       
+----------------------
+ {"logged_out": true}
+(1 row)
+
+psql:backend/tests/logout.sql:11: NOTICE:  PASS: revoked app session denied even with otherwise valid JWT claims
+DO
+RESET
+DO
+                                    set_config                                    
+----------------------------------------------------------------------------------
+ {"iat": 1793657644.885198, "session_id": "20000000-0000-4000-8000-000000000002"}
+(1 row)
+
+SET
+                                                                                      aq_me                                                                                      
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ {"role": "owner", "active": true, "user_id": "10000000-0000-4000-8000-000000000001", "username": "owner.test", "full_name": "Synthetic Owner", "contact_number": "09000000001"}
+(1 row)
+
+RESET
+UPDATE 1
+SET
+      aq_logout       
+----------------------
+ {"logged_out": true}
+(1 row)
+
+RESET
+psql:backend/tests/logout.sql:27: NOTICE:  PASS: fresh sign-in session works, inactive caller can logout, and revocation/audit remain exactly once
+DO
+ROLLBACK

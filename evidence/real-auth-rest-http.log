@@ -1,0 +1,4 @@
+PASS: real password/JWT verification; forged/anonymous denial; actual managed TOTP invalid/valid + AAL2 Staff creation/idempotency; Staff/metadata privilege denial.
+PASS: actual HTTPS Staff customer/order/receipt/short-pickup/refill/reservation/partial-final delivery/POS/Owner manual expense and exact date/as-of financial reports; retries have one effect.
+PASS: actual alias edits preserve Auth/transaction identity; deactivation denies old signed access/new login; reactivation, BMS logout and managed refresh revocation verified.
+PASS: real local Auth/PostgREST/production-handler integration. NOT RUN: hosted Supabase, Figma, declared-device/real-model gates, hosted recovery custody.

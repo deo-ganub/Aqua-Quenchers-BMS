@@ -1,0 +1,12 @@
+plugins { id 'java-library' }
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+tasks.register('selfTest', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'com.aquaquenchers.classifier.ClassifierSelfTest'
+    workingDir = rootProject.projectDir
+}
+tasks.named('check') { dependsOn selfTest }

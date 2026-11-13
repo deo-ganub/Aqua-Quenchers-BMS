@@ -1,0 +1,17 @@
+<resources>
+    <!-- Figma tokens (HIGH FIDELITY · Final) -->
+    <color name="aqua_primary">#0369A1</color>
+    <color name="aqua_dark">#0F172A</color>
+    <color name="aqua_background">#F8FAFC</color>
+    <color name="aqua_surface">#FFFFFF</color>
+    <color name="aqua_error">#CC2929</color>
+    <color name="aqua_muted">#475569</color>
+    <color name="aqua_border">#E2E8F0</color>
+    <color name="aqua_tonal">#E0F2FE</color>
+    <color name="aqua_amber">#B26608</color>
+    <color name="aqua_amber_bg">#FFF3DA</color>
+    <color name="aqua_green">#178C45</color>
+    <color name="aqua_green_bg">#E7F7EA</color>
+    <color name="aqua_grey_bg">#EDF2F7</color>
+    <color name="aqua_danger_bg">#FCE5E5</color>
+</resources>

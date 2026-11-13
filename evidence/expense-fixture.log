@@ -1,0 +1,17 @@
+BEGIN
+INSERT 0 1
+INSERT 0 1
+              set_config              
+--------------------------------------
+ 10000000-0000-4000-8000-000000000001
+(1 row)
+
+                                    set_config                                    
+----------------------------------------------------------------------------------
+ {"iat": 1793653975.102313, "session_id": "20000000-0000-4000-8000-000000000001"}
+(1 row)
+
+SET
+psql:backend/tests/expense_fixture.sql:22: NOTICE:  PASS: manual no-remarks fixture7/6250 becomes8/7000 once; newest-first and filtered total reconcile. No model result asserted.
+DO
+ROLLBACK

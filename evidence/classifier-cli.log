@@ -1,0 +1,7 @@
+usage: __main__.py [-h] {prepare,train,evaluate} ...
+
+positional arguments:
+  {prepare,train,evaluate}
+
+options:
+  -h, --help            show this help message and exit
