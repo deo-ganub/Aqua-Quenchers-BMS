@@ -777,6 +777,7 @@ public final class MainActivity extends Activity {
             boolean currentlyHidden = "Show".contentEquals(toggle.getText());
             int cursor = e.getSelectionEnd();
             e.setInputType(InputType.TYPE_CLASS_TEXT | (currentlyHidden ? InputType.TYPE_TEXT_VARIATION_NORMAL : InputType.TYPE_TEXT_VARIATION_PASSWORD));
+            e.setTransformationMethod(currentlyHidden ? null : android.text.method.PasswordTransformationMethod.getInstance());
             e.setTypeface(ui.o4);
             e.setSelection(Math.max(0, Math.min(cursor, e.length())));
             toggle.setText(currentlyHidden ? "Hide" : "Show");
@@ -792,6 +793,8 @@ public final class MainActivity extends Activity {
         EditText e = new EditText(this);
         e.setTag(label); e.setContentDescription(label); e.setHint(label); e.setText(value);
         e.setInputType(InputType.TYPE_CLASS_TEXT | (secret ? InputType.TYPE_TEXT_VARIATION_PASSWORD : 0)); e.setSingleLine(true);
+        // setSingleLine can drop the password transformation, so set it again here to keep secrets hidden by default.
+        if (secret) e.setTransformationMethod(android.text.method.PasswordTransformationMethod.getInstance());
         e.setTypeface(ui.o4); e.setTextColor(0xFF334155); e.setHintTextColor(0xFF94A3B8); e.setIncludeFontPadding(false); ui.size(e, 14, 19);
         e.setGravity(Gravity.CENTER_VERTICAL); ui.pad(e, 14, 0, secret ? 84 : 40, 0);
         e.setBackground(ui.shape(Ui.WHITE, 0xFFCBD5E1, r));

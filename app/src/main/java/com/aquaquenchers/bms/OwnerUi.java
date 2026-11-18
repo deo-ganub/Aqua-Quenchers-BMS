@@ -443,11 +443,20 @@ final class OwnerUi {
         for (int i = 0; i < 6; i++) {
             final int index = i;
             EditText e = new EditText(a); e.setSaveEnabled(false); e.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
-            e.setInputType(InputType.TYPE_CLASS_NUMBER); e.setFilters(new InputFilter[]{new InputFilter.LengthFilter(1)});
+            e.setInputType(InputType.TYPE_CLASS_NUMBER);
             e.setGravity(Gravity.CENTER); e.setTypeface(ui.p5); e.setTextColor(Ui.INK); e.setIncludeFontPadding(false); ui.size(e, 24, 36); e.setPadding(0, 0, 0, 0);
             e.setBackground(ui.shape(Ui.WHITE, Ui.FIELD, 10)); e.setContentDescription("Verification code digit " + (i + 1));
             boxes.addView(e, new LinearLayout.LayoutParams(ui.px(54), ui.px(58)));
-            e.addTextChangedListener(MainActivity.watcher(() -> { if (e.getText().length() == 1 && index < 5) digits[index + 1].requestFocus(); }));
+            e.addTextChangedListener(MainActivity.watcher(() -> {
+                // A pasted or multi-digit entry fills this box and the boxes after it, one digit each.
+                String typed = e.getText().toString().replaceAll("[^0-9]", "");
+                if (typed.length() > 1) {
+                    for (int k = 0; k < typed.length() && index + k < 6; k++) digits[index + k].setText(String.valueOf(typed.charAt(k)));
+                    digits[Math.min(index + typed.length(), 5)].requestFocus();
+                    return;
+                }
+                if (typed.length() == 1 && index < 5) digits[index + 1].requestFocus();
+            }));
             digits[i] = e;
         }
         TextView err = ui.fieldError(card); err.setGravity(Gravity.CENTER);
@@ -478,19 +487,35 @@ final class OwnerUi {
         card.addView(status, new LinearLayout.LayoutParams(-1, -2));
         LinearLayout actions = ui.H(card, 10); actions.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         api("GET", "/auth/v1/user", null, user -> {
-            if (hasVerifiedTotp(user)) { status.setText("Authenticator app set up and active."); return; }
+            if (hasVerifiedTotp(user)) {
+                status.setText("Authenticator app set up and active.");
+                ui.hug(actions, ui.button("Remove authenticator", Ui.DANGER_OUTLINE, 46, 12, 15, () -> removeAuthenticator(box)));
+                return;
+            }
             status.setText("Authenticator app not set up yet. Set it up before adding staff accounts or changing the password.");
             ui.hug(actions, ui.button("Set up authenticator", Ui.FILLED, 46, 12, 15, () -> startEnrollment(box)));
         });
     }
-    private static boolean hasVerifiedTotp(JSONObject user) {
+    /** Removal needs a current code, so someone holding an unlocked session cannot quietly remove the second factor. */
+    private void removeAuthenticator(LinearLayout box) {
+        confirmManagedMfa("this change", () -> api("GET", "/auth/v1/user", null, user -> {
+            String id = verifiedTotpId(user);
+            if (id.isEmpty()) { a.error("No authenticator is set up."); authenticatorStatus(box); return; }
+            api("DELETE", "/auth/v1/factors/" + id, a.json(), r -> {
+                a.info("Authenticator removed. Set it up again before changing staff accounts or the password.");
+                authenticatorStatus(box);
+            });
+        }));
+    }
+    private static String verifiedTotpId(JSONObject user) {
         JSONArray factors = user.optJSONArray("factors");
         if (factors != null) for (int i = 0; i < factors.length(); i++) {
             JSONObject f = factors.optJSONObject(i);
-            if (f != null && "verified".equals(f.optString("status")) && "totp".equals(f.optString("factor_type"))) return true;
+            if (f != null && "verified".equals(f.optString("status")) && "totp".equals(f.optString("factor_type"))) return f.optString("id");
         }
-        return false;
+        return "";
     }
+    private static boolean hasVerifiedTotp(JSONObject user) { return !verifiedTotpId(user).isEmpty(); }
     private void startEnrollment(LinearLayout box) {
         api("POST", "/auth/v1/factors", a.json("factor_type", "totp", "friendly_name", "Aqua Quenchers Owner"), factor -> showEnrollment(box, factor));
     }
