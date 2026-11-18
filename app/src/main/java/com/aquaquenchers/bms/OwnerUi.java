@@ -339,12 +339,13 @@ final class OwnerUi {
             LinearLayout content = ui.V(pageBody, 16);
             if ("Inventory".equals(section)) inventoryPane(content);
             else if ("Change password".equals(section)) passwordForm(content);
+            else if ("Authenticator".equals(section)) authenticatorPane(content);
             else staffPane(content, entity);
             return;
         }
         LinearLayout[] panes = a.panes(300);
         LinearLayout menu = ui.V(panes[0], 4); ui.bg(menu, Ui.WHITE, Ui.BORDER, 16); ui.pad(menu, 8, 8);
-        String[] items = {"Inventory", "Staff accounts", "Change password"};
+        String[] items = {"Inventory", "Staff accounts", "Change password", "Authenticator"};
         for (String item : items) {
             boolean on = item.equals(section);
             LinearLayout row = ui.H(menu, 8); ui.pad(row, 14, 14); row.setMinimumHeight(ui.px(55)); row.setClickable(true); row.setContentDescription(item);
@@ -357,6 +358,7 @@ final class OwnerUi {
         a.bannerAt(panes[1], 0);
         if ("Inventory".equals(section)) inventoryPane(panes[1]);
         else if ("Change password".equals(section)) passwordForm(panes[1]);
+        else if ("Authenticator".equals(section)) authenticatorPane(panes[1]);
         else staffPane(panes[1], entity);
     }
     void staffAccounts() { settingsPage("Staff accounts", null); }
@@ -461,10 +463,88 @@ final class OwnerUi {
         a.showDialog(d[0]);
         digits[0].requestFocus();
     }
-    private void verifyMfa(String code, Runnable verified) { api("GET", "/auth/v1/user", null, user -> { JSONArray factors = user.optJSONArray("factors"); String id = ""; if (factors != null) for (int i = 0; i < factors.length(); i++) { JSONObject factor = factors.optJSONObject(i); if ("verified".equals(factor.optString("status")) && "totp".equals(factor.optString("factor_type"))) { id = factor.optString("id"); break; } } if (id.isEmpty()) { a.error("A managed MFA factor must be enrolled by the designated administrator."); return; } String path = "/auth/v1/factors/" + id; api("POST", path + "/challenge", a.json(), challenge -> verifyCode(path, challenge.optString("id"), code, verified)); }); }
+    private void verifyMfa(String code, Runnable verified) { api("GET", "/auth/v1/user", null, user -> { JSONArray factors = user.optJSONArray("factors"); String id = ""; if (factors != null) for (int i = 0; i < factors.length(); i++) { JSONObject factor = factors.optJSONObject(i); if ("verified".equals(factor.optString("status")) && "totp".equals(factor.optString("factor_type"))) { id = factor.optString("id"); break; } } if (id.isEmpty()) { a.error("Set up the authenticator app first in Settings → Authenticator."); return; } String path = "/auth/v1/factors/" + id; api("POST", path + "/challenge", a.json(), challenge -> verifyCode(path, challenge.optString("id"), code, verified)); }); }
     private void verifyCode(String path, String challenge, String code, Runnable verified) { Backend expected = a.backend(); expected.call(path + "/verify", a.json("challenge_id", challenge, "code", code), session -> { if (expected != a.backend() || a.isDestroyed() || a.isFinishing()) return; if (session.optString("access_token").isEmpty() && session.optJSONObject("session") == null) { a.error("Verification was not confirmed. Try again."); return; } a.acceptTokens(session); verified.run(); }, e -> { if (expected != a.backend() || a.isDestroyed() || a.isFinishing()) return; if (e.status == 401) { a.endSession("Session expired. Sign in again."); return; } a.error(e.status == 400 || e.status == 403 || e.status == 422 ? "Enter a valid verification code." : e.getMessage()); }); }
 
     // ================================================================================================ password (O13 / T3)
+    // ================================================================================================ authenticator (Owner managed MFA setup)
+    /** Owner sets up the authenticator app on the tablet by scanning a QR code or typing the setup key. */
+    private void authenticatorPane(LinearLayout p) { authenticatorStatus(ui.V(p, 12)); }
+    private void authenticatorStatus(LinearLayout box) {
+        box.removeAllViews();
+        LinearLayout card = ui.card(box, 12, a.wide() ? 18 : 16);
+        ui.text(card, "Authenticator app", 22, 33, Ui.INK, ui.p6);
+        TextView status = ui.tv("Checking setup...", 14, 19, Ui.MUTED, ui.o4);
+        card.addView(status, new LinearLayout.LayoutParams(-1, -2));
+        LinearLayout actions = ui.H(card, 10); actions.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        api("GET", "/auth/v1/user", null, user -> {
+            if (hasVerifiedTotp(user)) { status.setText("Authenticator app set up and active."); return; }
+            status.setText("Authenticator app not set up yet. Set it up before adding staff accounts or changing the password.");
+            ui.hug(actions, ui.button("Set up authenticator", Ui.FILLED, 46, 12, 15, () -> startEnrollment(box)));
+        });
+    }
+    private static boolean hasVerifiedTotp(JSONObject user) {
+        JSONArray factors = user.optJSONArray("factors");
+        if (factors != null) for (int i = 0; i < factors.length(); i++) {
+            JSONObject f = factors.optJSONObject(i);
+            if (f != null && "verified".equals(f.optString("status")) && "totp".equals(f.optString("factor_type"))) return true;
+        }
+        return false;
+    }
+    private void startEnrollment(LinearLayout box) {
+        api("POST", "/auth/v1/factors", a.json("factor_type", "totp", "friendly_name", "Aqua Quenchers Owner"), factor -> showEnrollment(box, factor));
+    }
+    private void showEnrollment(LinearLayout box, JSONObject factor) {
+        String id = factor.optString("id");
+        JSONObject totp = factor.optJSONObject("totp");
+        String secret = totp == null ? "" : totp.optString("secret");
+        String uri = totp == null ? "" : totp.optString("uri");
+        if (id.isEmpty() || secret.isEmpty() || uri.isEmpty()) { a.error("The authenticator could not be created. Try again."); return; }
+        box.removeAllViews();
+        LinearLayout card = ui.card(box, 12, a.wide() ? 18 : 16);
+        ui.text(card, "Add to your phone", 22, 33, Ui.INK, ui.p6);
+        ui.text(card, "Open Google Authenticator, Authy or a similar app. Tap Add account and scan this code. Then type the 6-digit number the app shows.", 14, 19, Ui.MUTED, ui.o4);
+        android.graphics.Bitmap qr = qrBitmap(uri);
+        if (qr != null) {
+            ImageView image = new ImageView(a);
+            image.setImageBitmap(qr);
+            image.setContentDescription("Authenticator setup QR code");
+            card.addView(image, new LinearLayout.LayoutParams(ui.px(240), ui.px(240)));
+        }
+        ui.text(card, "Can't scan? Choose \"Enter a setup key\" in the app and type this key:", 13, 18, Ui.MUTED, ui.o4);
+        ui.text(card, secret, 16, 22, Ui.INK, ui.p5);
+        LinearLayout copyRow = ui.H(card, 10);
+        ui.hug(copyRow, ui.button("Copy key", Ui.OUTLINE, 44, 12, 14, () -> {
+            android.content.ClipboardManager clipboard = (android.content.ClipboardManager) a.getSystemService(Context.CLIPBOARD_SERVICE);
+            clipboard.setPrimaryClip(ClipData.newPlainText("Authenticator setup key", secret));
+            a.info("Setup key copied.");
+        }));
+        EditText code = a.input(card, "6-digit code from the app", "", InputType.TYPE_CLASS_NUMBER);
+        LinearLayout row = ui.H(card, 10); row.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+        ui.hug(row, ui.button("Cancel", Ui.OUTLINE, 46, 12, 15, () -> cancelEnrollment(box, id)));
+        ui.hug(row, ui.button("Confirm", Ui.FILLED, 46, 12, 15, () -> {
+            String value = code.getText().toString().trim();
+            if (!value.matches("[0-9]{6}")) { a.error("Enter the 6-digit code from the app."); return; }
+            String path = "/auth/v1/factors/" + id;
+            api("POST", path + "/challenge", a.json(), challenge -> verifyCode(path, challenge.optString("id"), value, () -> {
+                a.info("Authenticator set up.");
+                authenticatorStatus(box);
+            }));
+        }));
+    }
+    /** Removes the unfinished factor so a new setup key can be generated next time. */
+    private void cancelEnrollment(LinearLayout box, String id) {
+        api("DELETE", "/auth/v1/factors/" + id, a.json(), r -> authenticatorStatus(box));
+    }
+    /** Builds a QR bitmap from the otpauth:// URI. The secret is never logged. */
+    private static android.graphics.Bitmap qrBitmap(String text) {
+        try {
+            com.google.zxing.common.BitMatrix matrix = new com.google.zxing.qrcode.QRCodeWriter().encode(text, com.google.zxing.BarcodeFormat.QR_CODE, 512, 512);
+            android.graphics.Bitmap bitmap = android.graphics.Bitmap.createBitmap(512, 512, android.graphics.Bitmap.Config.ARGB_8888);
+            for (int x = 0; x < 512; x++) for (int y = 0; y < 512; y++) bitmap.setPixel(x, y, matrix.get(x, y) ? 0xFF000000 : 0xFFFFFFFF);
+            return bitmap;
+        } catch (Exception e) { return null; }
+    }
     private void password() { if (a.wide() && a.isOwner()) settingsPage("Change password", null); else { LinearLayout p = a.page("Change password"); passwordForm(p); } }
     private void passwordForm(LinearLayout p) {
         boolean ow = a.wide();

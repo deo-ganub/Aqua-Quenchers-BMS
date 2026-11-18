@@ -764,6 +764,25 @@ public final class MainActivity extends Activity {
         ui.hug(foot, ui.tv("Aqua Quencher  ·  Business workspace", 12, 16, Ui.NAV_MUTED, ui.o4));
         ui.hug(foot, ui.tv("Ready when you are.", 13, 20, Ui.PRIMARY, ui.p5));
     }
+    /** Show/Hide toggle for a password field. Keeps the typed text and cursor position. */
+    private void addShowHideToggle(EditText e, FrameLayout box) {
+        TextView toggle = ui.tv("Show", 13, 18, 0xFF0284C7, ui.p5);
+        toggle.setContentDescription("Show password");
+        toggle.setClickable(true);
+        toggle.setPadding(ui.px(8), ui.px(8), ui.px(8), ui.px(8));
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-2, -2, Gravity.END | Gravity.CENTER_VERTICAL);
+        lp.rightMargin = ui.px(6);
+        box.addView(toggle, lp);
+        toggle.setOnClickListener(v -> {
+            boolean currentlyHidden = "Show".contentEquals(toggle.getText());
+            int cursor = e.getSelectionEnd();
+            e.setInputType(InputType.TYPE_CLASS_TEXT | (currentlyHidden ? InputType.TYPE_TEXT_VARIATION_NORMAL : InputType.TYPE_TEXT_VARIATION_PASSWORD));
+            e.setTypeface(ui.o4);
+            e.setSelection(Math.max(0, Math.min(cursor, e.length())));
+            toggle.setText(currentlyHidden ? "Hide" : "Show");
+            toggle.setContentDescription(currentlyHidden ? "Hide password" : "Show password");
+        });
+    }
     /** Sign-in field: Poppins 600 14/21 label, input, and an icon + message validation row. */
     private EditText signField(LinearLayout form, String label, float h, float r, float w, String value, boolean secret) {
         LinearLayout field = ui.V(form, 6);
@@ -774,11 +793,12 @@ public final class MainActivity extends Activity {
         e.setTag(label); e.setContentDescription(label); e.setHint(label); e.setText(value);
         e.setInputType(InputType.TYPE_CLASS_TEXT | (secret ? InputType.TYPE_TEXT_VARIATION_PASSWORD : 0)); e.setSingleLine(true);
         e.setTypeface(ui.o4); e.setTextColor(0xFF334155); e.setHintTextColor(0xFF94A3B8); e.setIncludeFontPadding(false); ui.size(e, 14, 19);
-        e.setGravity(Gravity.CENTER_VERTICAL); ui.pad(e, 14, 0, 40, 0);
+        e.setGravity(Gravity.CENTER_VERTICAL); ui.pad(e, 14, 0, secret ? 84 : 40, 0);
         e.setBackground(ui.shape(Ui.WHITE, 0xFFCBD5E1, r));
         box.addView(e, new FrameLayout.LayoutParams(-1, -1));
+        if (secret) addShowHideToggle(e, box);
         ImageView mark = ui.icon(R.drawable.ic_error, 0xFFB91C1C); mark.setVisibility(View.GONE);
-        FrameLayout.LayoutParams mp = new FrameLayout.LayoutParams(ui.px(16), ui.px(16), Gravity.END | Gravity.CENTER_VERTICAL); mp.rightMargin = ui.px(14); box.addView(mark, mp);
+        FrameLayout.LayoutParams mp = new FrameLayout.LayoutParams(ui.px(16), ui.px(16), Gravity.END | Gravity.CENTER_VERTICAL); mp.rightMargin = ui.px(secret ? 56 : 14); box.addView(mark, mp);
         LinearLayout row = ui.hbox(8); row.setVisibility(View.GONE); row.setMinimumHeight(ui.px(24));
         row.addView(ui.icon(R.drawable.ic_error, 0xFFB91C1C), new LinearLayout.LayoutParams(ui.px(16), ui.px(16)));
         TextView msg = ui.tv("", 12, 16, 0xFFB91C1C, ui.o4); ui.hug(row, msg);
