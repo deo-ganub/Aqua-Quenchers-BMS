@@ -1,0 +1,10 @@
+{
+  "tool": "gitleaks",
+  "version": "8.30.1",
+  "release": "https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1",
+  "checksums": "https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_checksums.txt",
+  "verification": "Download the platform archive and the release checksums file, then require the archive's SHA-256 to match its line in that file before running it. CI performs this check in .github/workflows/security.yml.",
+  "config": ".gitleaks.toml",
+  "hook": ".githooks/pre-commit",
+  "notes": "A clean scan does not prove the absence of every vulnerability. If a real secret is found, revoke or rotate it and investigate use before cleaning source or history."
+}

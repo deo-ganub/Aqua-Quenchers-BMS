@@ -75,6 +75,8 @@ public final class ExpenseSuggestionController {
         message = "";
     }
     public synchronized String category() { return category; }
+    /** The category of the current reliable suggestion, or null when none is offered. */
+    public synchronized String suggestedCategory() { return canApplySuggestion() ? suggestion.suggestedCategory : null; }
     public synchronized String selectionSource() { return selectionSource; }
     public synchronized String acceptedModelVersion() { return acceptedModelVersion; }
     public synchronized String message() { return message; }

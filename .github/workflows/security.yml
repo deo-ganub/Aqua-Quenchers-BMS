@@ -1,0 +1,63 @@
+# IAS Task 4 / SEC-TASK-101, -106, -107: required checks named in policies/branch-rules.json.
+name: Security checks
+on:
+  pull_request:
+  push:
+    branches: [main, work]
+permissions:
+  contents: read
+jobs:
+  secret-scan:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Install pinned Gitleaks with checksum verification
+        run: |
+          set -euo pipefail
+          base=https://github.com/gitleaks/gitleaks/releases/download/v8.30.1
+          curl -sSLf -o gitleaks.tar.gz "$base/gitleaks_8.30.1_linux_x64.tar.gz"
+          curl -sSLf -o checksums.txt "$base/gitleaks_8.30.1_checksums.txt"
+          grep ' gitleaks_8.30.1_linux_x64.tar.gz$' checksums.txt | sha256sum -c -
+          tar -xzf gitleaks.tar.gz gitleaks
+          ./gitleaks version
+      - name: Prove the rule rejects a synthetic marker
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp -d)
+          printf 'value=AQ_SYNTHETIC_SECRET_%s\n' "$(printf 'X%.0s' $(seq 16))" > "$tmp/probe.txt"
+          if ./gitleaks dir "$tmp" --config .gitleaks.toml --no-banner --redact; then
+            echo "Synthetic marker was not detected" >&2; exit 1
+          fi
+      - name: Scan full Git history
+        run: ./gitleaks git . --config .gitleaks.toml --no-banner --redact
+  security-evidence:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Unit tests and lint (no backend credentials; public client values only)
+        run: ./gradlew --no-daemon :classifier-java:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug
+      - name: Inspect the compiled APK for privileged credentials
+        run: |
+          set -euo pipefail
+          mkdir apk && cd apk && unzip -q ../app/build/outputs/apk/debug/app-debug.apk
+          if grep -rIlaE 'sb_secret_|sbp_[a-f0-9]{40}|figd_|c2VydmljZV9yb2xl|NlcnZpY2Vfcm9sZ|zZXJ2aWNlX3JvbG|BEGIN (RSA |EC )?PRIVATE KEY' .; then
+            echo "Privileged credential pattern found in APK" >&2; exit 1
+          fi
+  model-and-risk:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - name: Classifier math, schema, pipeline and adapter tests
+        working-directory: classifier
+        run: |
+          python -m pip install -r requirements.txt
+          PYTHONPATH=. python -m unittest discover -s tests -p 'test_*.py'

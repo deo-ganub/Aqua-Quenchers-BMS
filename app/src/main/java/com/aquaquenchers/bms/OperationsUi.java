@@ -4,14 +4,9 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -21,6 +16,7 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -29,7 +25,10 @@ import java.util.List;
 import java.util.Locale;
 import java.util.function.Consumer;
 
-/** Shared native operational screens (Figma Staff 1–10 and Owner 3–9). Every successful write comes from the authenticated RPC. */
+/**
+ * Operational screens for both roles. Staff (phone): Figma S04–S16, P1–P7, K1–K4. Owner (tablet): Figma O3–O8.
+ * Every successful write comes from the authenticated RPC; rules and messages follow the requirements.
+ */
 public final class OperationsUi {
     private final MainActivity host;
     private final Ui ui;
@@ -40,60 +39,73 @@ public final class OperationsUi {
     private static final String[] TYPE_KEYS = {"household", "dealer", "walk_in"};
     public OperationsUi(MainActivity host) { this.host = host; this.ui = host.ui(); }
 
-    public boolean restore(String route,String entity){
-        if(Rules.uuid(entity)){
-            switch(route){
-                case "Customer Profile":customer(entity);return true;
-                case "Order Details":order(entity);return true;
-                case "Payments":payments(entity);return true;
-                case "Edit Customer":page(route,entity);query("customer",json("id",entity),r->customerForm(nested(r,"customer"),null));return true;
-                case "Record Pickup":page(route,entity);query("order",json("id",entity),r->pickup(nested(r,"order")));return true;
-                case "Reschedule Pickup":page(route,entity);query("order",json("id",entity),r->reschedule(nested(r,"order")));return true;
-                case "Record Delivery":page(route,entity);query("order",json("id",entity),r->delivery(nested(r,"order")));return true;
-                case "Sale saved":page(route,entity);query("sale",json("id",entity),r->saleResult(nested(r,"sale")));return true;
+    public boolean restore(String route, String entity) {
+        if (Rules.uuid(entity)) {
+            switch (route) {
+                case "Customer Profile": customer(entity); return true;
+                case "Order Details": order(entity); return true;
+                case "Payments": payments(entity); return true;
+                case "Record Pickup": loadOrder(entity, this::pickup); return true;
+                case "Reschedule Pickup": loadOrder(entity, this::reschedule); return true;
+                case "Record Delivery": loadOrder(entity, this::delivery); return true;
             }
         }
-        if("Record Payment".equals(route)&&(entity.startsWith("ORD-")||entity.startsWith("SALE-"))){
-            String kind=entity.startsWith("ORD-")?"order":"sale";
-            page(route,entity);query(kind,json("reference",entity),r->payment(nested(r,kind),kind));return true;
+        if ("Record Payment".equals(route) && (entity.startsWith("ORD-") || entity.startsWith("SALE-") || entity.startsWith("WI-"))) {
+            String kind = entity.startsWith("ORD-") ? "order" : "sale";
+            query(kind, json("reference", entity), r -> payment(nested(r, kind), kind)); return true;
         }
-        switch(route){case "Customers":customers();return true;case "Orders":orders();return true;case "Pending gallons / Carry-over Details":pending();return true;case "Walk-in Sale / POS":pos();return true;case "Payments":payments();return true;case "Create Order":newOrder(null);return true;case "Add Customer":customerForm(null,null);return true;}return false;}
-
-    // ---------------------------------------------------------------- helpers
-    private LinearLayout page(String title,String id){generation++;return host.page(title,id);}
-    private LinearLayout page(String title) { generation++; return host.page(title); }
-    private void query(String resource, JSONObject data, Consumer<JSONObject> action) {
-        long requestedGeneration = generation;
-        host.query(resource, data, result -> { if (requestedGeneration == generation) action.accept(result); });
+        switch (route) { case "Customers": customers(); return true; case "Orders": orders(); return true; case "Pending gallons / Carry-over Details": pending(); return true; case "Walk-in Sale / POS": case "Sale saved": pos(); return true; case "Payments": payments(); return true; case "Create Order": newOrder(null); return true; case "Add Customer": customerForm(null, null); return true; }
+        return false;
     }
+
+    // ================================================================================================ helpers
+    /** Owner tablet layout; Owners on a phone get the phone screens. */
+    private boolean owner() { return host.wide(); }
+    private LinearLayout page(String title, String id) { generation++; return host.page(title, id); }
+    private LinearLayout page(String title) { return page(title, ""); }
+    private void query(String resource, JSONObject data, Consumer<JSONObject> action) {
+        long requested = generation;
+        host.query(resource, data, result -> { if (requested == generation) action.accept(result); });
+    }
+    private void loadOrder(String id, Consumer<JSONObject> then) { host.query("order", json("id", id), r -> then.accept(nested(r, "order"))); }
     private JSONObject json(Object... pairs) { return host.json(pairs); }
     private static String value(EditText input) { return input.getText().toString().trim(); }
-    private static String title(String value){return Rules.label(value);}
-    private void watch(EditText field, Runnable changed) {
-        field.addTextChangedListener(new TextWatcher() {
-            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override public void onTextChanged(CharSequence s, int start, int before, int count) { changed.run(); }
-            @Override public void afterTextChanged(Editable e) {}
-        });
-    }
+    private static String title(String value) { return Rules.label(value); }
+    private void watch(EditText field, Runnable changed) { field.addTextChangedListener(MainActivity.watcher(changed)); }
     private int quantity(EditText input) { return Rules.quantity(value(input)); }
+    private static String cleanMoney(String raw) { return raw.replace("₱", "").replace(",", "").trim(); }
     private long cents(EditText input, String invalid) {
         try {
-            String raw = value(input);
+            String raw = cleanMoney(value(input));
             if (!raw.matches("-?[0-9]+(?:\\.[0-9]{1,2})?")) throw new IllegalArgumentException(invalid);
             return new BigDecimal(raw).setScale(2, RoundingMode.UNNECESSARY).movePointRight(2).longValueExact();
         } catch (ArithmeticException e) { throw new IllegalArgumentException(invalid); }
     }
-    private EditText date(LinearLayout parent, String label, String initial) {
-        EditText field = host.input(parent, label, initial, InputType.TYPE_CLASS_DATETIME | InputType.TYPE_DATETIME_VARIATION_DATE);
-        field.setFocusable(false); field.setContentDescription(label + ", select date");
+    static String pesoText(long cents) { return "₱" + BigDecimal.valueOf(cents, 2).setScale(2).toPlainString(); }
+    private static String wholePeso(long cents) { return cents % 100 == 0 ? "₱" + String.format(Locale.ENGLISH, "%,d", cents / 100) : Rules.money(cents); }
+    /** Date field: shows "Fri, 16 Oct 2026" (Staff) or "12 Oct 2026" (Owner); the ISO date is kept on the view. */
+    EditText date(LinearLayout parent, String label, String iso) { return date(parent, label, iso, false); }
+    EditText date(LinearLayout parent, String label, String iso, boolean todayPrefix) {
+        EditText field = host.input(parent, label, "", InputType.TYPE_NULL);
+        field.setTag(null); field.setFocusable(false); field.setContentDescription(label + ", select date");
+        setIso(field, iso, todayPrefix);
         field.setOnClickListener(v -> {
             LocalDate d;
-            try { d = LocalDate.parse(value(field)); } catch (Exception ignored) { d = LocalDate.parse(host.today()); }
-            host.showDialog(new DatePickerDialog(host, (picker, y, m, day) -> field.setText(LocalDate.of(y, m + 1, day).toString()), d.getYear(), d.getMonthValue() - 1, d.getDayOfMonth()));
+            try { d = LocalDate.parse(iso(field)); } catch (Exception ignored) { d = LocalDate.parse(host.today()); }
+            host.showDialog(new DatePickerDialog(host, (picker, y, m, day) -> { setIso(field, LocalDate.of(y, m + 1, day).toString(), todayPrefix); host.clearFieldError(field); }, d.getYear(), d.getMonthValue() - 1, d.getDayOfMonth()));
         });
         return field;
     }
+    void setIso(EditText field, String iso, boolean todayPrefix) {
+        field.setTag(R.id.iso_date, iso);
+        try {
+            LocalDate d = LocalDate.parse(iso);
+            String shown = owner() ? d.format(DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH)) : d.format(DateTimeFormatter.ofPattern("EEE, d MMM yyyy", Locale.ENGLISH));
+            if (todayPrefix && iso.equals(host.today())) shown = "Today · " + d.format(DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH));
+            field.setText(shown);
+        } catch (Exception e) { field.setText(iso == null ? "" : iso); }
+    }
+    static String iso(EditText field) { Object v = field.getTag(R.id.iso_date); return v == null ? field.getText().toString().trim() : v.toString(); }
     private static JSONArray items(JSONObject result) { JSONArray a = result.optJSONArray("items"); return a == null ? new JSONArray() : a; }
     private static JSONObject nested(JSONObject result, String key) { JSONObject object = result.optJSONObject(key); return object == null ? result : object; }
     private static String id(JSONObject item) { return item.optString("id"); }
@@ -115,28 +127,21 @@ public final class OperationsUi {
             case "rescheduled": return "Resume for pickup";
             case "for_pickup": return "Record pickup";
             case "picked_up": return "Start refilling";
-            case "refilling": return "Mark ready";
+            case "refilling": return "Mark ready for delivery";
             case "ready_for_delivery": case "undelivered": return "Record delivery";
             default: return "View order";
         }
     }
-    private static String shortDate(String iso) {
-        try { return LocalDate.parse(iso).format(DateTimeFormatter.ofPattern("d MMM", Locale.ENGLISH)); } catch (Exception e) { return iso; }
+    private static String shortDate(String iso) { try { return LocalDate.parse(iso).format(DateTimeFormatter.ofPattern("d MMM", Locale.ENGLISH)); } catch (Exception e) { return iso; } }
+    private static String longDate(String iso) { try { return LocalDate.parse(iso).format(DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH)); } catch (Exception e) { return iso; } }
+    private static String stamp(String encoded) {
+        try { return OffsetDateTime.parse(encoded).atZoneSameInstant(Rules.MANILA).format(DateTimeFormatter.ofPattern("d MMM · HH:mm", Locale.ENGLISH)); } catch (Exception e) { return encoded == null ? "" : encoded; }
     }
-    private String relativeDay(String iso) {
-        try { return shortDate(iso) + " · " + Math.max(0, ChronoUnit.DAYS.between(LocalDate.parse(iso), LocalDate.parse(host.today()))) + " day(s)"; } catch (Exception e) { return iso; }
-    }
+    private long daysSince(String iso) { try { return Math.max(0, ChronoUnit.DAYS.between(LocalDate.parse(iso), LocalDate.parse(host.today()))); } catch (Exception e) { return 0; } }
     private void valid(Runnable action) { try { action.run(); } catch (IllegalArgumentException e) { host.error(e.getMessage()); } }
-    private EditText search(LinearLayout parent, String label, String hint) {
-        EditText e = host.inputPlain(parent, label, "", InputType.TYPE_CLASS_TEXT); e.setHint(hint); return e;
-    }
-    private LinearLayout stack(LinearLayout parent) { LinearLayout c = new LinearLayout(host); c.setOrientation(LinearLayout.VERTICAL); parent.addView(c, new LinearLayout.LayoutParams(-1, -2)); return c; }
-    private TextView line(LinearLayout parent, String text) { return host.text(parent, text); }
-    private Button small(LinearLayout parent, String label, int style, Runnable action) {
-        Button b = new Button(host); b.setText(label); ui.styled(b, style); b.setMinHeight(ui.dp(44)); b.setPadding(ui.dp(16), 0, ui.dp(16), 0);
-        b.setOnClickListener(v -> { try { action.run(); } catch (IllegalArgumentException e) { host.error(e.getMessage()); } });
-        parent.addView(b, ui.lp(-2, ui.dp(44), 0, 0, 0, 0)); return b;
-    }
+    private EditText search(LinearLayout parent, String hint) { EditText e = host.inputPlain(parent, hint, "", InputType.TYPE_CLASS_TEXT); e.setHint(hint); return e; }
+    private TextView empty(LinearLayout p, String text) { return ui.text(p, text, 14, 19, Ui.MUTED, ui.o4); }
+
     /** Opens the dialler for the customer of an order or customer record. */
     void call(JSONObject record) {
         String number = record.optString("contact_number");
@@ -151,183 +156,268 @@ public final class OperationsUi {
     void nextStep(JSONObject summary) {
         String status = summary.optString("status");
         if (!"for_pickup".equals(status) && !"ready_for_delivery".equals(status) && !"undelivered".equals(status)) { order(id(summary)); return; }
-        page("Order Details", id(summary));
-        query("order", json("id", id(summary)), r -> {
-            JSONObject o = nested(r, "order");
-            if ("for_pickup".equals(status)) pickup(o); else delivery(o);
-        });
+        loadOrder(id(summary), o -> { if ("for_pickup".equals(status)) pickup(o); else delivery(o); });
+    }
+    static String displayContact(String n) { return n != null && n.matches("[0-9]{11}") ? n.substring(0, 4) + " " + n.substring(4, 7) + " " + n.substring(7) : n == null ? "" : n; }
+
+    // Staff customer header card (Figma S05/S11): avatar 44, name 19/28, subtitle 13/18.
+    private LinearLayout staffHeader(LinearLayout p, String name, String sub) {
+        LinearLayout card = ui.card(p, 10, 16);
+        LinearLayout r = ui.H(card, 12);
+        ui.sized(r, ui.avatar(name, 44, 15.84f), 44, 44);
+        LinearLayout names = ui.vbox(2); ui.grow(r, names);
+        ui.text(names, name, 19, 28, Ui.INK, ui.p6);
+        ui.text(names, sub, 13, 18, Ui.MUTED, ui.o4);
+        return card;
     }
 
-    // ---------------------------------------------------------------- customer sheet
+    // ================================================================================================ customer chooser
     private void chooseCustomer(Consumer<JSONObject> chosen, Runnable createNew) {
-        Dialog sheet = new Dialog(host);
-        sheet.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        LinearLayout root = new LinearLayout(host); root.setOrientation(LinearLayout.VERTICAL);
-        root.setBackground(ui.shape(Ui.WHITE, 0, 22)); root.setPadding(ui.dp(18), ui.dp(12), ui.dp(18), ui.dp(12));
-        View handle = new View(host); handle.setBackground(ui.shape(Ui.BORDER, 0, 3)); root.addView(handle, ui.lp(ui.dp(40), ui.dp(4), 0, 0, 0, 10));
-        ((LinearLayout.LayoutParams) handle.getLayoutParams()).gravity = Gravity.CENTER_HORIZONTAL;
-        root.addView(ui.tv("Choose customer", 19, Ui.INK, ui.headBold), ui.lp(-1, -2, 0, 0, 0, 8));
-        EditText find = new EditText(host); ui.styleInput(find); find.setHint("Search name or contact number"); find.setContentDescription("Search name or contact number"); find.setSingleLine(true);
-        root.addView(find, new LinearLayout.LayoutParams(-1, -2));
-        LinearLayout newRow = ui.row(root); newRow.setBackground(ui.shape(Ui.TONAL, 0, 12)); newRow.setPadding(ui.dp(12), ui.dp(12), ui.dp(12), ui.dp(12)); newRow.setClickable(true);
-        TextView plus = ui.tv("+", 18, Ui.WHITE, ui.headBold); plus.setGravity(Gravity.CENTER); plus.setBackground(ui.shape(Ui.PRIMARY, 0, 40)); newRow.addView(plus, new LinearLayout.LayoutParams(ui.dp(32), ui.dp(32)));
-        newRow.addView(ui.tv("  New customer", 15, Ui.PRIMARY, ui.head));
-        ((LinearLayout.LayoutParams) newRow.getLayoutParams()).topMargin = ui.dp(10);
-        newRow.setOnClickListener(v -> { sheet.dismiss(); createNew.run(); });
-        ScrollView scroller = new ScrollView(host); LinearLayout list = new LinearLayout(host); list.setOrientation(LinearLayout.VERTICAL); scroller.addView(list);
-        root.addView(scroller, new LinearLayout.LayoutParams(-1, ui.dp(300)));
+        Dialog[] d = new Dialog[1];
+        LinearLayout root = owner() ? host.modal(560, d) : host.sheet(d);
+        if (!owner()) {
+            View grab = new View(host); grab.setBackground(ui.shape(Ui.BORDER, 0, 2));
+            LinearLayout.LayoutParams gl = new LinearLayout.LayoutParams(ui.px(40), ui.px(4)); gl.gravity = Gravity.CENTER_HORIZONTAL; root.addView(grab, gl);
+        }
+        ui.text(root, "Choose customer", owner() ? 22 : 19, owner() ? 33 : 28, Ui.INK, ui.p6);
+        EditText find = ui.input(owner(), "Search name or contact number", InputType.TYPE_CLASS_TEXT);
+        find.setContentDescription("Search name or contact number"); ui.fill(root, find);
+        LinearLayout newRow = ui.H(root, 12); ui.bg(newRow, Ui.TONAL, 0, 12); ui.pad(newRow, 12, 12); newRow.setClickable(true);
+        TextView plus = ui.tv("+", 18, 27, Ui.WHITE, ui.p6); plus.setGravity(Gravity.CENTER); plus.setBackground(ui.shape(Ui.PRIMARY, 0, 18));
+        ui.sized(newRow, plus, 36, 36);
+        ui.hug(newRow, ui.tv("New customer", 15, 22, Ui.PRIMARY, ui.p5));
+        newRow.setOnClickListener(v -> { d[0].dismiss(); createNew.run(); });
+        ScrollView scroller = new ScrollView(host); LinearLayout list = ui.vbox(4); scroller.addView(list);
+        root.addView(scroller, new LinearLayout.LayoutParams(-1, ui.px(owner() ? 320 : 280)));
         List<JSONObject> all = new ArrayList<>();
         Runnable render = () -> {
-            list.removeAllViews(); String needle = value(find).toLowerCase(Locale.ROOT); int shown = 0;
+            list.removeAllViews(); String needle = value(find).toLowerCase(Locale.ROOT).replace(" ", ""); int shown = 0;
             for (JSONObject c : all) {
-                if (!needle.isEmpty() && !(c.optString("name").toLowerCase(Locale.ROOT).contains(needle) || c.optString("contact_number").contains(needle))) continue;
+                if (!needle.isEmpty() && !(c.optString("name").toLowerCase(Locale.ROOT).replace(" ", "").contains(needle) || c.optString("contact_number").contains(needle))) continue;
                 shown++;
-                LinearLayout r = ui.row(list); r.setPadding(0, ui.dp(10), 0, ui.dp(10)); r.setClickable(true);
-                r.addView(ui.avatar(c.optString("name")), new LinearLayout.LayoutParams(ui.dp(40), ui.dp(40)));
-                LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL); names.setPadding(ui.dp(10), 0, 0, 0);
-                names.addView(ui.tv(c.optString("name"), 15, Ui.INK, ui.headBold));
-                names.addView(ui.tv(title(c.optString("customer_type")) + " · " + c.optString("contact_number"), 12, Ui.MUTED, ui.body));
-                r.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
+                LinearLayout r = ui.H(list, 12); ui.pad(r, 0, 8); r.setClickable(true);
+                ui.sized(r, ui.avatar(c.optString("name"), 36, 13), 36, 36);
+                LinearLayout names = ui.vbox(1); ui.grow(r, names);
+                ui.text(names, c.optString("name"), 15, 22, Ui.INK, ui.p5);
+                ui.text(names, title(c.optString("customer_type")) + " · " + displayContact(c.optString("contact_number")), 12, 16, Ui.MUTED, ui.o4);
                 long due = balance(c);
-                r.addView(ui.tv(due > 0 ? host.money(due) + " due" : "–", 13, due > 0 ? Ui.AMBER : Ui.MUTED, ui.bodySemi));
+                ui.hug(r, ui.tv(due > 0 ? wholePeso(due) + " due" : "–", 13, 20, due > 0 ? Ui.AMBER : Ui.MUTED, ui.p5));
                 r.setContentDescription(c.optString("name"));
-                r.setOnClickListener(v -> { sheet.dismiss(); chosen.accept(c); });
+                r.setOnClickListener(v -> { d[0].dismiss(); chosen.accept(c); });
             }
-            if (shown == 0) list.addView(ui.tv("No customers found.", 14, Ui.MUTED, ui.body), ui.lp(-1, -2, 0, 12, 0, 0));
+            if (shown == 0) empty(list, "No customers found.");
         };
         watch(find, render);
         host.query("customers", json(), response -> { JSONArray rows = items(response); for (int i = 0; i < rows.length(); i++) { JSONObject c = rows.optJSONObject(i); if (c != null) all.add(c); } render.run(); });
-        sheet.setContentView(root);
-        host.showDialog(sheet);
-        Window w = sheet.getWindow();
-        if (w != null) { w.setBackgroundDrawableResource(android.R.color.transparent); w.setGravity(Gravity.BOTTOM); w.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT); }
+        host.showDialog(d[0]);
     }
 
-    // ---------------------------------------------------------------- customers
-    public void customers() {
-        LinearLayout p = page("Customers");
-        EditText search = search(p, "Search name or contact number", "Search name or contact number");
-        String[] groups = {"All", "Household", "Dealer", "Owes ₱"};
-        int[] filter = {0};
-        LinearLayout results = new LinearLayout(host); results.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout holder = p;
-        LinearLayout detailPane = null;
-        boolean split = host.isOwner() && host.tablet();
-        LinearLayout listSide = p;
-        if (split) {
-            LinearLayout h = new LinearLayout(host); h.setOrientation(LinearLayout.HORIZONTAL); p.addView(h, new LinearLayout.LayoutParams(-1, -2));
-            listSide = new LinearLayout(host); listSide.setOrientation(LinearLayout.VERTICAL); h.addView(listSide, new LinearLayout.LayoutParams(0, -2, 1));
-            detailPane = new LinearLayout(host); detailPane.setOrientation(LinearLayout.VERTICAL);
-            LinearLayout.LayoutParams dl = new LinearLayout.LayoutParams(0, -2, 1.3f); dl.leftMargin = ui.dp(16); h.addView(detailPane, dl);
-            p.removeView(search); listSide.addView(search, 0);
+    // ================================================================================================ customers
+    private static final String[] CUSTOMER_TABS = {"All", "Household", "Dealer", "Owes ₱"};
+    public void customers() { customers(null); }
+    private void customers(String selectedId) {
+        LinearLayout p = page("Customers", selectedId == null ? "" : selectedId);
+        if (owner()) {
+            ui.hug(host.titleActions(), ui.button("+  Add customer", Ui.FILLED, 44, 12, 15, () -> customerForm(null, null)));
+            LinearLayout[] panes = host.panes(380);
+            host.bannerAt(panes[1], 0);
+            customerList(panes[0], selectedId, ui.V(panes[1], 14));
+        } else {
+            customerList(p, null, null);
+            host.floatingAction("+  Add customer", () -> customerForm(null, null));
         }
-        final LinearLayout pane = detailPane;
-        long[] searchRequest = {0};
-        Ui.Chips[] chips = new Ui.Chips[1];
+    }
+    private void customerList(LinearLayout side, String selectedId, LinearLayout pane) {
+        boolean o = owner();
+        EditText search = search(side, "Search name or contact number");
+        int[] filter = {0};
+        LinearLayout results = ui.vbox(o ? 14 : 16);
         Runnable[] reload = new Runnable[1];
-        chips[0] = ui.chips(listSide, groups, 0, i -> { filter[0] = i; reload[0].run(); });
-        listSide.addView(results, new LinearLayout.LayoutParams(-1, -2));
+        ui.tabs(side, CUSTOMER_TABS, 0, false, o, o ? 6 : 8, i -> { filter[0] = i; reload[0].run(); });
+        ui.fill(side, results);
+        long[] searchRequest = {0};
+        String[] open = {selectedId == null ? "" : selectedId};
+        String[] shownId = {""};
+        Runnable showPane = () -> { if (pane == null || open[0].isEmpty() || open[0].equals(shownId[0])) return; shownId[0] = open[0]; pane.removeAllViews(); renderCustomer(pane, open[0]); };
         reload[0] = () -> {
             long requested = ++searchRequest[0];
-            query("customers", json("search", value(search)), result -> {
+            query("customers", json("search", value(search).replace(" ", "")), result -> {
                 if (requested != searchRequest[0]) return;
-                results.removeAllViews(); JSONArray rows = items(result); int shown = 0;
+                results.removeAllViews(); JSONArray rows = items(result); int shown = 0; JSONObject first = null;
                 for (int i = 0; i < rows.length(); i++) {
                     JSONObject c = rows.optJSONObject(i); if (c == null) continue;
                     String type = c.optString("customer_type");
                     if (filter[0] == 1 && !"household".equals(type)) continue;
                     if (filter[0] == 2 && !"dealer".equals(type)) continue;
                     if (filter[0] == 3 && balance(c) <= 0) continue;
-                    shown++;
-                    LinearLayout card = ui.card(results); card.setPadding(ui.dp(12), ui.dp(12), ui.dp(12), ui.dp(12));
-                    LinearLayout r = ui.row(card); card.setClickable(true);
-                    r.addView(ui.avatar(c.optString("name")), new LinearLayout.LayoutParams(ui.dp(40), ui.dp(40)));
-                    LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL); names.setPadding(ui.dp(10), 0, 0, 0);
-                    names.addView(ui.tv(c.optString("name"), 15, Ui.INK, ui.headBold));
-                    names.addView(ui.tv(title(type) + " · " + c.optString("contact_number") + (host.isOwner() ? " · Active" : ""), 12, Ui.MUTED, ui.body));
-                    r.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
+                    shown++; if (first == null) first = c;
                     long due = balance(c);
-                    r.addView(due > 0 ? ui.pill(host.money(due) + " due", Ui.AMBER_BG, Ui.AMBER) : ui.pill("Settled", Ui.GREEN_BG, Ui.GREEN));
-                    card.setContentDescription(c.optString("name") + " " + (due > 0 ? host.money(due) + " due" : "Settled"));
-                    card.setOnClickListener(v -> { if (pane != null) { pane.removeAllViews(); renderCustomer(pane, id(c)); } else customer(id(c)); });
+                    if (o) {
+                        boolean on = id(c).equals(open[0]);
+                        LinearLayout item = ui.H(results, 8); ui.bg(item, on ? Ui.TONAL : Ui.WHITE, on ? Ui.PRIMARY : Ui.BORDER, 12); ui.pad(item, 12, 12); item.setClickable(true);
+                        LinearLayout names = ui.vbox(2); ui.grow(item, names);
+                        ui.text(names, c.optString("name"), 15, 22, Ui.INK, ui.p6);
+                        ui.text(names, title(type) + " · " + displayContact(c.optString("contact_number")), 12, 16, Ui.MUTED, ui.o4);
+                        LinearLayout end = ui.vbox(4); end.setGravity(Gravity.END); ui.hug(item, end);
+                        ui.hug(end, ui.chip("Active", Ui.GREEN_BG, Ui.GREEN));
+                        ui.hug(end, ui.tv(due > 0 ? host.money(due) + " due" : "Settled", 12, 18, due > 0 ? Ui.AMBER : Ui.GREEN, ui.p5));
+                        item.setContentDescription(c.optString("name"));
+                        item.setOnClickListener(v -> { open[0] = id(c); reload[0].run(); showPane.run(); });
+                    } else {
+                        LinearLayout card = ui.card(results, 0, 14); card.setClickable(true);
+                        LinearLayout r = ui.H(card, 12);
+                        ui.sized(r, ui.avatar(c.optString("name"), 44, 15.84f), 44, 44);
+                        LinearLayout names = ui.vbox(1); ui.grow(r, names);
+                        ui.text(names, c.optString("name"), 16, 24, Ui.INK, ui.p6);
+                        ui.text(names, title(type) + " · " + displayContact(c.optString("contact_number")), 12, 16, Ui.MUTED, ui.o4);
+                        ui.hug(r, due > 0 ? ui.chip(host.money(due) + " due", Ui.AMBER_BG, Ui.AMBER) : ui.chip(paid(c) > 0 || c.optLong("total_centavos") > 0 ? "Settled" : host.money(0), Ui.GREEN_BG, Ui.GREEN));
+                        card.setContentDescription(c.optString("name") + " " + (due > 0 ? host.money(due) + " due" : "Settled"));
+                        card.setOnClickListener(v -> customer(id(c)));
+                    }
                 }
-                if (shown == 0) line(results, "No customers found.");
+                if (shown == 0) empty(results, "No customers found.");
+                if (o && open[0].isEmpty() && first != null) { open[0] = id(first); reload[0].run(); }
+                if (o) showPane.run();
             });
         };
         watch(search, reload[0]);
         reload[0].run();
-        host.mainAction("+ Add customer", Ui.FILLED, () -> customerForm(null, null));
     }
 
     public void customer(String customerId) {
+        if (owner()) { customers(customerId); return; }
         LinearLayout p = page("Customer Profile", customerId);
         renderCustomer(p, customerId);
     }
     private void renderCustomer(LinearLayout p, String customerId) {
+        boolean o = owner();
         query("customer", json("id", customerId), response -> {
             JSONObject c = nested(response, "customer");
             long due = balance(c);
-            LinearLayout head = ui.card(p);
-            LinearLayout r = ui.row(head);
-            TextView av = ui.avatar(c.optString("name")); av.setTextSize(16); r.addView(av, new LinearLayout.LayoutParams(ui.dp(52), ui.dp(52)));
-            LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL); names.setPadding(ui.dp(12), 0, 0, 0);
-            names.addView(ui.tv(c.optString("name"), 19, Ui.INK, ui.headBold));
-            names.addView(ui.tv(c.optString("contact_number") + " · " + c.optString("address"), 12, Ui.MUTED, ui.body));
-            LinearLayout pills = ui.row(names); pills.setPadding(0, ui.dp(6), 0, 0);
-            pills.addView(ui.pill(title(c.optString("customer_type")), Ui.TONAL, Ui.PRIMARY), ui.lp(-2, -2, 0, 0, 6, 0));
-            if (host.isOwner()) pills.addView(ui.pill("Active", Ui.GREEN_BG, Ui.GREEN), ui.lp(-2, -2, 0, 0, 6, 0));
-            if (due > 0) pills.addView(ui.pill(host.money(due) + " due", Ui.AMBER_BG, Ui.AMBER));
-            r.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
-            line(head, "Outstanding balance: " + host.money(due)).setTextSize(12);
-            LinearLayout actions = ui.row(p);
-            Button callBtn = host.button(actions, "Call", Ui.TONAL_BTN, () -> dial(c.optString("contact_number")));
-            callBtn.setLayoutParams(ui.lp(0, -2, 0, 0, 6, 0)); ((LinearLayout.LayoutParams) callBtn.getLayoutParams()).weight = 1;
-            Button newOrder = host.button(actions, "New order", Ui.FILLED, () -> newOrder(customerId));
-            LinearLayout.LayoutParams nl = ui.lp(0, -2, 0, 0, 6, 0); nl.weight = 1; newOrder.setLayoutParams(nl);
-            if (due > 0) { Button collect = host.button(actions, "Collect", Ui.AMBER_BTN, () -> payments(customerId)); LinearLayout.LayoutParams cl = ui.lp(0, -2, 0, 0, 0, 0); cl.weight = 1; collect.setLayoutParams(cl); }
-            EditText start = host.isOwner() ? date(p, "History start date", "") : null;
-            EditText end = host.isOwner() ? date(p, "History end date", "") : null;
-            LinearLayout orderRows = new LinearLayout(host), paymentRows = new LinearLayout(host);
-            orderRows.setOrientation(LinearLayout.VERTICAL); paymentRows.setOrientation(LinearLayout.VERTICAL);
-            ui.segmented(p, new String[]{"Orders", "Payments"}, 0, i -> { orderRows.setVisibility(i == 0 ? View.VISIBLE : View.GONE); paymentRows.setVisibility(i == 1 ? View.VISIBLE : View.GONE); });
-            p.addView(orderRows, new LinearLayout.LayoutParams(-1, -2)); p.addView(paymentRows, new LinearLayout.LayoutParams(-1, -2));
+            LinearLayout head = ui.card(p, o ? 14 : 12, o ? 18 : 16);
+            LinearLayout r = ui.H(head, o ? 14 : 12);
+            ui.sized(r, ui.avatar(c.optString("name"), 56, 20.16f), 56, 56);
+            LinearLayout names = ui.vbox(o ? 4 : 3); ui.grow(r, names);
+            ui.text(names, c.optString("name"), o ? 22 : 20, o ? 33 : 30, Ui.INK, ui.p6);
+            ui.text(names, displayContact(c.optString("contact_number")) + " · " + c.optString("address"), o ? 13 : 12, o ? 18 : 16, Ui.MUTED, ui.o4);
+            LinearLayout chips = ui.hbox(8); ui.hug(names, chips);
+            ui.hug(chips, ui.chip(title(c.optString("customer_type")), Ui.TONAL, Ui.PRIMARY));
+            if (o) ui.hug(chips, ui.chip("Active", Ui.GREEN_BG, Ui.GREEN));
+            else if (due > 0) ui.hug(chips, ui.chip(host.money(due) + " due", Ui.AMBER_BG, Ui.AMBER));
+            if (o) {
+                LinearLayout acts = ui.hbox(8); ui.hug(r, acts);
+                ui.hug(acts, ui.button("Edit", Ui.OUTLINE, 44, 12, 15, () -> customerForm(c, null)));
+                ui.hug(acts, ui.button("New order", Ui.TONAL_BTN, 44, 12, 15, () -> newOrder(customerId)));
+                if (due > 0) ui.hug(acts, ui.button("Collect " + wholePeso(due), Ui.AMBER_BTN, 44, 12, 15, () -> payments(customerId)));
+            } else {
+                LinearLayout actions = ui.H(p, 10);
+                ui.grow(actions, ui.button("Call", Ui.TONAL_BTN, 48, 14, 14, () -> dial(c.optString("contact_number"))));
+                ui.grow(actions, ui.button("New order", Ui.FILLED, 48, 14, 14, () -> newOrder(customerId)));
+                if (due > 0) ui.grow(actions, ui.button("Collect", Ui.AMBER_BTN, 48, 14, 14, () -> payments(customerId)));
+            }
+            TextView[] stats = new TextView[4];
+            if (o) {
+                LinearLayout row = ui.H(p, 12);
+                String[] labels = {"Orders", "Total billed", "Paid", "Outstanding"};
+                for (int i = 0; i < 4; i++) {
+                    LinearLayout s = ui.vbox(2); ui.bg(s, i == 3 ? Ui.AMBER_BG : Ui.WHITE, i == 3 ? 0 : Ui.BORDER, 16); ui.pad(s, 14, 14);
+                    ui.text(s, labels[i], 12, 16, Ui.MUTED, ui.o4);
+                    stats[i] = ui.text(s, i == 3 ? host.money(due) : "–", 20, 30, i == 3 ? Ui.AMBER : Ui.INK, ui.p6);
+                    ui.grow(row, s);
+                }
+            }
+            LinearLayout historyHost = o ? ui.card(p, 10, 18) : p;
+            LinearLayout tabRow = o ? ui.H(historyHost, 8) : null;
+            LinearLayout segHost = o ? ui.vbox(0) : p;
+            if (o) ui.hug(tabRow, segHost);
+            LinearLayout orderRows = ui.V(historyHost, o ? 0 : 16), paymentRows = ui.V(historyHost, o ? 0 : 16);
             paymentRows.setVisibility(View.GONE);
-            long[] historyRequest = {0};
-            Runnable history = () -> valid(() -> {
-                String from = start == null ? "" : value(start), to = end == null ? "" : value(end);
-                if (!from.isEmpty()) Rules.date(from); if (!to.isEmpty()) Rules.date(to);
-                if (!from.isEmpty() && !to.isEmpty()) Rules.period(from, to);
-                long requested = ++historyRequest[0];
-                query("orders", json("customer_id", customerId, "start_date", from, "end_date", to), orders -> { if (requested == historyRequest[0]) { orderRows.removeAllViews(); renderOrders(orderRows, items(orders), false); } });
-                query("payments", json("customer_id", customerId, "start_date", from, "end_date", to), payments -> { if (requested == historyRequest[0]) { paymentRows.removeAllViews(); renderReceipts(paymentRows, items(payments)); } });
-            });
-            if (host.isOwner()) {
-                ui.muted(p, "Orders use business date; payments use receipt date in Asia/Manila. Blank dates show all history.");
-                host.button(p, "Apply history dates", Ui.TONAL_BTN, history);
-                host.button(p, "Clear history dates", Ui.OUTLINE, () -> { start.setText(""); end.setText(""); history.run(); });
+            Ui.Tabs seg = ui.segmented(segHost, new String[]{"Orders", "Payments"}, 0, i -> { orderRows.setVisibility(i == 0 ? View.VISIBLE : View.GONE); paymentRows.setVisibility(i == 1 ? View.VISIBLE : View.GONE); });
+            if (o) { ((LinearLayout.LayoutParams) seg.view.getLayoutParams()).width = ui.px(220); historyHost.removeView(orderRows); historyHost.removeView(paymentRows); historyHost.addView(orderRows); historyHost.addView(paymentRows); }
+            String[] range = {"", ""};
+            Runnable history = () -> {
+                query("orders", json("customer_id", customerId, "start_date", range[0], "end_date", range[1]), orders -> {
+                    orderRows.removeAllViews(); JSONArray list = items(orders);
+                    long billed = 0, paidSum = 0;
+                    for (int i = 0; i < list.length(); i++) { JSONObject x = list.optJSONObject(i); if (x != null) { billed += x.optLong("total_centavos"); paidSum += paid(x); } }
+                    if (o) { stats[0].setText(Integer.toString(list.length())); stats[1].setText(host.money(billed)); stats[2].setText(host.money(paidSum)); }
+                    renderHistoryOrders(orderRows, list);
+                });
+                query("payments", json("customer_id", customerId, "start_date", range[0], "end_date", range[1]), pays -> { paymentRows.removeAllViews(); renderReceipts(paymentRows, items(pays), !o); });
+            };
+            if (o) {
+                ui.spacer(tabRow);
+                String[] periods = {"All time ▾", "This month ▾", "Custom ▾"};
+                int[] which = {0};
+                TextView period = ui.tv(periods[0], 14, 21, Ui.INK, ui.p5); ui.pad(period, 14, 8); ui.bg(period, Ui.WHITE, Ui.FIELD, 20); period.setClickable(true);
+                ui.hug(tabRow, period);
+                period.setOnClickListener(v -> {
+                    which[0] = (which[0] + 1) % 2; period.setText(periods[which[0]]);
+                    LocalDate now = LocalDate.parse(host.today());
+                    range[0] = which[0] == 1 ? now.withDayOfMonth(1).toString() : ""; range[1] = which[0] == 1 ? now.toString() : "";
+                    history.run();
+                });
             }
             history.run();
-            TextView edit = ui.tv("Edit customer", 14, Ui.PRIMARY, ui.head); edit.setGravity(Gravity.CENTER); edit.setPadding(0, ui.dp(12), 0, ui.dp(12)); edit.setClickable(true); edit.setOnClickListener(v -> customerForm(c, null));
-            p.addView(edit, new LinearLayout.LayoutParams(-1, -2));
+            if (!o) ui.fill(p, linkButton("Edit customer", () -> customerForm(c, null)));
         });
     }
+    private TextView linkButton(String label, Runnable action) {
+        TextView t = ui.tv(label, 14, 21, Ui.PRIMARY, ui.p5); t.setGravity(Gravity.CENTER); t.setMinHeight(ui.px(40)); t.setClickable(true);
+        t.setOnClickListener(v -> action.run()); return t;
+    }
+    private void renderHistoryOrders(LinearLayout p, JSONArray list) {
+        boolean o = owner();
+        if (list.length() == 0) { empty(p, "No orders found."); return; }
+        for (int i = 0; i < list.length(); i++) {
+            JSONObject x = list.optJSONObject(i); if (x == null) continue;
+            String meta = shortDate(x.optString("business_date")) + " · " + x.optInt("quantity") + " gallons · " + host.money(x.optLong("total_centavos"));
+            String status = x.optString("status");
+            TextView chip = "undelivered".equals(status) ? ui.chip("Undelivered", Ui.AMBER_BG, Ui.AMBER) : ui.statusChip(status, pending(x));
+            if (o) {
+                LinearLayout line = ui.H(p, 0); ui.pad(line, 0, 8); line.setMinimumHeight(ui.px(42)); line.setClickable(true);
+                LinearLayout names = ui.hbox(16); ui.grow(line, names);
+                ui.hug(names, ui.tv(x.optString("reference"), 14, 21, Ui.INK, ui.p5));
+                ui.hug(names, ui.tv(meta, 13, 18, Ui.MUTED, ui.o4));
+                ui.hug(line, chip);
+                line.setOnClickListener(v -> order(id(x)));
+            } else {
+                LinearLayout card = ui.card(p, 6, 14); card.setClickable(true);
+                LinearLayout top = ui.H(card, 8);
+                ui.grow(top, ui.tv(x.optString("reference"), 15, 22, Ui.INK, ui.p5));
+                ui.hug(top, chip);
+                ui.text(card, meta, 13, 18, Ui.MUTED, ui.o4);
+                card.setOnClickListener(v -> order(id(x)));
+            }
+        }
+    }
 
+    /** Add/edit customer: Staff page (K3, K4), Owner modal (O7b–O7e). */
     private void customerForm(JSONObject existing, Consumer<String> afterSave) {
-        LinearLayout p = page(existing == null ? "Add Customer" : "Edit Customer", existing == null ? "" : id(existing));
-        LinearLayout card = ui.card(p);
-        EditText name = host.input(card, "Full name", existing == null ? "" : existing.optString("name"), TEXT);
-        EditText contact = host.input(card, "Contact number", existing == null ? "" : existing.optString("contact_number"), InputType.TYPE_CLASS_PHONE);
-        contact.setHint("11 digits"); ui.muted(card, "11 digits").setTextSize(11);
-        EditText address = host.input(card, "Address", existing == null ? "" : existing.optString("address"), InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-        ui.label(card, "Customer type");
-        String saved = host.choice("customer_type");
+        boolean o = owner();
+        Dialog[] d = new Dialog[1];
+        LinearLayout form;
+        if (o) {
+            form = host.modal(460, d);
+            ui.text(form, existing == null ? "Add customer" : "Edit customer", 22, 33, Ui.INK, ui.p6);
+            ui.text(form, existing == null ? "Enter the customer details." : "Update the customer details.", 14, 19, Ui.MUTED, ui.o4);
+        } else {
+            LinearLayout p = page(existing == null ? "Add Customer" : "Edit Customer", existing == null ? "" : id(existing));
+            form = ui.card(p, 16, 16);
+        }
+        EditText name = host.input(form, "Full name", existing == null ? "" : existing.optString("name"), TEXT);
+        EditText contact = host.input(form, "Contact number", existing == null ? "" : displayContact(existing.optString("contact_number")), InputType.TYPE_CLASS_PHONE);
+        if (!o) { LinearLayout f = (LinearLayout) contact.getParent(); TextView help = ui.tv("11 digits", 12, 16, Ui.MUTED, ui.o4); f.addView(help, f.indexOfChild(contact) + 1, new LinearLayout.LayoutParams(-1, -2)); }
+        EditText address = host.input(form, "Address", existing == null ? "" : existing.optString("address"), TEXT);
+        LinearLayout typeBox = ui.V(form, o ? 6 : 16);
+        ui.label(typeBox, "Customer type");
         int[] type = {-1};
-        if (!saved.isEmpty()) type[0] = Integer.parseInt(saved);
-        else if (existing != null) { String t = existing.optString("customer_type"); type[0] = t.equals("household") ? 0 : t.equals("dealer") ? 1 : t.equals("walk_in") ? 2 : -1; }
-        TextView typeError = ui.smallError(card);
-        Ui.Chips seg = ui.segmented(card, TYPE_NAMES, type[0], i -> { type[0] = i; host.rememberChoice("customer_type", Integer.toString(i)); typeError.setVisibility(View.GONE); });
-        card.removeView(typeError); card.addView(typeError);
-        host.mainAction("Save customer", Ui.FILLED, () -> valid(() -> {
+        if (existing != null) { String t = existing.optString("customer_type"); type[0] = t.equals("household") ? 0 : t.equals("dealer") ? 1 : t.equals("walk_in") ? 2 : -1; }
+        TextView typeError = ui.fieldError(typeBox);
+        ui.segmented(typeBox, TYPE_NAMES, type[0], i -> { type[0] = i; typeError.setVisibility(View.GONE); });
+        typeBox.removeView(typeError); typeBox.addView(typeError);
+        LinearLayout bannerSlot = o ? ui.V(form, 0) : null;
+        Runnable save = () -> valid(() -> {
             boolean bad = false;
             if (value(name).isEmpty()) { host.fieldError(name, "Complete the required fields."); bad = true; }
             if (value(contact).isEmpty()) { host.fieldError(contact, "Complete the required fields."); bad = true; }
@@ -338,57 +428,53 @@ public final class OperationsUi {
             try { number = Rules.customerContact(value(contact)); } catch (IllegalArgumentException e) { host.fieldError(contact, e.getMessage()); return; }
             JSONObject fields = json("name", value(name), "customer_type", TYPE_KEYS[type[0]], "contact_number", number, "address", value(address));
             if (existing != null) try { fields.put("id", id(existing)); } catch (Exception e) { throw new IllegalArgumentException("Unable to prepare customer."); }
+            String savedName = value(name), savedType = TYPE_NAMES[type[0]];
             host.command(existing == null ? "create_customer" : "update_customer", fields, result -> {
-                JSONObject saved2 = nested(result, "customer");
-                if (afterSave != null) afterSave.accept(id(saved2)); else if (existing != null) customer(id(existing)); else customers();
-                host.info("Customer saved.", value(name) + " · " + number);
+                if (d[0] != null) d[0].dismiss();
+                JSONObject saved = nested(result, "customer");
+                if (afterSave != null) afterSave.accept(id(saved)); else customer(existing != null ? id(existing) : id(saved));
+                host.info("Customer saved.", savedName + " · " + savedType + " · " + displayContact(number));
             });
-        }));
+        });
+        if (o) {
+            LinearLayout row = ui.H(form, 10); row.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
+            ui.hug(row, ui.ownerButton("Cancel", Ui.OUTLINE, () -> d[0].dismiss()));
+            ui.hug(row, ui.ownerButton(existing == null ? "Save customer" : "Save changes", Ui.FILLED, save));
+            host.showDialog(d[0]);
+            host.bannerAt(bannerSlot, 0);
+        } else host.mainAction(existing == null ? "Save customer" : "Save changes", Ui.FILLED, save);
     }
 
-    // ---------------------------------------------------------------- orders
+    // ================================================================================================ orders
     public void orders() { ordersFiltered(null); }
     public void ordersFiltered(String initialGroup) {
+        if (owner()) { ownerOrders("Orders", "", null, initialGroup == null ? 0 : tabFor(initialGroup), null); return; }
         LinearLayout p = page("Orders");
-        boolean split = host.isOwner() && host.tablet();
-        LinearLayout top = host.headerRow() == null ? ui.row(p) : host.headerRow(); top.setGravity(Gravity.CENTER_VERTICAL);
-        if (host.isOwner()) { small(top, "Walk-in sale", Ui.TONAL_BTN, this::pos); top.addView(new View(host), new LinearLayout.LayoutParams(ui.dp(8), 1)); }
-        small(top, "+ New order", Ui.FILLED, () -> newOrder(null));
-        LinearLayout listSide = p, pane = null;
-        if (split) {
-            LinearLayout h = new LinearLayout(host); h.setOrientation(LinearLayout.HORIZONTAL); p.addView(h, new LinearLayout.LayoutParams(-1, -2));
-            listSide = new LinearLayout(host); listSide.setOrientation(LinearLayout.VERTICAL); h.addView(listSide, new LinearLayout.LayoutParams(0, -2, 1));
-            pane = new LinearLayout(host); pane.setOrientation(LinearLayout.VERTICAL);
-            LinearLayout.LayoutParams dl = new LinearLayout.LayoutParams(0, -2, 1.5f); dl.leftMargin = ui.dp(16); h.addView(pane, dl);
-        }
-        final LinearLayout detail = pane;
-        EditText search = search(listSide, host.isOwner() ? "Search order or customer" : "Search name or order ID", host.isOwner() ? "Search order or customer" : "Search name or order ID");
-        String[] names = host.isOwner() ? new String[]{"All", "Pickup", "Refill", "Deliver"} : new String[]{"Pickup", "Refilling", "Deliver", "All"};
-        int[] map = host.isOwner() ? new int[]{-1, 1, 2, 3} : new int[]{1, 2, 3, -1};
+        EditText search = search(p, "Search name or order ID");
+        String[] names = {"Pickup", "Refilling", "Deliver", "All"};
+        int[] map = {1, 2, 3, -1};
         String saved = host.choice("orders_filter");
         int start = 0;
         for (int i = 0; i < map.length; i++) if (initialGroup != null && initialGroup.equals(groupName(map[i]))) start = i;
         if (initialGroup == null && !saved.isEmpty()) try { start = Math.max(0, Math.min(3, Integer.parseInt(saved))); } catch (NumberFormatException ignored) { }
         int[] selected = {start};
-        LinearLayout rows = new LinearLayout(host); rows.setOrientation(LinearLayout.VERTICAL);
+        LinearLayout rows = ui.vbox(16);
         List<JSONObject> loaded = new ArrayList<>();
-        String[] openId = {""};
         Runnable[] render = new Runnable[1];
-        Ui.Chips chips = ui.chips(listSide, names, start, i -> { selected[0] = i; host.rememberChoice("orders_filter", Integer.toString(i)); render[0].run(); });
-        listSide.addView(rows, new LinearLayout.LayoutParams(-1, -2));
+        Ui.Tabs tabs = ui.tabs(p, names, start, false, false, 8, i -> { selected[0] = i; host.rememberChoice("orders_filter", Integer.toString(i)); render[0].run(); });
+        ui.fill(p, rows);
         render[0] = () -> {
             rows.removeAllViews();
             int[] counts = new int[4];
             for (JSONObject o : loaded) { int g = group(o.optString("status")); if (g > 0) counts[g]++; }
-            for (int i = 0; i < map.length; i++) chips.label(i, names[i] + " " + (map[i] < 0 ? loaded.size() : counts[map[i]]));
-            int shown = 0; JSONObject firstShown = null;
+            for (int i = 0; i < map.length; i++) tabs.label(i, names[i] + " " + (map[i] < 0 ? loaded.size() : counts[map[i]]));
+            int shown = 0;
             for (JSONObject o : loaded) {
                 if (map[selected[0]] >= 0 && group(o.optString("status")) != map[selected[0]]) continue;
-                shown++; if (firstShown == null) firstShown = o;
-                orderCard(rows, o, !host.isOwner(), id(o).equals(openId[0]), () -> { if (detail != null) { openId[0] = id(o); render[0].run(); detail.removeAllViews(); renderOrderById(detail, id(o)); } else order(id(o)); });
+                shown++;
+                staffOrderCard(rows, o);
             }
-            if (shown == 0) line(rows, "No orders found.");
-            if (detail != null && openId[0].isEmpty() && firstShown != null) { openId[0] = id(firstShown); render[0].run(); detail.removeAllViews(); renderOrderById(detail, id(firstShown)); }
+            if (shown == 0) empty(rows, "No orders found.");
         };
         long[] searchRequest = {0};
         Runnable load = () -> {
@@ -402,101 +488,160 @@ public final class OperationsUi {
         };
         watch(search, load);
         load.run();
+        host.floatingAction("+  New order", () -> newOrder(null));
     }
+    private static int tabFor(String group) { switch (group) { case "Pickup": return 1; case "Refilling": return 2; case "Deliver": return 3; default: return 0; } }
     private static String groupName(int g) { return g == 1 ? "Pickup" : g == 2 ? "Refilling" : g == 3 ? "Deliver" : "All"; }
-    private void orderCard(LinearLayout parent, JSONObject o, boolean showNext, boolean selected, Runnable open) {
-        LinearLayout card = ui.card(parent); card.setPadding(ui.dp(14), ui.dp(12), ui.dp(14), ui.dp(12)); card.setClickable(true);
-        if (selected) card.setBackground(ui.shape(Ui.TONAL, Ui.PRIMARY, 14));
-        LinearLayout r = ui.row(card);
-        LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL);
-        names.addView(ui.tv(o.optString("customer_name"), 15, Ui.INK, ui.headBold));
-        names.addView(ui.tv(o.optString("reference") + " · " + o.optInt("quantity") + " gallons", 12, Ui.MUTED, ui.body));
-        if (showNext && group(o.optString("status")) > 0) names.addView(ui.tv("Next: " + nextLabel(o.optString("status")) + " ›", 13, Ui.PRIMARY, ui.bodySemi), ui.lp(-2, -2, 0, 6, 0, 0));
-        r.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
-        LinearLayout right = new LinearLayout(host); right.setOrientation(LinearLayout.VERTICAL); right.setGravity(Gravity.END);
-        right.addView(ui.statusPill(o.optString("status"), pending(o)));
+    /** Figma S04 order card. */
+    private void staffOrderCard(LinearLayout parent, JSONObject o) {
+        LinearLayout card = ui.card(parent, 10, 16); card.setClickable(true);
+        LinearLayout top = ui.H(card, 8);
+        LinearLayout names = ui.vbox(2); ui.grow(top, names);
+        ui.text(names, o.optString("customer_name"), 16, 24, Ui.INK, ui.p6);
+        ui.text(names, o.optString("reference") + " · " + o.optInt("quantity") + " gallons", 13, 18, Ui.MUTED, ui.o4);
+        ui.hug(top, ui.statusChip(o.optString("status"), pending(o)));
+        LinearLayout bottom = ui.H(card, 0);
+        String status = o.optString("status");
+        TextView next = ui.tv(group(status) > 0 ? "Next: " + nextLabel(status) + "  ›" : "Delivered", 14, 21, group(status) > 0 ? Ui.PRIMARY : Ui.MUTED, ui.p5);
+        ui.grow(bottom, next);
         long due = balance(o);
-        TextView amount = ui.tv(due > 0 ? host.money(due) + " due" : "Paid", 13, due > 0 ? Ui.AMBER : Ui.GREEN, ui.bodySemi);
-        right.addView(amount, ui.lp(-2, -2, 0, 6, 0, 0));
-        r.addView(right);
-        card.setContentDescription(o.optString("reference") + " " + o.optString("customer_name") + " " + Rules.label(o.optString("status")));
-        card.setOnClickListener(v -> open.run());
+        ui.hug(bottom, ui.tv(due > 0 ? host.money(due) + " due" : "Paid", 14, 21, due > 0 ? Ui.AMBER : Ui.GREEN, ui.p5));
+        card.setContentDescription(o.optString("reference") + " " + o.optString("customer_name") + " " + Rules.label(status));
+        card.setOnClickListener(v -> order(id(o)));
     }
-    private void renderOrders(LinearLayout p, JSONArray rows, boolean pending) {
-        if (rows.length() == 0) line(p, pending ? "No pending deliveries." : "No orders found.");
-        for (int i = 0; i < rows.length(); i++) {
-            JSONObject o = rows.optJSONObject(i); if (o == null) continue;
-            if (pending) {
-                long days = 0;
-                try { days = Math.max(0, ChronoUnit.DAYS.between(LocalDate.parse(o.optString("business_date")), LocalDate.parse(host.today()))); } catch (Exception ignored) { }
-                LinearLayout card = ui.card(p); card.setClickable(true); card.setOnClickListener(v -> order(id(o)));
-                LinearLayout top = ui.row(card);
-                LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL);
-                names.addView(ui.tv(o.optString("customer_name"), 15, Ui.INK, ui.headBold));
-                names.addView(ui.tv(o.optString("reference") + " · Since " + shortDate(o.optString("business_date")), 12, Ui.MUTED, ui.body));
-                top.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
-                top.addView(days == 0 ? ui.pill("Today", Ui.TONAL, Ui.PRIMARY) : ui.pill(days + (days == 1 ? " day waiting" : " days waiting"), Ui.AMBER_BG, Ui.AMBER));
-                LinearLayout bottom = ui.row(card); bottom.setPadding(0, ui.dp(8), 0, 0);
-                int left = pending(o);
-                bottom.addView(ui.tv(left + (left == 1 ? " gallon" : " gallons"), 17, Ui.INK, ui.headBold), new LinearLayout.LayoutParams(0, -2, 1));
-                small(bottom, "Deliver", Ui.FILLED, () -> nextStep(o));
-                card.setContentDescription(o.optString("reference") + " " + o.optString("customer_name") + " " + left + " gallons pending");
-                ui.muted(p, "Original date: " + o.optString("business_date") + " · " + days + " days waiting · Pending gallons: " + left).setTextSize(11);
-                continue;
+
+    /**
+     * Owner Orders page (O3–O6): list on the left (380), and on the right either the selected order,
+     * a pickup/reschedule/delivery form, the new order form or the walk-in sale.
+     */
+    private void ownerOrders(String route, String entity, String selectedId, int tab, Consumer<LinearLayout> right) {
+        page(route, entity);
+        int mode = "Create Order".equals(route) ? 1 : "Walk-in Sale / POS".equals(route) ? 2 : 0;
+        LinearLayout acts = host.titleActions();
+        TextView walk = ui.button("Walk-in sale", mode == 2 ? Ui.DISABLED : Ui.TONAL_BTN, 44, 12, 15, this::pos);
+        TextView neu = ui.button("+  New order", mode == 1 ? Ui.DISABLED : mode == 2 ? Ui.TONAL_BTN : Ui.FILLED, 44, 12, 15, () -> newOrder(null));
+        if (mode == 2) walk.setEnabled(true); if (mode == 1) neu.setEnabled(true);
+        ui.hug(acts, walk); ui.hug(acts, neu);
+        LinearLayout[] panes = host.panes(380);
+        LinearLayout list = panes[0], pane = ui.V(panes[1], 14);
+        host.bannerAt(panes[1], 0);
+        EditText search = search(list, "Search order or customer");
+        String[] names = {"All", "Pickup", "Refill", "Deliver"};
+        int[] map = {-1, 1, 2, 3};
+        int[] selected = {tab};
+        LinearLayout rows = ui.vbox(14);
+        List<JSONObject> loaded = new ArrayList<>();
+        String[] openId = {selectedId == null ? "" : selectedId};
+        Runnable[] render = new Runnable[1];
+        Ui.Tabs tabs = ui.tabs(list, names, mode == 0 ? tab : -1, false, true, 6, i -> { selected[0] = i; render[0].run(); });
+        ui.fill(list, rows);
+        render[0] = () -> {
+            rows.removeAllViews();
+            int[] counts = new int[4];
+            for (JSONObject o : loaded) { int g = group(o.optString("status")); if (g > 0) counts[g]++; }
+            for (int i = 0; i < map.length; i++) tabs.label(i, names[i] + " " + (map[i] < 0 ? loaded.size() : counts[map[i]]));
+            int shown = 0; JSONObject first = null;
+            for (JSONObject o : loaded) {
+                if (selected[0] > 0 && group(o.optString("status")) != map[selected[0]]) continue;
+                shown++; if (first == null) first = o;
+                ownerOrderItem(rows, o, id(o).equals(openId[0]));
             }
-            orderCard(p, o, false, false, () -> order(id(o)));
-            if (pending) {
-                String d = o.optString("business_date"); long days = 0;
-                try { days = ChronoUnit.DAYS.between(LocalDate.parse(d), LocalDate.parse(host.today())); } catch (Exception ignored) {}
-                ui.muted(p, "Original date: " + d + " · " + Math.max(0, days) + " days waiting\nPending gallons: " + pending(o)).setPadding(ui.dp(4), 0, 0, ui.dp(10));
-            }
-        }
+            if (shown == 0) empty(rows, "No orders found.");
+            if (right == null && openId[0].isEmpty() && first != null) { openId[0] = id(first); render[0].run(); loadOrder(openId[0], x -> { pane.removeAllViews(); ownerDetail(pane, x); }); }
+        };
+        long[] searchRequest = {0};
+        Runnable load = () -> {
+            long requested = ++searchRequest[0];
+            query("orders", json("search", value(search)), response -> {
+                if (requested != searchRequest[0]) return;
+                loaded.clear(); JSONArray all = items(response);
+                for (int i = 0; i < all.length(); i++) { JSONObject o = all.optJSONObject(i); if (o != null) loaded.add(o); }
+                render[0].run();
+            });
+        };
+        watch(search, load);
+        load.run();
+        if (right != null) right.accept(pane);
+        else if (!openId[0].isEmpty()) loadOrder(openId[0], x -> { pane.removeAllViews(); ownerDetail(pane, x); });
+    }
+    /** Figma O3 list item. */
+    private void ownerOrderItem(LinearLayout parent, JSONObject o, boolean on) {
+        LinearLayout item = ui.H(parent, 8); ui.bg(item, on ? Ui.TONAL : Ui.WHITE, on ? Ui.PRIMARY : Ui.BORDER, 12); ui.pad(item, 12, 12); item.setClickable(true);
+        LinearLayout names = ui.vbox(2); ui.grow(item, names);
+        ui.text(names, o.optString("customer_name"), 15, 22, Ui.INK, ui.p6);
+        ui.text(names, o.optString("reference") + " · " + o.optInt("quantity") + " gal", 12, 16, Ui.MUTED, ui.o4);
+        LinearLayout end = ui.vbox(4); end.setGravity(Gravity.END); ui.hug(item, end);
+        ui.hug(end, ui.statusChip(o.optString("status"), pending(o)));
+        long due = balance(o);
+        ui.hug(end, ui.tv(due > 0 ? host.money(due) + " due" : "Paid", 12, 18, due > 0 ? Ui.AMBER : Ui.GREEN, ui.p5));
+        item.setContentDescription(o.optString("reference") + " " + o.optString("customer_name") + " " + Rules.label(o.optString("status")));
+        item.setOnClickListener(v -> order(id(o)));
     }
 
     public void pending() {
         LinearLayout p = page("Pending gallons / Carry-over Details");
-        ui.muted(p, "Gallons still owed to customers · oldest first");
+        ui.text(p, "Gallons still owed to customers", 14, 19, Ui.MUTED, ui.o4);
+        LinearLayout list = ui.V(p, 16);
         query("orders", json(), result -> {
             List<JSONObject> records = new ArrayList<>(); JSONArray all = items(result);
             for (int i = 0; i < all.length(); i++) {
-                JSONObject o = all.optJSONObject(i); if (o != null && (o.optString("status").equals("undelivered") || o.optString("status").equals("ready_for_delivery")) && pending(o) > 0) records.add(o);
+                JSONObject o = all.optJSONObject(i);
+                if (o != null && ("undelivered".equals(o.optString("status")) || "ready_for_delivery".equals(o.optString("status"))) && pending(o) > 0) records.add(o);
             }
             records.sort(Comparator.comparing(o -> o.optString("business_date")));
-            JSONArray ordered = new JSONArray(); for (JSONObject o : records) ordered.put(o); renderOrders(p, ordered, true);
+            if (records.isEmpty()) empty(list, "No pending deliveries.");
+            for (JSONObject o : records) {
+                long days = daysSince(o.optString("business_date"));
+                LinearLayout card = ui.card(list, 10, 16); card.setClickable(true); card.setOnClickListener(v -> order(id(o)));
+                LinearLayout top = ui.H(card, 8);
+                LinearLayout names = ui.vbox(2); ui.grow(top, names);
+                ui.text(names, o.optString("customer_name"), 16, 24, Ui.INK, ui.p6);
+                ui.text(names, o.optString("reference") + " · Since " + shortDate(o.optString("business_date")), 13, 18, Ui.MUTED, ui.o4);
+                ui.hug(top, days == 0 ? ui.chip("Today", Ui.TONAL, Ui.PRIMARY) : ui.chip(days + (days == 1 ? " day waiting" : " days waiting"), Ui.AMBER_BG, Ui.AMBER));
+                LinearLayout bottom = ui.H(card, 8);
+                int left = pending(o);
+                ui.grow(bottom, ui.tv(left + (left == 1 ? " gallon" : " gallons"), 20, 30, Ui.INK, ui.p6));
+                ui.hug(bottom, ui.button("Deliver", Ui.FILLED, 40, 12, 15, () -> nextStep(o)));
+                card.setContentDescription(o.optString("reference") + " " + o.optString("customer_name") + " " + left + " gallons pending, original date " + o.optString("business_date") + ", " + days + " days waiting");
+            }
         });
     }
 
-    // ---------------------------------------------------------------- new order
+    // ================================================================================================ new order
     public void newOrder(String selectedCustomerId) {
-        LinearLayout p = page("Create Order");
-        String desiredCustomer = selectedCustomerId == null ? host.choice("order_customer") : selectedCustomerId;
+        if (owner()) { ownerOrders("Create Order", "", null, -1, pane -> newOrderForm(pane, selectedCustomerId)); return; }
+        newOrderForm(page("Create Order"), selectedCustomerId);
+    }
+    private void newOrderForm(LinearLayout p, String selectedCustomerId) {
+        boolean o = owner();
+        String desired = selectedCustomerId == null ? host.choice("order_customer") : selectedCustomerId;
         JSONObject[] picked = {null};
-        List<JSONObject> list = new ArrayList<>();
-        LinearLayout customerCard = ui.card(p); customerCard.setClickable(true);
-        LinearLayout qtyCard = ui.card(p);
-        ui.muted(qtyCard, "How many gallons?").setTypeface(ui.bodySemi);
-        EditText quantity = host.quantity(qtyCard, "Gallon quantity", "", new int[]{5, 10, 15, 20}, "gallons");
+        LinearLayout customerCard = ui.card(p, 10, o ? 18 : 16);
+        LinearLayout qtyCard = ui.card(p, o ? 14 : 16, o ? 18 : 16);
+        LinearLayout qHead = ui.H(qtyCard, 8);
+        ui.grow(qHead, ui.tv("How many gallons?", 13, 18, Ui.MUTED, ui.o6));
+        TextView last = ui.chip("", Ui.TONAL, Ui.PRIMARY); last.setVisibility(View.GONE);
+        if (o) ui.hug(qHead, last);
+        EditText quantity = host.quantity(qtyCard, "Gallon quantity", "", o ? new int[]{5, 10, 15, 20, -1} : new int[]{5, 10, 15, 20}, o ? new String[]{"5", "10", "15", "20", "Other"} : new String[]{"5", "10", "15", "20"}, "gallons", o, 8, null);
+        if (o) ui.size(quantity, 48, 72);
         quantity.setHint("0");
-        TextView last = ui.pill("", Ui.TONAL, Ui.PRIMARY); last.setVisibility(View.GONE); qtyCard.addView(last, ui.lp(-2, -2, 0, 4, 0, 0));
-        LinearLayout priceCard = ui.card(p);
-        TextView[] unitRow = ui.pair(priceCard, "Price per gallon", "—", Ui.INK, false);
+        if (!o) { LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(-2, -2); qtyCard.addView(last, lp); }
+        LinearLayout priceCard = ui.card(p, 8, o ? 18 : 16);
+        TextView[] unitRow = ui.pair(priceCard, "Price per gallon", "—");
         String[] orderDate = {host.today()};
-        TextView[] dateRow = ui.pair(priceCard, "Order date", "Today · " + shortDate(orderDate[0]), Ui.INK, false);
-        dateRow[1].setClickable(true); dateRow[1].setTextColor(Ui.PRIMARY);
+        TextView[] dateRow = ui.pair(priceCard, "Order date", dateLabel(orderDate[0]));
+        dateRow[1].setClickable(true);
         dateRow[1].setOnClickListener(v -> {
             LocalDate d; try { d = LocalDate.parse(orderDate[0]); } catch (Exception e) { d = LocalDate.parse(host.today()); }
-            host.showDialog(new DatePickerDialog(host, (picker, y, m, day) -> { orderDate[0] = LocalDate.of(y, m + 1, day).toString(); dateRow[1].setText(orderDate[0].equals(host.today()) ? "Today · " + shortDate(orderDate[0]) : shortDate(orderDate[0]) + " " + orderDate[0].substring(0, 4)); }, d.getYear(), d.getMonthValue() - 1, d.getDayOfMonth()));
+            host.showDialog(new DatePickerDialog(host, (picker, y, m, day) -> { orderDate[0] = LocalDate.of(y, m + 1, day).toString(); dateRow[1].setText(dateLabel(orderDate[0])); }, d.getYear(), d.getMonthValue() - 1, d.getDayOfMonth()));
         });
-        TextView[] totalRow = ui.pair(priceCard, "Total", host.money(0), Ui.PRIMARY, true);
-        ui.muted(p, "Initial status: Ordered. Entered Order date is separate from server-recorded encoding time.").setTextSize(11);
+        TextView[] totalRow = ui.pair(priceCard, "Total", host.money(0), Ui.PRIMARY, o ? 24 : 22, ui.p6);
         Runnable preview = () -> {
             if (picked[0] == null) { unitRow[0].setText("Price per gallon"); unitRow[1].setText("—"); totalRow[1].setText(host.money(0)); return; }
-            long unit = picked[0].optString("customer_type").equals("dealer") ? 3000 : 3500;
+            long unit = Rules.fixedPrice(picked[0].optString("customer_type"));
             unitRow[0].setText("Price per gallon · " + title(picked[0].optString("customer_type"))); unitRow[1].setText(host.money(unit));
             try { totalRow[1].setText(host.money(Math.multiplyExact((long) Integer.parseInt(value(quantity)), unit))); }
-            catch (Exception e) {
-                try { double d = Double.parseDouble(value(quantity)); totalRow[1].setText(host.money(Math.round(d * unit))); } catch (Exception ignored) { totalRow[1].setText(host.money(0)); }
-            }
+            catch (Exception e) { totalRow[1].setText(host.money(0)); }
         };
         watch(quantity, preview);
         Runnable[] showCustomer = new Runnable[1];
@@ -504,177 +649,211 @@ public final class OperationsUi {
             () -> customerForm(null, selected -> newOrder(selected)));
         showCustomer[0] = () -> {
             customerCard.removeAllViews();
+            if (o) ui.text(customerCard, "New order", 22, 33, Ui.INK, ui.p6);
             if (picked[0] == null) {
-                LinearLayout r = ui.row(customerCard);
-                r.addView(ui.tv("Choose customer", 16, Ui.INK, ui.headBold), new LinearLayout.LayoutParams(0, -2, 1));
-                r.addView(ui.tv("Select ›", 14, Ui.PRIMARY, ui.head));
-                customerCard.setOnClickListener(v -> pick.run());
+                LinearLayout r = ui.H(customerCard, 12); r.setClickable(true); r.setOnClickListener(v -> pick.run());
+                if (o) { ui.bg(r, Ui.TONAL, 0, 12); ui.pad(r, 12, 12); }
+                ui.grow(r, ui.tv("Choose customer", 16, 24, Ui.INK, ui.p6));
+                ui.hug(r, ui.link("Select", 14, pick));
             } else {
                 JSONObject c = picked[0];
-                LinearLayout r = ui.row(customerCard);
-                r.addView(ui.avatar(c.optString("name")), new LinearLayout.LayoutParams(ui.dp(40), ui.dp(40)));
-                LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL); names.setPadding(ui.dp(10), 0, 0, 0);
-                names.addView(ui.tv(c.optString("name"), 16, Ui.INK, ui.headBold));
-                names.addView(ui.tv(title(c.optString("customer_type")) + " · " + c.optString("address"), 12, Ui.MUTED, ui.body));
-                r.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
-                TextView change = ui.tv("Change", 14, Ui.PRIMARY, ui.head); change.setClickable(true); change.setOnClickListener(v -> pick.run()); r.addView(change);
+                LinearLayout r = ui.H(customerCard, 12);
+                if (o) { ui.bg(r, Ui.TONAL, 0, 12); ui.pad(r, 12, 12); }
+                TextView av = ui.avatar(c.optString("name"), o ? 40 : 44, o ? 14.4f : 15.84f);
+                if (o) av.setBackground(ui.shape(Ui.WHITE, 0, 20));
+                ui.sized(r, av, o ? 40 : 44, o ? 40 : 44);
+                LinearLayout names = ui.vbox(o ? 1 : 2); ui.grow(r, names);
+                ui.text(names, c.optString("name"), o ? 16 : 17, o ? 24 : 26, Ui.INK, ui.p6);
+                String sub = o ? title(c.optString("customer_type")) + " · " + displayContact(c.optString("contact_number")) + " · Delivers to " + c.optString("address") : title(c.optString("customer_type")) + " · " + c.optString("address");
+                ui.text(names, sub, 12, 16, Ui.MUTED, ui.o4).setSingleLine(true);
+                ui.hug(r, ui.link("Change", 14, pick));
                 int previous = c.optInt("previous_order_quantity", 0);
                 if (previous > 0) { last.setText("Last order: " + previous + " gallons"); last.setVisibility(View.VISIBLE); last.setClickable(true); last.setOnClickListener(v -> quantity.setText(Integer.toString(previous))); if (value(quantity).isEmpty()) quantity.setText(Integer.toString(previous)); }
                 else last.setVisibility(View.GONE);
-                customerCard.setOnClickListener(null);
             }
+            if (o) ui.text(customerCard, "Not in the list? Search the customer box and choose “+ New customer”.", 12, 16, Ui.MUTED, ui.o4);
             preview.run();
         };
         showCustomer[0].run();
         query("customers", json(), response -> {
             JSONArray all = items(response);
-            for (int i = 0; i < all.length(); i++) { JSONObject c = all.optJSONObject(i); if (c == null) continue; list.add(c); if (id(c).equals(desiredCustomer)) picked[0] = c; }
+            for (int i = 0; i < all.length(); i++) { JSONObject c = all.optJSONObject(i); if (c != null && id(c).equals(desired)) picked[0] = c; }
             showCustomer[0].run();
             if (picked[0] == null && selectedCustomerId == null && value(quantity).isEmpty()) pick.run();
         });
-        host.mainAction("Save order", Ui.FILLED, () -> valid(() -> {
-            if (picked[0] == null) throw new IllegalArgumentException("Choose a customer.");
+        Runnable save = () -> valid(() -> {
+            if (picked[0] == null) { pick.run(); return; }
             int q;
-            try { q = quantity(quantity); } catch (IllegalArgumentException e) { host.fieldError(quantity, "Enter a valid gallon quantity."); return; }
-            String d;
-            try { d = LocalDate.parse(orderDate[0]).toString(); } catch (Exception e) { throw new IllegalArgumentException("Complete the required fields."); }
-            JSONObject c = picked[0]; long unit = c.optString("customer_type").equals("dealer") ? 3000 : 3500;
+            try { q = quantity(quantity); } catch (IllegalArgumentException e) { host.fieldError(quantity, e.getMessage()); return; }
+            String d = orderDate[0];
+            JSONObject c = picked[0]; long unit = Rules.fixedPrice(c.optString("customer_type"));
             host.command("create_order", json("customer_id", id(c), "quantity", q, "business_date", d), result -> {
-                JSONObject o = nested(result, "order");
-                if (!id(o).isEmpty()) order(id(o)); else orders();
-                host.info("Order saved.", o.optString("reference") + " · " + c.optString("name") + " · " + q + " gallons · " + host.money(Math.multiplyExact((long) q, unit)));
+                JSONObject saved = nested(result, "order");
+                if (!id(saved).isEmpty()) order(id(saved)); else orders();
+                host.info("Order saved", saved.optString("reference") + " · " + c.optString("name") + " · " + q + " gallons · " + host.money(Math.multiplyExact((long) q, unit)));
             });
-        }));
-        host.actionNote("Saved with today’s time; the order date can be changed above.");
+        });
+        if (o) { LinearLayout row = host.actionRow(p); host.ownerAction(row, "Cancel", Ui.OUTLINE, this::orders); host.ownerAction(row, "Save order", Ui.FILLED, save); }
+        else host.mainAction("Save order", Ui.FILLED, save);
+    }
+    private String dateLabel(String iso) {
+        boolean today = iso.equals(host.today());
+        String d = owner() ? longDate(iso) : shortDate(iso);
+        return today ? "Today · " + d : d;
     }
 
-    // ---------------------------------------------------------------- order detail
+    // ================================================================================================ order detail
     public void order(String orderId) {
+        if (owner()) { ownerOrders("Order Details", orderId, orderId, 0, null); return; }
         LinearLayout p = page("Order Details", orderId);
-        renderOrderById(p, orderId, host.isOwner() && host.tablet());
+        loadOrder(orderId, o -> staffDetail(p, o));
     }
-    private void renderOrderById(LinearLayout p, String orderId) { renderOrderById(p, orderId, true); }
-    private void renderOrderById(LinearLayout p, String orderId, boolean pane) {
-        query("order", json("id", orderId), response -> renderOrder(p, nested(response, "order"), pane));
-    }
-    private void renderOrder(LinearLayout p, JSONObject o, boolean pane) {
+    /** Figma S05/S06/S07/S10*: Staff order detail. */
+    private void staffDetail(LinearLayout p, JSONObject o) {
         String status = o.optString("status");
         long balance = balance(o), unit = o.optLong("unit_price_centavos");
         int delivered = o.optInt("delivered_quantity"), quantity = o.optInt("quantity");
-        // Header
-        LinearLayout head = ui.card(p);
-        LinearLayout r = ui.row(head);
-        r.addView(ui.avatar(o.optString("customer_name")), new LinearLayout.LayoutParams(ui.dp(44), ui.dp(44)));
-        LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL); names.setPadding(ui.dp(12), 0, 0, 0);
-        names.addView(ui.tv(o.optString("customer_name"), 19, Ui.INK, ui.headBold));
-        names.addView(ui.tv(o.optString("reference") + " · " + title(o.optString("customer_type")), 12, Ui.MUTED, ui.body));
-        r.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
-        Runnable main = mainStep(o);
-        String mainLabel = mainLabel(o);
-        if (pane && main != null) { Button b = small(r, mainLabel, "delivered".equals(status) ? Ui.AMBER_BTN : Ui.FILLED, main); b.setMinHeight(ui.dp(48)); }
-        else if (!pane) small(r, "Call", Ui.TONAL_BTN, () -> dial(o.optString("contact_number")));
-        if (!pane && group(status) == 1) {
-            line(head, o.optString("contact_number")).setTypeface(ui.bodySemi);
-            ui.muted(head, o.optString("address"));
+        LinearLayout head = staffHeader(p, o.optString("customer_name"), o.optString("reference") + " · " + title(o.optString("customer_type")));
+        if (group(status) == 1 && !"ordered".equals(status)) {
+            LinearLayout r = ui.H(head, 8);
+            LinearLayout contact = ui.vbox(2); ui.grow(r, contact);
+            ui.text(contact, displayContact(o.optString("contact_number")), 15, 22, Ui.INK, ui.p5);
+            ui.text(contact, o.optString("address"), 13, 18, Ui.MUTED, ui.o4);
+            ui.hug(r, ui.button("Call", Ui.TONAL_BTN, 40, 14, 16, () -> dial(o.optString("contact_number"))));
         }
-        // Progress
-        LinearLayout prog = ui.card(p);
-        boolean labelled = status.equals("ordered") || status.equals("undelivered") || status.equals("delivered") || status.equals("rescheduled");
+        LinearLayout prog = ui.card(p, 14, 16);
+        boolean labelled = !"for_pickup".equals(status);
         ui.label(prog, labelled ? "Progress · " + title(status) : "Progress");
-        ui.progress(prog, status, pane ? Ui.STAGES_FULL : Ui.STAGES_COMPACT);
-        // Gallons and payment
-        LinearLayout lower = p;
-        LinearLayout gallons, pay;
-        if (pane) {
-            LinearLayout both = new LinearLayout(host); both.setOrientation(LinearLayout.HORIZONTAL); p.addView(both, new LinearLayout.LayoutParams(-1, -2));
-            gallons = new LinearLayout(host); gallons.setOrientation(LinearLayout.VERTICAL); gallons.setBackground(ui.shape(Ui.WHITE, Ui.BORDER, 14)); gallons.setPadding(ui.dp(16), ui.dp(14), ui.dp(16), ui.dp(14));
-            LinearLayout.LayoutParams gl = new LinearLayout.LayoutParams(0, -2, 1); gl.rightMargin = ui.dp(6); both.addView(gallons, gl);
-            pay = new LinearLayout(host); pay.setOrientation(LinearLayout.VERTICAL); pay.setBackground(ui.shape(Ui.WHITE, Ui.BORDER, 14)); pay.setPadding(ui.dp(16), ui.dp(14), ui.dp(16), ui.dp(14));
-            LinearLayout.LayoutParams pl = new LinearLayout.LayoutParams(0, -2, 1); pl.leftMargin = ui.dp(6); both.addView(pay, pl);
-            ((LinearLayout.LayoutParams) both.getLayoutParams()).bottomMargin = ui.dp(12);
-        } else { gallons = ui.card(p); pay = ui.card(p); }
-        boolean progressStyle = delivered > 0 || status.equals("undelivered") || status.equals("delivered");
-        if (progressStyle || pane) {
-            ui.heading(gallons, "Gallons");
-            if (progressStyle) {
-                LinearLayout bar = new LinearLayout(host); bar.setOrientation(LinearLayout.HORIZONTAL);
-                View done = new View(host); done.setBackground(ui.shape(Ui.PRIMARY, 0, 4)); View left = new View(host); left.setBackground(ui.shape(Ui.AMBER, 0, 4));
-                bar.addView(done, new LinearLayout.LayoutParams(0, ui.dp(8), Math.max(0.01f, delivered))); bar.addView(left, new LinearLayout.LayoutParams(0, ui.dp(8), Math.max(0.01f, pending(o))));
-                gallons.addView(bar, ui.lp(-1, -2, 0, 0, 0, 6));
-                ui.pair(gallons, "Delivered", delivered + " of " + quantity, Ui.INK, false);
-                ui.pair(gallons, "Still to deliver", pending(o) + (pending(o) == 1 ? " gallon" : " gallons"), pending(o) > 0 ? Ui.AMBER : Ui.INK, false);
-                if (pending(o) > 0) ui.pair(gallons, "Waiting since", relativeDay(o.optString("business_date")), Ui.INK, false);
-            } else {
-                ui.pair(gallons, "Ordered", Integer.toString(quantity), Ui.INK, false);
-                ui.pair(gallons, "Picked up", Integer.toString(o.optInt("collected_quantity")), Ui.INK, false);
-                ui.pair(gallons, "Delivered", Integer.toString(delivered), Ui.INK, false);
-                ui.pair(gallons, "Still to deliver", Integer.toString(pending(o)), Ui.AMBER, false);
-            }
-        } else {
-            LinearLayout stats = ui.row(gallons);
+        ui.progress(prog, status, false);
+        boolean progressStyle = delivered > 0 || "undelivered".equals(status);
+        if (progressStyle && !"delivered".equals(status)) {
+            LinearLayout g = ui.card(p, 10, 16);
+            ui.label(g, "Gallons");
+            LinearLayout bar = ui.H(g, 0);
+            View done = new View(host), left = new View(host);
+            LinearLayout.LayoutParams dl = new LinearLayout.LayoutParams(0, ui.px(10), Math.max(0.01f, delivered)), ll = new LinearLayout.LayoutParams(0, ui.px(10), Math.max(0.01f, pending(o)));
+            done.setBackground(corner(Ui.PRIMARY, true, pending(o) == 0)); left.setBackground(corner(Ui.AMBER, delivered == 0, true));
+            bar.addView(done, dl); bar.addView(left, ll);
+            ui.pair(g, "Delivered", delivered + " of " + quantity, Ui.INK, 17, ui.p6);
+            ui.pair(g, "Still to deliver", pending(o) + (pending(o) == 1 ? " gallon" : " gallons"), Ui.AMBER, 17, ui.p6);
+            long days = daysSince(o.optString("business_date"));
+            ui.pair(g, "Waiting since", shortDate(o.optString("business_date")) + " · " + days + (days == 1 ? " day" : " days"));
+        } else if (!"ordered".equals(status) && !"delivered".equals(status)) {
+            LinearLayout g = ui.card(p, 10, 16);
+            LinearLayout stats = ui.H(g, 8); stats.setGravity(Gravity.TOP);
             String[][] cols = {{Integer.toString(quantity), "Ordered"}, {Integer.toString(o.optInt("collected_quantity")), "Picked up"}, {Integer.toString(delivered), "Delivered"}, {Integer.toString(pending(o)), "Pending"}};
-            for (String[] c : cols) { LinearLayout cell = new LinearLayout(host); cell.setOrientation(LinearLayout.VERTICAL); cell.addView(ui.tv(c[0], 20, Ui.INK, ui.headBold)); cell.addView(ui.tv(c[1], 12, Ui.MUTED, ui.body)); stats.addView(cell, new LinearLayout.LayoutParams(0, -2, 1)); }
+            for (String[] c : cols) { LinearLayout cell = ui.vbox(2); ui.text(cell, c[0], 22, 33, Ui.INK, ui.p6); ui.text(cell, c[1], 12, 16, Ui.MUTED, ui.o4); ui.grow(stats, cell); }
         }
-        LinearLayout payHead = ui.row(pay);
-        payHead.addView(ui.tv("Payment", 17, Ui.INK, ui.headBold), new LinearLayout.LayoutParams(0, -2, 1));
-        payHead.addView(ui.paymentPill(o.optString("payment_status")));
-        ui.pair(pay, "Total · " + quantity + " × " + host.money(unit), host.money(o.optLong("total_centavos")), Ui.INK, false);
-        ui.pair(pay, "Paid", host.money(paid(o)), Ui.INK, false);
-        ui.pair(pay, "Balance", host.money(balance), balance > 0 ? Ui.AMBER : Ui.INK, true);
-        if (balance > 0 && !"delivered".equals(status) || (balance > 0 && pane)) host.button(pay, "Collect payment", Ui.OUTLINE, () -> payment(o, "order"));
-        if (status.equals("for_pickup")) {
-            TextView re = ui.tv("Customer not home? Reschedule pickup", 14, Ui.PRIMARY, ui.body); re.setGravity(Gravity.CENTER); re.setPadding(0, ui.dp(10), 0, ui.dp(10)); re.setClickable(true); re.setOnClickListener(v -> reschedule(o));
-            p.addView(re, new LinearLayout.LayoutParams(-1, -2));
+        LinearLayout pay = ui.card(p, 8, 16);
+        if (!"ordered".equals(status)) {
+            LinearLayout ph = ui.H(pay, 8);
+            ui.grow(ph, ui.tv("Payment", 13, 18, Ui.MUTED, ui.o6));
+            ui.hug(ph, ui.paymentChip(o.optString("payment_status"), false));
         }
-        if (status.equals("rescheduled")) {
-            ui.muted(p, "Rescheduled pickup: " + o.optString("rescheduled_date"));
-            if (!o.optString("reschedule_notes").isEmpty()) ui.muted(p, "Pickup notes: " + o.optString("reschedule_notes"));
+        ui.pair(pay, "Total · " + quantity + " × " + host.money(unit), host.money(o.optLong("total_centavos")));
+        if (paid(o) > 0 || "ordered".equals(status) || "delivered".equals(status) || progressStyle) ui.pair(pay, "Paid", host.money(paid(o)));
+        ui.pair(pay, "Balance", host.money(balance), balance > 0 ? Ui.AMBER : Ui.INK, 17, ui.p6);
+        if (balance > 0 && !"delivered".equals(status) && !"ordered".equals(status)) ui.fill(pay, ui.button("Collect payment", Ui.OUTLINE, 44, 14, 16, () -> payment(o, "order")));
+        if ("for_pickup".equals(status)) ui.fill(p, linkButton("Customer not home? Reschedule pickup", () -> reschedule(o)));
+        if ("rescheduled".equals(status)) {
+            ui.text(p, "Rescheduled pickup: " + longDate(o.optString("rescheduled_date")), 13, 18, Ui.MUTED, ui.o4);
+            if (!o.optString("reschedule_notes").isEmpty()) ui.text(p, "Note: " + o.optString("reschedule_notes"), 13, 18, Ui.MUTED, ui.o4);
         }
-        // Full record
-        LinearLayout details = ui.card(p);
-        ui.heading(details, "Order details");
-        ui.pair(details, "Customer", o.optString("customer_name") + " · " + title(o.optString("customer_type")), Ui.INK, false);
-        ui.pair(details, "Contact", o.optString("contact_number"), Ui.INK, false);
-        ui.pair(details, "Address", o.optString("address"), Ui.INK, false);
-        ui.pair(details, "Order date", o.optString("business_date"), Ui.INK, false);
-        ui.pair(details, "Recorded", host.timestamp(o.optString("created_at")), Ui.INK, false);
-        ui.pair(details, "Recorded by", o.optString("recorded_by_name", o.optString("recorded_by")), Ui.INK, false);
-        ui.pair(details, "Order status", title(status), Ui.INK, false);
-        ui.pair(details, "Original expected gallons", Integer.toString(o.optInt("expected_quantity", quantity)), Ui.INK, false);
-        ui.pair(details, "Adjusted order gallons", Integer.toString(quantity), Ui.INK, false);
-        ui.pair(details, "Shortfall", Integer.toString(o.optInt("shortfall")), Ui.INK, false);
-        ui.pair(details, "Reserved for this order", Integer.toString(o.optInt("reserved_quantity")), Ui.INK, false);
-        ui.pair(details, "Fixed unit price", host.money(unit), Ui.INK, false);
-        if (pending(o) > 0) ui.pair(details, "Waiting", Math.max(0, ChronoUnit.DAYS.between(Rules.date(o.optString("business_date")), Rules.date(host.today()))) + " days since original order date", Ui.INK, false);
-        JSONArray receipts = o.optJSONArray("payments");
-        if (receipts != null) { LinearLayout c = ui.card(p); ui.heading(c, "Payment history"); renderReceipts(c, receipts); }
-        JSONArray deliveries = o.optJSONArray("deliveries");
-        if (deliveries != null && deliveries.length() > 0) {
-            LinearLayout c = ui.card(p); ui.heading(c, "Delivery history");
-            for (int i = 0; i < deliveries.length(); i++) { JSONObject d = deliveries.optJSONObject(i); if (d != null) line(c, d.optInt("quantity") + " gallons • " + host.timestamp(d.optString("created_at")) + " • Recorded by: " + d.optString("recorded_by_name", d.optString("recorded_by"))); }
-        }
-        if (host.isOwner()) {
-            LinearLayout c = ui.card(p); ui.heading(c, "Timeline");
-            JSONArray timeline = o.optJSONArray("timeline");
-            if (timeline == null || timeline.length() == 0) line(c, "No timeline events available.");
-            else for (int i = 0; i < timeline.length(); i++) { JSONObject event = timeline.optJSONObject(i); if (event != null) line(c, title(event.optString("action")) + " • " + title(event.optString("status")) + "\n" + host.timestamp(event.optString("occurred_at")) + "\nRecorded by: " + event.optString("recorded_by_name")); }
-        }
-        if (!pane && main != null) {
-            host.mainAction(mainLabel, "delivered".equals(status) ? Ui.AMBER_BTN : Ui.FILLED, main);
-            String note = "ordered".equals(status) ? "Moves the order to the pickup list" : "delivered".equals(status) ? "Last step for this order" : "refilling".equals(status) ? "Reserves the gallons for this order" : "";
+        Runnable main = mainStep(o);
+        if (main != null) {
+            host.mainAction(mainLabel(o), "delivered".equals(status) ? Ui.AMBER_BTN : Ui.FILLED, main);
+            String note = stepNote(o);
             if (!note.isEmpty()) host.actionNote(note);
         }
     }
-    private String mainLabel(JSONObject o) {
+    private android.graphics.drawable.GradientDrawable corner(int color, boolean left, boolean right) {
+        android.graphics.drawable.GradientDrawable d = new android.graphics.drawable.GradientDrawable(); d.setColor(color);
+        float r = ui.px(6), l = left ? r : 0, rr = right ? r : 0;
+        d.setCornerRadii(new float[]{l, l, rr, rr, rr, rr, l, l}); return d;
+    }
+    private String stepNote(JSONObject o) {
+        switch (o.optString("status")) {
+            case "ordered": case "rescheduled": return "Moves the order to the pickup list";
+            case "picked_up": return "Moves the order to refilling";
+            case "refilling": return "Moves " + o.optInt("quantity") + " gallons from empty to filled stock and reserves them for this order";
+            case "ready_for_delivery": return "Opens Record delivery";
+            case "delivered": return "Last step for this order";
+            default: return "";
+        }
+    }
+    /** Figma O3: Owner order detail pane. */
+    private void ownerDetail(LinearLayout pane, JSONObject o) {
         String status = o.optString("status");
-        if ("delivered".equals(status)) return "Collect " + host.money(balance(o));
-        return nextLabel(status);
+        long balance = balance(o), unit = o.optLong("unit_price_centavos");
+        int delivered = o.optInt("delivered_quantity"), quantity = o.optInt("quantity");
+        LinearLayout head = ui.card(pane, 14, 18);
+        LinearLayout r = ui.H(head, 14);
+        ui.sized(r, ui.avatar(o.optString("customer_name"), 52, 18.72f), 52, 52);
+        LinearLayout names = ui.vbox(2); ui.grow(r, names);
+        ui.text(names, o.optString("customer_name"), 22, 33, Ui.INK, ui.p6);
+        ui.text(names, o.optString("reference") + " · " + title(o.optString("customer_type")), 13, 18, Ui.MUTED, ui.o4);
+        Runnable main = mainStep(o);
+        if (main != null) ui.hug(r, ui.button(mainLabel(o), "delivered".equals(status) ? Ui.AMBER_BTN : Ui.FILLED, 48, 12, 16, () -> host.guarded(main)));
+        ui.progress(head, status, true);
+        LinearLayout both = ui.H(pane, 14); both.setGravity(Gravity.TOP);
+        LinearLayout gallons = ui.vbox(10); ui.bg(gallons, Ui.WHITE, Ui.BORDER, 16); ui.pad(gallons, 18, 18); ui.grow(both, gallons);
+        LinearLayout pay = ui.vbox(10); ui.bg(pay, Ui.WHITE, Ui.BORDER, 16); ui.pad(pay, 18, 18); ui.grow(both, pay);
+        ui.text(gallons, "Gallons", 16, 24, Ui.INK, ui.p6);
+        ui.pair(gallons, "Ordered", Integer.toString(o.optInt("expected_quantity", quantity)));
+        ui.pair(gallons, "Picked up", Integer.toString(o.optInt("collected_quantity")));
+        ui.pair(gallons, "Delivered", Integer.toString(delivered));
+        ui.pair(gallons, "Still to deliver", Integer.toString(pending(o)), pending(o) > 0 ? Ui.AMBER : Ui.INK, 17, ui.p6);
+        LinearLayout ph = ui.H(pay, 8);
+        ui.grow(ph, ui.tv("Payment", 16, 24, Ui.INK, ui.p6));
+        ui.hug(ph, ui.paymentChip(o.optString("payment_status"), false));
+        ui.pair(pay, "Total · " + quantity + " × " + host.money(unit), host.money(o.optLong("total_centavos")));
+        ui.pair(pay, "Paid", host.money(paid(o)));
+        ui.pair(pay, "Balance", host.money(balance), balance > 0 ? Ui.AMBER : Ui.INK, 17, ui.p6);
+        if (balance > 0) ui.fill(pay, ui.button("Collect payment", Ui.OUTLINE, 40, 12, 15, () -> payment(o, "order")));
+        if ("rescheduled".equals(status) || pending(o) > 0) {
+            LinearLayout note = ui.card(pane, 6, 18);
+            if ("rescheduled".equals(status)) {
+                ui.text(note, "Rescheduled pickup · " + longDate(o.optString("rescheduled_date")), 16, 24, Ui.INK, ui.p6);
+                if (!o.optString("reschedule_notes").isEmpty()) ui.text(note, o.optString("reschedule_notes"), 14, 19, Ui.MUTED, ui.o4);
+            } else {
+                long days = daysSince(o.optString("business_date"));
+                ui.text(note, "Pending delivery", 16, 24, Ui.INK, ui.p6);
+                ui.text(note, "Original date " + longDate(o.optString("business_date")) + " · " + days + (days == 1 ? " day" : " days") + " waiting · " + pending(o) + " gallons left · " + o.optInt("reserved_quantity") + " reserved", 14, 19, Ui.MUTED, ui.o4);
+            }
+        }
+        LinearLayout timeline = ui.card(pane, 8, 18);
+        ui.text(timeline, "Timeline", 16, 24, Ui.INK, ui.p6);
+        JSONArray events = o.optJSONArray("timeline");
+        if (events == null || events.length() == 0) ui.text(timeline, "Order created · " + host.timestamp(o.optString("created_at")) + " · " + o.optString("recorded_by_name", ""), 14, 19, Ui.INK, ui.o4);
+        else for (int i = 0; i < events.length(); i++) {
+            JSONObject e = events.optJSONObject(i); if (e == null) continue;
+            LinearLayout line = ui.H(timeline, 16); line.setGravity(Gravity.TOP);
+            TextView when = ui.tv(stamp(e.optString("occurred_at")), 13, 20, Ui.MUTED, ui.p5);
+            when.setMinWidth(ui.px(82)); when.setSingleLine(true); ui.hug(line, when);
+            String who = e.optString("recorded_by_name");
+            ui.grow(line, ui.tv(eventText(e) + (who.isEmpty() ? "" : " · " + who), 14, 19, Ui.INK, ui.o4));
+        }
+    }
+    private static String eventText(JSONObject e) {
+        String action = e.optString("action"), status = e.optString("status");
+        switch (action) {
+            case "create_order": return "Order created";
+            case "record_pickup": return "Picked up" + (e.has("quantity") ? " " + e.optInt("quantity") + " gallons" : "");
+            case "record_delivery": return "Delivered" + (e.has("quantity") ? " " + e.optInt("quantity") + " gallons" : "");
+            case "record_payment": return "Payment recorded";
+            case "reschedule_pickup": return "Pickup rescheduled";
+            case "transition_order": return Rules.label(status);
+            default: return Rules.label(action) + (status.isEmpty() ? "" : " · " + Rules.label(status));
+        }
+    }
+    private String mainLabel(JSONObject o) {
+        if ("delivered".equals(o.optString("status"))) return "Collect " + host.money(balance(o));
+        return nextLabel(o.optString("status"));
     }
     /** The single next-step action of an order; null when nothing is left to do. */
     private Runnable mainStep(JSONObject o) {
         switch (o.optString("status")) {
-            case "ordered": return () -> transition(o, "for_pickup");
-            case "rescheduled": return () -> transition(o, "for_pickup");
+            case "ordered": case "rescheduled": return () -> transition(o, "for_pickup");
             case "for_pickup": return () -> pickup(o);
             case "picked_up": return () -> transition(o, "refilling");
             case "refilling": return () -> transition(o, "ready_for_delivery");
@@ -684,315 +863,441 @@ public final class OperationsUi {
         }
     }
     private void transition(JSONObject order, String status) {
-        host.command("transition_order", json("order_id", id(order), "status", status), saved -> { order(id(order)); host.info("Order updated."); });
+        host.command("transition_order", json("order_id", id(order), "status", status), saved -> { order(id(order)); host.info("Order updated", order.optString("reference") + " · " + Rules.label(status)); });
     }
 
-    // ---------------------------------------------------------------- pickup, reschedule, delivery
-    private void customerHeader(LinearLayout p, JSONObject o, String extra) {
-        LinearLayout card = ui.card(p);
-        LinearLayout r = ui.row(card);
-        r.addView(ui.avatar(o.optString("customer_name")), new LinearLayout.LayoutParams(ui.dp(40), ui.dp(40)));
-        LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL); names.setPadding(ui.dp(10), 0, 0, 0);
-        names.addView(ui.tv(o.optString("customer_name"), 16, Ui.INK, ui.headBold));
-        names.addView(ui.tv(o.optString("reference") + (extra.isEmpty() ? "" : " · " + extra), 12, Ui.MUTED, ui.body));
-        r.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
-        if (!o.optString("contact_number").isEmpty() || !o.optString("address").isEmpty()) ui.muted(card, (o.optString("contact_number") + "\n" + o.optString("address")).trim()).setPadding(0, ui.dp(8), 0, 0);
-    }
+    // ================================================================================================ pickup, reschedule, delivery
     private void pickup(JSONObject o) {
-        LinearLayout p = page("Record Pickup", id(o)); int expected = o.optInt("expected_quantity", o.optInt("quantity")); long unit = o.optLong("unit_price_centavos");
-        customerHeader(p, o, "Pickup date: " + host.today());
-        LinearLayout card = ui.card(p);
-        ui.pair(card, "Original expected gallons", Integer.toString(expected), Ui.INK, true);
-        ui.label(card, "Actual collected gallons");
-        EditText collected = host.quantity(card, "Actual collected gallons", "", new int[]{Math.max(1, expected / 2), Math.max(1, expected - 1), expected}, "gallons");
+        if (owner()) { ownerOrders("Record Pickup", id(o), id(o), 1, pane -> pickupForm(pane, o)); return; }
+        pickupForm(page("Record Pickup", id(o)), o);
+    }
+    /** Figma S11 / O4: actual collected gallons, shortfall preview and adjusted charge. */
+    private void pickupForm(LinearLayout p, JSONObject o) {
+        boolean ow = owner();
+        int expected = o.optInt("expected_quantity", o.optInt("quantity")); long unit = o.optLong("unit_price_centavos");
+        if (ow) ownerFormHeader(p, "Record pickup · " + o.optString("customer_name"), o.optString("reference") + " · " + title(o.optString("customer_type")) + " · Expected " + expected + " gallons", o.optString("status"), "Reschedule", () -> reschedule(o));
+        else staffHeader(p, o.optString("customer_name"), o.optString("reference") + " · Expected " + expected + " gallons");
+        LinearLayout card = ui.card(p, 16, ow ? 18 : 16);
+        ui.label(card, "Gallons collected");
+        int[] picks = new int[Math.min(4, expected)]; String[] names = new String[picks.length];
+        for (int i = 0; i < picks.length; i++) { picks[i] = expected - i; names[i] = i == 0 ? "All " + expected : Integer.toString(picks[i]); }
+        EditText collected = host.quantity(card, "Actual collected gallons", "", picks, names, "of " + expected + " expected", !ow, 8, null);
         collected.setHint("0");
-        LinearLayout calc = ui.card(p);
-        TextView[] shortfall = ui.pair(calc, "Shortfall", "—", Ui.INK, false), adjusted = ui.pair(calc, "Adjusted order gallons", "—", Ui.INK, false);
-        ui.pair(calc, "Fixed unit price", host.money(unit), Ui.INK, false);
-        TextView[] total = ui.pair(calc, "Adjusted total", "—", Ui.PRIMARY, true);
-        Runnable refreshPreview = () -> {
-            try { int q = quantity(collected); if (q > expected) throw new IllegalArgumentException(); shortfall[1].setText(Integer.toString(expected - q)); adjusted[1].setText(Integer.toString(q)); total[1].setText(host.money(Math.multiplyExact((long) q, unit))); }
-            catch (Exception e) { shortfall[1].setText("—"); adjusted[1].setText("—"); total[1].setText("—"); }
-        }; watch(collected, refreshPreview); if (!value(collected).isEmpty()) refreshPreview.run();
-        TextView re = ui.tv("Customer not home? Reschedule pickup", 14, Ui.PRIMARY, ui.body); re.setGravity(Gravity.CENTER); re.setPadding(0, ui.dp(10), 0, ui.dp(10)); re.setClickable(true); re.setOnClickListener(v -> reschedule(o));
-        p.addView(re, new LinearLayout.LayoutParams(-1, -2));
-        host.mainAction("Save pickup", Ui.FILLED, () -> valid(() -> {
+        LinearLayout shortBanner = ui.banner(p, Ui.WARNING, "", "", ow); shortBanner.setVisibility(View.GONE);
+        Runnable refresh = () -> {
+            try {
+                int q = quantity(collected);
+                if (q > expected) { collected.setTextColor(Ui.DANGER); ui.setBanner(shortBanner, Ui.ERROR, "Collected quantity cannot exceed the expected quantity.", null, ow); shortBanner.setVisibility(View.VISIBLE); return; }
+                collected.setTextColor(Ui.INK);
+                if (q < expected) {
+                    long total = Math.multiplyExact((long) q, unit);
+                    ui.setBanner(shortBanner, Ui.WARNING, (expected - q) + (expected - q == 1 ? " gallon short" : " gallons short"), "The order becomes " + q + " × " + host.money(unit) + " = " + host.money(total) + ". The original request of " + expected + " stays on record.", ow);
+                    shortBanner.setVisibility(View.VISIBLE);
+                } else shortBanner.setVisibility(View.GONE);
+            } catch (Exception e) { shortBanner.setVisibility(View.GONE); }
+        };
+        watch(collected, refresh);
+        if (!ow) ui.fill(p, linkButton("Not collected? Reschedule pickup", () -> reschedule(o)));
+        TextView[] note = {null};
+        Runnable save = () -> valid(() -> {
             int q;
             try { q = quantity(collected); } catch (IllegalArgumentException e) { host.fieldError(collected, e.getMessage()); return; }
             if (q > expected) { host.fieldError(collected, "Collected quantity cannot exceed the expected quantity."); return; }
             if (Math.multiplyExact((long) q, unit) < paid(o)) { host.fieldError(collected, "Adjusted total cannot be less than the amount already paid."); return; }
-            host.command("record_pickup", json("order_id", id(o), "quantity", q), saved -> { order(id(o)); host.info("Pickup recorded.", q + " gallons collected · adjusted total " + host.money(Math.multiplyExact((long) q, unit))); });
-        }));
+            host.command("record_pickup", json("order_id", id(o), "quantity", q), saved -> {
+                String detail = o.optString("reference") + " · " + q + " gallons collected · order now " + q + " × " + host.money(unit) + " = " + host.money(Math.multiplyExact((long) q, unit)) + " · " + q + " empty gallons added to stock";
+                // A saved pickup goes straight into refilling (no separate "Start refilling" tap).
+                host.command("transition_order", json("order_id", id(o), "status", "refilling"), moved -> {
+                    order(id(o));
+                    host.info("Pickup recorded · now Refilling", detail);
+                });
+            });
+        });
+        if (ow) { LinearLayout row = host.actionRow(p); host.ownerAction(row, "Cancel", Ui.OUTLINE, () -> order(id(o))); host.ownerAction(row, "Save pickup", Ui.FILLED, save); }
+        else {
+            LinearLayout dock = (LinearLayout) host.mainAction("Save pickup", Ui.FILLED, save).getParent();
+            note[0] = ui.tv("", 13, 18, Ui.MUTED, ui.o4); note[0].setGravity(Gravity.CENTER); ui.fill(dock, note[0]);
+            Runnable updateNote = () -> { try { int q = quantity(collected); note[0].setText("Adds " + q + (q == 1 ? " empty gallon" : " empty gallons") + " to stock"); note[0].setVisibility(View.VISIBLE); } catch (Exception e) { note[0].setVisibility(View.GONE); } };
+            watch(collected, updateNote); updateNote.run();
+        }
+    }
+    /** Owner form header card: title, subtitle, optional secondary action and the stage stepper (O4). */
+    private void ownerFormHeader(LinearLayout p, String titleText, String sub, String status, String action, Runnable run) {
+        LinearLayout head = ui.card(p, 10, 18);
+        LinearLayout r = ui.H(head, 8);
+        LinearLayout names = ui.vbox(2); ui.grow(r, names);
+        ui.text(names, titleText, 22, 33, Ui.INK, ui.p6);
+        ui.text(names, sub, 13, 18, Ui.MUTED, ui.o4);
+        if (action != null) ui.hug(r, ui.button(action, Ui.OUTLINE, 44, 12, 15, run));
+        if (status != null) ui.progress(head, status, true);
     }
     private void reschedule(JSONObject o) {
-        LinearLayout p = page("Reschedule Pickup", id(o)); customerHeader(p, o, "");
-        LinearLayout card = ui.card(p);
-        EditText next = date(card, "New pickup date", host.today());
-        EditText notes = host.input(card, "Notes (optional)", o.optString("reschedule_notes"), InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_MULTI_LINE);
-        host.mainAction(host.isOwner() ? "Save Pickup Result" : "Save result", Ui.FILLED, () -> valid(() -> {
+        if (owner()) { ownerOrders("Reschedule Pickup", id(o), id(o), 1, pane -> rescheduleForm(pane, o)); return; }
+        rescheduleForm(page("Reschedule Pickup", id(o)), o);
+    }
+    /** Figma S12 / O4f: new pickup date (quick picks), optional note. */
+    private void rescheduleForm(LinearLayout p, JSONObject o) {
+        boolean ow = owner();
+        if (ow) ownerFormHeader(p, "Reschedule pickup · " + o.optString("customer_name"), o.optString("reference") + " · Pickup not done", o.optString("status"), null, null);
+        else staffHeader(p, o.optString("customer_name"), o.optString("reference") + " · Pickup not done");
+        LinearLayout card = ui.card(p, 14, ow ? 18 : 16);
+        ui.label(card, "New pickup date");
+        LocalDate today = LocalDate.parse(host.today());
+        EditText[] next = new EditText[1];
+        Ui.Tabs[] quick = new Ui.Tabs[1];
+        quick[0] = ui.tabs(card, new String[]{"Today", "Tomorrow", "In 3 days", "Pick date"}, 1, true, ow, 8, i -> {
+            if (i == 3) { next[0].performClick(); return; }
+            setIso(next[0], today.plusDays(i == 0 ? 0 : i == 1 ? 1 : 3).toString(), false); host.clearFieldError(next[0]);
+        });
+        next[0] = date(card, "Date", today.plusDays(1).toString());
+        EditText notes = host.input(card, "Note (optional)", o.optString("reschedule_notes"), InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
+        Runnable save = () -> valid(() -> {
             LocalDate d;
-            try { d = LocalDate.parse(value(next)); } catch (Exception e) { host.fieldError(next, "Select today or a future date."); return; }
-            if (d.isBefore(LocalDate.parse(host.today()))) { host.fieldError(next, "Select today or a future date."); return; }
+            try { d = LocalDate.parse(iso(next[0])); } catch (Exception e) { host.fieldError(next[0], "Select today or a future date."); return; }
+            if (d.isBefore(today)) { host.fieldError(next[0], "Select today or a future date."); return; }
             Rules.remarks(value(notes));
-            host.command("reschedule_pickup", json("order_id", id(o), "scheduled_date", d.toString(), "notes", value(notes)), saved -> { order(id(o)); host.info("Order rescheduled.", "Pickup moved to " + shortDate(d.toString()) + "."); });
-        }));
+            host.command("reschedule_pickup", json("order_id", id(o), "scheduled_date", d.toString(), "notes", value(notes)), saved -> { order(id(o)); host.info("Order rescheduled", o.optString("reference") + " · pickup moved to " + longDate(d.toString())); });
+        });
+        if (ow) { LinearLayout row = host.actionRow(p); host.ownerAction(row, "Cancel", Ui.OUTLINE, () -> order(id(o))); host.ownerAction(row, "Save pickup result", Ui.FILLED, save); }
+        else { host.mainAction("Save new date", Ui.FILLED, save); host.actionNote("The order stays in the pickup list with the new date"); }
     }
     private void delivery(JSONObject o) {
-        LinearLayout p = page("Record Delivery", id(o)); int remaining = pending(o); int delivered = o.optInt("delivered_quantity");
-        customerHeader(p, o, delivered + " of " + o.optInt("quantity") + " delivered");
-        LinearLayout card = ui.card(p);
-        ui.muted(card, "Gallons delivered now").setTypeface(ui.bodySemi);
+        if (owner()) { ownerOrders("Record Delivery", id(o), id(o), 3, pane -> deliveryForm(pane, o)); return; }
+        deliveryForm(page("Record Delivery", id(o)), o);
+    }
+    /** Figma S13 / O4h: gallons delivered this trip, partial/complete preview, reservation check. */
+    private void deliveryForm(LinearLayout p, JSONObject o) {
+        boolean ow = owner();
+        int remaining = pending(o), delivered = o.optInt("delivered_quantity"), reserved = o.optInt("reserved_quantity", remaining);
+        if (ow) ownerFormHeader(p, "Record delivery · " + o.optString("customer_name"), o.optString("reference") + " · " + title(o.optString("customer_type")) + " · " + delivered + " of " + o.optInt("quantity") + " delivered", o.optString("status"), null, null);
+        else staffHeader(p, o.optString("customer_name"), o.optString("reference") + " · " + delivered + " of " + o.optInt("quantity") + " delivered");
+        LinearLayout card = ui.card(p, 16, ow ? 18 : 16);
+        ui.label(card, "Gallons delivered now");
         int[] picks = new int[Math.min(3, remaining)]; String[] pickNames = new String[picks.length];
-        for (int i = 0; i < picks.length; i++) { picks[i] = i == 0 ? remaining : remaining - i; pickNames[i] = i == 0 ? "All " + remaining : Integer.toString(picks[i]); }
-        EditText trip = host.quantity(card, "Gallons delivered this trip", "", picks, pickNames, "of " + remaining + " remaining");
+        for (int i = 0; i < picks.length; i++) { picks[i] = remaining - i; pickNames[i] = i == 0 ? "All " + remaining : Integer.toString(picks[i]); }
+        EditText trip = host.quantity(card, "Gallons delivered this trip", "", picks, pickNames, "of " + remaining + " remaining", !ow, 8, null);
         trip.setHint("0");
-        TextView status = ui.tv("", 13, Ui.INK, ui.body); status.setPadding(ui.dp(14), ui.dp(10), ui.dp(14), ui.dp(10)); status.setVisibility(View.GONE);
-        p.addView(status, ui.lp(-1, -2, 0, 0, 0, 12));
-        ui.muted(p, "Previously delivered: " + delivered + " · Remaining gallons: " + remaining + " · Order reservation: " + o.optInt("reserved_quantity") + "\nRecorded at actual server time on save." + (host.isOwner() ? "\nRecording account: " + host.recorder() + " · Today: " + host.today() + " (Asia/Manila)" : "")).setTextSize(11);
-        Runnable refreshPreview = () -> {
+        LinearLayout status = ui.banner(p, Ui.SUCCESS, "", "", ow); status.setVisibility(View.GONE);
+        Runnable refresh = () -> {
             try {
                 int q = quantity(trip); if (q > remaining) throw new IllegalArgumentException();
-                boolean all = q == remaining; status.setVisibility(View.VISIBLE);
-                status.setBackground(ui.shape(all ? Ui.GREEN_BG : Ui.AMBER_BG, 0, 12)); status.setTextColor(all ? Ui.GREEN : Ui.AMBER);
-                status.setText(all ? "Order will be Delivered\n" + (remaining - q) + " gallons pending after saving. Reserved stock for this order: " + o.optInt("reserved_quantity") + "."
-                    : (remaining - q) + (remaining - q == 1 ? " gallon stays pending" : " gallons stay pending") + "\nOrder becomes Undelivered. The remaining reservation is kept.");
+                boolean all = q == remaining;
+                int left = remaining - q, total = o.optInt("quantity");
+                String who = host.recorder() + " (" + (host.isOwner() ? "Owner" : "Staff") + ")";
+                if (all) ui.setBanner(status, Ui.SUCCESS, "Order will be Delivered", ow ? "0 gallons pending after saving · reserved stock for this order: " + reserved + " · cumulative delivered " + (delivered + q) + " of " + total + " · recorded by " + who + ", " + longDate(host.today()) : "0 gallons pending after saving. Reserved stock for this order: " + reserved + ".", ow);
+                else if (ow) ui.setBanner(status, Ui.WARNING, "Order becomes Undelivered", left + (left == 1 ? " gallon stays pending" : " gallons stay pending") + " · the remaining reservation is kept · cumulative delivered " + (delivered + q) + " of " + total + " · recorded by " + who, true);
+                else ui.setBanner(status, Ui.WARNING, left + (left == 1 ? " gallon stays pending" : " gallons stay pending"), "Order becomes Undelivered. The remaining reservation is kept.", false);
+                status.setVisibility(View.VISIBLE);
             } catch (Exception e) { status.setVisibility(View.GONE); }
-        }; watch(trip, refreshPreview); if (!value(trip).isEmpty()) refreshPreview.run();
-        host.mainAction("Save delivery", Ui.FILLED, () -> valid(() -> {
+        };
+        watch(trip, refresh);
+        Runnable save = () -> valid(() -> {
             int q;
             try { q = quantity(trip); } catch (IllegalArgumentException e) { host.fieldError(trip, e.getMessage()); return; }
             if (q > remaining) { host.fieldError(trip, "Delivered quantity cannot exceed the remaining " + remaining + " gallons."); return; }
-            if (o.has("reserved_quantity") && q > o.optInt("reserved_quantity")) { host.error("Not enough reserved gallons for this order."); return; }
-            host.command("record_delivery", json("order_id", id(o), "quantity", q), saved -> { order(id(o)); host.info("Delivery recorded.", q == remaining ? "All " + (delivered + q) + " gallons delivered." : q + " gallons delivered · " + (remaining - q) + " still to deliver"); });
-        }));
+            if (o.has("reserved_quantity") && q > o.optInt("reserved_quantity")) { ui.setBanner(status, Ui.ERROR, "Not enough reserved gallons for this order.", ow ? "Reserved stock for this order: " + o.optInt("reserved_quantity") + " · nothing was saved" : "Reserved stock for this order: " + o.optInt("reserved_quantity") + ". Nothing was saved.", ow); status.setVisibility(View.VISIBLE); return; }
+            host.command("record_delivery", json("order_id", id(o), "quantity", q), saved -> {
+                order(id(o));
+                host.info("Delivery recorded", o.optString("reference") + " · " + q + " gallons delivered · " + (q == remaining ? "all " + (delivered + q) + " delivered" : (remaining - q) + " still to deliver"));
+            });
+        });
+        if (ow) { LinearLayout row = host.actionRow(p); host.ownerAction(row, "Cancel", Ui.OUTLINE, () -> order(id(o))); host.ownerAction(row, "Save delivery", Ui.FILLED, save); }
+        else host.mainAction("Save delivery", Ui.FILLED, save);
     }
 
-    // ---------------------------------------------------------------- walk-in sale
+    // ================================================================================================ walk-in sale
     public void pos() {
-        LinearLayout p = page("Walk-in Sale / POS");
-        LinearLayout top = ui.row(p);
-        top.addView(ui.tv("Counter sale · no profile needed", 12, Ui.MUTED, ui.body), new LinearLayout.LayoutParams(0, -2, 1));
-        TextView stock = ui.pill("Checking stock…", Ui.TONAL, Ui.PRIMARY); top.addView(stock);
-        ui.muted(p, "Purified water · fixed price ₱35.00 per gallon. A saved customer profile is optional.").setTextSize(11);
-        if (host.isOwner()) ui.muted(p, "Recording account: " + host.recorder()).setTextSize(11);
+        if (owner()) { ownerOrders("Walk-in Sale / POS", "", null, -1, this::posForm); return; }
+        posForm(page("Walk-in Sale / POS"));
+    }
+    /** Figma P1–P7 (Staff) and O6–O6g (Owner). */
+    private void posForm(LinearLayout p) {
+        boolean ow = owner();
         final long[] available = {-1};
+        TextView stock = ui.chip("Checking stock…", Ui.TONAL, Ui.PRIMARY);
+        EditText name;
+        if (ow) {
+            LinearLayout head = ui.card(p, 12, 18);
+            LinearLayout r = ui.H(head, 8);
+            ui.grow(r, ui.tv("Walk-in sale", 22, 33, Ui.INK, ui.p6));
+            ui.hug(r, stock);
+            name = host.input(head, "Customer name", "", TEXT);
+        } else {
+            LinearLayout r = ui.H(p, 8);
+            ui.grow(r, ui.tv("Counter sale · no profile needed", 13, 18, Ui.MUTED, ui.o4));
+            ui.hug(r, stock);
+            name = host.input(p, "Customer name", "", TEXT);
+        }
         query("inventory", json(), response -> { JSONObject i = nested(response, "inventory"); available[0] = i.optLong("filled_available", i.optLong("available_filled", -1)); stock.setText(available[0] < 0 ? "Stock checked on save" : available[0] + " gallons available"); });
-        EditText name = host.input(p, "Customer name", "", TEXT);
-        String[] profileId = {host.choice("pos_customer")};
-        TextView profile = ui.tv(profileId[0].isEmpty() ? "Use a saved customer profile (optional)" : "Saved profile selected · change", 13, Ui.PRIMARY, ui.head); profile.setClickable(true); profile.setPadding(0, ui.dp(4), 0, ui.dp(8));
-        profile.setOnClickListener(v -> chooseCustomer(c -> { profileId[0] = id(c); host.rememberChoice("pos_customer", id(c)); name.setText(c.optString("name")); profile.setText("Saved profile: " + c.optString("name") + " · change"); }, () -> customerForm(null, selected -> pos())));
-        p.addView(profile, new LinearLayout.LayoutParams(-1, -2));
-        LinearLayout gCard = ui.card(p);
-        ui.muted(gCard, "Gallons").setTypeface(ui.bodySemi);
-        EditText gallons = host.quantity(gCard, "Gallon quantity", "", new int[]{1, 2, 3, 5, 10}, "× ₱35.00 each");
+        LinearLayout pair = ow ? ui.H(p, 14) : p;
+        if (ow) pair.setGravity(Gravity.TOP);
+        LinearLayout gCard = ow ? ui.vbox(12) : ui.card(p, 14, 16);
+        LinearLayout cCard = ow ? ui.vbox(12) : null;
+        if (ow) { ui.bg(gCard, Ui.WHITE, Ui.BORDER, 16); ui.pad(gCard, 18, 18); ui.grow(pair, gCard); }
+        ui.label(gCard, ow ? "Gallons · ₱35.00 each" : "Gallons");
+        EditText gallons = host.quantity(gCard, "Gallon quantity", "", new int[]{1, 2, 3, 5, 10}, new String[]{"1", "2", "3", "5", "10"}, ow ? "gallons" : "× ₱35.00 each", true, 8, null);
+        if (ow) ui.size(gallons, 48, 72);
         gallons.setHint("0");
-        LinearLayout cCard = ui.card(p);
-        ui.muted(cCard, "Cash received").setTypeface(ui.bodySemi);
-        EditText cash = host.input(cCard, "Cash received (₱)", "", CASH); cash.setHint("₱0.00");
-        host.quickAmounts(cCard, cash, new String[]{"Exact", "₱100", "₱200", "₱500"}, new String[]{"", "100", "200", "500"});
-        // the "Exact" pick is resolved against the current total below
-        LinearLayout bar = host.actionBar();
-        LinearLayout totals = ui.row(bar);
-        LinearLayout tl = new LinearLayout(host); tl.setOrientation(LinearLayout.VERTICAL);
-        tl.addView(ui.tv("Total", 12, Ui.MUTED, ui.body)); TextView totalView = ui.tv(host.money(0), 22, Ui.INK, ui.headBold); tl.addView(totalView);
-        totals.addView(tl, new LinearLayout.LayoutParams(0, -2, 1));
-        LinearLayout tr = new LinearLayout(host); tr.setOrientation(LinearLayout.VERTICAL); tr.setGravity(Gravity.END);
-        TextView changeLabel = ui.tv("Change", 12, Ui.MUTED, ui.body); tr.addView(changeLabel); TextView changeView = ui.tv("–", 22, Ui.GREEN, ui.headBold); tr.addView(changeView);
-        totals.addView(tr);
-        Button complete = host.button(bar, "Complete sale", Ui.FILLED, () -> { });
-        ui.setEnabledLook(complete, false, Ui.FILLED);
-        TextView creditNote = ui.tv("", 12, Ui.MUTED, ui.body); creditNote.setGravity(Gravity.CENTER); creditNote.setVisibility(View.GONE); bar.addView(creditNote);
-        Runnable[] recompute = new Runnable[1];
-        recompute[0] = () -> {
-            long total = 0, tendered = -1; boolean ok = true;
-            try { int q = quantity(gallons); total = Math.multiplyExact((long) q, 3500); totalView.setText(host.money(total)); host.clearFieldError(gallons); if (available[0] >= 0 && q > available[0]) { host.fieldError(gallons, "Not enough filled gallons."); ok = false; } }
+        if (ow) { cCard = ui.vbox(12); ui.bg(cCard, Ui.WHITE, Ui.BORDER, 16); ui.pad(cCard, 18, 18); ui.grow(pair, cCard); }
+        else cCard = ui.card(p, 14, 16);
+        ui.label(cCard, "Cash received");
+        EditText cash = host.inputPlain(cCard, "Cash received", "", InputType.TYPE_CLASS_TEXT); cash.setHint("₱0.00");
+        LinearLayout cashField = (LinearLayout) cash.getParent();
+        String[] cashLabels = {"Exact", "₱100", "₱200", "₱500"};
+        long[] cashValues = {-1, 10000, 20000, 50000};
+        Ui.Tabs cashPicks = ui.tabs(cCard, cashLabels, -1, true, ow, 8, i -> {
+            if (i == 0) { try { cash.setText(pesoText(Math.multiplyExact((long) quantity(gallons), 3500))); } catch (IllegalArgumentException e) { host.fieldError(gallons, e.getMessage()); } }
+            else cash.setText(pesoText(cashValues[i]));
+        });
+        cCard.removeView(cashField); cCard.addView(cashField, 1);
+        if (ow) { TextView[] rec = ui.pair(cCard, "Recorded by", host.recorder()); rec[1].setSingleLine(true); rec[1].setEllipsize(android.text.TextUtils.TruncateAt.END); }
+        // Totals: Owner green card under the inputs, Staff in the dock above the button
+        LinearLayout totalsHost;
+        TextView[] stockAfter = {null};
+        if (ow) { totalsHost = ui.card(p, 8, 18); ui.bg(totalsHost, Ui.GREEN_BG, 0, 16); }
+        else totalsHost = host.dockBox();
+        LinearLayout totals = ui.H(totalsHost, 0); totals.setGravity(Gravity.TOP);
+        LinearLayout tl = ui.vbox(0); ui.hug(totals, tl);
+        ui.hug(tl, ui.tv("Total", 13, 18, Ui.MUTED, ui.o4));
+        TextView totalView = ui.hugText(tl, host.money(0), ow ? 28 : 24, Ui.INK, ui.p6);
+        ui.spacer(totals);
+        LinearLayout tr = ui.vbox(0); tr.setGravity(ow ? Gravity.CENTER_HORIZONTAL : Gravity.END); ui.hug(totals, tr);
+        TextView changeLabel = ui.hugText(tr, "Change", 13, Ui.MUTED, ui.o4);
+        TextView changeView = ui.hugText(tr, "–", ow ? 28 : 24, Ui.GREEN, ui.p6);
+        if (ow) {
+            ui.spacer(totals);
+            LinearLayout st = ui.vbox(0); st.setGravity(Gravity.END); ui.hug(totals, st);
+            ui.hug(st, ui.tv("Stock after saving", 13, 18, Ui.MUTED, ui.o4));
+            stockAfter[0] = ui.hugText(st, "–", 28, Ui.INK, ui.p6);
+        }
+        TextView complete; TextView creditNote = null;
+        Runnable[] submit = new Runnable[1];
+        if (ow) { LinearLayout row = host.actionRow(p); host.ownerAction(row, "Cancel", Ui.OUTLINE, this::orders); complete = host.ownerAction(row, "Complete sale", Ui.FILLED, () -> submit[0].run()); }
+        else {
+            complete = ui.dockButton("Complete sale", Ui.FILLED, () -> host.guarded(submit[0])); ui.fill(totalsHost, complete);
+            creditNote = ui.tv("", 13, 18, Ui.MUTED, ui.o4); creditNote.setGravity(Gravity.CENTER); creditNote.setVisibility(View.GONE); ui.fill(totalsHost, creditNote);
+        }
+        final TextView note = creditNote;
+        Runnable recompute = () -> {
+            long total = 0, tendered = -1; boolean ok = true; int q = 0;
+            try { q = quantity(gallons); total = Math.multiplyExact((long) q, 3500); totalView.setText(host.money(total)); host.clearFieldError(gallons); if (available[0] >= 0 && q > available[0]) { host.fieldError(gallons, "Not enough filled gallons."); ok = false; } }
             catch (IllegalArgumentException e) { totalView.setText(host.money(0)); ok = false; if (!value(gallons).isEmpty()) host.fieldError(gallons, e.getMessage()); }
+            String raw = cleanMoney(value(cash));
             try { tendered = cents(cash, "Enter a valid cash amount."); host.clearFieldError(cash); if (tendered < 0) { host.fieldError(cash, "Cash received cannot be negative."); ok = false; } }
-            catch (IllegalArgumentException e) { ok = false; if (!value(cash).isEmpty()) host.fieldError(cash, e.getMessage()); }
+            catch (IllegalArgumentException e) { ok = false; if (!raw.isEmpty()) host.fieldError(cash, e.getMessage()); }
+            int pick = -1; for (int i = 1; i < cashValues.length; i++) if (tendered == cashValues[i]) pick = i; if (tendered >= 0 && tendered == total && total > 0) pick = 0;
+            cashPicks.select(pick, false);
             boolean credit = ok && tendered < total;
             changeLabel.setText(credit ? "Credit (unpaid)" : "Change");
             if (ok && !credit) { changeView.setText(host.money(tendered - total)); changeView.setTextColor(Ui.GREEN); }
             else if (credit) { changeView.setText(host.money(total - tendered)); changeView.setTextColor(Ui.AMBER); }
             else { changeView.setText("–"); changeView.setTextColor(Ui.GREEN); }
+            if (stockAfter[0] != null) stockAfter[0].setText(available[0] >= 0 && ok ? Long.toString(available[0] - q) : "–");
             complete.setText(credit ? "Save as credit · " + host.money(total - tendered) : "Complete sale");
-            ui.setEnabledLook(complete, ok && total > 0, credit ? Ui.AMBER_BTN : Ui.FILLED);
-            creditNote.setVisibility(credit ? View.VISIBLE : View.GONE);
-            if (credit) creditNote.setText("Paid " + host.money(Math.max(0, tendered)) + " now · " + host.money(total - tendered) + " stays as a balance");
+            ui.style(complete, ok && total > 0 ? (credit ? Ui.AMBER_BTN : Ui.FILLED) : Ui.DISABLED);
+            if (note != null) { note.setVisibility(credit ? View.VISIBLE : View.GONE); if (credit) note.setText("Paid " + host.money(Math.max(0, tendered)) + " now · " + host.money(total - tendered) + " stays as a balance"); }
         };
-        watch(gallons, recompute[0]); watch(cash, recompute[0]);
-        // Exact = the current total
-        for (TextView chip : new TextView[]{}) { }
-        complete.setOnClickListener(v -> valid(() -> {
+        watch(gallons, recompute); watch(cash, recompute);
+        submit[0] = () -> valid(() -> {
             if (value(name).isEmpty()) { host.fieldError(name, "Enter the customer name."); return; }
-            int q = quantity(gallons); long tendered = cents(cash, "Enter a valid cash amount.");
-            if (tendered < 0) throw new IllegalArgumentException("Cash received cannot be negative.");
-            if (available[0] >= 0 && q > available[0]) throw new IllegalArgumentException("Not enough filled gallons.");
+            int q; try { q = quantity(gallons); } catch (IllegalArgumentException e) { host.fieldError(gallons, e.getMessage()); return; }
+            long tendered; try { tendered = cents(cash, "Enter a valid cash amount."); } catch (IllegalArgumentException e) { host.fieldError(cash, e.getMessage()); return; }
+            if (tendered < 0) { host.fieldError(cash, "Cash received cannot be negative."); return; }
+            if (available[0] >= 0 && q > available[0]) { host.fieldError(gallons, "Not enough filled gallons."); return; }
             long total = Math.multiplyExact((long) q, 3500);
             JSONObject payload = json("customer_name", value(name), "quantity", q, "cash_centavos", tendered, "confirm_credit", tendered < total);
-            if (!profileId[0].isEmpty()) try { payload.put("customer_id", profileId[0]); } catch (Exception e) { throw new IllegalArgumentException("Unable to prepare sale."); }
+            String customer = value(name);
             host.command("create_sale", payload, saved -> {
                 JSONObject sale = nested(saved, "sale");
-                long balance = balance(sale);
-                String status = balance > 0 ? (tendered > 0 ? "Partially paid" : "Unpaid") : "Paid";
-                String detail = value(name) + " · " + q + " gallons · " + status + (balance > 0 ? " · Credit " + host.money(balance) : " · Change " + host.money(Math.max(0, tendered - total)))
-                    + (available[0] >= 0 ? " · Stock " + available[0] + " → " + (available[0] - q) : "");
-                host.rememberChoice("pos_customer", "");
+                long bal = balance(sale);
+                String st = bal > 0 ? (tendered > 0 ? "Partially paid" : "Unpaid") : "Paid";
                 pos();
-                host.info("Sale " + sale.optString("reference") + " saved", detail);
+                host.info("Sale " + sale.optString("reference") + " saved", customer + " · " + q + " gallons · " + st + (bal > 0 ? " · Credit " + host.money(bal) : " · Change " + host.money(Math.max(0, tendered - total))) + (available[0] >= 0 ? " · Stock " + available[0] + " → " + (available[0] - q) : ""));
             });
-        }));
-        cashExact(cCard, cash, totalView, gallons);
-        recompute[0].run();
-    }
-    /** "Exact" quick amount: cash equals the current total. */
-    private void cashExact(LinearLayout cashCard, EditText cash, TextView totalView, EditText gallons) {
-        for (int i = 0; i < cashCard.getChildCount(); i++) {
-            View child = cashCard.getChildAt(i);
-            if (child instanceof LinearLayout && ((LinearLayout) child).getChildCount() == 4) {
-                View exact = ((LinearLayout) child).getChildAt(0);
-                exact.setOnClickListener(v -> { try { long total = Math.multiplyExact((long) quantity(gallons), 3500); cash.setText(BigDecimal.valueOf(total, 2).setScale(2).toPlainString()); } catch (IllegalArgumentException e) { host.fieldError(gallons, e.getMessage()); } });
-            }
-        }
-    }
-    private void saleResult(JSONObject sale) {
-        LinearLayout p = page("Sale saved", id(sale));
-        host.info("Walk-in sale completed.", sale.optString("reference"));
-        LinearLayout c = ui.card(p);
-        ui.pair(c, "Transaction", sale.optString("reference"), Ui.INK, true);
-        ui.pair(c, "Customer", sale.optString("customer_name"), Ui.INK, false);
-        ui.pair(c, "Date/time", host.timestamp(sale.optString("created_at")), Ui.INK, false);
-        ui.pair(c, "Recorded by", sale.optString("recorded_by_name", sale.optString("recorded_by")), Ui.INK, false);
-        ui.pair(c, "Total", host.money(sale.optLong("total_centavos")), Ui.INK, false);
-        ui.pair(c, "Payment status", title(sale.optString("payment_status")), Ui.INK, false);
-        ui.pair(c, "Balance", host.money(balance(sale)), balance(sale) > 0 ? Ui.AMBER : Ui.INK, true);
-        ui.muted(c, "Keep the transaction reference for later credit payments.").setTextSize(11);
-        if (balance(sale) > 0) host.button(p, "Collect payment", Ui.AMBER_BTN, () -> payment(sale, "sale"));
-        host.mainAction("Done", Ui.FILLED, this::pos);
+        });
+        recompute.run();
     }
 
-    // ---------------------------------------------------------------- payments
-    public void payments() { payments(null); }
-    private void payments(String customerId) {
+    // ================================================================================================ payments
+    public void payments() { payments(null, null); }
+    private void payments(String customerId) { payments(customerId, null); }
+    private void payments(String customerId, String openReference) {
+        boolean ow = owner();
         LinearLayout p = page("Payments", customerId == null ? "" : customerId);
-        boolean split = host.isOwner() && host.tablet();
-        LinearLayout listSide = p, pane = null;
-        if (split) {
-            LinearLayout h = new LinearLayout(host); h.setOrientation(LinearLayout.HORIZONTAL); p.addView(h, new LinearLayout.LayoutParams(-1, -2));
-            listSide = new LinearLayout(host); listSide.setOrientation(LinearLayout.VERTICAL); h.addView(listSide, new LinearLayout.LayoutParams(0, -2, 1));
-            pane = new LinearLayout(host); pane.setOrientation(LinearLayout.VERTICAL);
-            LinearLayout.LayoutParams dl = new LinearLayout.LayoutParams(0, -2, 1.2f); dl.leftMargin = ui.dp(16); h.addView(pane, dl);
-        }
+        TextView outstanding = ui.chip("", Ui.AMBER_BG, Ui.AMBER); outstanding.setVisibility(View.GONE);
+        if (ow) ui.hug(host.titleActions(), outstanding);
+        LinearLayout list, pane = null;
+        if (ow) { LinearLayout[] panes = host.panes(380); list = panes[0]; pane = ui.V(panes[1], 14); host.bannerAt(panes[1], 0); }
+        else list = p;
         final LinearLayout form = pane;
-        EditText search = search(listSide, "Find customer, Order ID or Walk-in credit reference", "Find customer, Order ID or Walk-in credit reference");
-        ui.muted(listSide, "Select one unpaid or partially paid reference. Payments are recorded on the actual server receipt date.").setTextSize(11);
-        ui.heading(listSide, "Unpaid and Partially Paid Orders"); LinearLayout orderBalances = stack(listSide);
-        ui.heading(listSide, "Named Walk-in Credits"); LinearLayout saleBalances = stack(listSide);
-        long[] searchRequest = {0};
-        Runnable load = () -> {
-            long requested = ++searchRequest[0];
-            JSONObject filter = json("search", value(search)); if (customerId != null) try { filter.put("customer_id", customerId); } catch (Exception ignored) {}
-            query("orders", filter, response -> { if (requested == searchRequest[0]) { orderBalances.removeAllViews(); renderBalances(orderBalances, items(response), "order", form); } });
-            query("sales", filter, response -> { if (requested == searchRequest[0]) { saleBalances.removeAllViews(); renderBalances(saleBalances, items(response), "sale", form); } });
+        EditText search = search(list, ow ? "Search customer or reference" : "Search customer, order or sale reference");
+        int[] filter = {0};
+        LinearLayout rows = ui.vbox(14);
+        Runnable[] load = new Runnable[1];
+        ui.tabs(list, new String[]{"Owes ₱", "All payments"}, 0, false, ow, 6, i -> { filter[0] = i; load[0].run(); });
+        ui.fill(list, rows);
+        long[] request = {0};
+        String[] openRef = {openReference == null ? "" : openReference};
+        load[0] = () -> {
+            long requested = ++request[0];
+            JSONObject f = json("search", value(search)); if (customerId != null) try { f.put("customer_id", customerId); } catch (Exception ignored) { }
+            query("orders", f, orders -> query("sales", f, sales -> query("payments", f, receipts -> {
+                if (requested != request[0]) return;
+                rows.removeAllViews();
+                List<JSONObject[]> due = new ArrayList<>();
+                long sum = 0;
+                JSONArray oa = items(orders), sa = items(sales);
+                for (int i = 0; i < oa.length(); i++) { JSONObject x = oa.optJSONObject(i); if (x != null && balance(x) > 0) { due.add(new JSONObject[]{x, json("kind", "order")}); sum += balance(x); } }
+                for (int i = 0; i < sa.length(); i++) { JSONObject x = sa.optJSONObject(i); if (x != null && balance(x) > 0) { due.add(new JSONObject[]{x, json("kind", "sale")}); sum += balance(x); } }
+                outstanding.setText("Outstanding " + host.money(sum)); outstanding.setVisibility(View.VISIBLE);
+                if (filter[0] == 1) { renderReceipts(rows, items(receipts), true); return; }
+                if (due.isEmpty()) empty(rows, "No outstanding balances.");
+                JSONObject[] first = null;
+                for (JSONObject[] d : due) {
+                    JSONObject x = d[0]; String kind = d[1].optString("kind");
+                    if (first == null) first = d;
+                    boolean on = x.optString("reference").equals(openRef[0]);
+                    LinearLayout item = ui.H(rows, 8); ui.bg(item, on ? Ui.TONAL : Ui.WHITE, on ? Ui.PRIMARY : Ui.BORDER, ow ? 12 : 16); ui.pad(item, ow ? 12 : 16, ow ? 12 : 14); item.setClickable(true);
+                    LinearLayout names = ui.vbox(2); ui.grow(item, names);
+                    ui.text(names, x.optString("customer_name"), 15, 22, Ui.INK, ui.p6);
+                    ui.text(names, x.optString("reference") + ("sale".equals(kind) ? " · walk-in" : ""), 12, 16, Ui.MUTED, ui.o4);
+                    LinearLayout end = ui.vbox(4); end.setGravity(Gravity.END); ui.hug(item, end);
+                    ui.hug(end, ui.paymentChip(x.optString("payment_status"), true));
+                    ui.hug(end, ui.tv(host.money(balance(x)) + " due", 12, 18, Ui.AMBER, ui.p5));
+                    item.setContentDescription(x.optString("reference") + " " + x.optString("customer_name") + " Balance " + host.money(balance(x)));
+                    item.setOnClickListener(v -> { if (form != null) { openRef[0] = x.optString("reference"); load[0].run(); form.removeAllViews(); paymentForm(form, x, kind); } else payment(x, kind); });
+                }
+                if (form != null && !openRef[0].isEmpty() && form.getChildCount() == 0) for (JSONObject[] d : due) if (d[0].optString("reference").equals(openRef[0])) { paymentForm(form, d[0], d[1].optString("kind")); break; }
+                if (form != null && openRef[0].isEmpty() && first != null) { openRef[0] = first[0].optString("reference"); JSONObject[] fx = first; load[0].run(); form.removeAllViews(); paymentForm(form, fx[0], fx[1].optString("kind")); }
+            })));
         };
-        watch(search, load); load.run();
-        host.button(listSide, "Payment history", Ui.OUTLINE, () -> {
-            String selectedSearch = value(search);
-            LinearLayout history = page("Payment history");
-            JSONObject filter = json("search", selectedSearch);
-            if (customerId != null) try { filter.put("customer_id", customerId); } catch (Exception ignored) {}
-            query("payments", filter, response -> renderReceipts(history, items(response)));
-        });
-    }
-    private void renderBalances(LinearLayout p, JSONArray rows, String kind, LinearLayout form) {
-        int count = 0;
-        for (int i = 0; i < rows.length(); i++) {
-            JSONObject r = rows.optJSONObject(i); if (r == null || balance(r) <= 0) continue; count++;
-            LinearLayout card = ui.card(p); card.setPadding(ui.dp(14), ui.dp(12), ui.dp(14), ui.dp(12)); card.setClickable(true);
-            LinearLayout row = ui.row(card);
-            LinearLayout names = new LinearLayout(host); names.setOrientation(LinearLayout.VERTICAL);
-            names.addView(ui.tv(r.optString("customer_name"), 15, Ui.INK, ui.headBold));
-            names.addView(ui.tv(r.optString("reference"), 12, Ui.MUTED, ui.body));
-            row.addView(names, new LinearLayout.LayoutParams(0, -2, 1));
-            LinearLayout right = new LinearLayout(host); right.setOrientation(LinearLayout.VERTICAL); right.setGravity(Gravity.END);
-            right.addView(ui.paymentPill(r.optString("payment_status")));
-            right.addView(ui.tv(host.money(balance(r)), 14, Ui.AMBER, ui.headBold), ui.lp(-2, -2, 0, 4, 0, 0));
-            row.addView(right);
-            card.setContentDescription(r.optString("reference") + " " + r.optString("customer_name") + " Balance " + host.money(balance(r)));
-            card.setOnClickListener(v -> { if (form != null) { form.removeAllViews(); paymentForm(form, r, kind, null); } else payment(r, kind); });
-        }
-        if (count == 0) line(p, "No outstanding " + (kind.equals("order") ? "orders" : "Walk-in credits") + " found.");
+        watch(search, load[0]); load[0].run();
     }
     private void payment(JSONObject target, String kind) {
+        if (owner()) { payments(null, target.optString("reference")); return; }
         LinearLayout p = page("Record Payment", target.optString("reference"));
-        paymentForm(p, target, kind, null);
+        paymentForm(p, target, kind);
     }
-    private void paymentForm(LinearLayout p, JSONObject target, String kind, Runnable ignored) {
+    /** Figma S15 (Staff) and O8 (Owner): collect a payment against one reference. */
+    private void paymentForm(LinearLayout p, JSONObject target, String kind) {
+        boolean ow = owner();
         long due = balance(target);
-        LinearLayout head = ui.card(p);
-        LinearLayout headRow = ui.row(head);
-        LinearLayout headNames = new LinearLayout(host); headNames.setOrientation(LinearLayout.VERTICAL);
-        headNames.addView(ui.tv("Collect payment · " + target.optString("customer_name"), 18, Ui.INK, ui.headBold));
-        headNames.addView(ui.tv(target.optString("reference") + " · Total " + host.money(target.optLong("total_centavos")) + " · Paid " + host.money(paid(target)), 12, Ui.MUTED, ui.body));
-        headRow.addView(headNames, new LinearLayout.LayoutParams(0, -2, 1));
-        LinearLayout balanceBox = new LinearLayout(host); balanceBox.setOrientation(LinearLayout.VERTICAL); balanceBox.setGravity(Gravity.END);
-        balanceBox.addView(ui.tv("Balance", 12, Ui.MUTED, ui.body)); balanceBox.addView(ui.tv(host.money(due), 24, Ui.AMBER, ui.headBold));
-        headRow.addView(balanceBox);
-        head.setContentDescription("Outstanding balance " + host.money(due));
-        LinearLayout both = new LinearLayout(host); both.setOrientation(host.tablet() ? LinearLayout.HORIZONTAL : LinearLayout.VERTICAL); p.addView(both, new LinearLayout.LayoutParams(-1, -2));
-        LinearLayout card = new LinearLayout(host); card.setOrientation(LinearLayout.VERTICAL); card.setBackground(ui.shape(Ui.WHITE, Ui.BORDER, 14)); card.setPadding(ui.dp(16), ui.dp(14), ui.dp(16), ui.dp(14));
-        LinearLayout.LayoutParams cl = host.tablet() ? new LinearLayout.LayoutParams(0, -2, 1) : new LinearLayout.LayoutParams(-1, -2); cl.bottomMargin = ui.dp(12); if (host.tablet()) cl.rightMargin = ui.dp(6); both.addView(card, cl);
-        LinearLayout after = new LinearLayout(host); after.setOrientation(LinearLayout.VERTICAL); after.setBackground(ui.shape(Ui.WHITE, Ui.BORDER, 14)); after.setPadding(ui.dp(16), ui.dp(14), ui.dp(16), ui.dp(14));
-        LinearLayout.LayoutParams al = host.tablet() ? new LinearLayout.LayoutParams(0, -2, 1) : new LinearLayout.LayoutParams(-1, -2); al.bottomMargin = ui.dp(12); if (host.tablet()) al.leftMargin = ui.dp(6); both.addView(after, al);
-        ui.muted(card, "Amount received").setTypeface(ui.bodySemi);
-        String full = BigDecimal.valueOf(due, 2).setScale(2).toPlainString();
-        LinearLayout quickHost = new LinearLayout(host); quickHost.setOrientation(LinearLayout.VERTICAL); card.addView(quickHost, new LinearLayout.LayoutParams(-1, -2));
-        EditText amount = host.input(card, "Payment amount (₱)", "", CASH); amount.setHint("₱0.00");
-        host.quickAmounts(quickHost, amount, new String[]{"Full " + host.money(due), "₱100", "₱200", "₱500"}, new String[]{full, "100", "200", "500"});
-        ui.pair(card, "Method", "Cash", Ui.INK, false);
-        ui.pair(card, "Payment date", "Today · " + shortDate(host.today()), Ui.INK, false);
-        ui.pair(card, "Recorded by", host.recorder(), Ui.INK, false);
-        ui.muted(card, "Receipt date/time and reference are assigned by the server.").setTextSize(11);
-        if (host.isOwner()) ui.muted(card, "Today: " + host.today() + " (Asia/Manila)").setTextSize(11);
-        ui.muted(after, "After saving").setTypeface(ui.bodySemi);
-        TextView[] remaining = ui.pair(after, "Balance", "—", Ui.AMBER, true), result = ui.pair(after, "Status", "—", Ui.INK, false);
-        TextView receiptNote = ui.tv("Receipt shown after you save.", 13, Ui.PRIMARY, ui.body); receiptNote.setBackground(ui.shape(Ui.TONAL, 0, 12)); receiptNote.setPadding(ui.dp(14), ui.dp(10), ui.dp(14), ui.dp(10)); after.addView(receiptNote, ui.lp(-1, -2, 0, 10, 0, 0));
-        watch(amount, () -> { try { long c = cents(amount, ""); if (c <= 0 || c > due) throw new IllegalArgumentException(); remaining[1].setText(host.money(due - c)); result[1].setText(c == due ? "Paid" : "Partially paid"); } catch (Exception e) { remaining[1].setText("—"); result[1].setText("—"); } });
+        LinearLayout amountCard, afterCard = null;
+        if (ow) {
+            LinearLayout head = ui.card(p, 12, 18);
+            LinearLayout r = ui.H(head, 8);
+            LinearLayout names = ui.vbox(2); ui.grow(r, names);
+            ui.text(names, "Collect payment · " + target.optString("customer_name"), 22, 33, Ui.INK, ui.p6);
+            ui.text(names, target.optString("reference") + " · Total " + host.money(target.optLong("total_centavos")) + " · Paid " + host.money(paid(target)), 13, 18, Ui.MUTED, ui.o4);
+            LinearLayout bal = ui.hbox(0); ui.hug(r, bal);
+            ui.hug(bal, ui.tv("Balance", 14, 19, Ui.MUTED, ui.o4));
+            ui.hug(bal, ui.tv(host.money(due), 26, 39, Ui.AMBER, ui.p6));
+            LinearLayout both = ui.H(p, 14); both.setGravity(Gravity.TOP);
+            amountCard = ui.vbox(12); ui.bg(amountCard, Ui.WHITE, Ui.BORDER, 16); ui.pad(amountCard, 18, 18); ui.grow(both, amountCard);
+            afterCard = ui.vbox(8); ui.bg(afterCard, Ui.WHITE, Ui.BORDER, 16); ui.pad(afterCard, 18, 18); ui.grow(both, afterCard);
+        } else {
+            staffHeader(p, target.optString("customer_name"), target.optString("reference") + " · Total " + host.money(target.optLong("total_centavos")) + " · Paid " + host.money(paid(target)));
+            amountCard = ui.card(p, 12, 16);
+            ui.pair(amountCard, "Balance due", host.money(due), Ui.AMBER, 22, ui.p6);
+        }
+        ui.label(amountCard, "Amount received");
+        List<Long> amounts = new ArrayList<>(); amounts.add(due);
+        for (long c : new long[]{50000, 20000, 10000, 5000, 2000}) if (c < due && amounts.size() < 3) amounts.add(c);
+        String[] labels = new String[amounts.size()];
+        for (int i = 0; i < labels.length; i++) labels[i] = i == 0 ? "Full " + wholePeso(due) : wholePeso(amounts.get(i));
+        EditText[] amountRef = new EditText[1];
+        Ui.Tabs picks = ui.tabs(amountCard, labels, -1, true, ow, 8, i -> amountRef[0].setText(pesoText(amounts.get(i))));
+        EditText amount = host.inputPlain(amountCard, "Payment amount", "", InputType.TYPE_CLASS_TEXT); amount.setHint("₱0.00");
+        amountRef[0] = amount;
+        ui.pair(amountCard, "Method", "Cash");
+        if (ow) {
+            ui.pair(amountCard, "Payment date", "Today · " + longDate(host.today()));
+            TextView[] rec = ui.pair(amountCard, "Recorded by", host.recorder()); rec[1].setSingleLine(true); rec[1].setEllipsize(android.text.TextUtils.TruncateAt.END);
+        }
+        TextView[] remaining = null, result = null;
+        LinearLayout receipt;
+        if (ow) {
+            ui.label(afterCard, "After saving");
+            remaining = ui.pair(afterCard, "Balance", "—", Ui.AMBER, 22, ui.p6);
+            result = ui.pair(afterCard, "Status", "—");
+            receipt = ui.banner(afterCard, Ui.INFO, "Receipt reference", "Shown after you save.", true);
+        } else {
+            receipt = ui.banner(p, Ui.INFO, "Balance after payment: —", "Enter the amount received.", false);
+        }
+        final TextView[] rem = remaining, res = result;
+        watch(amount, () -> {
+            int sel = -1;
+            try {
+                long c = cents(amount, ""); for (int i = 0; i < amounts.size(); i++) if (amounts.get(i) == c) sel = i;
+                if (c <= 0 || c > due) throw new IllegalArgumentException();
+                String status = c == due ? "Paid" : "Partially paid";
+                if (rem != null) { rem[1].setText(host.money(due - c)); res[1].setText(status); }
+                else ui.setBanner(receipt, Ui.INFO, "Balance after payment: " + host.money(due - c), "Status becomes " + status + ".", false);
+            } catch (Exception e) {
+                if (rem != null) { rem[1].setText("—"); res[1].setText("—"); }
+                else ui.setBanner(receipt, Ui.INFO, "Balance after payment: —", "Enter the amount received.", false);
+            }
+            picks.select(sel, false);
+        });
         Runnable save = () -> valid(() -> {
             long c;
             try { c = cents(amount, "Enter an amount greater than zero and not above the balance."); } catch (IllegalArgumentException e) { host.fieldError(amount, e.getMessage()); return; }
-            if (c <= 0 || c > due) { host.fieldError(amount, "Enter an amount greater than zero and not above the balance."); return; }
-            host.command("record_payment", json("reference", target.optString("reference"), "amount_centavos", c), result2 -> {
-                JSONObject receipt = nested(result2, "payment"); LinearLayout saved = page("Payment recorded");
-                host.info("Payment recorded.", target.optString("reference") + " · " + host.money(c));
-                LinearLayout sc = ui.card(saved);
-                ui.pair(sc, "Payment reference", receipt.optString("reference"), Ui.INK, true);
-                ui.pair(sc, "Related reference", target.optString("reference"), Ui.INK, false);
-                ui.pair(sc, "Amount", host.money(c), Ui.INK, false);
-                ui.pair(sc, "Balance", host.money(receipt.optLong("balance_centavos", due - c)), Ui.AMBER, true);
-                ui.pair(sc, "Payment status", title(receipt.optString("payment_status", due == c ? "paid" : "partially_paid")), Ui.INK, false);
-                ui.pair(sc, "Receipt time", host.timestamp(receipt.optString("received_at", receipt.optString("created_at"))), Ui.INK, false);
-                ui.pair(sc, "Recorded by", receipt.optString("recorded_by_name", receipt.optString("recorded_by")), Ui.INK, false);
-                host.mainAction("Done", Ui.FILLED, () -> { if (kind.equals("order")) order(id(target)); else payments(); });
+            if (c > due) { host.fieldError(amount, "Payment cannot exceed the " + host.money(due) + " balance."); return; }
+            if (c <= 0) { host.fieldError(amount, "Enter an amount greater than zero and not above the balance."); return; }
+            host.command("record_payment", json("reference", target.optString("reference"), "amount_centavos", c), done -> {
+                JSONObject r = nested(done, "payment");
+                long left = r.optLong("balance_centavos", due - c);
+                String status = title(r.optString("payment_status", left == 0 ? "paid" : "partially_paid"));
+                paymentRecorded(target, kind, r, c, left, status);
             });
         });
-        if (p == host.currentContent()) host.mainAction("Save payment", Ui.FILLED, save);
-        else {
-            LinearLayout buttons = ui.row(p); buttons.setGravity(Gravity.END);
-            Button cancel = host.button(buttons, "Cancel", Ui.OUTLINE, () -> { p.removeAllViews(); });
-            cancel.setLayoutParams(ui.lp(-2, -2, 0, 0, 8, 0));
-            Button saveButton = host.button(buttons, "Save payment", Ui.FILLED, save); saveButton.setLayoutParams(new LinearLayout.LayoutParams(-2, -2));
+        if (ow) { LinearLayout row = host.actionRow(p); host.ownerAction(row, "Cancel", Ui.OUTLINE, () -> p.removeAllViews()); host.ownerAction(row, "Save payment", Ui.FILLED, save); }
+        else host.mainAction("Save payment", Ui.FILLED, save);
+        if (ow) {
+            LinearLayout history = ui.card(p, 6, 18);
+            ui.text(history, "Payment history", 16, 24, Ui.INK, ui.p6);
+            query("payments", json("search", target.optString("reference")), r -> renderReceipts(history, items(r), false));
         }
     }
-    private void renderReceipts(LinearLayout p, JSONArray receipts) {
-        if (receipts.length() == 0) line(p, "No payments recorded.");
+    /** Figma S16 / O8d. */
+    private void paymentRecorded(JSONObject target, String kind, JSONObject receipt, long amount, long left, String status) {
+        String detail = host.money(amount) + " cash · Balance " + host.money(left) + " · " + status;
+        if (owner()) { payments(); host.info("Payment recorded. · " + receipt.optString("reference"), target.optString("reference") + " · " + detail); return; }
+        if ("order".equals(kind)) {
+            LinearLayout p = page("Order Details", id(target));
+            loadOrder(id(target), o -> { staffDetail(p, o); host.info("Payment recorded. · " + receipt.optString("reference"), detail); });
+        } else {
+            LinearLayout p = page("Payment recorded", target.optString("reference"));
+            staffHeader(p, target.optString("customer_name"), target.optString("reference") + " · Walk-in");
+            LinearLayout c = ui.card(p, 8, 16);
+            ui.pair(c, "Total", host.money(target.optLong("total_centavos")));
+            ui.pair(c, "Paid", host.money(target.optLong("total_centavos") - left));
+            ui.pair(c, "Balance", host.money(left), left > 0 ? Ui.AMBER : Ui.INK, 17, ui.p6);
+            host.info("Payment recorded. · " + receipt.optString("reference"), detail);
+            host.mainAction("Done", Ui.FILLED, this::payments);
+        }
+    }
+    private void renderReceipts(LinearLayout p, JSONArray receipts, boolean cards) {
+        if (receipts.length() == 0) { empty(p, "No payments recorded."); return; }
         for (int i = 0; i < receipts.length(); i++) {
             JSONObject r = receipts.optJSONObject(i); if (r == null) continue;
-            LinearLayout row = ui.column(p); row.setPadding(0, ui.dp(6), 0, ui.dp(6));
-            LinearLayout top = ui.row(row);
-            top.addView(ui.tv(r.optString("reference"), 14, Ui.INK, ui.headBold), new LinearLayout.LayoutParams(0, -2, 1));
-            top.addView(ui.tv(host.money(r.optLong("amount_centavos")), 14, Ui.GREEN, ui.headBold));
-            ui.muted(row, "Related reference: " + r.optString("invoice_reference", r.optString("charge_reference", r.optString("related_reference"))));
-            ui.muted(row, "Received: " + host.timestamp(r.optString("received_at", r.optString("created_at"))) + " · Recorded by: " + r.optString("recorded_by_name", r.optString("recorded_by"))).setTextSize(11);
+            String when = shortDate(r.optString("received_at", r.optString("created_at")).length() >= 10 ? r.optString("received_at", r.optString("created_at")).substring(0, 10) : "");
+            try { when = OffsetDateTime.parse(r.optString("received_at", r.optString("created_at"))).atZoneSameInstant(Rules.MANILA).format(DateTimeFormatter.ofPattern("d MMM", Locale.ENGLISH)); } catch (Exception ignored) { }
+            String who = r.optString("recorded_by_name", r.optString("recorded_by"));
+            String related = r.optString("invoice_reference", r.optString("charge_reference", r.optString("related_reference")));
+            if (cards) {
+                LinearLayout card = ui.card(p, 6, 14);
+                LinearLayout top = ui.H(card, 8);
+                ui.grow(top, ui.tv(r.optString("reference"), 15, 22, Ui.INK, ui.p5));
+                ui.hug(top, ui.tv(host.money(r.optLong("amount_centavos")), 15, 22, Ui.GREEN, ui.p6));
+                ui.text(card, when + " · " + related + " · " + who, 13, 18, Ui.MUTED, ui.o4);
+            } else {
+                LinearLayout line = ui.H(p, 16);
+                ui.hug(line, ui.tv(r.optString("reference"), 13, 20, Ui.INK, ui.p5));
+                ui.hug(line, ui.tv(when, 13, 18, Ui.MUTED, ui.o4));
+                ui.hug(line, ui.tv(host.money(r.optLong("amount_centavos")), 13, 20, Ui.INK, ui.p5));
+                ui.hug(line, ui.tv(who, 13, 18, Ui.MUTED, ui.o4));
+            }
         }
     }
 }

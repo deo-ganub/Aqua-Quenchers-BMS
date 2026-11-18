@@ -1,0 +1,14 @@
+#!/bin/sh
+# IAS SEC-TASK-101: reject staged privileged credentials. Enable once per clone with:
+#   git config core.hooksPath .githooks
+# Fails closed: a missing scanner blocks the commit instead of silently skipping the check.
+if ! command -v gitleaks >/dev/null 2>&1; then
+  echo "pre-commit: gitleaks v8.30.1 is required (see policies/gitleaks-release.json). Commit blocked." >&2
+  exit 1
+fi
+version=$(gitleaks version 2>/dev/null | tr -d 'v[:space:]')
+if [ "$version" != "8.30.1" ]; then
+  echo "pre-commit: expected gitleaks 8.30.1, found '$version'. Commit blocked." >&2
+  exit 1
+fi
+exec gitleaks git --pre-commit --staged --redact --config .gitleaks.toml --no-banner

@@ -1,1 +1,7 @@
-<resources><item name="field_error" type="id"/></resources>
+<resources>
+    <item name="field_error" type="id"/>
+    <item name="button_shape" type="id"/>
+    <item name="button_style" type="id"/>
+    <item name="field_owner" type="id"/>
+    <item name="iso_date" type="id"/>
+</resources>

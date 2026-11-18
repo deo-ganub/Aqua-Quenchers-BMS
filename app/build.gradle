@@ -29,7 +29,16 @@ android {
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
     buildFeatures { buildConfig true }
-    buildTypes { release { minifyEnabled false; proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro' } }
+    buildTypes {
+        // ALGOCOM: release builds accept only an Owner-reviewed (nonsynthetic) model pinned by AQ_CLASSIFIER_SHA256.
+        release { minifyEnabled false; proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'; buildConfigField 'boolean', 'ALLOW_SYNTHETIC_MODEL', 'false' }
+        // Debug builds may carry the clearly labelled synthetic demo model from src/debug/assets.
+        debug {
+            buildConfigField 'boolean', 'ALLOW_SYNTHETIC_MODEL', 'true'
+            def demo = file('src/debug/assets/expense-model.json')
+            if (demo.exists()) buildConfigField 'String', 'CLASSIFIER_SHA256', quoted(java.security.MessageDigest.getInstance('SHA-256').digest(demo.bytes).encodeHex().toString())
+        }
+    }
     compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
     lint { abortOnError true; checkReleaseBuilds true }
     testOptions { unitTests.returnDefaultValues = true }

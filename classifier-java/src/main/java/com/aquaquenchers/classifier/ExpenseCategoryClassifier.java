@@ -29,6 +29,9 @@ public final class ExpenseCategoryClassifier {
     private final Model model;
     public ExpenseCategoryClassifier(Model model) { this.model = model; }
     public static ExpenseCategoryClassifier unavailable() { return new ExpenseCategoryClassifier(null); }
+    /** True when the loaded package was trained on synthetic data (demo builds only); never station accuracy. */
+    public boolean isSynthetic() { return model != null && model.synthetic; }
+    public boolean isAvailable() { return model != null; }
     public static ExpenseCategoryClassifier fromPackage(byte[] bytes, String trustedSha256, boolean allowSynthetic) {
         try { return new ExpenseCategoryClassifier(Model.load(bytes, trustedSha256, allowSynthetic)); }
         catch (IllegalArgumentException ex) { return unavailable(); }

@@ -1,0 +1,6 @@
+# IAS Task 4: Git policy-as-code. Pinned Gitleaks release v8.30.1.
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks

@@ -1,0 +1,47 @@
+# IAS SEC-TASK-101 / ACL-08: block privileged credentials before commit and in CI.
+# Extends the maintained Gitleaks default rules with project-specific Supabase/Figma patterns.
+title = "Aqua Quenchers secret rules"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "supabase-secret-key"
+description = "Supabase secret API key (backend only, never in Android or Git)"
+regex = '''sb_secret_[A-Za-z0-9_-]{20,}'''
+keywords = ["sb_secret_"]
+
+[[rules]]
+id = "supabase-management-token"
+description = "Supabase personal access / management token"
+regex = '''sbp_[a-f0-9]{40}'''
+keywords = ["sbp_"]
+
+[[rules]]
+id = "supabase-service-role-jwt"
+description = "Legacy Supabase service_role JWT"
+regex = '''eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]*(c2VydmljZV9yb2xl|NlcnZpY2Vfcm9sZ|zZXJ2aWNlX3JvbG)[A-Za-z0-9_-]*\.[A-Za-z0-9_-]{10,}'''
+keywords = ["eyj"]
+
+[[rules]]
+id = "figma-token"
+description = "Figma personal access token"
+regex = '''figd_[A-Za-z0-9_-]{30,}'''
+keywords = ["figd_"]
+
+[[rules]]
+id = "aq-synthetic-enforcement-marker"
+description = "Harmless marker used only to prove the hook and CI reject a staged secret"
+regex = '''AQ_SYNTHETIC_SECRET_[A-Z0-9]{16}'''
+keywords = ["aq_synthetic_secret_"]
+
+[allowlist]
+description = "Public client values and generated build output"
+paths = [
+  '''(^|/)build/''',
+  '''(^|/)\.gradle/''',
+  '''(^|/)handoff/''',
+]
+regexes = [
+  '''sb_publishable_[A-Za-z0-9_-]+''',
+]
