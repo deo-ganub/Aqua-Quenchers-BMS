@@ -30,6 +30,8 @@ import java.util.function.Consumer;
  * Every successful write comes from the authenticated RPC; rules and messages follow the requirements.
  */
 public final class OperationsUi {
+    /** Largest gallon quantity accepted for one new order. */
+    static final int MAX_ORDER_GALLONS = 20;
     private final MainActivity host;
     private final Ui ui;
     private long generation;
@@ -112,6 +114,13 @@ public final class OperationsUi {
     static long paid(JSONObject item) { return item.optLong("paid_centavos", item.optLong("amount_paid_centavos")); }
     static long balance(JSONObject item) { return item.has("balance_centavos") ? item.optLong("balance_centavos") : item.optLong("total_centavos") - paid(item); }
     static int pending(JSONObject o) { return o.optInt("pending_quantity", o.optInt("quantity") - o.optInt("delivered_quantity")); }
+    /** List order: in progress first, then Ready, then delivered but unpaid, then delivered and paid last. */
+    static int listRank(JSONObject o) {
+        String status = o.optString("status");
+        if ("ready_for_delivery".equals(status)) return 1;
+        if ("delivered".equals(status)) return balance(o) > 0 ? 2 : 3;
+        return 0;
+    }
     /** 1 = pickup, 2 = refilling, 3 = delivery; 0 = finished. */
     static int group(String status) {
         switch (status == null ? "" : status) {
@@ -483,6 +492,7 @@ public final class OperationsUi {
                 if (requested != searchRequest[0]) return;
                 loaded.clear(); JSONArray all = items(response);
                 for (int i = 0; i < all.length(); i++) { JSONObject o = all.optJSONObject(i); if (o != null) loaded.add(o); }
+                loaded.sort(Comparator.comparingInt(OperationsUi::listRank));
                 render[0].run();
             });
         };
@@ -556,6 +566,7 @@ public final class OperationsUi {
                 if (requested != searchRequest[0]) return;
                 loaded.clear(); JSONArray all = items(response);
                 for (int i = 0; i < all.length(); i++) { JSONObject o = all.optJSONObject(i); if (o != null) loaded.add(o); }
+                loaded.sort(Comparator.comparingInt(OperationsUi::listRank));
                 render[0].run();
             });
         };
@@ -685,6 +696,7 @@ public final class OperationsUi {
             if (picked[0] == null) { pick.run(); return; }
             int q;
             try { q = quantity(quantity); } catch (IllegalArgumentException e) { host.fieldError(quantity, e.getMessage()); return; }
+            if (q > MAX_ORDER_GALLONS) { host.fieldError(quantity, "An order can be at most " + MAX_ORDER_GALLONS + " gallons."); return; }
             String d = orderDate[0];
             JSONObject c = picked[0]; long unit = Rules.fixedPrice(c.optString("customer_type"));
             host.command("create_order", json("customer_id", id(c), "quantity", q, "business_date", d), result -> {

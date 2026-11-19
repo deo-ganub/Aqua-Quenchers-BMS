@@ -21,8 +21,8 @@ android {
         applicationId 'com.aquaquenchers.bms'
         minSdk 29
         targetSdk 35
-        versionCode 1
-        versionName '0.1.0'
+        versionCode 3
+        versionName '0.1.2'
         buildConfigField 'String', 'CLASSIFIER_SHA256', quoted(publicValue('AQ_CLASSIFIER_SHA256'))
         buildConfigField 'String', 'SUPABASE_URL', quoted(publicValue('AQ_SUPABASE_URL'))
         buildConfigField 'String', 'SUPABASE_ANON_KEY', quoted(clientKey)

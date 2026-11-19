@@ -30,7 +30,7 @@ public class LoginRateLimitDeviceTest {
             scenario.onActivity(a->{((EditText)a.findViewById(R.id.content).findViewWithTag("Username")).setText(fixture.optString("username"));((EditText)a.findViewById(R.id.content).findViewWithTag("Password")).setText(fixture.optString("password"));button(a.getWindow().getDecorView()).performClick();});
             AtomicReference<String> text=new AtomicReference<>("");long deadline=SystemClock.elapsedRealtime()+30000;
             while(text.get().isEmpty()&&SystemClock.elapsedRealtime()<deadline){scenario.onActivity(a->text.set(((TextView)a.findViewById(R.id.message)).getText().toString()));SystemClock.sleep(100);}
-            assertEquals("Sign-in unavailable. Try again later.",text.get());
+            assertEquals("Too many sign-in attempts. Wait 15 minutes, then try again.",text.get());
             scenario.onActivity(a->{assertEquals(0,((ViewGroup)a.findViewById(R.id.navigation)).getChildCount());assertNotNull(button(a.getWindow().getDecorView()));assertEquals(fixture.optString("username"),((EditText)a.findViewById(R.id.content).findViewWithTag("Username")).getText().toString());});
         }
     }

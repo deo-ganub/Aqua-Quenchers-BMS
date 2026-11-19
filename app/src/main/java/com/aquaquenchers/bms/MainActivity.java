@@ -271,9 +271,10 @@ public final class MainActivity extends Activity {
         backAction = backLabel;
         appTitle = ui.single(ui.tv("", 24, 35, Ui.INK, ui.p6));
         ui.grow(row, appTitle);
-        TextView account = ui.tv(isOwner() ? "OWNER ACCOUNT" : "STAFF ACCOUNT", 10, 16, Ui.INK, ui.o4); account.setGravity(Gravity.END);
-        FrameLayout.LayoutParams acp = new FrameLayout.LayoutParams(-2, -2, Gravity.END | Gravity.TOP); acp.topMargin = ui.px(1); acp.rightMargin = ui.px(20);
-        bar.addView(account, acp);
+        // Account label sits on the same line as the title, at the right edge, instead of pinned to the top.
+        TextView account = ui.tv(isOwner() ? "OWNER ACCOUNT" : "STAFF ACCOUNT", 10, 16, Ui.INK, ui.o4);
+        account.setGravity(Gravity.CENTER_VERTICAL | Gravity.END); account.setSingleLine(true);
+        ui.hug(row, account);
         // Viewport: scroll body + floating action
         FrameLayout vp = new FrameLayout(this); vp.setBackgroundColor(Ui.BG);
         c.addView(vp, new LinearLayout.LayoutParams(-1, 0, 1));
@@ -848,7 +849,7 @@ public final class MainActivity extends Activity {
         }, e -> {
             busy(false);
             if (pending == state && attempt == loginGeneration && !isDestroyed()) {
-                if (e.status == 429) signError("Sign-in unavailable. Try again later.", false, false);
+                if (e.status == 429) signError("Too many sign-in attempts. Wait 15 minutes, then try again.", false, false);
                 else if (e.status == 0) signError(e.getMessage(), false, false);
                 else signError("Invalid username or password.", true, false);
             }
@@ -859,7 +860,7 @@ public final class MainActivity extends Activity {
     // Navigation
     // =====================================================================================================
     private void restoreRoute() { if (ownerUi.restore(state.route, state.routeEntity) || operations.restore(state.route, state.routeEntity)) return; showHome(); }
-    private void navigate(String route) { switch (route) { case "Dashboard": case "Home": showHome(); break; case "Orders": operations.orders(); break; case "Customers": operations.customers(); break; case "POS": operations.pos(); break; case "Payments": operations.payments(); break; case "Expenses": ownerUi.expenses(); break; case "Reports": ownerUi.reports(); break; case "Settings": case "More": ownerUi.settings(); break; default: showHome(); } }
+    private void navigate(String route) { switch (route) { case "Dashboard": case "Home": showHome(); break; case "Orders": operations.orders(); break; case "Customers": operations.customers(); break; case "POS": operations.pos(); break; case "Payments": operations.payments(); break; case "Expenses": ownerUi.expenses(); break; case "Reports": ownerUi.reports(); break; case "More": ownerUi.more(); break; case "Settings": ownerUi.settings(); break; default: showHome(); } }
     /** Header Back: the parent of the current page, never a status shortcut. */
     void goBack() {
         String entity = state.routeEntity == null ? "" : state.routeEntity;

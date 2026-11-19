@@ -119,6 +119,8 @@ final class OwnerUi {
         int[] per = {1}; String savedPer = a.choice("expense_period"); if (!savedPer.isEmpty()) try { per[0] = Math.max(0, Math.min(3, Integer.parseInt(savedPer))); } catch (NumberFormatException ignored) { }
         int[] cat = {0};
         LinearLayout filters = ui.hbox(8); ui.hug(list, filters);
+        // Phones: the add form opens on its own page so the list stays readable.
+        if (!a.wide()) ui.fill(list, ui.button("+  Add expense", Ui.FILLED, 46, 12, 15, () -> addExpensePage()));
         LinearLayout records = ui.V(list, 14);
         long[] filterRequest = {0}; Runnable[] load = new Runnable[1];
         TextView[] chips = new TextView[2];
@@ -158,8 +160,13 @@ final class OwnerUi {
                 }
             });
         };
-        expenseForm(panes[1]);
+        if (a.wide()) expenseForm(panes[1]);
         load[0].run();
+    }
+    /** Phone add-expense screen: the same form as the tablet, on its own page. */
+    private void addExpensePage() {
+        LinearLayout pageBody = a.page("Add expense");
+        expenseForm(pageBody);
     }
     private void customPeriod(Runnable applied) {
         Dialog[] d = new Dialog[1];
@@ -330,7 +337,38 @@ final class OwnerUi {
     }
 
     // ================================================================================================ settings
-    void settings() { if (a.wide() && a.isOwner()) settingsPage("Inventory", null); else staffSettings(); }
+    void settings() {
+        if (a.wide() && a.isOwner()) settingsPage("Inventory", null);
+        else if (a.isOwner()) ownerPhoneSettings();
+        else staffSettings();
+    }
+    /** Owner phone "More" tab: Expenses, Reports and Settings in one short list. */
+    void more() {
+        LinearLayout p = a.page("More");
+        LinearLayout list = ui.V(p, 10);
+        moreRow(list, "Expenses", "Record and review expenses", () -> expenses());
+        moreRow(list, "Reports", "Financial summary PDF", () -> reports());
+        moreRow(list, "Settings", "Inventory, staff, password, authenticator", () -> settings());
+    }
+    private void moreRow(LinearLayout parent, String title, String detail, Runnable open) {
+        LinearLayout row = ui.H(parent, 12); ui.pad(row, 16, 14); ui.bg(row, Ui.WHITE, Ui.BORDER, 16);
+        row.setMinimumHeight(ui.px(64)); row.setClickable(true); row.setContentDescription(title);
+        LinearLayout text = ui.grow(row, ui.vbox(2));
+        ui.text(text, title, 16, 22, Ui.INK, ui.p6);
+        ui.text(text, detail, 13, 18, Ui.MUTED, ui.o4);
+        ui.hug(row, ui.tv("›", 18, 27, Ui.MUTED, ui.p5));
+        row.setOnClickListener(v -> open.run());
+    }
+    /** Owner phone Settings: one row per section, each opening its existing page. */
+    private void ownerPhoneSettings() {
+        LinearLayout p = a.page("Settings");
+        LinearLayout list = ui.V(p, 10);
+        moreRow(list, "Inventory", "Stock counts", () -> settingsPage("Inventory", null));
+        moreRow(list, "Staff accounts", "Add, edit or deactivate staff", () -> settingsPage("Staff accounts", null));
+        moreRow(list, "Change password", "At least 15 characters", () -> settingsPage("Change password", null));
+        moreRow(list, "Authenticator", "Set up or remove the code app", () -> settingsPage("Authenticator", null));
+        moreRow(list, "Log out", "Sign out of this device", () -> a.endSession("Signed out."));
+    }
     /** Owner settings (O11–O13): menu on the left (300), selected section on the right. */
     private void settingsPage(String section, String entity) {
         if (!owner()) return;
@@ -375,7 +413,8 @@ final class OwnerUi {
             if (users == null || users.length() == 0) { ui.text(rows, "No staff accounts yet.", 14, 19, Ui.MUTED, ui.o4); staffForm(formHost, null); return; }
             JSONObject chosen = null;
             for (int i = 0; i < users.length(); i++) { JSONObject u = users.optJSONObject(i); if (u != null && u.optString("user_id").equals(selected)) chosen = u; }
-            if (chosen == null) chosen = users.optJSONObject(0);
+            // Tablets open the first account's edit form; phones wait for a tap so the list stays clean.
+            if (chosen == null && a.wide()) chosen = users.optJSONObject(0);
             for (int i = 0; i < users.length(); i++) {
                 JSONObject u = users.optJSONObject(i); if (u == null) continue;
                 boolean on = chosen != null && u.optString("user_id").equals(chosen.optString("user_id"));
@@ -389,7 +428,7 @@ final class OwnerUi {
                 item.setContentDescription(u.optString("full_name") + " • " + u.optString("username") + " • " + (u.optBoolean("active") ? "Active" : "Inactive"));
                 item.setOnClickListener(v -> staffAccounts(u.optString("user_id")));
             }
-            staffForm(formHost, chosen);
+            if (chosen != null) staffForm(formHost, chosen);
         });
     }
     private void validateAccount(EditText name, EditText username, EditText contact) {
