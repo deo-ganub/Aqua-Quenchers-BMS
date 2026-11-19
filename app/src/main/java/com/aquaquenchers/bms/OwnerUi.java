@@ -26,7 +26,8 @@ final class OwnerUi {
     private ExpenseCategoryClassifier cachedClassifier;
     private JSONObject report;
     private byte[] pdf;
-    private static final int PDF_REQUEST = 201;
+    private static final int PDF_REQUEST = 201, CSV_REQUEST = 202;
+    private byte[] csv;
     private static final int TEXT = InputType.TYPE_CLASS_TEXT;
     private static final int MONEY = InputType.TYPE_CLASS_TEXT;
     private static final int SECRET = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
@@ -307,6 +308,7 @@ final class OwnerUi {
         ui.text(names, "Financial summary", 22, 33, Ui.INK, ui.p6);
         ui.text(names, r.optString("station", "Aqua Quenchers") + " · " + HomeUi.rangeLabel(r.optString("start_date"), r.optString("end_date")) + " · Generated " + generated(r), 13, 18, Ui.MUTED, ui.o4);
         ui.hug(head, ui.button("Export PDF", Ui.FILLED, 46, 12, 15, () -> a.guarded(this::exportPdf)));
+        ui.hug(head, ui.button("Export CSV", Ui.OUTLINE, 46, 12, 15, () -> a.guarded(this::exportCsv)));
         if (stale) ui.banner(card, Ui.WARNING, "Showing the last valid report", "Fix the dates on the left to update it.", true);
         String[] labels = {"Revenue", "Payments received", "Outstanding balances", "Expenses", "Net income"};
         String[] keys = {"revenue_centavos", "payments_received_centavos", "outstanding_centavos", "expenses_centavos", "net_income_centavos"};
@@ -321,9 +323,19 @@ final class OwnerUi {
         }
         ui.text(card, "Net income = payments received " + a.money(r.optLong("payments_received_centavos")) + " − expenses " + a.money(r.optLong("expenses_centavos")), 13, 18, Ui.MUTED, ui.o4);
     }
+    private void exportCsv() {
+        if (!owner()) return;
+        if (report == null) throw new IllegalArgumentException("Generate a report first.");
+        csv = ReportCsv.render(report.optString("station", "Aqua Quenchers"), HomeUi.rangeLabel(report.optString("start_date"), report.optString("end_date")),
+                a.timestamp(report.optString("generated_at")), report.optLong("revenue_centavos"), report.optLong("payments_received_centavos"),
+                report.optLong("expenses_centavos"), report.optLong("net_income_centavos"), report.optLong("outstanding_centavos"));
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT).setType("text/csv").addCategory(Intent.CATEGORY_OPENABLE).putExtra(Intent.EXTRA_TITLE, "Aqua-Quenchers-" + report.optString("start_date") + ".csv");
+        a.startActivityForResult(intent, CSV_REQUEST);
+    }
     private void exportPdf() { if (!owner()) return; if (report == null) throw new IllegalArgumentException("Generate a report first."); pdf = ReportPdf.render(report); a.pendingPdf(pdf); Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT).setType("application/pdf").addCategory(Intent.CATEGORY_OPENABLE).putExtra(Intent.EXTRA_TITLE, "Aqua-Quenchers-" + report.optString("start_date") + ".pdf"); a.startActivityForResult(intent, PDF_REQUEST); }
     private String generated(JSONObject r) { try { return OffsetDateTime.parse(r.optString("generated_at")).atZoneSameInstant(Rules.MANILA).format(DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH)); } catch (Exception e) { return a.timestamp(r.optString("generated_at")); } }
     void activityResult(int request, int result, Intent data) {
+        if (request == CSV_REQUEST) { saveCsv(result, data); return; }
         if (request != PDF_REQUEST) return;
         if (result != Activity.RESULT_OK || data == null) { pdf = null; a.pendingPdf(null); return; }
         if (pdf == null) return; Uri uri = data.getData(); if (uri == null) return;
@@ -334,6 +346,16 @@ final class OwnerUi {
         a.info("Report exported successfully.", report == null ? "" : "Financial summary · " + HomeUi.rangeLabel(report.optString("start_date"), report.optString("end_date")) + " · PDF");
         try { a.startActivity(new Intent(Intent.ACTION_VIEW).setDataAndType(uri, "application/pdf").addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)); }
         catch (ActivityNotFoundException | SecurityException ignored) { }
+    }
+
+    private void saveCsv(int result, Intent data) {
+        if (result != Activity.RESULT_OK || data == null) { csv = null; return; }
+        if (csv == null) return;
+        Uri uri = data.getData(); if (uri == null) return;
+        try (OutputStream out = a.getContentResolver().openOutputStream(uri)) { if (out == null) throw new IOException(); out.write(csv); out.flush(); }
+        catch (IOException | SecurityException e) { a.error("CSV export failed. Try again."); return; }
+        csv = null;
+        a.info("Report exported successfully.", report == null ? "" : "Financial summary · " + HomeUi.rangeLabel(report.optString("start_date"), report.optString("end_date")) + " · CSV");
     }
 
     // ================================================================================================ settings
