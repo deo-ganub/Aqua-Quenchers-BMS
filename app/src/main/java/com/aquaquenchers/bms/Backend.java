@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 import android.os.Handler;
 import android.os.Looper;
 
-/** HTTPS-only API transport. No financial write queue, no embedded privileged keys. */
+/** HTTPS-only API transport, no embedded privileged keys. Saves that fail for lack of connection are kept by OfflineQueue (encrypted) and resent with the same request_id. */
 public final class Backend {
     public static final class Failure extends Exception {
         public final int status;

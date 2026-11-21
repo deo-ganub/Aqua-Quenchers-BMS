@@ -44,6 +44,10 @@ public final class MainActivity extends Activity {
     private HomeUi home;
     private final Map<String, View> navItems = new LinkedHashMap<>();
     private final Set<Dialog> dialogs = new HashSet<>();
+    // Offline save queue (see OfflineQueue): encrypted on the device, sent automatically, never shown as saved early.
+    private OfflineStore offlineStore;
+    private OfflineQueue offline = new OfflineQueue();
+    private boolean offlineSending;
 
     static final class Session {
         Backend backend = new Backend(BuildConfig.SUPABASE_URL, BuildConfig.SUPABASE_ANON_KEY);
@@ -73,6 +77,45 @@ public final class MainActivity extends Activity {
         operations = new OperationsUi(this); ownerUi = new OwnerUi(this); home = new HomeUi(this);
         if (state.profile == null) signIn(); else { shell(); restoreRoute(); }
         clock.postDelayed(idleCheck, 60000);
+        offlineStore = new OfflineStore(this);
+        try { offline = offlineStore.load(); } catch (Exception e) { offline = new OfflineQueue(); clock.post(() -> error("Unsent saves on this phone could not be read.", "They were not sent. Check recent records and enter any missing ones again.")); }
+        clock.postDelayed(offlineTick, 5000);
+    }
+    private final Runnable offlineTick = new Runnable() { public void run() { flushOffline(); clock.postDelayed(this, 30000); } };
+    private void persistOffline() { try { offlineStore.save(offline); } catch (Exception e) { error("Could not keep the unsent save on this phone.", "Stay on this screen and retry when connected."); } }
+    /** Keeps a save that failed for lack of connection; it is sent later with the same request_id. */
+    private void queueOffline(JSONObject request) {
+        String uid = state.profile.optString("user_id");
+        boolean kept = offline.add(uid, request, System.currentTimeMillis());
+        if (!kept) { error("Not sent — no connection.", "Too many saves are already waiting on this phone. Reconnect before entering more."); return; }
+        persistOffline();
+        int waiting = offline.sizeFor(uid);
+        banner(Ui.WARNING, "Not sent yet — no connection", OfflineQueue.label(request.optString("operation")) + " is kept on this phone (encrypted) and will be sent automatically when you are back online. It is not saved until you see \"Sent\". Don't enter it again." + (waiting > 1 ? " Waiting: " + waiting + "." : ""));
+    }
+    /** Sends waiting saves for the signed-in account, oldest first, one at a time. */
+    private void flushOffline() {
+        if (offlineSending || isDestroyed() || state == null || state.profile == null || offline.size() == 0) return;
+        long now = System.currentTimeMillis();
+        java.util.List<OfflineQueue.Entry> expired = offline.expire(now);
+        if (!expired.isEmpty()) { persistOffline(); error(expired.size() + (expired.size() == 1 ? " unsent save was" : " unsent saves were") + " older than 3 days and removed.", "They were never saved. Enter them again if they are still needed."); }
+        java.util.List<OfflineQueue.Entry> ready = offline.sendable(state.profile.optString("user_id"), now);
+        if (ready.isEmpty()) return;
+        OfflineQueue.Entry entry = ready.get(0); Session sent = state; offlineSending = true;
+        state.backend.call("/rest/v1/rpc/aq_command", json("p_request", entry.request), r -> {
+            offlineSending = false; if (sent != state || isDestroyed()) return;
+            String idField = "update_profile".equals(entry.operation) ? "user_id" : "id";
+            if (!Rules.uuid(r.optString(idField))) return; // not confirmed: keep it and try again later
+            offline.remove(entry.requestId); persistOffline();
+            state.keys.values().removeIf(v -> v.equals(entry.requestId));
+            info("Sent: " + entry.label, (r.optString("reference").isEmpty() ? "" : r.optString("reference") + " · ") + "saved on the server" + (offline.sizeFor(state.profile.optString("user_id")) > 0 ? " · more waiting" : ""));
+            flushOffline();
+        }, e -> {
+            offlineSending = false; if (sent != state || isDestroyed()) return;
+            if (OfflineQueue.outcome(e.status) == OfflineQueue.Outcome.KEEP) return;
+            offline.remove(entry.requestId); persistOffline();
+            state.keys.values().removeIf(v -> v.equals(entry.requestId));
+            error("Not saved: " + entry.label + " — " + e.getMessage(), "This waiting save was refused by the server. Check the record and enter it again if needed.");
+        });
     }
     private final Runnable idleCheck = new Runnable() { public void run() { if (state.profile != null && SystemClock.elapsedRealtime() - state.lastInteraction >= INACTIVITY) endSession("Session expired. Sign in again."); clock.postDelayed(this, 60000); } };
     @Override public void onUserInteraction() { super.onUserInteraction(); if (state != null) { if (state.profile != null && SystemClock.elapsedRealtime() - state.lastInteraction >= INACTIVITY) { endSession("Session expired. Sign in again."); return; } state.lastInteraction = SystemClock.elapsedRealtime(); } }
@@ -81,7 +124,7 @@ public final class MainActivity extends Activity {
         applyDensity();
         if (state != null && state.profile != null) {
             if (SystemClock.elapsedRealtime() - state.lastInteraction >= INACTIVITY) endSession("Session expired. Sign in again.");
-            else query("me", json(), p -> { boolean changed = !state.profile.optString("role").equals(p.optString("role")); state.profile = p; if (changed) { shell(); showHome(); } });
+            else query("me", json(), p -> { boolean changed = !state.profile.optString("role").equals(p.optString("role")); state.profile = p; if (changed) { shell(); showHome(); } flushOffline(); });
         }
     }
     @Override protected void onDestroy() { clock.removeCallbacksAndMessages(null); dismissDialogs(); if (ownerUi != null) ownerUi.close(); if (state != null) { state.expenseState.cancelPending(); if (isFinishing()) state.backend.close(); } super.onDestroy(); }
@@ -583,7 +626,7 @@ public final class MainActivity extends Activity {
     public void command(String operation, JSONObject fields, Consumer<JSONObject> success) { if (!canWrite()) return; try { fields.remove("request_id"); fields.put("operation", operation); String fingerprint = requestHash(fields.toString()); String key = state.keys.computeIfAbsent(fingerprint, k -> UUID.randomUUID().toString()); fields.put("request_id", key); rpc("aq_command", fields, result -> { String idField = "update_profile".equals(operation) ? "user_id" : "id"; if (!Rules.uuid(result.optString(idField)) || (!"update_profile".equals(operation) && !operation.endsWith("customer") && result.optString("reference").isEmpty())) { error("The service did not confirm this save. Keep the inputs and retry safely."); return; } state.keys.remove(fingerprint); if ("update_profile".equals(operation)) state.profile = result; if ("create_expense".equals(operation)) state.expenseState = new com.aquaquenchers.classifier.ExpenseSuggestionController(); state.drafts.keySet().removeIf(k -> k.startsWith(draftScope + "/")); state.skipCapture = true; success.accept(result); }, true); } catch (JSONException e) { error("Invalid command."); } }
     public void accountCommand(JSONObject fields, Consumer<JSONObject> success) { if (!canWrite() || !isOwner()) return; Session sent = state; try { fields.remove("request_id"); JSONObject publicFields = new JSONObject(fields.toString()); publicFields.remove("temporary_password"); String fingerprint = requestHash("staff-admin/" + publicFields.toString()); fields.put("request_id", state.keys.computeIfAbsent(fingerprint, k -> UUID.randomUUID().toString())); busy(true); sent.backend.call("/functions/v1/staff-admin", fields, r -> { busy(false); if (sent != state) return; if (!Rules.uuid(r.optString("user_id")) || !"staff".equals(r.optString("role"))) { error("The service did not confirm this account change. Retry with the same details."); return; } state.keys.remove(fingerprint); state.drafts.keySet().removeIf(k -> k.startsWith(draftScope + "/")); state.skipCapture = true; success.accept(r); }, e -> { busy(false); if (sent == state) { if (e.status == 401 || (e.status == 403 && !"Enter a valid verification code.".equals(e.getMessage()))) { endSession("Session expired. Sign in again."); return; } if (e.status == 400) state.keys.remove(fingerprint); error(e.getMessage()); } }); } catch (JSONException e) { error("Invalid account details."); } }
     private void rpc(String function, JSONObject request, Consumer<JSONObject> success, boolean mutation) { rpcAttempt(function, request, success, mutation, false); }
-    private void rpcAttempt(String function, JSONObject request, Consumer<JSONObject> success, boolean mutation, boolean refreshed) { Session sent = state; busy(true); state.backend.call("/rest/v1/rpc/" + function, json("p_request", request), r -> { busy(false); if (sent == state) success.accept(r); }, e -> { busy(false); if (sent != state) return; if (e.status == 401) { if (refreshed) { endSession("Session expired. Sign in again."); return; } refreshThen(() -> rpcAttempt(function, request, success, mutation, true)); } else if (e.status == 403 && "Session expired. Sign in again.".equals(e.getMessage())) { endSession(e.getMessage()); } else if (e.status == 403) { revalidateDeniedSession(sent); } else error(e.getMessage()); }); }
+    private void rpcAttempt(String function, JSONObject request, Consumer<JSONObject> success, boolean mutation, boolean refreshed) { Session sent = state; busy(true); state.backend.call("/rest/v1/rpc/" + function, json("p_request", request), r -> { busy(false); if (sent == state) success.accept(r); }, e -> { busy(false); if (sent != state) return; if (e.status == 401) { if (refreshed) { endSession("Session expired. Sign in again."); return; } refreshThen(() -> rpcAttempt(function, request, success, mutation, true)); } else if (e.status == 403 && "Session expired. Sign in again.".equals(e.getMessage())) { endSession(e.getMessage()); } else if (e.status == 403) { revalidateDeniedSession(sent); } else if (e.status == 0 && mutation && "aq_command".equals(function) && state.profile != null) { queueOffline(request); } else error(e.getMessage()); }); }
     private void revalidateDeniedSession(Session sent) {
         if (sent.profile == null) { endSession("Access denied. Sign in again."); return; }
         busy(true);
