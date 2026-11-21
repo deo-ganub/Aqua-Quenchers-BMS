@@ -20,6 +20,8 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -212,9 +214,8 @@ public final class OperationsUi {
         root.addView(scroller, new LinearLayout.LayoutParams(-1, ui.px(owner() ? 320 : 280)));
         List<JSONObject> all = new ArrayList<>();
         Runnable render = () -> {
-            list.removeAllViews(); String needle = value(find).toLowerCase(Locale.ROOT).replace(" ", ""); int shown = 0;
-            for (JSONObject c : all) {
-                if (!needle.isEmpty() && !(c.optString("name").toLowerCase(Locale.ROOT).replace(" ", "").contains(needle) || c.optString("contact_number").contains(needle))) continue;
+            list.removeAllViews(); int shown = 0;
+            for (JSONObject c : fuzzyRank(all, value(find))) {
                 shown++;
                 LinearLayout r = ui.H(list, 12); ui.pad(r, 0, 8); r.setClickable(true);
                 ui.sized(r, ui.avatar(c.optString("name"), 36, 13), 36, 36);
@@ -231,6 +232,18 @@ public final class OperationsUi {
         watch(find, render);
         host.query("customers", json(), response -> { JSONArray rows = items(response); for (int i = 0; i < rows.length(); i++) { JSONObject c = rows.optJSONObject(i); if (c != null) all.add(c); } render.run(); });
         host.showDialog(d[0]);
+    }
+
+    /** Customers that match the search (typos allowed), best match first; all customers when the search is empty. */
+    static List<JSONObject> fuzzyRank(List<JSONObject> customers, String query) {
+        if (query == null || query.trim().isEmpty()) return new ArrayList<>(customers);
+        List<JSONObject> hits = new ArrayList<>(); Map<JSONObject, Integer> scores = new HashMap<>();
+        for (JSONObject c : customers) {
+            int s = Fuzzy.score(query, c.optString("name"), c.optString("contact_number"));
+            if (s >= 0) { hits.add(c); scores.put(c, s); }
+        }
+        hits.sort((a, b) -> Integer.compare(scores.get(b), scores.get(a)));
+        return hits;
     }
 
     // ================================================================================================ customers
@@ -262,11 +275,13 @@ public final class OperationsUi {
         Runnable showPane = () -> { if (pane == null || open[0].isEmpty() || open[0].equals(shownId[0])) return; shownId[0] = open[0]; pane.removeAllViews(); renderCustomer(pane, open[0]); };
         reload[0] = () -> {
             long requested = ++searchRequest[0];
-            query("customers", json("search", value(search).replace(" ", "")), result -> {
+            // Load every customer and rank on the device so small typos still find the person.
+            query("customers", json(), result -> {
                 if (requested != searchRequest[0]) return;
                 results.removeAllViews(); JSONArray rows = items(result); int shown = 0; JSONObject first = null;
-                for (int i = 0; i < rows.length(); i++) {
-                    JSONObject c = rows.optJSONObject(i); if (c == null) continue;
+                List<JSONObject> loaded = new ArrayList<>();
+                for (int i = 0; i < rows.length(); i++) { JSONObject x = rows.optJSONObject(i); if (x != null) loaded.add(x); }
+                for (JSONObject c : fuzzyRank(loaded, value(search))) {
                     String type = c.optString("customer_type");
                     if (filter[0] == 1 && !"household".equals(type)) continue;
                     if (filter[0] == 2 && !"dealer".equals(type)) continue;
