@@ -38,7 +38,7 @@ final class OwnerUi {
         switch (route) {
             case "Expenses": case "Add Expense": if (a.isOwner()) { expenses(); return true; } break;
             case "Financial summary": case "Report Preview": if (a.isOwner()) { reports(); return true; } break;
-            case "Inventory": if (a.isOwner()) { inventory(); return true; } break;
+            case "Gallons at station": if (a.isOwner()) { inventory(); return true; } break;
             case "Staff accounts": case "Create Staff account": if (a.isOwner()) { staffAccounts(); return true; } break;
             case "Settings": settings(); return true;
             case "My account": case "Edit profile": profile(); return true;
@@ -68,18 +68,19 @@ final class OwnerUi {
     }
 
     // ================================================================================================ inventory
-    void inventory() { settingsPage("Inventory", null); }
+    void inventory() { settingsPage("Gallons at station", null); }
+    /** Customer-owned gallons the station is holding now (picked up or dropped off, not yet returned). */
     private void inventoryPane(LinearLayout pane) {
         a.query("inventory", a.json(), r -> {
             LinearLayout c = card(pane, 12);
             LinearLayout head = ui.H(c, 8);
-            ui.grow(head, ui.tv("Inventory", 22, 33, Ui.INK, ui.p6));
+            ui.grow(head, ui.tv("Gallons at the station", 22, 33, Ui.INK, ui.p6));
             String stamp = Rules.shortStamp(r.optString("updated_at"));
             if (!stamp.isEmpty()) ui.hug(head, ui.chip("Updated " + stamp, Ui.GREY_BG, Ui.MUTED));
             LinearLayout tiles = ui.H(c, 12);
-            String[] keys = {"filled_available", "reserved_filled", "empty_quantity", "pending_quantity"};
-            String[] labels = {"Filled available", "Reserved filled", "Empty", "Pending gallons"};
-            int[] bg = {Ui.GREEN_BG, Ui.TONAL, Ui.GREY_BG, Ui.AMBER_BG}, fg = {Ui.GREEN, Ui.PRIMARY, Ui.INK, Ui.AMBER};
+            String[] keys = {"at_station", "refilling", "pending_quantity", "to_claim"};
+            String[] labels = {"At the station", "Refilling", "To deliver", "To claim"};
+            int[] bg = {Ui.TONAL, Ui.GREY_BG, Ui.AMBER_BG, Ui.GREEN_BG}, fg = {Ui.PRIMARY, Ui.INK, Ui.AMBER, Ui.GREEN};
             for (int i = 0; i < 4; i++) {
                 LinearLayout t = ui.vbox(0); ui.bg(t, bg[i], 0, 12); ui.pad(t, 14, 14);
                 ui.text(t, Long.toString(r.optLong(keys[i])), 28, 42, fg[i], ui.p6);
@@ -87,24 +88,25 @@ final class OwnerUi {
                 t.setContentDescription(labels[i] + ": " + r.optLong(keys[i]));
                 ui.grow(tiles, t);
             }
-            LinearLayout carry = card(pane, 10);
-            ui.text(carry, "Carry-over details", 17, 26, Ui.INK, ui.p6);
-            JSONArray rows = r.optJSONArray("pending_orders");
-            if (rows == null || rows.length() == 0) ui.text(carry, "No pending delivery gallons.", 14, 19, Ui.MUTED, ui.o4);
+            LinearLayout list = card(pane, 10);
+            ui.text(list, "Whose gallons we have", 17, 26, Ui.INK, ui.p6);
+            JSONArray rows = r.optJSONArray("gallons");
+            if (rows == null || rows.length() == 0) ui.text(list, "No customer gallons at the station.", 14, 19, Ui.MUTED, ui.o4);
             else for (int i = 0; i < rows.length(); i++) {
                 JSONObject row = rows.optJSONObject(i); if (row == null) continue;
-                LinearLayout line = ui.H(carry, 12); ui.pad(line, 0, 8); line.setClickable(true);
-                String oid = row.optString("id", row.optString("order_id"));
-                line.setOnClickListener(v -> { if (Rules.uuid(oid)) a.operations().order(oid); else a.openPending(); });
+                LinearLayout line = ui.H(list, 12); ui.pad(line, 0, 8); line.setClickable(true);
+                String oid = row.optString("id");
+                line.setOnClickListener(v -> { if (Rules.uuid(oid)) a.operations().order(oid); });
                 LinearLayout names = ui.hbox(14); ui.grow(line, names);
                 ui.hug(names, ui.tv(row.optString("customer_name"), 15, 22, Ui.INK, ui.p5));
-                ui.hug(names, ui.tv(row.optString("reference"), 13, 18, Ui.MUTED, ui.o4));
+                ui.hug(names, ui.tv(row.optString("reference") + ("counter".equals(row.optString("channel")) ? " · walk-in" : ""), 13, 18, Ui.MUTED, ui.o4));
                 long days = 0; try { days = Math.max(0, java.time.temporal.ChronoUnit.DAYS.between(LocalDate.parse(row.optString("business_date")), LocalDate.parse(a.today()))); } catch (Exception ignored) { }
-                ui.hug(line, ui.tv("Original date " + shortDate(row.optString("business_date")) + " · " + (days == 0 ? "today" : days == 1 ? "1 day waiting" : days + " days waiting"), 13, 18, Ui.MUTED, ui.o4));
-                long left = row.optLong("pending_quantity");
+                ui.hug(line, ui.tv("Since " + shortDate(row.optString("business_date")) + " · " + (days == 0 ? "today" : days == 1 ? "1 day" : days + " days"), 13, 18, Ui.MUTED, ui.o4));
+                ui.hug(line, ui.statusChip(row.optString("status"), OperationsUi.pending(row)));
+                long left = row.optLong("quantity") - row.optLong("delivered_quantity");
                 ui.hug(line, ui.chip(left + (left == 1 ? " gallon" : " gallons"), Ui.AMBER_BG, Ui.AMBER));
             }
-            ui.banner(pane, Ui.INFO, "Stock updates automatically", "From pickups, deliveries, walk-in sales and “Ready for delivery”. There is no manual adjustment screen.", true);
+            ui.banner(pane, Ui.INFO, "These gallons belong to customers", "The list updates from pickups, walk-in drop-offs, deliveries and claims. The station keeps no gallon stock of its own.", true);
         });
     }
 
@@ -360,7 +362,7 @@ final class OwnerUi {
 
     // ================================================================================================ settings
     void settings() {
-        if (a.wide() && a.isOwner()) settingsPage("Inventory", null);
+        if (a.wide() && a.isOwner()) settingsPage("Gallons at station", null);
         else if (a.isOwner()) ownerPhoneSettings();
         else staffSettings();
     }
@@ -370,7 +372,7 @@ final class OwnerUi {
         LinearLayout list = ui.V(p, 10);
         moreRow(list, "Expenses", "Record and review expenses", () -> expenses());
         moreRow(list, "Reports", "Financial summary PDF", () -> reports());
-        moreRow(list, "Settings", "Inventory, staff, password, authenticator", () -> settings());
+        moreRow(list, "Settings", "Gallons at station, staff, password, authenticator", () -> settings());
     }
     private void moreRow(LinearLayout parent, String title, String detail, Runnable open) {
         LinearLayout row = ui.H(parent, 12); ui.pad(row, 16, 14); ui.bg(row, Ui.WHITE, Ui.BORDER, 16);
@@ -385,7 +387,7 @@ final class OwnerUi {
     private void ownerPhoneSettings() {
         LinearLayout p = a.page("Settings");
         LinearLayout list = ui.V(p, 10);
-        moreRow(list, "Inventory", "Stock counts", () -> settingsPage("Inventory", null));
+        moreRow(list, "Gallons at station", "Customer gallons we are holding", () -> settingsPage("Gallons at station", null));
         moreRow(list, "Staff accounts", "Add, edit or deactivate staff", () -> settingsPage("Staff accounts", null));
         moreRow(list, "Change password", "At least 15 characters", () -> settingsPage("Change password", null));
         moreRow(list, "Authenticator", "Set up or remove the code app", () -> settingsPage("Authenticator", null));
@@ -397,7 +399,7 @@ final class OwnerUi {
         LinearLayout pageBody = a.page("Staff accounts".equals(section) && entity != null ? "Edit Staff account" : section, entity == null ? "" : entity);
         if (!a.wide()) {
             LinearLayout content = ui.V(pageBody, 16);
-            if ("Inventory".equals(section)) inventoryPane(content);
+            if ("Gallons at station".equals(section)) inventoryPane(content);
             else if ("Change password".equals(section)) passwordForm(content);
             else if ("Authenticator".equals(section)) authenticatorPane(content);
             else staffPane(content, entity);
@@ -405,7 +407,7 @@ final class OwnerUi {
         }
         LinearLayout[] panes = a.panes(300);
         LinearLayout menu = ui.V(panes[0], 4); ui.bg(menu, Ui.WHITE, Ui.BORDER, 16); ui.pad(menu, 8, 8);
-        String[] items = {"Inventory", "Staff accounts", "Change password", "Authenticator"};
+        String[] items = {"Gallons at station", "Staff accounts", "Change password", "Authenticator"};
         for (String item : items) {
             boolean on = item.equals(section);
             LinearLayout row = ui.H(menu, 8); ui.pad(row, 14, 14); row.setMinimumHeight(ui.px(55)); row.setClickable(true); row.setContentDescription(item);
@@ -416,7 +418,7 @@ final class OwnerUi {
         }
         ui.fill(panes[0], ui.button("Log out", Ui.DANGER_OUTLINE, 46, 12, 15, () -> a.endSession("Signed out.")));
         a.bannerAt(panes[1], 0);
-        if ("Inventory".equals(section)) inventoryPane(panes[1]);
+        if ("Gallons at station".equals(section)) inventoryPane(panes[1]);
         else if ("Change password".equals(section)) passwordForm(panes[1]);
         else if ("Authenticator".equals(section)) authenticatorPane(panes[1]);
         else staffPane(panes[1], entity);
@@ -693,7 +695,7 @@ final class OwnerUi {
         ui.text(names, (a.isOwner() ? "Owner" : "Staff") + " · @" + (me == null ? "" : me.optString("username")) + " · " + OperationsUi.displayContact(me == null ? "" : me.optString("contact_number")), 12, 16, Ui.MUTED, ui.o4);
         LinearLayout menu = ui.V(p, 0); ui.bg(menu, Ui.WHITE, Ui.BORDER, 16); ui.pad(menu, 4, 4);
         boolean ownerPhone = a.isOwner();
-        String[] items = ownerPhone ? new String[]{"Expenses", "Reports", "Inventory", "Staff accounts", "Change password", "Edit profile"} : new String[]{"Edit profile", "Change password", "Pending gallons", "Collect payments"};
+        String[] items = ownerPhone ? new String[]{"Expenses", "Reports", "Gallons at station", "Staff accounts", "Change password", "Edit profile"} : new String[]{"Edit profile", "Change password", "Pending gallons", "Collect payments"};
         Runnable[] actions = ownerPhone ? new Runnable[]{this::expenses, this::reports, this::inventory, this::staffAccounts, this::password, this::profile} : new Runnable[]{this::profile, this::password, a::openPending, a::openPayments};
         for (int i = 0; i < items.length; i++) {
             final Runnable go = actions[i];

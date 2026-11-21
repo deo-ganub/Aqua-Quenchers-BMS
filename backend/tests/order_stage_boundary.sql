@@ -69,7 +69,7 @@ begin
   execute 'set local role authenticated';
   perform public.aq_command(jsonb_build_object('operation','record_delivery','request_id',gen_random_uuid(),'order_id',o->>'id','quantity',1));
   execute 'reset role';perform pg_temp.reject_unavailable_stages((o->>'id')::uuid);
-  if (select status<>'delivered' or quantity<>2 or delivered_quantity<>2 from aq_private.orders where id=(o->>'id')::uuid) or (select physical_filled<>0 or empty_quantity<>0 from aq_private.inventory where singleton) or exists(select 1 from aq_private.reservations where quantity<>0) then raise exception 'Valid continuation failed after rejected stage';end if;
+  if (select status<>'delivered' or quantity<>2 or delivered_quantity<>2 from aq_private.orders where id=(o->>'id')::uuid) then raise exception 'Valid continuation failed after rejected stage';end if;
  end loop;
  raise notice 'PASS: Owner+Staff skipped/backward/unsupported direct transitions at every lifecycle stage reject exact message with full rollback; corrected valid path/reschedule/pickup/readiness/partial/final delivery succeeds. JWT stubs only.';
 end $$;

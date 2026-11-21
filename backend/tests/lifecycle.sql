@@ -21,14 +21,12 @@ begin
  params:=jsonb_build_object('operation','transition_order','request_id',gen_random_uuid(),'order_id',o->>'id','status','ready_for_delivery');
  perform public.aq_command(params);perform public.aq_command(params);
  r:=public.aq_query('{"resource":"inventory"}');
- if (r->>'reserved_filled')::int<>8 or (r->>'physical_filled')::int<>8 or (r->>'filled_available')::int<>0 then raise exception 'Reservation/conversion duplicated or incorrect';end if;
- denied:=false;begin perform public.aq_command(jsonb_build_object('operation','create_sale','request_id',gen_random_uuid(),'customer_name','Synthetic counter','quantity',1,'cash_centavos',3500));exception when others then denied:=true;end;
- if not denied then raise exception 'POS spent reserved stock';end if;
+ if (r->>'ready')::int<>8 or (r->>'at_station')::int<>8 then raise exception 'Ready retry duplicated or incorrect';end if;
  params:=jsonb_build_object('operation','record_delivery','request_id',gen_random_uuid(),'order_id',o->>'id','quantity',3);
  r:=public.aq_command(params);perform public.aq_command(params);
- if r->>'status'<>'undelivered' or (r->>'reserved_quantity')::int<>5 or (r->>'total_centavos')::bigint<>28000 then raise exception 'Partial delivery failed';end if;
+ if r->>'status'<>'undelivered' or (r->>'total_centavos')::bigint<>28000 then raise exception 'Partial delivery failed';end if;
  r:=public.aq_command(jsonb_build_object('operation','record_delivery','request_id',gen_random_uuid(),'order_id',o->>'id','quantity',5));
- if r->>'status'<>'delivered' or (r->>'reserved_quantity')::int<>0 then raise exception 'Final delivery failed';end if;
+ if r->>'status'<>'delivered' then raise exception 'Final delivery failed';end if;
  perform public.aq_command(jsonb_build_object('operation','record_payment','request_id',gen_random_uuid(),'reference',o->>'reference','amount_centavos',10000));
  perform public.aq_command(jsonb_build_object('operation','create_expense','request_id',gen_random_uuid(),'business_date','2026-10-15','category','Fuel','amount_centavos',75000,'selection_source','manual'));
  r:=public.aq_query('{"resource":"expenses","start_date":"2026-10-15","end_date":"2026-10-15"}');
@@ -43,7 +41,7 @@ begin
  for event in select value from jsonb_array_elements(r->'timeline') loop
   if (select count(*) from jsonb_object_keys(event))<>5 or event->>'occurred_at' is null or event->>'recorded_by_name'<>'Synthetic Owner' then raise exception 'Timeline fields not minimized/server-derived';end if;
  end loop;
- raise notice 'PASS: adjusted charge, conversion/reservation retry, reserved POS protection, partial/final delivery, Owner expenses, report date/receipt/as-of definitions and minimal exact-once ordered Owner timeline';
+ raise notice 'PASS: adjusted charge, ready retry, partial/final delivery, Owner expenses, report date/receipt/as-of definitions and minimal exact-once ordered Owner timeline';
 end $$;
 reset role;
 insert into auth.users values ('10000000-0000-4000-8000-000000000002','staff@test.invalid');

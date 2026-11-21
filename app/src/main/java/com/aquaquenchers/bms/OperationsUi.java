@@ -118,14 +118,18 @@ public final class OperationsUi {
     static int listRank(JSONObject o) {
         String status = o.optString("status");
         if ("ready_for_delivery".equals(status)) return 1;
-        if ("delivered".equals(status)) return balance(o) > 0 ? 2 : 3;
+        if (done(status)) return balance(o) > 0 ? 2 : 3;
         return 0;
     }
+    /** Finished orders: delivered, or a walk-in whose gallons were claimed at the counter. */
+    static boolean done(String status) { return "delivered".equals(status) || "claimed".equals(status); }
+    /** Walk-in that the customer claims at the counter instead of a delivery. */
+    static boolean claimAtCounter(JSONObject o) { return "claim".equals(o.optString("fulfillment")); }
     /** 1 = pickup, 2 = refilling, 3 = delivery; 0 = finished. */
     static int group(String status) {
         switch (status == null ? "" : status) {
             case "ordered": case "for_pickup": case "rescheduled": return 1;
-            case "picked_up": case "refilling": return 2;
+            case "picked_up": case "received_at_counter": case "refilling": return 2;
             case "ready_for_delivery": case "undelivered": return 3;
             default: return 0;
         }
@@ -135,11 +139,19 @@ public final class OperationsUi {
             case "ordered": return "Send for pickup";
             case "rescheduled": return "Resume for pickup";
             case "for_pickup": return "Record pickup";
-            case "picked_up": return "Start refilling";
+            case "picked_up": case "received_at_counter": return "Start refilling";
             case "refilling": return "Mark ready for delivery";
             case "ready_for_delivery": case "undelivered": return "Record delivery";
             default: return "View order";
         }
+    }
+    static String nextLabel(JSONObject o) {
+        String status = o.optString("status");
+        if (claimAtCounter(o)) {
+            if ("refilling".equals(status)) return "Mark ready to claim";
+            if ("ready_for_delivery".equals(status)) return "Mark claimed";
+        }
+        return nextLabel(status);
     }
     private static String shortDate(String iso) { try { return LocalDate.parse(iso).format(DateTimeFormatter.ofPattern("d MMM", Locale.ENGLISH)); } catch (Exception e) { return iso; } }
     private static String longDate(String iso) { try { return LocalDate.parse(iso).format(DateTimeFormatter.ofPattern("d MMM yyyy", Locale.ENGLISH)); } catch (Exception e) { return iso; } }
@@ -164,7 +176,7 @@ public final class OperationsUi {
     /** Home shortcut: the form for the order's next eligible step. */
     void nextStep(JSONObject summary) {
         String status = summary.optString("status");
-        if (!"for_pickup".equals(status) && !"ready_for_delivery".equals(status) && !"undelivered".equals(status)) { order(id(summary)); return; }
+        if (claimAtCounter(summary) || !"for_pickup".equals(status) && !"ready_for_delivery".equals(status) && !"undelivered".equals(status)) { order(id(summary)); return; }
         loadOrder(id(summary), o -> { if ("for_pickup".equals(status)) pickup(o); else delivery(o); });
     }
     static String displayContact(String n) { return n != null && n.matches("[0-9]{11}") ? n.substring(0, 4) + " " + n.substring(4, 7) + " " + n.substring(7) : n == null ? "" : n; }
@@ -512,7 +524,7 @@ public final class OperationsUi {
         ui.hug(top, ui.statusChip(o.optString("status"), pending(o)));
         LinearLayout bottom = ui.H(card, 0);
         String status = o.optString("status");
-        TextView next = ui.tv(group(status) > 0 ? "Next: " + nextLabel(status) + "  ›" : "Delivered", 14, 21, group(status) > 0 ? Ui.PRIMARY : Ui.MUTED, ui.p5);
+        TextView next = ui.tv(group(status) > 0 ? "Next: " + nextLabel(o) + "  ›" : Rules.label(status), 14, 21, group(status) > 0 ? Ui.PRIMARY : Ui.MUTED, ui.p5);
         ui.grow(bottom, next);
         long due = balance(o);
         ui.hug(bottom, ui.tv(due > 0 ? host.money(due) + " due" : "Paid", 14, 21, due > 0 ? Ui.AMBER : Ui.GREEN, ui.p5));
@@ -528,7 +540,7 @@ public final class OperationsUi {
         page(route, entity);
         int mode = "Create Order".equals(route) ? 1 : "Walk-in Sale / POS".equals(route) ? 2 : 0;
         LinearLayout acts = host.titleActions();
-        TextView walk = ui.button("Walk-in sale", mode == 2 ? Ui.DISABLED : Ui.TONAL_BTN, 44, 12, 15, this::pos);
+        TextView walk = ui.button("Walk-in", mode == 2 ? Ui.DISABLED : Ui.TONAL_BTN, 44, 12, 15, this::pos);
         TextView neu = ui.button("+  New order", mode == 1 ? Ui.DISABLED : mode == 2 ? Ui.TONAL_BTN : Ui.FILLED, 44, 12, 15, () -> newOrder(null));
         if (mode == 2) walk.setEnabled(true); if (mode == 1) neu.setEnabled(true);
         ui.hug(acts, walk); ui.hug(acts, neu);
@@ -738,7 +750,7 @@ public final class OperationsUi {
         ui.label(prog, labelled ? "Progress · " + title(status) : "Progress");
         ui.progress(prog, status, false);
         boolean progressStyle = delivered > 0 || "undelivered".equals(status);
-        if (progressStyle && !"delivered".equals(status)) {
+        if (progressStyle && !done(status)) {
             LinearLayout g = ui.card(p, 10, 16);
             ui.label(g, "Gallons");
             LinearLayout bar = ui.H(g, 0);
@@ -750,7 +762,7 @@ public final class OperationsUi {
             ui.pair(g, "Still to deliver", pending(o) + (pending(o) == 1 ? " gallon" : " gallons"), Ui.AMBER, 17, ui.p6);
             long days = daysSince(o.optString("business_date"));
             ui.pair(g, "Waiting since", shortDate(o.optString("business_date")) + " · " + days + (days == 1 ? " day" : " days"));
-        } else if (!"ordered".equals(status) && !"delivered".equals(status)) {
+        } else if (!"ordered".equals(status) && !done(status)) {
             LinearLayout g = ui.card(p, 10, 16);
             LinearLayout stats = ui.H(g, 8); stats.setGravity(Gravity.TOP);
             String[][] cols = {{Integer.toString(quantity), "Ordered"}, {Integer.toString(o.optInt("collected_quantity")), "Picked up"}, {Integer.toString(delivered), "Delivered"}, {Integer.toString(pending(o)), "Pending"}};
@@ -763,9 +775,9 @@ public final class OperationsUi {
             ui.hug(ph, ui.paymentChip(o.optString("payment_status"), false));
         }
         ui.pair(pay, "Total · " + quantity + " × " + host.money(unit), host.money(o.optLong("total_centavos")));
-        if (paid(o) > 0 || "ordered".equals(status) || "delivered".equals(status) || progressStyle) ui.pair(pay, "Paid", host.money(paid(o)));
+        if (paid(o) > 0 || "ordered".equals(status) || done(status) || progressStyle) ui.pair(pay, "Paid", host.money(paid(o)));
         ui.pair(pay, "Balance", host.money(balance), balance > 0 ? Ui.AMBER : Ui.INK, 17, ui.p6);
-        if (balance > 0 && !"delivered".equals(status) && !"ordered".equals(status)) ui.fill(pay, ui.button("Collect payment", Ui.OUTLINE, 44, 14, 16, () -> payment(o, "order")));
+        if (balance > 0 && !done(status) && !"ordered".equals(status)) ui.fill(pay, ui.button("Collect payment", Ui.OUTLINE, 44, 14, 16, () -> payment(o, "order")));
         if ("for_pickup".equals(status)) ui.fill(p, linkButton("Customer not home? Reschedule pickup", () -> reschedule(o)));
         if ("rescheduled".equals(status)) {
             ui.text(p, "Rescheduled pickup: " + longDate(o.optString("rescheduled_date")), 13, 18, Ui.MUTED, ui.o4);
@@ -773,7 +785,7 @@ public final class OperationsUi {
         }
         Runnable main = mainStep(o);
         if (main != null) {
-            host.mainAction(mainLabel(o), "delivered".equals(status) ? Ui.AMBER_BTN : Ui.FILLED, main);
+            host.mainAction(mainLabel(o), done(status) ? Ui.AMBER_BTN : Ui.FILLED, main);
             String note = stepNote(o);
             if (!note.isEmpty()) host.actionNote(note);
         }
@@ -786,10 +798,10 @@ public final class OperationsUi {
     private String stepNote(JSONObject o) {
         switch (o.optString("status")) {
             case "ordered": case "rescheduled": return "Moves the order to the pickup list";
-            case "picked_up": return "Moves the order to refilling";
-            case "refilling": return "Moves " + o.optInt("quantity") + " gallons from empty to filled stock and reserves them for this order";
-            case "ready_for_delivery": return "Opens Record delivery";
-            case "delivered": return "Last step for this order";
+            case "picked_up": case "received_at_counter": return "Moves the order to refilling";
+            case "refilling": return claimAtCounter(o) ? "The customer is told their gallons are ready" : "Marks the " + o.optInt("quantity") + " refilled gallons ready for delivery";
+            case "ready_for_delivery": return claimAtCounter(o) ? "The customer took their gallons at the counter" : "Opens Record delivery";
+            case "delivered": case "claimed": return "Last step for this order";
             default: return "";
         }
     }
@@ -805,7 +817,7 @@ public final class OperationsUi {
         ui.text(names, o.optString("customer_name"), 22, 33, Ui.INK, ui.p6);
         ui.text(names, o.optString("reference") + " · " + title(o.optString("customer_type")), 13, 18, Ui.MUTED, ui.o4);
         Runnable main = mainStep(o);
-        if (main != null) ui.hug(r, ui.button(mainLabel(o), "delivered".equals(status) ? Ui.AMBER_BTN : Ui.FILLED, 48, 12, 16, () -> host.guarded(main)));
+        if (main != null) ui.hug(r, ui.button(mainLabel(o), done(status) ? Ui.AMBER_BTN : Ui.FILLED, 48, 12, 16, () -> host.guarded(main)));
         ui.progress(head, status, true);
         LinearLayout both = ui.H(pane, 14); both.setGravity(Gravity.TOP);
         LinearLayout gallons = ui.vbox(10); ui.bg(gallons, Ui.WHITE, Ui.BORDER, 16); ui.pad(gallons, 18, 18); ui.grow(both, gallons);
@@ -830,7 +842,7 @@ public final class OperationsUi {
             } else {
                 long days = daysSince(o.optString("business_date"));
                 ui.text(note, "Pending delivery", 16, 24, Ui.INK, ui.p6);
-                ui.text(note, "Original date " + longDate(o.optString("business_date")) + " · " + days + (days == 1 ? " day" : " days") + " waiting · " + pending(o) + " gallons left · " + o.optInt("reserved_quantity") + " reserved", 14, 19, Ui.MUTED, ui.o4);
+                ui.text(note, "Original date " + longDate(o.optString("business_date")) + " · " + days + (days == 1 ? " day" : " days") + " waiting · " + pending(o) + " gallons left", 14, 19, Ui.MUTED, ui.o4);
             }
         }
         LinearLayout timeline = ui.card(pane, 8, 18);
@@ -850,6 +862,7 @@ public final class OperationsUi {
         String action = e.optString("action"), status = e.optString("status");
         switch (action) {
             case "create_order": return "Order created";
+            case "create_counter_order": return "Walk-in received at counter";
             case "record_pickup": return "Picked up" + (e.has("quantity") ? " " + e.optInt("quantity") + " gallons" : "");
             case "record_delivery": return "Delivered" + (e.has("quantity") ? " " + e.optInt("quantity") + " gallons" : "");
             case "record_payment": return "Payment recorded";
@@ -859,18 +872,19 @@ public final class OperationsUi {
         }
     }
     private String mainLabel(JSONObject o) {
-        if ("delivered".equals(o.optString("status"))) return "Collect " + host.money(balance(o));
-        return nextLabel(o.optString("status"));
+        if (done(o.optString("status"))) return "Collect " + host.money(balance(o));
+        return nextLabel(o);
     }
     /** The single next-step action of an order; null when nothing is left to do. */
     private Runnable mainStep(JSONObject o) {
         switch (o.optString("status")) {
             case "ordered": case "rescheduled": return () -> transition(o, "for_pickup");
             case "for_pickup": return () -> pickup(o);
-            case "picked_up": return () -> transition(o, "refilling");
+            case "picked_up": case "received_at_counter": return () -> transition(o, "refilling");
             case "refilling": return () -> transition(o, "ready_for_delivery");
-            case "ready_for_delivery": case "undelivered": return () -> delivery(o);
-            case "delivered": return balance(o) > 0 ? () -> payment(o, "order") : null;
+            case "ready_for_delivery": return claimAtCounter(o) ? () -> transition(o, "claimed") : () -> delivery(o);
+            case "undelivered": return () -> delivery(o);
+            case "delivered": case "claimed": return balance(o) > 0 ? () -> payment(o, "order") : null;
             default: return null;
         }
     }
@@ -917,7 +931,7 @@ public final class OperationsUi {
             if (q > expected) { host.fieldError(collected, "Collected quantity cannot exceed the expected quantity."); return; }
             if (Math.multiplyExact((long) q, unit) < paid(o)) { host.fieldError(collected, "Adjusted total cannot be less than the amount already paid."); return; }
             host.command("record_pickup", json("order_id", id(o), "quantity", q), saved -> {
-                String detail = o.optString("reference") + " · " + q + " gallons collected · order now " + q + " × " + host.money(unit) + " = " + host.money(Math.multiplyExact((long) q, unit)) + " · " + q + " empty gallons added to stock";
+                String detail = o.optString("reference") + " · " + q + " gallons collected · order now " + q + " × " + host.money(unit) + " = " + host.money(Math.multiplyExact((long) q, unit)) + " · " + q + " customer gallons now at the station";
                 // A saved pickup goes straight into refilling (no separate "Start refilling" tap).
                 host.command("transition_order", json("order_id", id(o), "status", "refilling"), moved -> {
                     order(id(o));
@@ -929,7 +943,7 @@ public final class OperationsUi {
         else {
             LinearLayout dock = (LinearLayout) host.mainAction("Save pickup", Ui.FILLED, save).getParent();
             note[0] = ui.tv("", 13, 18, Ui.MUTED, ui.o4); note[0].setGravity(Gravity.CENTER); ui.fill(dock, note[0]);
-            Runnable updateNote = () -> { try { int q = quantity(collected); note[0].setText("Adds " + q + (q == 1 ? " empty gallon" : " empty gallons") + " to stock"); note[0].setVisibility(View.VISIBLE); } catch (Exception e) { note[0].setVisibility(View.GONE); } };
+            Runnable updateNote = () -> { try { int q = quantity(collected); note[0].setText(q + (q == 1 ? " customer gallon" : " customer gallons") + " will be at the station for refilling"); note[0].setVisibility(View.VISIBLE); } catch (Exception e) { note[0].setVisibility(View.GONE); } };
             watch(collected, updateNote); updateNote.run();
         }
     }
@@ -977,10 +991,10 @@ public final class OperationsUi {
         if (owner()) { ownerOrders("Record Delivery", id(o), id(o), 3, pane -> deliveryForm(pane, o)); return; }
         deliveryForm(page("Record Delivery", id(o)), o);
     }
-    /** Figma S13 / O4h: gallons delivered this trip, partial/complete preview, reservation check. */
+    /** Figma S13 / O4h: gallons delivered this trip, partial/complete preview. */
     private void deliveryForm(LinearLayout p, JSONObject o) {
         boolean ow = owner();
-        int remaining = pending(o), delivered = o.optInt("delivered_quantity"), reserved = o.optInt("reserved_quantity", remaining);
+        int remaining = pending(o), delivered = o.optInt("delivered_quantity");
         if (ow) ownerFormHeader(p, "Record delivery · " + o.optString("customer_name"), o.optString("reference") + " · " + title(o.optString("customer_type")) + " · " + delivered + " of " + o.optInt("quantity") + " delivered", o.optString("status"), null, null);
         else staffHeader(p, o.optString("customer_name"), o.optString("reference") + " · " + delivered + " of " + o.optInt("quantity") + " delivered");
         LinearLayout card = ui.card(p, 16, ow ? 18 : 16);
@@ -996,9 +1010,9 @@ public final class OperationsUi {
                 boolean all = q == remaining;
                 int left = remaining - q, total = o.optInt("quantity");
                 String who = host.recorder() + " (" + (host.isOwner() ? "Owner" : "Staff") + ")";
-                if (all) ui.setBanner(status, Ui.SUCCESS, "Order will be Delivered", ow ? "0 gallons pending after saving · reserved stock for this order: " + reserved + " · cumulative delivered " + (delivered + q) + " of " + total + " · recorded by " + who + ", " + longDate(host.today()) : "0 gallons pending after saving. Reserved stock for this order: " + reserved + ".", ow);
-                else if (ow) ui.setBanner(status, Ui.WARNING, "Order becomes Undelivered", left + (left == 1 ? " gallon stays pending" : " gallons stay pending") + " · the remaining reservation is kept · cumulative delivered " + (delivered + q) + " of " + total + " · recorded by " + who, true);
-                else ui.setBanner(status, Ui.WARNING, left + (left == 1 ? " gallon stays pending" : " gallons stay pending"), "Order becomes Undelivered. The remaining reservation is kept.", false);
+                if (all) ui.setBanner(status, Ui.SUCCESS, "Order will be Delivered", ow ? "0 gallons pending after saving · cumulative delivered " + (delivered + q) + " of " + total + " · recorded by " + who + ", " + longDate(host.today()) : "0 gallons pending after saving.", ow);
+                else if (ow) ui.setBanner(status, Ui.WARNING, "Order becomes Undelivered", left + (left == 1 ? " gallon stays pending" : " gallons stay pending") + " · cumulative delivered " + (delivered + q) + " of " + total + " · recorded by " + who, true);
+                else ui.setBanner(status, Ui.WARNING, left + (left == 1 ? " gallon stays pending" : " gallons stay pending"), "Order becomes Undelivered. Deliver the rest later.", false);
                 status.setVisibility(View.VISIBLE);
             } catch (Exception e) { status.setVisibility(View.GONE); }
         };
@@ -1007,7 +1021,6 @@ public final class OperationsUi {
             int q;
             try { q = quantity(trip); } catch (IllegalArgumentException e) { host.fieldError(trip, e.getMessage()); return; }
             if (q > remaining) { host.fieldError(trip, "Delivered quantity cannot exceed the remaining " + remaining + " gallons."); return; }
-            if (o.has("reserved_quantity") && q > o.optInt("reserved_quantity")) { ui.setBanner(status, Ui.ERROR, "Not enough reserved gallons for this order.", ow ? "Reserved stock for this order: " + o.optInt("reserved_quantity") + " · nothing was saved" : "Reserved stock for this order: " + o.optInt("reserved_quantity") + ". Nothing was saved.", ow); status.setVisibility(View.VISIBLE); return; }
             host.command("record_delivery", json("order_id", id(o), "quantity", q), saved -> {
                 order(id(o));
                 host.info("Delivery recorded", o.optString("reference") + " · " + q + " gallons delivered · " + (q == remaining ? "all " + (delivered + q) + " delivered" : (remaining - q) + " still to deliver"));
@@ -1017,30 +1030,41 @@ public final class OperationsUi {
         else host.mainAction("Save delivery", Ui.FILLED, save);
     }
 
-    // ================================================================================================ walk-in sale
+    // ================================================================================================ walk-in (counter order)
     public void pos() {
         if (owner()) { ownerOrders("Walk-in Sale / POS", "", null, -1, this::posForm); return; }
         posForm(page("Walk-in Sale / POS"));
     }
-    /** Figma P1–P7 (Staff) and O6–O6g (Owner). */
+    /**
+     * Figma P1–P7 (Staff) and O6–O6g (Owner). A walk-in customer brings their OWN gallons: the
+     * station refills them, then the customer waits and claims them or leaves an address for
+     * delivery. It is saved as a counter order (no station stock involved) and paid at drop-off.
+     */
     private void posForm(LinearLayout p) {
         boolean ow = owner();
-        final long[] available = {-1};
-        TextView stock = ui.chip("Checking stock…", Ui.TONAL, Ui.PRIMARY);
-        EditText name;
+        TextView own = ui.chip("Customer's own gallons", Ui.TONAL, Ui.PRIMARY);
+        EditText name; LinearLayout head;
         if (ow) {
-            LinearLayout head = ui.card(p, 12, 18);
+            head = ui.card(p, 12, 18);
             LinearLayout r = ui.H(head, 8);
-            ui.grow(r, ui.tv("Walk-in sale", 22, 33, Ui.INK, ui.p6));
-            ui.hug(r, stock);
+            ui.grow(r, ui.tv("Walk-in", 22, 33, Ui.INK, ui.p6));
+            ui.hug(r, own);
             name = host.input(head, "Customer name", "", TEXT);
         } else {
             LinearLayout r = ui.H(p, 8);
-            ui.grow(r, ui.tv("Counter sale · no profile needed", 13, 18, Ui.MUTED, ui.o4));
-            ui.hug(r, stock);
-            name = host.input(p, "Customer name", "", TEXT);
+            ui.grow(r, ui.tv("Counter walk-in · no profile needed", 13, 18, Ui.MUTED, ui.o4));
+            ui.hug(r, own);
+            head = ui.card(p, 12, 16);
+            name = host.input(head, "Customer name", "", TEXT);
         }
-        query("inventory", json(), response -> { JSONObject i = nested(response, "inventory"); available[0] = i.optLong("filled_available", i.optLong("available_filled", -1)); stock.setText(available[0] < 0 ? "Stock checked on save" : available[0] + " gallons available"); });
+        final boolean[] deliver = {false};
+        ui.label(head, "After refilling");
+        LinearLayout[] addressBox = {null};
+        ui.tabs(head, new String[]{"Wait and claim", "Deliver to address"}, 0, true, ow, 8, i -> { deliver[0] = i == 1; if (addressBox[0] != null) addressBox[0].setVisibility(deliver[0] ? View.VISIBLE : View.GONE); });
+        addressBox[0] = ui.V(head, 12);
+        EditText address = host.input(addressBox[0], "Delivery address", "", TEXT);
+        EditText contact = host.input(addressBox[0], "Contact number (optional)", "", InputType.TYPE_CLASS_PHONE);
+        addressBox[0].setVisibility(View.GONE);
         LinearLayout pair = ow ? ui.H(p, 14) : p;
         if (ow) pair.setGravity(Gravity.TOP);
         LinearLayout gCard = ow ? ui.vbox(12) : ui.card(p, 14, 16);
@@ -1065,7 +1089,6 @@ public final class OperationsUi {
         if (ow) { TextView[] rec = ui.pair(cCard, "Recorded by", host.recorder()); rec[1].setSingleLine(true); rec[1].setEllipsize(android.text.TextUtils.TruncateAt.END); }
         // Totals: Owner green card under the inputs, Staff in the dock above the button
         LinearLayout totalsHost;
-        TextView[] stockAfter = {null};
         if (ow) { totalsHost = ui.card(p, 8, 18); ui.bg(totalsHost, Ui.GREEN_BG, 0, 16); }
         else totalsHost = host.dockBox();
         LinearLayout totals = ui.H(totalsHost, 0); totals.setGravity(Gravity.TOP);
@@ -1076,23 +1099,17 @@ public final class OperationsUi {
         LinearLayout tr = ui.vbox(0); tr.setGravity(ow ? Gravity.CENTER_HORIZONTAL : Gravity.END); ui.hug(totals, tr);
         TextView changeLabel = ui.hugText(tr, "Change", 13, Ui.MUTED, ui.o4);
         TextView changeView = ui.hugText(tr, "–", ow ? 28 : 24, Ui.GREEN, ui.p6);
-        if (ow) {
-            ui.spacer(totals);
-            LinearLayout st = ui.vbox(0); st.setGravity(Gravity.END); ui.hug(totals, st);
-            ui.hug(st, ui.tv("Stock after saving", 13, 18, Ui.MUTED, ui.o4));
-            stockAfter[0] = ui.hugText(st, "–", 28, Ui.INK, ui.p6);
-        }
         TextView complete; TextView creditNote = null;
         Runnable[] submit = new Runnable[1];
-        if (ow) { LinearLayout row = host.actionRow(p); host.ownerAction(row, "Cancel", Ui.OUTLINE, this::orders); complete = host.ownerAction(row, "Complete sale", Ui.FILLED, () -> submit[0].run()); }
+        if (ow) { LinearLayout row = host.actionRow(p); host.ownerAction(row, "Cancel", Ui.OUTLINE, this::orders); complete = host.ownerAction(row, "Save walk-in", Ui.FILLED, () -> submit[0].run()); }
         else {
-            complete = ui.dockButton("Complete sale", Ui.FILLED, () -> host.guarded(submit[0])); ui.fill(totalsHost, complete);
+            complete = ui.dockButton("Save walk-in", Ui.FILLED, () -> host.guarded(submit[0])); ui.fill(totalsHost, complete);
             creditNote = ui.tv("", 13, 18, Ui.MUTED, ui.o4); creditNote.setGravity(Gravity.CENTER); creditNote.setVisibility(View.GONE); ui.fill(totalsHost, creditNote);
         }
         final TextView note = creditNote;
         Runnable recompute = () -> {
             long total = 0, tendered = -1; boolean ok = true; int q = 0;
-            try { q = quantity(gallons); total = Math.multiplyExact((long) q, 3500); totalView.setText(host.money(total)); host.clearFieldError(gallons); if (available[0] >= 0 && q > available[0]) { host.fieldError(gallons, "Not enough filled gallons."); ok = false; } }
+            try { q = quantity(gallons); total = Math.multiplyExact((long) q, 3500); totalView.setText(host.money(total)); host.clearFieldError(gallons); }
             catch (IllegalArgumentException e) { totalView.setText(host.money(0)); ok = false; if (!value(gallons).isEmpty()) host.fieldError(gallons, e.getMessage()); }
             String raw = cleanMoney(value(cash));
             try { tendered = cents(cash, "Enter a valid cash amount."); host.clearFieldError(cash); if (tendered < 0) { host.fieldError(cash, "Cash received cannot be negative."); ok = false; } }
@@ -1104,8 +1121,7 @@ public final class OperationsUi {
             if (ok && !credit) { changeView.setText(host.money(tendered - total)); changeView.setTextColor(Ui.GREEN); }
             else if (credit) { changeView.setText(host.money(total - tendered)); changeView.setTextColor(Ui.AMBER); }
             else { changeView.setText("–"); changeView.setTextColor(Ui.GREEN); }
-            if (stockAfter[0] != null) stockAfter[0].setText(available[0] >= 0 && ok ? Long.toString(available[0] - q) : "–");
-            complete.setText(credit ? "Save as credit · " + host.money(total - tendered) : "Complete sale");
+            complete.setText(credit ? "Save as credit · " + host.money(total - tendered) : "Save walk-in");
             ui.style(complete, ok && total > 0 ? (credit ? Ui.AMBER_BTN : Ui.FILLED) : Ui.DISABLED);
             if (note != null) { note.setVisibility(credit ? View.VISIBLE : View.GONE); if (credit) note.setText("Paid " + host.money(Math.max(0, tendered)) + " now · " + host.money(total - tendered) + " stays as a balance"); }
         };
@@ -1115,16 +1131,19 @@ public final class OperationsUi {
             int q; try { q = quantity(gallons); } catch (IllegalArgumentException e) { host.fieldError(gallons, e.getMessage()); return; }
             long tendered; try { tendered = cents(cash, "Enter a valid cash amount."); } catch (IllegalArgumentException e) { host.fieldError(cash, e.getMessage()); return; }
             if (tendered < 0) { host.fieldError(cash, "Cash received cannot be negative."); return; }
-            if (available[0] >= 0 && q > available[0]) { host.fieldError(gallons, "Not enough filled gallons."); return; }
+            String where = deliver[0] ? value(address) : "";
+            if (deliver[0] && where.isEmpty()) { host.fieldError(address, "Enter the delivery address."); return; }
+            String phone = deliver[0] ? value(contact).replace(" ", "") : "";
+            if (!phone.isEmpty() && !phone.matches("[0-9]{11}")) { host.fieldError(contact, "Please enter a valid contact number. Use 11 digits."); return; }
             long total = Math.multiplyExact((long) q, 3500);
-            JSONObject payload = json("customer_name", value(name), "quantity", q, "cash_centavos", tendered, "confirm_credit", tendered < total);
+            JSONObject payload = json("customer_name", value(name), "contact_number", phone, "address", where, "quantity", q, "cash_centavos", tendered, "confirm_credit", tendered < total);
             String customer = value(name);
-            host.command("create_sale", payload, saved -> {
-                JSONObject sale = nested(saved, "sale");
-                long bal = balance(sale);
+            host.command("create_counter_order", payload, saved -> {
+                JSONObject order = nested(saved, "order");
+                long bal = balance(order);
                 String st = bal > 0 ? (tendered > 0 ? "Partially paid" : "Unpaid") : "Paid";
-                pos();
-                host.info("Sale " + sale.optString("reference") + " saved", customer + " · " + q + " gallons · " + st + (bal > 0 ? " · Credit " + host.money(bal) : " · Change " + host.money(Math.max(0, tendered - total))) + (available[0] >= 0 ? " · Stock " + available[0] + " → " + (available[0] - q) : ""));
+                order(id(order));
+                host.info("Walk-in " + order.optString("reference") + " saved", customer + " · " + q + " gallons · " + (where.isEmpty() ? "claim at counter" : "for delivery") + " · " + st + (bal > 0 ? " · Credit " + host.money(bal) : " · Change " + host.money(Math.max(0, tendered - total))));
             });
         });
         recompute.run();

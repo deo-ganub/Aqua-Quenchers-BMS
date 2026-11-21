@@ -7,7 +7,6 @@ insert into auth.users values
 insert into aq_private.profiles(user_id,username,full_name,contact_number,role) values
  ('13000000-0000-4000-8000-000000000001','delivery.owner','Delivery Owner','09000000301','owner'),
  ('13000000-0000-4000-8000-000000000002','delivery.staff','Delivery Staff','09000000302','staff');
-update aq_private.inventory set initialized=true,physical_filled=20;
 create function pg_temp.delivery_snapshot() returns jsonb language plpgsql as $$
 declare result jsonb:='{}'; name text; rows jsonb;
 begin
@@ -47,17 +46,9 @@ begin
    execute 'reset role';
    if not rejected or pg_temp.delivery_snapshot() is distinct from before_state then raise exception 'Delivery invalid quantity changed protected state: %',row.value;end if;
   end loop;
-  -- Test-admin injection models missing own reservation despite abundant physical stock.
-  -- No product adjustment endpoint or production inventory is used.
-  update aq_private.reservations set quantity=0 where order_id=(o->>'id')::uuid;
-  before_state:=pg_temp.delivery_snapshot();request:=jsonb_build_object('operation','record_delivery','request_id',gen_random_uuid(),'order_id',o->>'id','quantity',1);rejected:=false;
-  execute 'set local role authenticated';
-  begin perform public.aq_command(request);exception when others then if sqlerrm='Not enough reserved gallons for this order.' then rejected:=true;else raise;end if;end;
-  execute 'reset role';
-  if not rejected or pg_temp.delivery_snapshot() is distinct from before_state then raise exception 'Missing reservation changed protected state';end if;
-  update aq_private.reservations set quantity=3 where order_id=(o->>'id')::uuid;
+  request:=jsonb_build_object('operation','record_delivery','request_id',gen_random_uuid(),'order_id',o->>'id','quantity',1);
   execute 'set local role authenticated';saved:=public.aq_command(request);execute 'reset role';
-  if saved->>'status'<>'undelivered' or (saved->>'pending_quantity')::int<>2 or (saved->>'reserved_quantity')::int<>2 or (saved->>'total_centavos')::int<>9000 then raise exception 'Partial delivery did not preserve charge/reservation';end if;
+  if saved->>'status'<>'undelivered' or (saved->>'pending_quantity')::int<>2 or (saved->>'total_centavos')::int<>9000 then raise exception 'Partial delivery did not preserve charge';end if;
   select created_at into first_delivery from aq_private.deliveries where order_id=(o->>'id')::uuid;
   if first_delivery is null or abs(extract(epoch from clock_timestamp()-first_delivery))>5 or not exists(select 1 from aq_private.deliveries where order_id=(o->>'id')::uuid and recorded_by=actor and quantity=1) then raise exception 'Delivery actual timestamp/actor missing';end if;
   before_state:=pg_temp.delivery_snapshot();execute 'set local role authenticated';replay:=public.aq_command(request);execute 'reset role';
@@ -65,8 +56,8 @@ begin
   execute 'set local role authenticated';
   saved:=public.aq_command(jsonb_build_object('operation','record_delivery','request_id',gen_random_uuid(),'order_id',o->>'id','quantity',2));
   execute 'reset role';
-  if saved->>'status'<>'delivered' or (saved->>'pending_quantity')::int<>0 or (saved->>'reserved_quantity')::int<>0 or (saved->>'total_centavos')::int<>9000 then raise exception 'Final delivery reconciliation failed';end if;
+  if saved->>'status'<>'delivered' or (saved->>'pending_quantity')::int<>0 or (saved->>'total_centavos')::int<>9000 then raise exception 'Final delivery reconciliation failed';end if;
  end loop;
- raise notice 'PASS: both roles exact invalid quantities and own-reservation denial/full protected rollback; restored same request succeeds once, replay immutable, partial/final charge-reservation-time-actor preserved.';
+ raise notice 'PASS: both roles exact invalid quantities with full protected rollback; partial delivery succeeds once, replay immutable, partial/final charge-time-actor preserved.';
 end $$;
 rollback;

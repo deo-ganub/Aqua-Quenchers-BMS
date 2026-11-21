@@ -40,7 +40,7 @@ final class HomeUi {
             if (a.today().equals(o.optString("business_date"))) todays++;
             int g = OperationsUi.group(s);
             if (g == 1) pickup++; else if (g == 2) refilling++; else if (g == 3) deliver++;
-            if (!"delivered".equals(s)) open.add(o);
+            if (!OperationsUi.done(s)) open.add(o);
             collect += Math.max(0, OperationsUi.balance(o));
         }
         String first = a.recorder().trim().isEmpty() ? "" : a.recorder().trim().split("\\s+")[0];
@@ -56,7 +56,7 @@ final class HomeUi {
         if (open.isEmpty()) {
             ui.text(next, "ALL CLEAR", 12, 18, 0xFFC7E5FF, ui.p5);
             ui.text(next, "Nothing waiting right now", 22, 33, Ui.WHITE, ui.p6);
-            ui.text(next, "Create an order or record a walk-in sale.", 14, 19, 0xFFE0F2FF, ui.o4);
+            ui.text(next, "Create an order or record a walk-in.", 14, 19, 0xFFE0F2FF, ui.o4);
         } else {
             JSONObject job = open.get(0);
             String status = job.optString("status");
@@ -70,7 +70,7 @@ final class HomeUi {
             LinearLayout buttons = ui.H(next, 10);
             TextView call = ui.button("Call", Ui.FILLED, 48, 14, 16, () -> a.operations().call(job));
             call.setBackground(ui.shape(Ui.WHITE, 0, 14)); call.setTextColor(Ui.PRIMARY); ui.hug(buttons, call);
-            TextView act = ui.button(OperationsUi.nextLabel(status), Ui.FILLED, 48, 14, 16, () -> a.operations().nextStep(job));
+            TextView act = ui.button(OperationsUi.nextLabel(job), Ui.FILLED, 48, 14, 16, () -> a.operations().nextStep(job));
             act.setBackground(ui.shape(Ui.WHITE, 0, 14)); act.setTextColor(Ui.PRIMARY); ui.grow(buttons, act);
         }
 
@@ -85,7 +85,7 @@ final class HomeUi {
         JSONObject longest = null;
         for (JSONObject o : open) {
             String s = o.optString("status");
-            if (("undelivered".equals(s) || "ready_for_delivery".equals(s)) && OperationsUi.pending(o) > 0) { longest = o; break; }
+            if (("undelivered".equals(s) || "ready_for_delivery".equals(s)) && !OperationsUi.claimAtCounter(o) && OperationsUi.pending(o) > 0) { longest = o; break; }
         }
         LinearLayout wait = ui.card(p, 6, 16);
         wait.setClickable(true); wait.setOnClickListener(v -> a.operations().pending()); wait.setContentDescription("Pending gallons");
@@ -101,7 +101,7 @@ final class HomeUi {
         }
         LinearLayout actions = ui.H(p, 12);
         ui.grow(actions, ui.dockButton("New order", Ui.FILLED, () -> a.operations().newOrder(null)));
-        ui.grow(actions, ui.dockButton("Walk-in sale", Ui.TONAL_BTN, () -> a.operations().pos()));
+        ui.grow(actions, ui.dockButton("Walk-in", Ui.TONAL_BTN, () -> a.operations().pos()));
     }
     /** Whole pesos for the "To collect" tile (Figma "₱150"), otherwise the full amount. */
     private String peso(long cents) { return cents % 100 == 0 ? "₱" + String.format(Locale.ENGLISH, "%,d", cents / 100) : a.money(cents); }
@@ -195,7 +195,7 @@ final class HomeUi {
                 range.setText(rangeLabel(from, to));
                 JSONObject stock = r.optJSONObject("inventory");
                 String stamp = stock == null ? "" : stock.optString("updated_at");
-                if (!stamp.isEmpty()) { updated.setText("Stock updated " + Rules.shortStamp(stamp)); updated.setVisibility(View.VISIBLE); }
+                if (!stamp.isEmpty()) { updated.setText("Updated " + Rules.shortStamp(stamp)); updated.setVisibility(View.VISIBLE); }
                 host.removeAllViews();
                 LinearLayout grid = ui.V(host, 12);
                 LinearLayout r1 = ui.H(grid, 12), r2 = ui.H(grid, 12);
@@ -205,13 +205,13 @@ final class HomeUi {
                 phoneKpi(r2, "Net income", r.optLong("net_income_centavos"), "Payments − expenses", true);
                 LinearLayout gallons = ui.card(host, 12, 16);
                 LinearLayout gh = ui.H(gallons, 8);
-                ui.grow(gh, ui.tv("Gallon stock", 17, 26, Ui.INK, ui.p6));
-                ui.hug(gh, ui.link("Inventory ›", 14, () -> a.ownerUi().inventory()));
+                ui.grow(gh, ui.tv("Gallons at the station", 17, 26, Ui.INK, ui.p6));
+                ui.hug(gh, ui.link("Gallons at station ›", 14, () -> a.ownerUi().inventory()));
                 LinearLayout s1 = ui.H(gallons, 10), s2 = ui.H(gallons, 10);
-                stockTile(s1, stock == null ? 0 : stock.optLong("filled_available"), "Filled available", Ui.GREEN_BG, Ui.GREEN);
-                stockTile(s1, stock == null ? 0 : stock.optLong("reserved_filled"), "Reserved", Ui.TONAL, Ui.PRIMARY);
-                stockTile(s2, stock == null ? 0 : stock.optLong("empty_quantity"), "Empty", Ui.GREY_BG, Ui.INK);
-                stockTile(s2, stock == null ? 0 : stock.optLong("pending_quantity"), "Pending delivery", Ui.AMBER_BG, Ui.AMBER);
+                stockTile(s1, stock == null ? 0 : stock.optLong("at_station"), "At the station", Ui.TONAL, Ui.PRIMARY);
+                stockTile(s1, stock == null ? 0 : stock.optLong("refilling"), "Refilling", Ui.GREY_BG, Ui.INK);
+                stockTile(s2, stock == null ? 0 : stock.optLong("pending_quantity"), "To deliver", Ui.AMBER_BG, Ui.AMBER);
+                stockTile(s2, stock == null ? 0 : stock.optLong("to_claim"), "To claim", Ui.GREEN_BG, Ui.GREEN);
                 LinearLayout owed = ui.card(host, 6, 16); owed.setClickable(true); owed.setOnClickListener(v -> a.operations().payments());
                 ui.label(owed, "Outstanding balances");
                 LinearLayout or = ui.H(owed, 8);
@@ -240,7 +240,7 @@ final class HomeUi {
                 });
                 LinearLayout actions = ui.H(host, 12);
                 ui.grow(actions, ui.dockButton("New order", Ui.FILLED, () -> a.operations().newOrder(null)));
-                ui.grow(actions, ui.dockButton("Walk-in sale", Ui.TONAL_BTN, () -> a.operations().pos()));
+                ui.grow(actions, ui.dockButton("Walk-in", Ui.TONAL_BTN, () -> a.operations().pos()));
                 ui.fill(host, ui.dockButton("Reports", Ui.OUTLINE, () -> a.ownerUi().reports()));
             });
         };
@@ -304,13 +304,13 @@ final class HomeUi {
 
         JSONObject stock = r.optJSONObject("inventory");
         LinearLayout gallons = ui.card(right, 12, 18);
-        ui.text(gallons, "Gallon stock", 17, 26, Ui.INK, ui.p6);
+        ui.text(gallons, "Customer gallons at the station", 17, 26, Ui.INK, ui.p6);
         LinearLayout s1 = ui.H(gallons, 10), s2 = ui.H(gallons, 10);
-        stockTile(s1, stock == null ? 0 : stock.optLong("filled_available"), "Filled available", Ui.GREEN_BG, Ui.GREEN);
-        stockTile(s1, stock == null ? 0 : stock.optLong("reserved_filled"), "Reserved", Ui.TONAL, Ui.PRIMARY);
-        stockTile(s2, stock == null ? 0 : stock.optLong("empty_quantity"), "Empty", Ui.GREY_BG, Ui.INK);
-        stockTile(s2, stock == null ? 0 : stock.optLong("pending_quantity"), "Pending delivery", Ui.AMBER_BG, Ui.AMBER);
-        ui.hug(gallons, ui.link("Inventory ›", 14, () -> a.ownerUi().inventory()));
+        stockTile(s1, stock == null ? 0 : stock.optLong("at_station"), "At the station", Ui.TONAL, Ui.PRIMARY);
+        stockTile(s1, stock == null ? 0 : stock.optLong("refilling"), "Refilling", Ui.GREY_BG, Ui.INK);
+        stockTile(s2, stock == null ? 0 : stock.optLong("pending_quantity"), "To deliver", Ui.AMBER_BG, Ui.AMBER);
+        stockTile(s2, stock == null ? 0 : stock.optLong("to_claim"), "To claim", Ui.GREEN_BG, Ui.GREEN);
+        ui.hug(gallons, ui.link("Gallons at station ›", 14, () -> a.ownerUi().inventory()));
 
         LinearLayout owed = ui.card(right, 6, 18);
         ui.label(owed, "Outstanding balances");
@@ -318,7 +318,7 @@ final class HomeUi {
         ui.hug(owed, ui.link("Customer balances ›", 14, () -> a.operations().payments()));
 
         ui.fill(right, ui.button("+  Create order", Ui.FILLED, 48, 12, 15, () -> a.operations().newOrder(null)));
-        ui.fill(right, ui.button("Walk-in sale", Ui.TONAL_BTN, 48, 12, 15, () -> a.operations().pos()));
+        ui.fill(right, ui.button("Walk-in", Ui.TONAL_BTN, 48, 12, 15, () -> a.operations().pos()));
         ui.fill(right, ui.button("Reports", Ui.OUTLINE, 48, 12, 15, () -> a.ownerUi().reports()));
     }
     private void kpi(LinearLayout row, String label, long cents, String caption, boolean dark) {

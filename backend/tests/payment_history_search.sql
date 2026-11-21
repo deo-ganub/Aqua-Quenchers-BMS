@@ -5,7 +5,6 @@ insert into auth.users values ('10000000-0000-4000-8000-000000000001','owner@his
 insert into aq_private.profiles(user_id,username,full_name,contact_number,role) values
 ('10000000-0000-4000-8000-000000000001','owner.history','SYNTHETIC History Owner','09000000001','owner'),
 ('10000000-0000-4000-8000-000000000002','staff.history','SYNTHETIC History Staff','09000000002','staff');
-update aq_private.inventory set physical_filled=1;
 select set_config('request.jwt.claim.sub','10000000-0000-4000-8000-000000000001',true);
 select set_config('request.jwt.claims',jsonb_build_object('session_id','20000000-0000-4000-8000-000000000001','iat',extract(epoch from clock_timestamp()),'aal','aal2')::text,true);
 set local role authenticated;
@@ -19,7 +18,7 @@ begin
  perform public.aq_command(jsonb_build_object('operation','record_payment','request_id',gen_random_uuid(),'reference',o->>'reference','amount_centavos',1000));
  perform public.aq_command(jsonb_build_object('operation','record_payment','request_id',gen_random_uuid(),'reference',o->>'reference','amount_centavos',500));
  perform public.aq_command(jsonb_build_object('operation','record_payment','request_id',gen_random_uuid(),'reference',other_order->>'reference','amount_centavos',250));
- sale:=public.aq_command(jsonb_build_object('operation','create_sale','request_id',gen_random_uuid(),'customer_name','SYNTHETIC Needle Walk-in','quantity',1,'cash_centavos',1000,'confirm_credit',true));
+ sale:=public.aq_command(jsonb_build_object('operation','create_counter_order','request_id',gen_random_uuid(),'customer_name','SYNTHETIC Needle Walk-in','quantity',1,'cash_centavos',1000,'confirm_credit',true));
  all_receipts:=public.aq_query('{"resource":"payments"}');stock:=public.aq_query('{"resource":"inventory"}');
  if jsonb_array_length(all_receipts->'items')<>4 then raise exception 'Missing fixture receipts';end if;
  r:=public.aq_query('{"resource":"payments","search":"nEeDlE"}');if jsonb_array_length(r->'items')<>3 then raise exception 'Customer-name history omits order or unlinked sale receipts';end if;

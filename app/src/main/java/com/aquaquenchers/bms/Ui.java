@@ -425,10 +425,10 @@ final class Ui {
         switch (status == null ? "" : status) {
             case "ordered": return 0;
             case "for_pickup": case "rescheduled": return 1;
-            case "picked_up": return 2;
+            case "picked_up": case "received_at_counter": return 2;
             case "refilling": return 3;
             case "ready_for_delivery": case "undelivered": return 4;
-            case "delivered": return 5;
+            case "delivered": case "claimed": return 5;
             default: return 0;
         }
     }
@@ -475,6 +475,8 @@ final class Ui {
             case "ready_for_delivery": return chip("Ready", GREEN_BG, GREEN);
             case "for_pickup": return chip("To pick up", TONAL, PRIMARY);
             case "delivered": return chip("Delivered", GREEN_BG, GREEN);
+            case "claimed": return chip("Claimed", GREEN_BG, GREEN);
+            case "received_at_counter": return chip("At counter", TONAL, PRIMARY);
             case "picked_up": return chip("Picked up", TONAL, PRIMARY);
             case "refilling": return chip("Refilling", TONAL, PRIMARY);
             case "rescheduled": return chip("Rescheduled", AMBER_BG, AMBER);

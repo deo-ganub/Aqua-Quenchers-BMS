@@ -243,7 +243,7 @@ public final class MainActivity extends Activity {
         FrameLayout item = new FrameLayout(this); item.setClickable(true);
         ImageView icon = ui.icon(sideIcon(route), Ui.NAV_MUTED);
         FrameLayout.LayoutParams ip = new FrameLayout.LayoutParams(ui.px(20), ui.px(20), Gravity.CENTER_VERTICAL); ip.leftMargin = ui.px(12); item.addView(icon, ip);
-        TextView label = ui.tv("Home".equals(route) ? "Today" : "POS".equals(route) ? "Walk-in sale" : route, 13.5f, 20, Ui.INK, ui.p5);
+        TextView label = ui.tv("Home".equals(route) ? "Today" : "POS".equals(route) ? "Walk-in" : route, 13.5f, 20, Ui.INK, ui.p5);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(-2, -2, Gravity.CENTER_VERTICAL); lp.leftMargin = ui.px(44); item.addView(label, lp);
         View bar = new View(this); bar.setBackground(ui.shape(Ui.PRIMARY, 0, 2)); bar.setVisibility(View.GONE);
         item.addView(bar, new FrameLayout.LayoutParams(ui.px(3), ui.px(24), Gravity.CENTER_VERTICAL));
@@ -340,7 +340,7 @@ public final class MainActivity extends Activity {
     static String displayTitle(String title) {
         switch (title) {
             case "Home": return "Today";
-            case "Walk-in Sale / POS": return "Walk-in sale";
+            case "Walk-in Sale / POS": return "Walk-in";
             case "Create Order": return "New order";
             case "Order Details": return "Order";
             case "Customer Profile": return "Customer";
@@ -350,12 +350,12 @@ public final class MainActivity extends Activity {
             case "Reschedule Pickup": return "Reschedule";
             case "Record Delivery": return "Record delivery";
             case "Record Payment": case "Payment recorded": return "Collect payment";
-            case "Sale saved": return "Walk-in sale";
+            case "Sale saved": return "Walk-in";
             case "Pending gallons / Carry-over Details": return "Pending gallons";
             case "Financial summary": case "Report Preview": return "Reports";
             case "My account": case "Edit profile": return "Edit profile";
             case "Change password": return "Change password";
-            case "Inventory": return "Inventory";
+            case "Gallons at station": return "Gallons at station";
             case "Staff accounts": case "Create Staff account": case "Edit Staff account": return "Staff accounts";
             case "Expenses": return "Expenses";
             case "Payment history": return "Payment history";
@@ -392,7 +392,7 @@ public final class MainActivity extends Activity {
         if (wide()) {
             LinearLayout head = ui.H(body, 10);
             head.setMinimumHeight(ui.px(39));
-            String nav = navRouteFor(title), ownerTitle = isOwner() ? nav : "POS".equals(nav) ? "Walk-in sale" : displayTitle(nav);
+            String nav = navRouteFor(title), ownerTitle = isOwner() ? nav : "POS".equals(nav) ? "Walk-in" : displayTitle(nav);
             TextView heading = ui.tv(ownerTitle, 26, 39, Ui.INK, ui.p6);
             ui.grow(head, heading);
             titleActions = ui.hbox(10); ui.hug(head, titleActions);
@@ -407,7 +407,7 @@ public final class MainActivity extends Activity {
         }
         return body;
     }
-    /** Owner title row actions (e.g. "Walk-in sale", "+ New order", "Outstanding" chip). */
+    /** Owner title row actions (e.g. "Walk-in", "+ New order", "Outstanding" chip). */
     LinearLayout titleActions() { return titleActions; }
     /** Two side-by-side panes (Owner): fixed-width left column, flexible right column, 16 apart. */
     LinearLayout[] panes(float leftWidth) {
@@ -550,10 +550,8 @@ public final class MainActivity extends Activity {
     public void error(String text) { if (text == null || text.isEmpty()) text = "Check the entered details and try again."; banner(Ui.ERROR, text, errorDetail(text)); }
     private static String errorDetail(String text) {
         switch (text) {
-            case "Not enough empty gallons.": return "Status and stock were not changed.";
             case "Follow the next eligible order stage.": return "The saved status was not changed.";
-            case "Not enough reserved gallons for this order.": return "Nothing was saved.";
-            case "Not enough filled gallons.": return "Nothing was saved and stock is unchanged.";
+            case "Confirm recording the remaining balance as credit.": return "Nothing was saved.";
             default: return null;
         }
     }
@@ -873,7 +871,7 @@ public final class MainActivity extends Activity {
             case "Add Expense": ownerUi.expenses(); break;
             case "Expenses": case "Financial summary": ownerUi.settings(); break;
             case "Report Preview": ownerUi.reports(); break;
-            case "Inventory": case "Staff accounts": case "My account": case "Change password": case "Edit profile": ownerUi.settings(); break;
+            case "Gallons at station": case "Staff accounts": case "My account": case "Change password": case "Edit profile": ownerUi.settings(); break;
             case "Create Staff account": case "Edit Staff account": ownerUi.staffAccounts(); break;
             default: showHome();
         }
