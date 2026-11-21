@@ -16,16 +16,28 @@ create extension if not exists pgcrypto with schema extensions;
 create table if not exists aq_private.local_secrets(name text primary key, value text not null);
 alter table aq_private.local_secrets enable row level security;
 revoke all on aq_private.local_secrets from public,anon,authenticated;
-insert into aq_private.local_secrets(name,value) values('aq_pii_key',encode(extensions.gen_random_bytes(32),'hex')) on conflict do nothing;
+-- Local/test databases (no Vault) get generated keys. Where Vault exists (Supabase) nothing is
+-- seeded here: create the Vault secrets "aq_pii_key" and "aq_pii_index_key" first, otherwise this
+-- migration stops with "Encryption key ... is not configured in Vault." (fail closed).
+do $$ begin
+ if to_regclass('vault.decrypted_secrets') is null then
+  insert into aq_private.local_secrets(name,value) values
+   ('aq_pii_key',encode(extensions.gen_random_bytes(32),'hex')),
+   ('aq_pii_index_key',encode(extensions.gen_random_bytes(32),'hex')) on conflict do nothing;
+ end if;
+end $$;
 
-create function aq_private.pii_key() returns text language plpgsql stable security definer set search_path='' as $$
+create function aq_private.pii_key(p_name text default 'aq_pii_key') returns text language plpgsql stable security definer set search_path='' as $$
 declare k text;
 begin
+ if p_name not in ('aq_pii_key','aq_pii_index_key') then raise exception 'Unknown key.'; end if;
  if to_regclass('vault.decrypted_secrets') is not null then
-  execute 'select decrypted_secret from vault.decrypted_secrets where name=$1 limit 1' into k using 'aq_pii_key';
+  execute 'select decrypted_secret from vault.decrypted_secrets where name=$1 limit 1' into k using p_name;
+  if k is null or length(k)<32 then raise exception 'Encryption key % is not configured in Vault.',p_name; end if;
+  return k;
  end if;
- if k is null then select value into k from aq_private.local_secrets where name='aq_pii_key'; end if;
- if k is null or length(k)<32 then raise exception 'Encryption key is not configured.'; end if;
+ select value into k from aq_private.local_secrets where name=p_name;
+ if k is null or length(k)<32 then raise exception 'Encryption key % is not configured.',p_name; end if;
  return k;
 end $$;
 create function aq_private.enc(p text) returns text language sql volatile security definer set search_path='' as $$
@@ -37,7 +49,12 @@ create function aq_private.dec(p text) returns text language sql stable security
   else extensions.pgp_sym_decrypt(decode(substr(p,8),'base64'),aq_private.pii_key()) end
 $$;
 create function aq_private.blind(p text) returns bytea language sql stable security definer set search_path='' as $$
- select case when p is null or p='' then null else extensions.hmac(convert_to(p,'UTF8'),convert_to(aq_private.pii_key(),'UTF8'),'sha256') end
+ select case when p is null or p='' then null else extensions.hmac(convert_to(p,'UTF8'),convert_to(aq_private.pii_key('aq_pii_index_key'),'UTF8'),'sha256') end
+$$;
+-- Keyed digest of a whole request, used only to detect a reused request_id with different data.
+-- Keyed so that a database dump cannot be used to guess the contact number inside a request.
+create function aq_private.request_digest(p jsonb) returns bytea language sql stable security definer set search_path='' as $$
+ select extensions.hmac(sha256(convert_to(p::text,'UTF8')),convert_to(aq_private.pii_key('aq_pii_index_key'),'UTF8'),'sha256')
 $$;
 create function aq_private.strip_pii(p jsonb) returns jsonb language sql immutable set search_path='' as $$
  select case when p is null then null when jsonb_typeof(p)='object' then p-array['contact_number','address','contact_index','temporary_password','password'] else p end
@@ -65,7 +82,9 @@ alter table aq_private.customers add constraint customers_contact_sealed_check c
 alter table aq_private.customers add constraint customers_address_sealed_check check(address is null or (address like 'enc:v1:%' and length(address)<=4000));
 update aq_private.orders set contact_number=aq_private.enc(contact_number),address=aq_private.enc(address);
 alter table aq_private.orders add constraint orders_pii_sealed_check check((contact_number is null or contact_number='' or contact_number like 'enc:v1:%') and (address is null or address='' or address like 'enc:v1:%'));
-update aq_private.requests set payload=aq_private.strip_pii(payload),result=aq_private.seal_result(result);
+-- Re-key stored request digests (old value = sha256 of the request text) and drop PII.
+update aq_private.requests set payload=aq_private.strip_pii(payload),result=aq_private.seal_result(result),
+ payload_hash=extensions.hmac(payload_hash,convert_to(aq_private.pii_key('aq_pii_index_key'),'UTF8'),'sha256');
 
 -- Readers return decrypted values to authorised callers only.
 create or replace function aq_private.customer_json(p_id uuid) returns jsonb language sql stable set search_path='' as $$
@@ -89,10 +108,10 @@ $$;
 -- ---------------------------------------------------------------- tamper-evident audit log
 alter table aq_private.audit_events add column chain_seq bigint unique, add column content_digest bytea, add column prev_hash bytea, add column row_hash bytea;
 create function aq_private.audit_row_hash(p_prev bytea,p_seq bigint,p_actor uuid,p_action text,p_entity uuid,p_request uuid,p_created timestamptz,p_digest bytea) returns bytea language sql immutable set search_path='' as $$
- select sha256(p_prev||convert_to(concat_ws('|',p_seq,p_actor,p_action,p_entity,p_request,to_char(p_created at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS.US'),encode(p_digest,'hex')),'UTF8'))
+ select sha256(p_prev||convert_to(jsonb_build_array(p_seq,p_actor,p_action,p_entity,p_request,to_char(p_created at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS.US'),encode(p_digest,'hex'))::text,'UTF8'))
 $$;
 create function aq_private.audit_content_digest(p_before jsonb,p_after jsonb,p_reason text) returns bytea language sql immutable set search_path='' as $$
- select sha256(convert_to(coalesce(p_before::text,'')||'|'||coalesce(p_after::text,'')||'|'||coalesce(p_reason,''),'UTF8'))
+ select sha256(convert_to(jsonb_build_array(p_before,p_after,p_reason)::text,'UTF8'))
 $$;
 -- Remove personal contact fields from historical audit rows, then build the chain in id order.
 update aq_private.audit_events set before_state=aq_private.strip_pii(before_state),after_state=aq_private.strip_pii(after_state);
@@ -163,7 +182,7 @@ begin
  if not p_execute then return result;end if;
  update aq_private.customers set contact_number=null,contact_index=null,address=null,updated_at=clock_timestamp() where id=p_customer_id and updated_at<=cutoff;
  update aq_private.orders set contact_number=null,address=null where customer_id=p_customer_id and created_at<=cutoff;
- update aq_private.requests as req set payload=aq_private.strip_pii(req.payload),result=aq_private.strip_pii(req.result)-'pii_enc'
+ update aq_private.requests as req set payload=aq_private.strip_pii(req.payload),result=aq_private.strip_pii(req.result)-'pii_enc',payload_hash=extensions.gen_random_bytes(32)
  where req.created_at<=cutoff and (req.result->>'id'=p_customer_id::text or req.result->>'id' in(select id::text from aq_private.orders where customer_id=p_customer_id and created_at<=cutoff));
  insert into aq_private.privacy_decisions(decision_id,customer_id,payload,result,administrator,effective_cutoff) values(p_decision_id,p_customer_id,payload,result,session_user,cutoff);
  insert into aq_private.audit_events(action,entity_id,request_id,after_state,reason) values('approved_contact_removal',p_customer_id,p_decision_id,result,p_reason);
@@ -181,9 +200,9 @@ begin
  if p_request is null or jsonb_typeof(p_request)<>'object' then raise exception 'Invalid request.'; end if;
  begin rid:=(p_request->>'request_id')::uuid; exception when others then raise exception 'A valid request_id is required.'; end;
  if rid is null then raise exception 'A valid request_id is required.'; end if;
- insert into aq_private.requests(actor_id,request_id,payload,payload_hash) values(a,rid,aq_private.strip_pii(p_request),sha256(convert_to(p_request::text,'UTF8'))) on conflict do nothing;
+ insert into aq_private.requests(actor_id,request_id,payload,payload_hash) values(a,rid,aq_private.strip_pii(p_request),aq_private.request_digest(p_request)) on conflict do nothing;
  select * into previous from aq_private.requests where actor_id=a and request_id=rid for update;
- if previous.payload_hash<>sha256(convert_to(p_request::text,'UTF8')) then raise exception 'Request key was already used with different data.'; end if;
+ if previous.payload_hash<>aq_private.request_digest(p_request) then raise exception 'Request key was already used with different data.'; end if;
  if previous.result is not null then return aq_private.open_result(previous.result); end if;
  -- A small station benefits from a deterministic global write lock; explicit rows below
  -- also protect invariants. This serializes application mutations, never external reads.
@@ -370,6 +389,11 @@ begin
   result:=aq_private.financial_summary(start_date,end_date);
   if resource='dashboard' then return result||jsonb_build_object('inventory',aq_private.stock_json(),'recent_orders',(select coalesce(jsonb_agg(x.item),'[]') from (select aq_private.order_json(o.id) item from aq_private.orders o order by created_at desc limit 10) x)); end if;
   return result;
+ elsif resource='request_status' then
+  -- Whether this account's request_id reached the server (used before giving up on an offline save).
+  if nullif(p_request->>'id','') is null then raise exception 'Invalid request.'; end if;
+  return (select case when r.request_id is null then jsonb_build_object('known',false) else jsonb_build_object('known',true,'completed',r.result is not null,'result',aq_private.open_result(r.result)) end
+   from (select 1) one left join aq_private.requests r on r.actor_id=a and r.request_id=(p_request->>'id')::uuid);
  elsif resource='audit_integrity' then
   perform aq_private.require_actor(true);
   return aq_private.verify_audit_chain();

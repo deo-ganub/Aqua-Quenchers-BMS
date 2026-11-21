@@ -78,7 +78,9 @@ public final class MainActivity extends Activity {
         if (state.profile == null) signIn(); else { shell(); restoreRoute(); }
         clock.postDelayed(idleCheck, 60000);
         offlineStore = new OfflineStore(this);
-        try { offline = offlineStore.load(); } catch (Exception e) { offline = new OfflineQueue(); clock.post(() -> error("Unsent saves on this phone could not be read.", "They were not sent. Check recent records and enter any missing ones again.")); }
+        try { offline = offlineStore.load(); } catch (Exception e) { offline = new OfflineQueue(); clock.post(() -> error("Unsent saves on this phone could not be read.", "Check recent records and enter any missing ones again.")); }
+        java.util.List<OfflineQueue.Entry> purged = offline.purge(System.currentTimeMillis());
+        if (!purged.isEmpty()) { persistOffline(); clock.post(() -> error(purged.size() + (purged.size() == 1 ? " unsent save was" : " unsent saves were") + " removed after 14 days.", "Their account did not sign in again, so they could not be checked. Check recent records and enter any missing ones again.")); }
         clock.postDelayed(offlineTick, 5000);
     }
     private final Runnable offlineTick = new Runnable() { public void run() { flushOffline(); clock.postDelayed(this, 30000); } };
@@ -87,18 +89,30 @@ public final class MainActivity extends Activity {
     private void queueOffline(JSONObject request) {
         String uid = state.profile.optString("user_id");
         boolean kept = offline.add(uid, request, System.currentTimeMillis());
-        if (!kept) { error("Not sent — no connection.", "Too many saves are already waiting on this phone. Reconnect before entering more."); return; }
+        if (!kept) { error("Not sent — no connection.", "Too many saves are already waiting for this account. Reconnect before entering more."); return; }
         persistOffline();
         int waiting = offline.sizeFor(uid);
         banner(Ui.WARNING, "Not sent yet — no connection", OfflineQueue.label(request.optString("operation")) + " is kept on this phone (encrypted) and will be sent automatically when you are back online. It is not saved until you see \"Sent\". Don't enter it again." + (waiting > 1 ? " Waiting: " + waiting + "." : ""));
     }
+    /** A save older than 3 days is not sent again. Ask the server whether it arrived (the reply may have
+     *  been lost) and tell the user the real outcome. */
+    private void settleExpired(OfflineQueue.Entry entry) {
+        Session sent = state; offlineSending = true;
+        state.backend.call("/rest/v1/rpc/aq_query", json("p_request", json("resource", "request_status", "id", entry.requestId)), r -> {
+            offlineSending = false; if (sent != state || isDestroyed()) return;
+            offline.remove(entry.requestId); persistOffline(); state.keys.values().removeIf(v -> v.equals(entry.requestId));
+            if (r.optBoolean("known") && r.optBoolean("completed")) { JSONObject res = r.optJSONObject("result"); info("Sent earlier: " + entry.label, (res == null || res.optString("reference").isEmpty() ? "" : res.optString("reference") + " · ") + "the server already had it"); }
+            else error("Not saved: " + entry.label, "It waited more than 3 days without a connection and the server never received it. Enter it again if it is still needed.");
+            flushOffline();
+        }, e -> { offlineSending = false; /* keep it; ask again on the next try */ });
+    }
     /** Sends waiting saves for the signed-in account, oldest first, one at a time. */
     private void flushOffline() {
         if (offlineSending || isDestroyed() || state == null || state.profile == null || offline.size() == 0) return;
-        long now = System.currentTimeMillis();
-        java.util.List<OfflineQueue.Entry> expired = offline.expire(now);
-        if (!expired.isEmpty()) { persistOffline(); error(expired.size() + (expired.size() == 1 ? " unsent save was" : " unsent saves were") + " older than 3 days and removed.", "They were never saved. Enter them again if they are still needed."); }
-        java.util.List<OfflineQueue.Entry> ready = offline.sendable(state.profile.optString("user_id"), now);
+        long now = System.currentTimeMillis(); String uid = state.profile.optString("user_id");
+        java.util.List<OfflineQueue.Entry> expired = offline.expired(uid, now);
+        if (!expired.isEmpty()) { settleExpired(expired.get(0)); return; }
+        java.util.List<OfflineQueue.Entry> ready = offline.sendable(uid, now);
         if (ready.isEmpty()) return;
         OfflineQueue.Entry entry = ready.get(0); Session sent = state; offlineSending = true;
         state.backend.call("/rest/v1/rpc/aq_command", json("p_request", entry.request), r -> {
@@ -111,7 +125,7 @@ public final class MainActivity extends Activity {
             flushOffline();
         }, e -> {
             offlineSending = false; if (sent != state || isDestroyed()) return;
-            if (OfflineQueue.outcome(e.status) == OfflineQueue.Outcome.KEEP) return;
+            if (OfflineQueue.outcome(e.status, e.getMessage()) == OfflineQueue.Outcome.KEEP) return;
             offline.remove(entry.requestId); persistOffline();
             state.keys.values().removeIf(v -> v.equals(entry.requestId));
             error("Not saved: " + entry.label + " — " + e.getMessage(), "This waiting save was refused by the server. Check the record and enter it again if needed.");

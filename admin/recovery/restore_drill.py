@@ -27,7 +27,6 @@ end $$;
 
 CHECKS = """
 select jsonb_build_object(
- 'audit_chain', aq_private.verify_audit_chain(),
  'rows', jsonb_build_object(
    'customers',(select count(*) from aq_private.customers),
    'orders',(select count(*) from aq_private.orders),
@@ -41,18 +40,53 @@ select jsonb_build_object(
 """
 
 
-def run(cmd, **kw):
-    r = subprocess.run(cmd, text=True, capture_output=True, **kw)
+def run(cmd, timeout=1800, **kw):
+    r = subprocess.run(cmd, text=True, capture_output=True, timeout=timeout, **kw)
     if r.returncode != 0:
-        raise SystemExit(f"Restore drill step failed: {cmd[0]}: {r.stderr.strip()[:2000]}")
+        # Only the first error line is shown: later lines can echo restored rows (personal data).
+        first = next((l for l in r.stderr.splitlines() if "ERROR" in l or "error" in l), "see server log")
+        raise SystemExit(f"Restore drill step failed: {cmd[0]}: {first[:300]}")
     return r
+
+
+# Rows exported with Postgres built-ins only (not functions from the dump), so a tampered
+# verify_audit_chain() in the backup cannot hide a rewritten log. Hashes are recomputed here.
+CHAIN_ROWS = """
+select chain_seq, encode(prev_hash,'hex'), encode(row_hash,'hex'), encode(content_digest,'hex'),
+ jsonb_build_array(before_state,after_state,reason)::text,
+ jsonb_build_array(chain_seq,actor_id,action,entity_id,request_id,to_char(created_at at time zone 'UTC','YYYY-MM-DD"T"HH24:MI:SS.US'),encode(content_digest,'hex'))::text
+from aq_private.audit_events order by chain_seq;
+"""
+
+
+def verify_chain(target, anchor_seq=None, anchor_hash=None):
+    import csv, hashlib, io
+    out = run(["psql", "-X", "-A", "-t", "--csv", "-v", "ON_ERROR_STOP=1", "-d", target], input=CHAIN_ROWS).stdout
+    prev = bytes(32); n = 0; anchor_ok = anchor_seq is None
+    for row in csv.reader(io.StringIO(out)):
+        if not row: continue
+        seq, prev_hex, row_hex, digest_hex, content, canon = int(row[0]), row[1], row[2], row[3], row[4], row[5]
+        n += 1
+        digest = hashlib.sha256(content.encode()).hexdigest()
+        h = hashlib.sha256(prev + canon.encode()).hexdigest()
+        if seq != n or prev_hex != prev.hex() or digest_hex != digest or row_hex != h:
+            return {"ok": False, "rows_checked": n, "first_broken_seq": seq}
+        if anchor_seq is not None and seq == anchor_seq:
+            if row_hex != anchor_hash:
+                return {"ok": False, "rows_checked": n, "first_broken_seq": seq, "anchor": "MISMATCH"}
+            anchor_ok = True
+        prev = bytes.fromhex(row_hex)
+    if not anchor_ok:
+        return {"ok": False, "rows_checked": n, "anchor": "MISSING (log shorter than the previous backup)"}
+    return {"ok": True, "rows_checked": n, "latest_seq": n, "latest_hash": prev.hex(),
+            "anchor": "MATCHED" if anchor_seq is not None else "NONE"}
 
 
 def dsn_for(admin_dsn, database):
     return f"{admin_dsn} dbname={database}"
 
 
-def drill(dump, admin_dsn):
+def drill(dump, admin_dsn, anchor_seq=None, anchor_hash=None):
     started = datetime.datetime.now(datetime.timezone.utc)
     run(["pg_restore", "--list", dump])  # structurally valid archive
     name = "aq_drill_" + uuid.uuid4().hex[:12]
@@ -66,14 +100,19 @@ def drill(dump, admin_dsn):
              "--schema=aq_private", "--schema=public", "--dbname", target, dump])
         out = run(["psql", "-X", "-At", "-v", "ON_ERROR_STOP=1", "-d", target], input=CHECKS).stdout.strip()
         checks = json.loads(out.splitlines()[-1])
+        checks["audit_chain"] = verify_chain(target, anchor_seq, anchor_hash)
     finally:
-        run(["psql", "-X", "-v", "ON_ERROR_STOP=1", "-d", dsn_for(admin_dsn, "postgres"), "-c", f"drop database if exists {name}"])
+        try:
+            run(["psql", "-X", "-v", "ON_ERROR_STOP=1", "-d", dsn_for(admin_dsn, "postgres"), "-c", f"drop database if exists {name} with (force)"], timeout=300)
+        except BaseException as cleanup:  # do not hide the original failure
+            print(f"warning: scratch database {name} may remain: {cleanup}", file=sys.stderr)
     ok = (checks["audit_chain"].get("ok") is True and checks["unsealed_customer_contacts"] == 0
           and checks["overpaid_orders"] == 0 and checks["orphan_payments"] == 0)
     finished = datetime.datetime.now(datetime.timezone.utc)
     return {"status": "PASSED" if ok else "FAILED", "started_at": started.isoformat(), "finished_at": finished.isoformat(),
             "duration_seconds": round((finished - started).total_seconds(), 1), "scratch_database_dropped": True,
-            "latest_audit_hash": checks["audit_chain"].get("latest_hash"), "checks": checks,
+            "latest_audit_hash": checks["audit_chain"].get("latest_hash"),
+            "latest_audit_seq": checks["audit_chain"].get("latest_seq"), "checks": checks,
             "note": "Automated restore drill evidence. The administrator still records the isolated_restore decision."}
 
 
@@ -82,8 +121,11 @@ def main():
     ap.add_argument("--dump", required=True)
     ap.add_argument("--admin-dsn", required=True, help="libpq connection for the scratch (non-production) server, without dbname")
     ap.add_argument("--out")
+    ap.add_argument("--anchor-seq", type=int, help="chain_seq recorded by the previous backup's drill")
+    ap.add_argument("--anchor-hash", help="row hash recorded for --anchor-seq")
     a = ap.parse_args()
-    result = drill(a.dump, a.admin_dsn)
+    if (a.anchor_seq is None) != (a.anchor_hash is None): ap.error("--anchor-seq and --anchor-hash go together")
+    result = drill(a.dump, a.admin_dsn, a.anchor_seq, a.anchor_hash)
     text = json.dumps(result, indent=2)
     if a.out:
         with open(a.out, "x") as f:

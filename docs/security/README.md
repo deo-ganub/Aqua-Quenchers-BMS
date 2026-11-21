@@ -45,3 +45,8 @@ Validation requires review of the effective ingress policy and a bounded isolate
 The assessment does not establish hosted configuration, branch protection, signing-key custody, recovery-destination permissions, operational restoration performance or physical-device behavior. Completion requires independent coverage criticism, resolution of accepted coverage gaps, candidate verification, final-record verification and consistent final reporting. Application-branch findings require their own validation against the active source.
 
 Related assessments are the [Application Branch Assessment](OWNER_MODULE_REVIEW.md), [OWASP Agentic Skills Assessment](OWASP_AGENTIC_SKILLS_TOP_10.md) and [Security-Control Matrix](../ias/SECURITY_CONTROLS.md).
+
+
+## 6. Update — 22 November 2026
+
+The unresolved validation item in §4 was fixed in code (only a configured proxy header is trusted; see [AQ-SEC-04](SECURITY_REVIEW_2026-11-22.md), F5). An independent review of the IAS hardening changes was carried out and its findings fixed or documented in AQ-SEC-04. That review was done by a separate reviewer instance, not an outside auditor; a third-party audit and runtime validation of the hosted proxy header remain open.

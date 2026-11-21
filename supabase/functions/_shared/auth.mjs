@@ -46,21 +46,23 @@ async function readBody(request){
  }catch(error){if(error instanceof SafeError)throw error;throw new SafeError(400,'Invalid request.');}
  finally{reader?.releaseLock();}
 }
-// Client address for the per-source sign-in limit. Callers can put anything at the START of
-// x-forwarded-for, so it is never trusted: use the header the edge proxy sets itself
-// (AQ_CLIENT_IP_HEADER, default cf-connecting-ip), else the LAST x-forwarded-for hop, which the
-// nearest proxy appends. The per-username limit applies regardless.
+// Client address for the per-source sign-in limit. Request headers can be forged by the caller,
+// so only a header named in AQ_CLIENT_IP_HEADER is used: the one the deployed edge proxy sets and
+// overwrites (confirm it on the hosted project). Without that setting there is no trustworthy
+// address and the function returns null: the source limit then follows the username, and the
+// per-username limit (10 attempts / 15 minutes) still applies. No shared "unknown" bucket that one
+// attacker could fill for everybody.
 export function clientSource(request,env=()=>undefined){
- const named=(env('AQ_CLIENT_IP_HEADER')||'cf-connecting-ip').toLowerCase();
- const direct=request.headers.get(named)?.trim();if(direct&&direct.length<=64)return direct;
- const hops=(request.headers.get('x-forwarded-for')||'').split(',').map(v=>v.trim()).filter(Boolean);
- const last=hops[hops.length-1];return last&&last.length<=64?last:'unknown';
+ const named=(env('AQ_CLIENT_IP_HEADER')||'').trim().toLowerCase();
+ if(!named)return null;
+ const value=request.headers.get(named)?.split(',').map(v=>v.trim()).filter(Boolean).pop();
+ return value&&value.length<=64?value:null;
 }
 export function loginHandler(env,fetcher=fetch){return async request=>{try{
  const body=validateLogin(await readBody(request)),cfg=config(env),api=client(cfg,fetcher);
  // Source comes from the proxy-set header (see clientSource). Username bucket always throttles.
  const bucket=await fingerprint(cfg.service,{username:body.username});
- const source=await fingerprint(cfg.service,{source:clientSource(request,env)});
+ const address=clientSource(request,env);const source=await fingerprint(cfg.service,address?{source:address}:{source_username:body.username});
  const permitted=await api('/rest/v1/rpc/aq_auth_login_attempt',{body:{p_username_key:bucket,p_source_key:source}});if(permitted!==true)throw new SafeError(429,'Sign-in unavailable. Try again later.');
  const mapping=await api('/rest/v1/rpc/aq_admin_resolve_username',{body:{p_username:body.username}});
  // Same Auth request for invalid/inactive names avoids a distinct early response.

@@ -49,3 +49,17 @@ Checked boxes mean the stated local implementation check has passed; they do not
 ## Evidence and governing references
 
 [Implementation links and executed tests](IMPLEMENTATION_OF_SECURITY_CONTROLS.md) · [Privacy Policy and laws](DRAFT_PRIVACY_POLICY.md) · [Terms](DRAFT_TERMS_AND_CONDITIONS.md) · [full assessment](SECURITY_CONTROLS.md) · [traceability](../REQUIREMENTS_TRACEABILITY.md)
+
+## Update — 22 November 2026 (main branch)
+
+- [x] Encrypt customer contact numbers and addresses in the database (AES-256 field encryption; keys in Supabase Vault, fail closed if missing; separate blind-index key). Locally verified (`backend/tests/ias_hardening.sql`); hosted Vault keys must be created before the migration runs.
+- [x] Make the audit log append-only and tamper-evident (SHA-256 hash chain, no contact data in audit rows, Owner-only integrity check). Locally verified, including detection of a superuser edit.
+- [x] Enforce the password policy (15+ characters, no common words or own name) in the app and for staff accounts on the server. The hosted Auth policy still has to be set for self-service changes (see AQ-SEC-04 F4).
+- [x] Keep unsent saves encrypted on the device and send them later with the same request ID; never report them as saved early. Unit-tested; not yet tried on a device.
+- [x] Restore every backup into a scratch database before keeping it, with an independent hash-chain check and an anchor from the previous backup. Locally verified; the private runner schedule is still to be configured by the custodian.
+- [x] Resolve the sign-in source-key item from the Cloudflare-method audit and complete an independent review of the changed code ([AQ-SEC-04](../security/SECURITY_REVIEW_2026-11-22.md)).
+- [x] Add weekly dependency advisory/update pull requests (Dependabot).
+- [ ] Fill the operator's name, email, phone, street address and effective date in the Privacy Policy and Terms.
+- [ ] Configure the private backup runner, recovery custodians and (if purchased) Supabase PITR; measure RPO/RTO in a hosted drill.
+- [ ] Run the Android build and test the offline queue, Keystore and screens on the real tablet and phone.
+- [ ] Third-party (outside) security audit; this project's reviews are internal.

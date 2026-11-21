@@ -32,16 +32,32 @@ public class OfflineQueueTest {
 
     @Test public void fullQueueRefusesMore() throws Exception {
         OfflineQueue q = new OfflineQueue();
-        for (int i = 0; i < OfflineQueue.MAX_ENTRIES; i++) assertTrue(q.add("u", req("r" + i, "create_order"), i));
+        for (int i = 0; i < OfflineQueue.MAX_ENTRIES; i++) assertTrue(q.add("u" + (i % 2), req("r" + i, "create_order"), i));
         assertFalse(q.add("u", req("extra", "create_order"), 99));
     }
 
-    @Test public void oldEntriesExpireAndAreReported() throws Exception {
+    @Test public void expiredEntriesAreCheckedNotDroppedAndOldOnesPurged() throws Exception {
         OfflineQueue q = new OfflineQueue();
         q.add("u", req("old", "record_delivery"), 0);
         q.add("u", req("new", "record_delivery"), OfflineQueue.MAX_AGE_MS);
-        assertEquals(1, q.expire(OfflineQueue.MAX_AGE_MS + 1).size());
+        q.add("other", req("theirs", "record_payment"), 0);
+        assertEquals(1, q.expired("u", OfflineQueue.MAX_AGE_MS + 1).size());
+        assertEquals(3, q.size()); // nothing removed until the server is asked
+        assertEquals(0, q.purge(OfflineQueue.MAX_AGE_MS + 1).size());
+        assertEquals(2, q.purge(OfflineQueue.PURGE_AGE_MS + 1).size());
         assertEquals("new", q.all().get(0).requestId);
+    }
+
+    @Test public void perAccountCapLeavesRoomForOthers() throws Exception {
+        OfflineQueue q = new OfflineQueue();
+        for (int i = 0; i < OfflineQueue.MAX_PER_ACCOUNT; i++) assertTrue(q.add("busy", req("b" + i, "create_order"), i));
+        assertFalse(q.add("busy", req("b-extra", "create_order"), 99));
+        assertTrue(q.add("other", req("o1", "create_order"), 99));
+    }
+
+    @Test public void expiredSessionIsKeptOtherDenialsAreNot() {
+        assertEquals(OfflineQueue.Outcome.KEEP, OfflineQueue.outcome(403, "Session expired. Sign in again."));
+        assertEquals(OfflineQueue.Outcome.REJECTED, OfflineQueue.outcome(403, "Access denied."));
     }
 
     @Test public void outcomesKeepOnlyRetryableFailures() {

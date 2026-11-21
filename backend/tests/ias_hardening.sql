@@ -71,4 +71,34 @@ do $$declare cid uuid:=(select v::uuid from ias_c);r jsonb;begin
  if (aq_private.verify_audit_chain()->>'ok')::boolean is not true then raise exception 'Erasure broke the audit chain';end if;
 end $$;
 rollback;
-\echo PASS: IAS hardening - encrypted contact data, blind-index uniqueness and search, sealed retries, PII-free append-only SHA-256 audit chain with tamper detection, staff denied integrity report, erasure keeps the chain valid.
+begin;
+-- Fail closed: once a Vault exists, a missing Vault key stops encryption (no silent local fallback).
+create schema vault;
+create view vault.decrypted_secrets as select 'other'::text as name,'x'::text as decrypted_secret;
+do $$declare blocked boolean:=false;begin
+ begin perform aq_private.enc('09175550000');exception when others then blocked:=sqlerrm like 'Encryption key aq_pii_key is not configured in Vault.%';end;
+ if not blocked then raise exception 'Vault present without key did not fail closed';end if;
+end $$;
+rollback;
+begin;
+insert into auth.users values ('15000000-0000-4000-8000-000000000003','ias-req@test.invalid');
+insert into aq_private.profiles(user_id,username,full_name,contact_number,role) values ('15000000-0000-4000-8000-000000000003','ias.req','IAS Req','09000000503','staff');
+select set_config('request.jwt.claim.sub','15000000-0000-4000-8000-000000000003',true);
+select set_config('request.jwt.claims',jsonb_build_object('session_id',gen_random_uuid(),'iat',extract(epoch from clock_timestamp()))::text,true);
+create temp table ias_req(v jsonb);grant all on ias_req to authenticated;
+set local role authenticated;
+do $$declare rid uuid:=gen_random_uuid();req jsonb;c jsonb;st jsonb;begin
+ st:=public.aq_query(jsonb_build_object('resource','request_status','id',rid));
+ if (st->>'known')::boolean then raise exception 'Unknown request reported as known';end if;
+ req:=jsonb_build_object('operation','create_customer','request_id',rid,'id',null,'name','IAS Req','customer_type','household','contact_number','09175550444','address','4 Rizal St.');
+ c:=public.aq_command(req);
+ st:=public.aq_query(jsonb_build_object('resource','request_status','id',rid));
+ if not (st->>'known')::boolean or not (st->>'completed')::boolean or st->'result'->>'contact_number'<>'09175550444' then raise exception 'Request status wrong %',st;end if;
+ insert into ias_req values(req);
+end $$;
+reset role;
+do $$declare req jsonb:=(select v from ias_req);begin
+ if exists(select 1 from aq_private.requests where request_id=(req->>'request_id')::uuid and payload_hash=sha256(convert_to(req::text,'UTF8'))) then raise exception 'Request digest is not keyed';end if;
+end $$;
+rollback;
+\echo PASS: IAS hardening - encrypted contact data, blind-index uniqueness and search, sealed retries, PII-free append-only SHA-256 audit chain with tamper detection, staff denied integrity report, erasure keeps the chain valid, fail-closed Vault key, keyed request digest, request-status lookup.

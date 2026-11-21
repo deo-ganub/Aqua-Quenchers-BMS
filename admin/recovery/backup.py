@@ -38,7 +38,9 @@ def package(bundle,recipients,primary,recovery,catalog):
    d=json.loads(drill.read_text())
    if d.get('status')!='PASSED':raise ValueError('Automated restore drill did not pass; nothing was packaged.')
    # Evidence only; the administrator still records the isolated_restore decision.
-   manifest['automated_restore_drill']={'status':d['status'],'finished_at':d['finished_at'],'duration_seconds':d['duration_seconds'],'latest_audit_hash':d.get('latest_audit_hash')}
+   manifest['automated_restore_drill']={'status':d['status'],'finished_at':d['finished_at'],'duration_seconds':d['duration_seconds'],'latest_audit_seq':d.get('latest_audit_seq'),'latest_audit_hash':d.get('latest_audit_hash')}
+  else:
+   manifest['automated_restore_drill']='NOT RUN'
   with tarfile.open(archive,'w') as tar:tar.add(bundle,arcname='bundle')
   subprocess.run(['age','--encrypt','--recipients-file',str(recipients),'--output',str(encrypted),str(archive)],check=True)
   digest=sha(encrypted)

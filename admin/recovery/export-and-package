@@ -11,10 +11,20 @@ umask 077
 : "${AQ_RECOVERY_TOOL:?Absolute path to reviewed admin/recovery/backup.py required}"
 bundle=$(mktemp -d)
 trap 'rm -rf -- "$bundle"' EXIT
-pg_dump --format=custom --schema=public --schema=aq_private --schema=auth --schema=storage --exclude-table-data=aq_private.privacy_decisions --file="$bundle/database.dump"
+pg_dump --format=custom --schema=public --schema=aq_private --schema=auth --schema=storage --exclude-table-data=aq_private.privacy_decisions --exclude-table-data=aq_private.local_secrets --file="$bundle/database.dump"
 # Automated isolated restore drill on a separate scratch server (never production).
 : "${AQ_DRILL_DSN:?libpq connection (without dbname) for the scratch restore-drill server required}"
-python3 "$(dirname "$AQ_RECOVERY_TOOL")/restore_drill.py" --dump "$bundle/database.dump" --admin-dsn "$AQ_DRILL_DSN" --out "$bundle/restore-drill.json"
+# Anchor: the audit chain must still contain the row hash recorded by the previous backup.
+anchor=$(python3 - "$AQ_BACKUP_CATALOG" <<'PY'
+import json,pathlib,sys
+rows=[json.loads(p.read_text()) for p in pathlib.Path(sys.argv[1]).glob('*.json')]
+rows=[r['automated_restore_drill'] for r in rows if isinstance(r.get('automated_restore_drill'),dict) and r['automated_restore_drill'].get('latest_audit_seq')]
+if rows:
+  last=max(rows,key=lambda r:r['finished_at']);print(f"--anchor-seq {last['latest_audit_seq']} --anchor-hash {last['latest_audit_hash']}")
+PY
+)
+# shellcheck disable=SC2086
+python3 "$(dirname "$AQ_RECOVERY_TOOL")/restore_drill.py" --dump "$bundle/database.dump" --admin-dsn "$AQ_DRILL_DSN" --out "$bundle/restore-drill.json" $anchor
 pg_dumpall --roles-only --no-role-passwords --file="$bundle/roles.sql"
 for file in project-config.json auth-config.json storage-inventory.json; do
   cp -- "$AQ_RECOVERY_CONFIG_DIR/$file" "$bundle/$file"

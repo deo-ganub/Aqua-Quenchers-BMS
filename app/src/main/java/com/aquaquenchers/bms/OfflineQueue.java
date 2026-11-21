@@ -17,7 +17,10 @@ import java.util.List;
  */
 public final class OfflineQueue {
     public static final int MAX_ENTRIES = 50;
+    public static final int MAX_PER_ACCOUNT = 30;
     public static final long MAX_AGE_MS = 72L * 60 * 60 * 1000;
+    /** Saves of an account that never signs in again are purged after this, signed in or not. */
+    public static final long PURGE_AGE_MS = 14L * 24 * 60 * 60 * 1000;
 
     /** Turns bytes into a protected form and back (Android Keystore AES-GCM on the device). */
     public interface Sealer { byte[] seal(byte[] plain) throws Exception; byte[] open(byte[] sealed) throws Exception; }
@@ -42,7 +45,7 @@ public final class OfflineQueue {
         String id = request.optString("request_id");
         if (id.isEmpty() || userId == null || userId.isEmpty()) throw new IllegalArgumentException("A request_id and account are required.");
         for (Entry e : entries) if (e.requestId.equals(id)) return true;
-        if (entries.size() >= MAX_ENTRIES) return false;
+        if (entries.size() >= MAX_ENTRIES || sizeFor(userId) >= MAX_PER_ACCOUNT) return false;
         String op = request.optString("operation");
         try { entries.add(new Entry(id, userId, op, label(op), new JSONObject(request.toString()), now)); } catch (JSONException e) { throw new IllegalArgumentException("Invalid request."); }
         return true;
@@ -54,16 +57,25 @@ public final class OfflineQueue {
         for (Entry e : entries) if (e.userId.equals(userId) && now - e.createdAt <= MAX_AGE_MS) out.add(e);
         return out;
     }
-    /** Removes and returns entries older than the limit; the user must be told they were not sent. */
-    public synchronized List<Entry> expire(long now) {
+    /** This account's entries past the send limit. They are NOT removed here: the caller first asks
+     *  the server whether the request arrived (a lost reply looks the same as no connection). */
+    public synchronized List<Entry> expired(String userId, long now) {
         List<Entry> old = new ArrayList<>();
-        for (Entry e : entries) if (now - e.createdAt > MAX_AGE_MS) old.add(e);
+        for (Entry e : entries) if (e.userId.equals(userId) && now - e.createdAt > MAX_AGE_MS) old.add(e);
+        return old;
+    }
+    /** Removes and returns entries of any account older than the hard purge age. */
+    public synchronized List<Entry> purge(long now) {
+        List<Entry> old = new ArrayList<>();
+        for (Entry e : entries) if (now - e.createdAt > PURGE_AGE_MS || now < e.createdAt - PURGE_AGE_MS) old.add(e);
         entries.removeAll(old);
         return old;
     }
 
     /** Decide from the HTTP status: 0 = no connection (keep), 401 = sign-in needed (keep), 2xx handled by caller, others = rejected. */
-    public static Outcome outcome(int status) { return status == 0 || status == 401 || status == 408 || status == 429 || status >= 500 ? Outcome.KEEP : Outcome.REJECTED; }
+    public static Outcome outcome(int status) { return outcome(status, ""); }
+    /** A 403 that only says the session expired is kept: signing in again lets it through. */
+    public static Outcome outcome(int status, String message) { if (status == 403 && "Session expired. Sign in again.".equals(message)) return Outcome.KEEP; return status == 0 || status == 401 || status == 408 || status == 429 || status >= 500 ? Outcome.KEEP : Outcome.REJECTED; }
 
     static String label(String operation) {
         switch (operation) {

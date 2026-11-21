@@ -50,16 +50,15 @@ test('staff temporary password policy matches the app rules',async()=>{
  const base={operation:'create',request_id:'30000000-0000-4000-8000-000000000001',full_name:'Synthetic Staff',username:'staff.test',contact_number:'09000000000',temporary_password:'password password1'};
  assert.throws(()=>validateStaff(base));
 });
-test('sign-in source key ignores caller-controlled forwarding values',async()=>{
+test('sign-in source key uses only the configured proxy header',async()=>{
  const {clientSource}=await import('../../supabase/functions/_shared/auth.mjs');
  const req=h=>new Request('https://local.test',{method:'POST',headers:h});
- // Spoofed leading values do not change the source when the proxy header is present.
- assert.equal(clientSource(req({'cf-connecting-ip':'203.0.113.7','x-forwarded-for':'1.1.1.1, 203.0.113.7'})),'203.0.113.7');
- assert.equal(clientSource(req({'cf-connecting-ip':'203.0.113.7','x-forwarded-for':'9.9.9.9'})),'203.0.113.7');
- // Without it, the last (proxy-appended) hop is used, not the first.
- assert.equal(clientSource(req({'x-forwarded-for':'1.1.1.1, 2.2.2.2, 198.51.100.4'})),'198.51.100.4');
- assert.equal(clientSource(req({'x-forwarded-for':'8.8.8.8, 198.51.100.4'})),clientSource(req({'x-forwarded-for':'7.7.7.7, 198.51.100.4'})));
- // A configured header name is honoured; missing data falls back to one shared bucket.
- assert.equal(clientSource(req({'x-real-ip':'192.0.2.1'}),k=>k==='AQ_CLIENT_IP_HEADER'?'x-real-ip':undefined),'192.0.2.1');
- assert.equal(clientSource(req({})),'unknown');
+ const env=k=>k==='AQ_CLIENT_IP_HEADER'?'cf-connecting-ip':undefined;
+ // Not configured: forged headers are ignored entirely (falls back to the username bucket).
+ assert.equal(clientSource(req({'cf-connecting-ip':'203.0.113.7','x-forwarded-for':'1.1.1.1'})),null);
+ // Configured: only that header counts; x-forwarded-for values are ignored.
+ assert.equal(clientSource(req({'cf-connecting-ip':'203.0.113.7','x-forwarded-for':'1.1.1.1, 9.9.9.9'}),env),'203.0.113.7');
+ assert.equal(clientSource(req({'x-forwarded-for':'1.1.1.1'}),env),null);
+ // A list-valued configured header uses its last (proxy-appended) entry.
+ assert.equal(clientSource(req({'x-real-ip':'8.8.8.8, 192.0.2.1'}),k=>k==='AQ_CLIENT_IP_HEADER'?'x-real-ip':undefined),'192.0.2.1');
 });
