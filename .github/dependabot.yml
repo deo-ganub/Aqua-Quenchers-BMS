@@ -1,0 +1,16 @@
+# OWASP Agentic Skills AST07 (update drift) / AST02 (supply chain): weekly advisory and
+# version-update pull requests for every package ecosystem in this repository. Each PR still
+# needs a human review; nothing is merged automatically.
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: /
+    schedule: { interval: weekly, day: monday, time: "06:00", timezone: Asia/Manila }
+    open-pull-requests-limit: 5
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: { interval: weekly, day: monday, time: "06:00", timezone: Asia/Manila }
+  - package-ecosystem: pip
+    directory: /classifier
+    schedule: { interval: weekly, day: monday, time: "06:00", timezone: Asia/Manila }
+    open-pull-requests-limit: 5

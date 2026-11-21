@@ -46,11 +46,21 @@ async function readBody(request){
  }catch(error){if(error instanceof SafeError)throw error;throw new SafeError(400,'Invalid request.');}
  finally{reader?.releaseLock();}
 }
+// Client address for the per-source sign-in limit. Callers can put anything at the START of
+// x-forwarded-for, so it is never trusted: use the header the edge proxy sets itself
+// (AQ_CLIENT_IP_HEADER, default cf-connecting-ip), else the LAST x-forwarded-for hop, which the
+// nearest proxy appends. The per-username limit applies regardless.
+export function clientSource(request,env=()=>undefined){
+ const named=(env('AQ_CLIENT_IP_HEADER')||'cf-connecting-ip').toLowerCase();
+ const direct=request.headers.get(named)?.trim();if(direct&&direct.length<=64)return direct;
+ const hops=(request.headers.get('x-forwarded-for')||'').split(',').map(v=>v.trim()).filter(Boolean);
+ const last=hops[hops.length-1];return last&&last.length<=64?last:'unknown';
+}
 export function loginHandler(env,fetcher=fetch){return async request=>{try{
  const body=validateLogin(await readBody(request)),cfg=config(env),api=client(cfg,fetcher);
- // The gateway supplies source information. Username bucket still throttles if absent.
+ // Source comes from the proxy-set header (see clientSource). Username bucket always throttles.
  const bucket=await fingerprint(cfg.service,{username:body.username});
- const source=await fingerprint(cfg.service,{source:request.headers.get('x-forwarded-for')?.split(',')[0]?.trim()||'unknown'});
+ const source=await fingerprint(cfg.service,{source:clientSource(request,env)});
  const permitted=await api('/rest/v1/rpc/aq_auth_login_attempt',{body:{p_username_key:bucket,p_source_key:source}});if(permitted!==true)throw new SafeError(429,'Sign-in unavailable. Try again later.');
  const mapping=await api('/rest/v1/rpc/aq_admin_resolve_username',{body:{p_username:body.username}});
  // Same Auth request for invalid/inactive names avoids a distinct early response.
