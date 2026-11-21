@@ -34,11 +34,19 @@ for(const upstream of [400,503])test(`Auth creation ${upstream} distinguishes de
   else throw Error('Unexpected mutation');
   return new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json'}});
  };
- const handler=staffHandler(k=>cfg[k],fetcher);const r=await handler(new Request('https://local.test',{method:'POST',headers:{Authorization:'Bearer synthetic-owner-token'},body:JSON.stringify({operation:'create',request_id,full_name:'Synthetic Staff',username:'staff.test',contact_number:'09000000000',temporary_password:'a long synthetic passphrase'})}));
+ const handler=staffHandler(k=>cfg[k],fetcher);const r=await handler(new Request('https://local.test',{method:'POST',headers:{Authorization:'Bearer synthetic-owner-token'},body:JSON.stringify({operation:'create',request_id,full_name:'Synthetic Staff',username:'staff.test',contact_number:'09000000000',temporary_password:'a long river passphrase'})}));
  assert.equal(r.status,upstream===400?400:503);assert.equal(paths.filter(x=>x.endsWith('aq_admin_fail_staff')).length,upstream===400?1:0);assert.equal(paths.filter(x=>x.endsWith('aq_admin_finish_staff')).length,0);assert.ok((await r.json()).error);
 });
 test('chunked oversized request is bounded before any credential lookup',async()=>{
  let calls=0;const handler=loginHandler(()=>undefined,async()=>{calls++;throw Error();});
  let n=0,cancelled=false;const stream=new ReadableStream({pull(c){if(n++<10)c.enqueue(new Uint8Array(5000).fill(32));else c.close();},cancel(){cancelled=true;}});
  const r=await handler(new Request('https://local.test',{method:'POST',body:stream,duplex:'half'}));assert.equal(r.status,413);assert.equal(calls,0);assert.equal(cancelled,true);
+});
+test('staff temporary password policy matches the app rules',async()=>{
+ const {checkPassword}=await import('../../supabase/functions/_shared/auth.mjs');
+ checkPassword('blue river morning tide',['staff.test','Synthetic Staff']);
+ for(const bad of ['short','aaaaaaaaaaaaaaaa','abcabcabcabcabcabc','MyPassword2026!!x','qwerty-river-blue','tide 1234567 river','synthetic river tide'])
+  assert.throws(()=>checkPassword(bad,['staff.test','Synthetic Staff']),undefined,bad);
+ const base={operation:'create',request_id:'30000000-0000-4000-8000-000000000001',full_name:'Synthetic Staff',username:'staff.test',contact_number:'09000000000',temporary_password:'password password1'};
+ assert.throws(()=>validateStaff(base));
 });

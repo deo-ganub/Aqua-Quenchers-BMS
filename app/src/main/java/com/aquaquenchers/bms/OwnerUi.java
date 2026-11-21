@@ -488,7 +488,7 @@ final class OwnerUi {
             try { validateAccount(name, username, contact); } catch (FieldErrors e) { return; }
             String temp = value(temporary);
             if (user == null && temp.isEmpty()) { a.fieldError(temporary, "Complete the required fields."); return; }
-            if (!temp.isEmpty()) try { Rules.password(temp); } catch (IllegalArgumentException e) { a.fieldError(temporary, e.getMessage()); return; }
+            if (!temp.isEmpty()) try { Rules.password(temp, value(username), value(name)); } catch (IllegalArgumentException e) { a.fieldError(temporary, e.getMessage()); return; }
             JSONObject payload = a.json("operation", user == null ? "create" : "update", "full_name", value(name).trim(), "username", value(username).trim(), "contact_number", value(contact).replace(" ", ""), "active", active[0] == 0);
             try { if (user != null) payload.put("user_id", user.optString("user_id")); if (!temp.isEmpty()) payload.put("temporary_password", temp); } catch (JSONException e) { throw new IllegalArgumentException("Invalid account details."); }
             String summary = value(name).trim() + " · @" + value(username).trim() + " · " + (active[0] == 0 ? "Active" : "Inactive");
@@ -640,7 +640,7 @@ final class OwnerUi {
         if (ow) ui.text(card, "Change password", 22, 33, Ui.INK, ui.p6);
         EditText current = a.input(card, "Current password", "", SECRET), next = a.input(card, "New password", "", SECRET);
         LinearLayout nf = (LinearLayout) next.getParent();
-        nf.addView(ui.tv("At least 15 characters. A long passphrase works well.", 12, 16, Ui.MUTED, ui.o4), new LinearLayout.LayoutParams(-1, -2));
+        nf.addView(ui.tv("At least 15 characters. Use a long passphrase; avoid your name and words like \"password\".", 12, 16, Ui.MUTED, ui.o4), new LinearLayout.LayoutParams(-1, -2));
         EditText confirmation = a.input(card, "Confirm new password", "", SECRET);
         TextView[] saveRef = {null};
         Runnable paint = () -> { if (saveRef[0] != null) { boolean ready = !value(current).isEmpty() && value(next).codePointCount(0, value(next).length()) >= 15 && value(next).equals(value(confirmation)); ui.style(saveRef[0], ready ? Ui.FILLED : Ui.DISABLED); saveRef[0].setEnabled(true); } };
@@ -648,7 +648,7 @@ final class OwnerUi {
         Runnable save = () -> {
             String currentPassword = value(current), newPassword = value(next), confirmed = value(confirmation); boolean bad = false;
             if (currentPassword.isEmpty()) { a.fieldError(current, "Enter your current password."); bad = true; }
-            try { Rules.password(newPassword); } catch (IllegalArgumentException e) { a.fieldError(next, e.getMessage()); bad = true; }
+            try { Rules.password(newPassword, a.recorder(), a.profile() == null ? "" : a.profile().optString("username")); } catch (IllegalArgumentException e) { a.fieldError(next, e.getMessage()); bad = true; }
             if (!newPassword.equals(confirmed)) { a.fieldError(confirmation, "New passwords do not match."); bad = true; }
             if (bad) return; a.clearMessage();
             a.query("me", a.json(), me -> {

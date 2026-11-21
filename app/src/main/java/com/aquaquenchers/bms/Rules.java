@@ -35,7 +35,28 @@ public final class Rules {
     public static void contact(String s) { if (!s.matches("[0-9]{11}")) throw new IllegalArgumentException("Please enter a valid contact number. Use 11 digits."); }
     public static String customerContact(String s) { String normalized=s==null?"":s.replace(" ","");contact(normalized);return normalized; }
     public static void remarks(String s) { if (s.codePointCount(0,s.length()) > 500) throw new IllegalArgumentException("Use 500 characters or fewer."); }
-    public static void password(String s) { if (s.codePointCount(0,s.length()) < 15) throw new IllegalArgumentException("Use at least 15 characters."); }
+    /** Weak fragments that make even a long password easy to guess (also checked on the server). */
+    static final String[] WEAK_PARTS = {"password", "passw0rd", "qwerty", "asdfgh", "zxcvbn", "123456", "654321", "abcdef", "iloveyou", "letmein", "welcome", "aquaquencher", "admin"};
+    public static void password(String s) { password(s, new String[0]); }
+    /** Password policy: 15+ characters, at least 5 different characters, no common or repeated
+     *  patterns, and not containing the person's own username or name. */
+    public static void password(String s, String... personal) {
+        if (s.codePointCount(0,s.length()) < 15) throw new IllegalArgumentException("Use at least 15 characters.");
+        if (s.length() > 4096) throw new IllegalArgumentException("Use 4096 characters or fewer.");
+        String n = s.toLowerCase(Locale.ROOT).replaceAll("[^a-z0-9]", "");
+        if (s.codePoints().distinct().count() < 5 || repeatsShortPattern(n)) throw new IllegalArgumentException("Avoid repeated characters or simple patterns.");
+        for (String w : WEAK_PARTS) if (n.contains(w)) throw new IllegalArgumentException("Avoid common words or sequences such as \"password\" or \"123456\".");
+        if (personal != null) for (String p : personal) {
+            if (p == null) continue;
+            for (String part : p.toLowerCase(Locale.ROOT).split("[^a-z0-9]+")) if (part.length() >= 3 && n.contains(part)) throw new IllegalArgumentException("Don't use your name or username in the password.");
+        }
+    }
+    /** True when the text is one short chunk (1–4 characters) repeated, e.g. "abcabcabc". */
+    static boolean repeatsShortPattern(String n) {
+        if (n.isEmpty()) return false;
+        for (int k = 1; k <= 4 && k < n.length(); k++) { boolean all = true; for (int i = k; i < n.length() && all; i++) all = n.charAt(i) == n.charAt(i - k); if (all) return true; }
+        return false;
+    }
     public static LocalDate date(String s) { try { return LocalDate.parse(s); } catch (Exception e) { throw new IllegalArgumentException("Enter a valid date (YYYY-MM-DD)."); } }
     public static void period(String start,String end) { if(date(end).isBefore(date(start))) throw new IllegalArgumentException("The end date cannot be earlier than the start date."); }
     public static String label(String value){if(value==null||value.isEmpty())return "";switch(value){case "household":return "Household";case "dealer":return "Dealer";case "walk_in":return "Walk-in";case "ordered":return "Ordered";case "for_pickup":return "For Pickup";case "picked_up":return "Picked Up";case "refilling":return "Refilling";case "ready_for_delivery":return "Ready for Delivery";case "undelivered":return "Undelivered";case "delivered":return "Delivered";case "received_at_counter":return "Received at Counter";case "claimed":return "Claimed";case "rescheduled":return "Rescheduled";case "paid":return "Paid";case "partially_paid":return "Partially Paid";case "unpaid":return "Unpaid";default:String text=value.replace('_',' ');return Character.toUpperCase(text.charAt(0))+text.substring(1);}}

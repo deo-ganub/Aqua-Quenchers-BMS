@@ -5,13 +5,25 @@ const exact=(o,allowed)=>{if(!o||Array.isArray(o)||typeof o!=='object'||Object.k
 export function normalizeUsername(value){if(typeof value!=='string')throw new SafeError(400,'Invalid request.');const s=value.normalize('NFKC').trim().toLowerCase();if(!/^[a-z0-9][a-z0-9_.-]{2,39}$/.test(s))throw new SafeError(400,'Invalid request.');return s;}
 const uuid=v=>typeof v==='string'&&/^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(v);
 export function validateLogin(body){exact(body,['username','password']);const username=normalizeUsername(body.username);if(typeof body.password!=='string'||body.password.length>4096||!body.password)throw new SafeError(400,'Invalid request.');return{username,password:body.password};}
+// Same policy as Rules.password in the app: 15+ characters, 5+ different characters, no common
+// words/sequences or short repeated patterns, and not the person's own username or name.
+const WEAK_PARTS=['password','passw0rd','qwerty','asdfgh','zxcvbn','123456','654321','abcdef','iloveyou','letmein','welcome','aquaquencher','admin'];
+export function checkPassword(p,personal=[]){
+ if(typeof p!=='string'||[...p].length<15)throw new SafeError(400,'Use at least 15 characters.');
+ if(p.length>4096)throw new SafeError(400,'Use 4096 characters or fewer.');
+ const n=p.toLowerCase().replace(/[^a-z0-9]/g,'');
+ const repeats=k=>k<n.length&&[...n].every((c,i)=>i<k||c===n[i-k]);
+ if(new Set([...p]).size<5||(n.length>0&&[1,2,3,4].some(repeats)))throw new SafeError(400,'Avoid repeated characters or simple patterns.');
+ if(WEAK_PARTS.some(w=>n.includes(w)))throw new SafeError(400,'Avoid common words or sequences such as "password" or "123456".');
+ for(const value of personal){if(typeof value!=='string')continue;for(const part of value.toLowerCase().split(/[^a-z0-9]+/))if(part.length>=3&&n.includes(part))throw new SafeError(400,"Don't use your name or username in the password.");}
+}
 export function validateStaff(body){exact(body,['operation','request_id','user_id','username','full_name','contact_number','temporary_password','active']);if(!['create','update','set_active'].includes(body.operation)||!uuid(body.request_id))throw new SafeError(400,'Invalid request.');
  const out={operation:body.operation,request_id:body.request_id};
  if(body.operation!=='create'){if(!uuid(body.user_id))throw new SafeError(400,'Invalid request.');out.user_id=body.user_id;}
  if(body.operation!=='set_active'){
   out.username=normalizeUsername(body.username);if(typeof body.full_name!=='string'||!body.full_name.trim()||[...body.full_name].length>160||!/^\d{11}$/.test(body.contact_number))throw new SafeError(400,'Invalid staff details.');out.full_name=body.full_name.trim();out.contact_number=body.contact_number;
  }
- if(body.operation==='create'){if(typeof body.temporary_password!=='string'||[...body.temporary_password].length<15||body.temporary_password.length>4096)throw new SafeError(400,'Use at least 15 characters.');out.temporary_password=body.temporary_password;}
+ if(body.operation==='create'){checkPassword(body.temporary_password,[body.username,body.full_name]);out.temporary_password=body.temporary_password;}
  else if('temporary_password'in body)throw new SafeError(400,'Invalid request.');
  if('active'in body){if(typeof body.active!=='boolean')throw new SafeError(400,'Invalid request.');out.active=body.active;}else if(body.operation==='set_active')throw new SafeError(400,'Invalid request.');
  return out;
