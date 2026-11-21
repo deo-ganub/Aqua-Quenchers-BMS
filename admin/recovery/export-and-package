@@ -12,6 +12,9 @@ umask 077
 bundle=$(mktemp -d)
 trap 'rm -rf -- "$bundle"' EXIT
 pg_dump --format=custom --schema=public --schema=aq_private --schema=auth --schema=storage --exclude-table-data=aq_private.privacy_decisions --file="$bundle/database.dump"
+# Automated isolated restore drill on a separate scratch server (never production).
+: "${AQ_DRILL_DSN:?libpq connection (without dbname) for the scratch restore-drill server required}"
+python3 "$(dirname "$AQ_RECOVERY_TOOL")/restore_drill.py" --dump "$bundle/database.dump" --admin-dsn "$AQ_DRILL_DSN" --out "$bundle/restore-drill.json"
 pg_dumpall --roles-only --no-role-passwords --file="$bundle/roles.sql"
 for file in project-config.json auth-config.json storage-inventory.json; do
   cp -- "$AQ_RECOVERY_CONFIG_DIR/$file" "$bundle/$file"

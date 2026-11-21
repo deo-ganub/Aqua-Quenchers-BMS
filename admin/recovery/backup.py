@@ -33,6 +33,12 @@ def package(bundle,recipients,primary,recovery,catalog):
  with tempfile.TemporaryDirectory(prefix='aq-backup-') as scratch:
   os.chmod(scratch,0o700);archive=pathlib.Path(scratch)/'export.tar';encrypted=pathlib.Path(scratch)/name
   manifest={'created_at':stamp.isoformat(),'business_date':stamp.astimezone(ZoneInfo('Asia/Manila')).date().isoformat(),'files':{str(f.relative_to(bundle)):sha(f) for f in sorted(bundle.rglob('*')) if f.is_file()},'isolated_restore':'NOT RUN'}
+  drill=bundle/'restore-drill.json'
+  if drill.is_file():
+   d=json.loads(drill.read_text())
+   if d.get('status')!='PASSED':raise ValueError('Automated restore drill did not pass; nothing was packaged.')
+   # Evidence only; the administrator still records the isolated_restore decision.
+   manifest['automated_restore_drill']={'status':d['status'],'finished_at':d['finished_at'],'duration_seconds':d['duration_seconds'],'latest_audit_hash':d.get('latest_audit_hash')}
   with tarfile.open(archive,'w') as tar:tar.add(bundle,arcname='bundle')
   subprocess.run(['age','--encrypt','--recipients-file',str(recipients),'--output',str(encrypted),str(archive)],check=True)
   digest=sha(encrypted)
