@@ -162,7 +162,7 @@ final class HomeUi {
         LinearLayout row = ui.H(card, 10); row.setGravity(Gravity.END | Gravity.CENTER_VERTICAL);
         TextView cancel = ui.button("Cancel", Ui.OUTLINE, 46, 12, 15, () -> d[0].dismiss()); ui.hug(row, cancel);
         TextView apply = ui.button("Apply period", Ui.FILLED, 46, 12, 15, () -> {
-            String from = start.getText().toString().trim(), to = end.getText().toString().trim();
+            String from = OperationsUi.iso(start), to = OperationsUi.iso(end);
             try { Rules.period(from, to); } catch (IllegalArgumentException e) { a.fieldError(end, e.getMessage()); return; }
             customFrom = from; customTo = to; d[0].dismiss(); applied.run();
         });
